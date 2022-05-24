@@ -1,4 +1,3 @@
-
 import { GLOBALTYPES } from './globalTypes'
 import { imageUpload } from '../../utils/imageUpload'
 import { postDataAPI } from '../../utils/fetchData'
