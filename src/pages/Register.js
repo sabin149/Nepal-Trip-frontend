@@ -113,7 +113,7 @@ import React,{useState,useEffect} from 'react'
                         value="other" onChange={handleChangeInput} />
                     </label>
                 </div>
-                <button type="submit" className="btn btn-dark w-100">
+                <button type="submit" className="btn btn-warning w-100">
                     Register
                 </button>
            <p className='my-2'>
