@@ -18,6 +18,7 @@ const Login = () => {
     const { name, value } = e.target 
     setUserData({ ...userData, [name]: value })
   }
+
   const handleSubmit = e => {
     e.preventDefault()
     dispatch(login(userData))
@@ -25,12 +26,15 @@ const Login = () => {
   return (
     <div className='auth_page'>
       <form onSubmit={handleSubmit}>
-        <h3 className='text-uppercase text-center mb-4'>Nepal<span className='text-primary'>Trip</span></h3>
+      <h3 className='text-uppercase text-center mb-4 text-warning'>LOGIN  
+           <span className='text-dark'>FORM</span>
+           </h3>
+        <hr/>
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <input type="email" className="form-control" id="exampleInputEmail1"
             name="email" onChange={handleChangeInput} value={email} />
-          <small className="form-text text-muted">We'll never share your email with anyone else.</small>
+          
         </div>
         <div className="form-group">
           <label htmlFor="exampleInputPassword1">Password</label>
@@ -43,7 +47,10 @@ const Login = () => {
             </small>
           </div>
         </div>
-        <button type="submit" className="btn btn-dark w-100 mt-2" 
+        <p className='my-2'>
+          <Link to="/register" style={{ color: "blue" }}>Forgot Password?</Link>
+        </p>
+        <button type="submit" className="btn btn-warning w-100 mt-2" 
           disabled={email && password ? false : true}
         >Login</button>
         <p className='my-2'>
