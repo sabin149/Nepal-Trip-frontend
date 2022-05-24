@@ -2,7 +2,35 @@ import { GLOBALTYPES } from "./globalTypes"
 import {postDataAPI} from "../../utils/fetchData"
 import valid from "../../utils/valid"
 
-
+export const login = (data) => async (dispatch) => {
+    try {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: true} })
+        console.log(data);
+        const res = await postDataAPI('login', data)
+        console.log(res);
+        dispatch({ 
+            type: GLOBALTYPES.AUTH, 
+            payload: {
+                token: res.data.access_token,
+                user: res.data.user
+            } 
+        })
+        localStorage.setItem("firstLogin", true)
+        dispatch({ 
+            type: GLOBALTYPES.ALERT, 
+            payload: {
+                success: res.data.msg
+            } 
+        })
+    } catch (err) {
+        dispatch({ 
+            type: GLOBALTYPES.ALERT, 
+            payload: {
+                error: err.response.data.msg
+            } 
+        })
+    }
+}
 
 export const refreshToken = () => async (dispatch) => {
     const firstLogin = localStorage.getItem("firstLogin")
