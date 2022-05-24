@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import "../../styles/hotel.css"
+// import "../../styles/hotel.css"
 import uploadImage from "../../images/Upload_Image.png"
 
 const Hotel = () => {

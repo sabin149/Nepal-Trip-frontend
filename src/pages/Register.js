@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from 'react'
  import {useSelector,useDispatch} from "react-redux"
  import {useNavigate,Link} from "react-router-dom"
- import {register} from "../../../Nepal-Trip-frontend/src/redux/actions/authAction"
+ import {register} from "../redux/actions/authAction"
  import "../styles/auth.css"
  const Register = () => {
     const { auth, alert } = useSelector(state => state)
@@ -28,22 +28,21 @@ import React,{useState,useEffect} from 'react'
      return (
        <div className='auth_page'>
          <form onSubmit={handleSubmit}>
-           <h3 className='text-uppercase text-center mb-4 text-warning'>REGISTER  
-           <span className='text-dark'>FORM</span>
+           <h3 className='text-uppercase text-center mb-4'>REGISTER FORM 
+           {/* <span className='text-primary'>Trip</span> */}
            </h3>
-           <hr/>
            <div className="form-group">
                     <label htmlFor="fullname">Full Name</label>
-                    <input type="text" className="form-control" id="fullname" name="fullname" 
+                    <input type="text" className="form-control" id="fullname" name="fullname"
                     onChange={handleChangeInput} value={fullname}
                     style={{background: `${alert.fullname ? '#fd2d6a14' : ''}`}} />
-                    <small className="form-text text-danger"> 
+                    <small className="form-text text-danger">
                         {alert.fullname ? alert.fullname : ''}
                     </small>
                 </div>
                 <div className="form-group">
                     <label htmlFor="username">User Name</label>
-                    <input type="text" className="form-control" id="username" name="username" 
+                    <input type="text" className="form-control" id="username" name="username"
                     onChange={handleChangeInput} value={username.toLowerCase().replace(/ /g, '')}
                     style={{background: `${alert.username ? '#fd2d6a14' : ''}`}} />
                     <small className="form-text text-danger">
@@ -52,7 +51,7 @@ import React,{useState,useEffect} from 'react'
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" name="email" 
+                    <input type="email" className="form-control" id="exampleInputEmail1" name="email"
                     onChange={handleChangeInput} value={email}
                     style={{background: `${alert.email ? '#fd2d6a14' : ''}`}} />
                     <small className="form-text text-danger">
@@ -62,7 +61,7 @@ import React,{useState,useEffect} from 'react'
 
                 <div className="form-group">
                     <label htmlFor="exampleInputphone">Phone Number</label>
-                    <input type="text" className="form-control" id="exampleInputPhone" name="phone" 
+                    <input type="text" className="form-control" id="exampleInputPhone" name="phone"
                     onChange={handleChangeInput} value={phone}
                     style={{background: `${alert.phone ? '#fd2d6a14' : ''}`}} />
                     <small className="form-text text-danger">
@@ -74,7 +73,7 @@ import React,{useState,useEffect} from 'react'
                     <label htmlFor="exampleInputPassword1">Password</label>
                     <div className="pass">
                         <input type={ typePass ? "text" : "password" } 
-                        className="form-control" id="exampleInputPassword1" 
+                        className="form-control" id="exampleInputPassword1"
                         onChange={handleChangeInput} value={password} name="password"
                         style={{background: `${alert.password ? '#fd2d6a14' : ''}`}} />
                         <small onClick={() => setTypePass(!typePass)}>
@@ -89,7 +88,7 @@ import React,{useState,useEffect} from 'react'
                     <label htmlFor="password_confirmation">Confirm Password</label>
                     <div className="pass">
                         <input type={ typeCfPass ? "text" : "password" } 
-                        className="form-control" id="password_confirmation" 
+                        className="form-control" id="password_confirmation"
                         onChange={handleChangeInput} value={password_confirmation} name="password_confirmation"
                         style={{background: `${alert.password_confirmation ? '#fd2d6a14' : ''}`}} />
                         <small onClick={() => setTypeCfPass(!typeCfPass)}>
@@ -114,11 +113,11 @@ import React,{useState,useEffect} from 'react'
                         value="other" onChange={handleChangeInput} />
                     </label>
                 </div>
-                <button type="submit" className="btn btn-warning w-100">
+                <button type="submit" className="btn btn-dark w-100">
                     Register
                 </button>
            <p className='my-2'>
-             Already have an account? <Link to="/" style={{ color: "crimson" }}>Login Now</Link>
+             Already have an account? <Link to="/login" style={{ color: "crimson" }}>Login Now</Link>
            </p>
          </form>
        </div>
