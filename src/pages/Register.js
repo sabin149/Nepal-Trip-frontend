@@ -77,7 +77,7 @@ import React,{useState,useEffect} from 'react'
                         onChange={handleChangeInput} value={password} name="password"
                         style={{background: `${alert.password ? '#fd2d6a14' : ''}`}} />
                         <small onClick={() => setTypePass(!typePass)}>
-                            {typePass ? <i className="fas fa-eye"></i> :<i className="fas fa-eye-slash"></i>}
+                            {typePass ? <i className="fa-regular fa-eye"></i> :<i className="fa-regular fa-eye-slash"></i>}
                         </small>
                     </div>
                     <small className="form-text text-danger">
@@ -92,7 +92,7 @@ import React,{useState,useEffect} from 'react'
                         onChange={handleChangeInput} value={password_confirmation} name="password_confirmation"
                         style={{background: `${alert.password_confirmation ? '#fd2d6a14' : ''}`}} />
                         <small onClick={() => setTypeCfPass(!typeCfPass)}>
-                            {typeCfPass ? <i className="fas fa-eye"></i> :<i className="fas fa-eye-slash"></i>}
+                            {typeCfPass ?  <i className="fa-regular fa-eye"></i> :<i className="fa-regular fa-eye-slash"></i>}
                         </small>
                     </div>
                     <small className="form-text text-danger">
