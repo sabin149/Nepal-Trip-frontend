@@ -9,14 +9,14 @@ export const HOTEL_TYPES = {
     APPROVE_HOTEL: "APPROVE_HOTEL",
 }
 
-export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_number, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, auth }) => async (dispatch) => {
+export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, auth }) => async (dispatch) => {
     let media = []
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         if (hotel_images.length > 0) media = await imageUpload(hotel_images)
-        const res = await postDataAPI('hotel', { hotel_name, address, phone, hotel_email, pan_number, price, hotel_info, hotel_facilities, hotel_policies, hotel_images: media }, auth.token)
+        const res = await postDataAPI('hotel', { hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images: media }, auth.token)
         dispatch({
-            type: HOTEL_TYPES.CREATE_POST,
+            type: HOTEL_TYPES.CREATE_HOTEL,
             payload: { ...res.data.newHotel, user: auth.user }
         })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
