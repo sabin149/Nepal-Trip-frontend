@@ -9,24 +9,29 @@ import AdminDashboard from "./pages/AdminDashboard"
 import VendorDashboard from "./pages/VendorDashboard"
 import { useSelector } from "react-redux"
 function App() {
-  const { user } = useSelector(state => state.auth) 
+  const { user } = useSelector(state => state.auth)
+  // const vendorLogin=localStorage.getItem('vendorLogin')
+  // const adminLogin=localStorage.getItem('adminLogin')
+
+  const isAdmin=user && user.role==="admin"
+  const isVendor=user && user.role==="vendor"
   return (
     <div >
       <Router>
         <Alert />
         <Routes>
-{
-  user && user.role === "admin" ?
-  <Route path="/" element={<AdminDashboard />} />
-  :
-  user && user.role === "vendor" ?
-  <Route path="/" element={<VendorDashboard />} />
-  :
-  <Route path="/" element={<Home />} />
-}
+          {
+            isAdmin?
+              <Route path="/" element={<AdminDashboard />} />
+              :
+            isVendor?
+                <Route path="/" element={<VendorDashboard />} />
+                :
+                <Route path="/" element={<Home />} />
+          }
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/hotel" element={<Hotel />} />
+         <Route path="/hotel" element={isVendor ?<Hotel />:<NotFound/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
