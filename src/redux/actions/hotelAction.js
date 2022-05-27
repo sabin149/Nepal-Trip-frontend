@@ -1,6 +1,7 @@
 import { GLOBALTYPES } from './globalTypes'
 import { imageUpload } from '../../utils/imageUpload'
 import { getDataAPI, patchDataAPI, postDataAPI } from '../../utils/fetchData'
+import axios from 'axios'
 
 export const HOTEL_TYPES = {
     CREATE_HOTEL: "CREATE_HOTEL",
@@ -20,6 +21,12 @@ export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, p
             payload: { ...res.data.newHotel, user: auth.user }
         })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: {
+                success: res.data.msg
+            }
+        })
 
     } catch (err) {
         dispatch({
@@ -34,7 +41,6 @@ export const getHotels = (token) => async (dispatch) => {
 
         dispatch({ type: HOTEL_TYPES.LOADING_HOTEL, payload: true })
         const res = await getDataAPI('hotel', token)
-        // console.log(res);
         dispatch({
             type: HOTEL_TYPES.GET_HOTELS,
             payload: { ...res.data, page: 2 }
@@ -50,9 +56,10 @@ export const getHotels = (token) => async (dispatch) => {
 }
 
 export const approveHotel = ({ hotel, auth }) => async (dispatch) => {
-    dispatch({ type: HOTEL_TYPES.APPROVE_HOTEL, payload: hotel })
     try {
-        await patchDataAPI(`approveHotel/${hotel._id}`, auth.token)
+        dispatch({ type: HOTEL_TYPES.APPROVE_HOTEL, payload: hotel })
+      await patchDataAPI(`approveHotel/${hotel._id}`, auth.token)
+       
     } catch (err) {
         dispatch({
             type: GLOBALTYPES.ALERT,

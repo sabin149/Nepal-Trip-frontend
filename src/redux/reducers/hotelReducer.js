@@ -28,12 +28,7 @@ const hotelReducer = (state = initialState, action) => {
         case HOTEL_TYPES.APPROVE_HOTEL:
             return {
                 ...state,
-                hotels: state.hotels.map(hotel => {
-                    if (hotel._id === action.payload._id) {
-                        return action.payload
-                    }
-                    return hotel
-                })
+                hotels: PatchData(state.hotels, action.payload._id),
             };
         default:
             return state;
