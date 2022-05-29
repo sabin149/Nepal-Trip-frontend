@@ -33,6 +33,9 @@ function App() {
           <Route path="/login" element={<Login />} />
          <Route path="/hotel" element={isVendor ?<Hotel />:<NotFound/>} />
           <Route path="*" element={<NotFound />} />
+
+          
+          
         </Routes>
       </Router>
     </div>
