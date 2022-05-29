@@ -4,16 +4,16 @@ import { approveHotel, getHotels } from '../redux/actions/hotelAction'
 import "../styles/admin.css"
 
 
-const AdminDashboard = () => {
+const AdminDashboard = ({token}) => {
   const dispatch = useDispatch()
-  const { auth,hotel } = useSelector(state => state)
+  const {hotel } = useSelector(state => state)
 
   useEffect(() => {
-    dispatch(getHotels(auth.token))
-  }, [auth, dispatch])
+    dispatch(getHotels(token))
+  }, [token, dispatch])
 
   const changeStatus = (hotel) => {
-        dispatch(approveHotel({hotel,auth}))
+        dispatch(approveHotel({hotel,token}))
   }
   
   return (
@@ -44,9 +44,9 @@ const AdminDashboard = () => {
                                 <td>{hotel.pan_no}</td>
                                 <td className='text-capitalize' onClick={()=>changeStatus(hotel)}>
                                     {hotel.hotel_validity ? (
-                                        <span className='badge text-bg-success'>Active</span>
+                                        <span className='badge text-bg-success' style={{"cursor":'pointer'}}>Active</span>
                                     ) : (
-                                        <span className='badge text-bg-danger'>Inactive</span>
+                                        <span className='badge text-bg-danger' style={{"cursor":'pointer'}}>Inactive</span>
                                     )}
                                     <div className='float-end'>
                                         <span ><i className="fa-solid fa-ellipsis-vertical"></i></span>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-// import {useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 // import "../../styles/hotel.css"
@@ -9,11 +9,10 @@ import { createHotel } from '../../redux/actions/hotelAction'
 import "../../styles/hotel.css"
 
 const Hotel = () => {
-
   const dispatch = useDispatch()
   const {auth} = useSelector(state => state)
-
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
+  const token = localStorage.getItem('token')
 
   const initialState = {
     hotel_name: "", address: "", phone: "", hotel_email: "", pan_no: "", price: "", hotel_info: "",hotel_facilities:"", hotel_policies: ""
@@ -59,11 +58,8 @@ const Hotel = () => {
         return dispatch({ 
             type: GLOBALTYPES.ALERT, payload: {error: "Please add hotel images."}
         })
-        dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info,hotel_facilities, hotel_policies, hotel_images, auth }))
-
-        // navigate("/")
-
-
+        dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info,hotel_facilities, hotel_policies, hotel_images,auth,token }))
+        navigate("/")
    }
  
   return (
@@ -110,8 +106,6 @@ const Hotel = () => {
                   <div className="file_upload">
                     <div className="d-flex">
                       <h6 className='btn btn-warning text-light me-2'>Upload Images</h6>
-
-                      <i className="fas fa-image" />
                     </div>
                     <input type="file" name="file" id="file"
                       multiple accept="image/*,video/*" onChange={handleChangeImages} />

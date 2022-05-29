@@ -1,21 +1,21 @@
 import { GLOBALTYPES } from './globalTypes'
 import { imageUpload } from '../../utils/imageUpload'
 import { getDataAPI, patchDataAPI, postDataAPI } from '../../utils/fetchData'
-import axios from 'axios'
 
 export const HOTEL_TYPES = {
     CREATE_HOTEL: "CREATE_HOTEL",
     LOADING_HOTEL: "LOADING_HOTEL",
     GET_HOTELS: "GET_HOTELS",
+    UPDATE_HOTEL: "UPDATE_HOTEL",
     APPROVE_HOTEL: "APPROVE_HOTEL",
 }
 
-export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, auth }) => async (dispatch) => {
+export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, auth, token }) => async (dispatch) => {
     let media = []
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         if (hotel_images.length > 0) media = await imageUpload(hotel_images)
-        const res = await postDataAPI('hotel', { hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images: media }, auth.token)
+        const res = await postDataAPI('hotel', { hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images: media },token)
         dispatch({
             type: HOTEL_TYPES.CREATE_HOTEL,
             payload: { ...res.data.newHotel, user: auth.user }
@@ -55,10 +55,10 @@ export const getHotels = (token) => async (dispatch) => {
     }
 }
 
-export const approveHotel = ({ hotel, auth }) => async (dispatch) => {
+export const approveHotel = ({ hotel, token }) => async (dispatch) => {
     try {
         dispatch({ type: HOTEL_TYPES.APPROVE_HOTEL, payload: hotel })
-      await patchDataAPI(`approveHotel/${hotel._id}`, auth.token)
+      await patchDataAPI(`approveHotel/${hotel._id}`, token)
        
     } catch (err) {
         dispatch({
