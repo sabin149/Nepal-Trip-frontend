@@ -39,6 +39,9 @@ function App() {
           <Route path="/hotel" element={isVendor ? <Hotel /> :<Navigate to="/"/>} />
           <Route path="/room" element={isVendor ? <Room /> :<Navigate to="/"/>} />
           <Route path="*" element={<NotFound />} />
+
+          
+          
         </Routes>
       </Router>
     </div>
