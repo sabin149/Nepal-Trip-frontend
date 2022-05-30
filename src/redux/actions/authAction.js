@@ -13,8 +13,12 @@ export const login = (data) => async (dispatch) => {
                 user: res.data.user
             } 
         })
-        
-        localStorage.setItem("firstLogin", true)
+        const token= res.data.access_token
+        const role = res.data.user.role
+        const userID= res.data.user._id
+        localStorage.setItem("token",token )
+        localStorage.setItem("role",role )
+        localStorage.setItem("userID",userID )
         dispatch({ 
             type: GLOBALTYPES.ALERT, 
             payload: {
@@ -73,13 +77,35 @@ export const register = (data) => async (dispatch) => {
                 user: res.data.user
             } 
         })
-        localStorage.setItem("firstLogin", true)
+        const token= res.data.access_token
+        const role = res.data.user.role
+        const userID= res.data.user._id
+        localStorage.setItem("token",token )
+        localStorage.setItem("role",role )
+        localStorage.setItem("userID",userID )
         dispatch({ 
             type: GLOBALTYPES.ALERT, 
             payload: {
                 success: res.data.msg
             } 
         })
+    } catch (err) {
+        dispatch({ 
+            type: GLOBALTYPES.ALERT, 
+            payload: {
+                error: err.response.data.msg
+            } 
+        })
+    }
+}
+
+export const logout = () => async (dispatch) => {
+    try {
+        localStorage.removeItem("token" )
+        localStorage.removeItem("role" )
+        localStorage.removeItem("userID" )
+        await postDataAPI('logout')
+        window.location.href = "/"
     } catch (err) {
         dispatch({ 
             type: GLOBALTYPES.ALERT, 

@@ -28,8 +28,8 @@ import React,{useState,useEffect} from 'react'
      return (
        <div className='auth_page'>
          <form onSubmit={handleSubmit}>
-           <h3 className='text-uppercase text-center mb-4'>REGISTER FORM 
-           {/* <span className='text-primary'>Trip</span> */}
+         <h3 className='text-uppercase text-center mb-4 text-warning'>REGISTER  
+           <span className='text-dark'>FORM</span>
            </h3>
            <div className="form-group">
                     <label htmlFor="fullname">Full Name</label>

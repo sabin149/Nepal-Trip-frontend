@@ -6,20 +6,27 @@ export const HOTEL_TYPES = {
     CREATE_HOTEL: "CREATE_HOTEL",
     LOADING_HOTEL: "LOADING_HOTEL",
     GET_HOTELS: "GET_HOTELS",
+    UPDATE_HOTEL: "UPDATE_HOTEL",
     APPROVE_HOTEL: "APPROVE_HOTEL",
 }
 
-export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, auth }) => async (dispatch) => {
+export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, auth, token }) => async (dispatch) => {
     let media = []
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         if (hotel_images.length > 0) media = await imageUpload(hotel_images)
-        const res = await postDataAPI('hotel', { hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images: media }, auth.token)
+        const res = await postDataAPI('hotel', { hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images: media },token)
         dispatch({
             type: HOTEL_TYPES.CREATE_HOTEL,
             payload: { ...res.data.newHotel, user: auth.user }
         })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: {
+                success: res.data.msg
+            }
+        })
 
     } catch (err) {
         dispatch({
@@ -34,7 +41,6 @@ export const getHotels = (token) => async (dispatch) => {
 
         dispatch({ type: HOTEL_TYPES.LOADING_HOTEL, payload: true })
         const res = await getDataAPI('hotel', token)
-        // console.log(res);
         dispatch({
             type: HOTEL_TYPES.GET_HOTELS,
             payload: { ...res.data, page: 2 }
@@ -49,10 +55,11 @@ export const getHotels = (token) => async (dispatch) => {
     }
 }
 
-export const approveHotel = ({ hotel, auth }) => async (dispatch) => {
-    dispatch({ type: HOTEL_TYPES.APPROVE_HOTEL, payload: hotel })
+export const approveHotel = ({ hotel, token }) => async (dispatch) => {
     try {
-        await patchDataAPI(`approveHotel/${hotel._id}`, auth.token)
+        dispatch({ type: HOTEL_TYPES.APPROVE_HOTEL, payload: hotel })
+      await patchDataAPI(`approveHotel/${hotel._id}`, token)
+       
     } catch (err) {
         dispatch({
             type: GLOBALTYPES.ALERT,

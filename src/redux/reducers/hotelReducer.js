@@ -1,4 +1,4 @@
-import { PatchData } from "../actions/globalTypes";
+import { EditData, PatchData } from "../actions/globalTypes";
 import { HOTEL_TYPES } from "../actions/hotelAction";
 const initialState = {
     loading: false,
@@ -25,16 +25,17 @@ const hotelReducer = (state = initialState, action) => {
                 count: action.payload.count,
                 page: action.payload.page
             };
+
         case HOTEL_TYPES.APPROVE_HOTEL:
             return {
                 ...state,
-                hotels: state.hotels.map(hotel => {
-                    if (hotel._id === action.payload._id) {
-                        return action.payload
-                    }
-                    return hotel
-                })
+                hotels: EditData(state.hotels, action.payload._id),
             };
+        case HOTEL_TYPES.UPDATE_HOTEL:
+            return {
+                ...state,
+                hotels: PatchData(state.hotels, action.payload._id, action)
+            }
         default:
             return state;
     }

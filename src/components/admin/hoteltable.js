@@ -1,22 +1,24 @@
-import React from 'react'
-import {useDispatch} from 'react-redux'
-import { approveHotel } from '../../redux/actions/hotelAction'
+import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { approveHotel, getHotels } from '../redux/actions/hotelAction'
+import "../styles/admin.css"
 
-const Hoteltable = ({ hotel, auth }) => {
-    const dispatch = useDispatch()
 
-//   const a= hotel.hotels.map((hotel)=> hotel._id)
-//   console.log(a);
+const HotelTable = () => {
+  const dispatch = useDispatch()
+  const { auth,hotel } = useSelector(state => state)
 
-    const changeStatus=()=>{
-        // if(window.confirm("Are you sure want to change the status?")){
-          dispatch(approveHotel({hotel,auth}))
-            // return history.push("/")
-        // }
-    }
-    return (
-        <div>
-            <h2 className="text-danger text-capitalize text-center">
+  useEffect(() => {
+    dispatch(getHotels(auth.token))
+  }, [auth, dispatch])
+
+  const changeStatus = (hotel) => {
+        dispatch(approveHotel({hotel,auth}))
+  }
+  
+  return (
+    <div className='container'>
+      <h2 className="text-danger text-capitalize text-center">
                 Welcome to Admin Dashboard
             </h2>
             <div className='hotel-table'>
@@ -33,13 +35,14 @@ const Hoteltable = ({ hotel, auth }) => {
                     </thead>
                     <tbody>
                         {hotel.hotels.map((hotel, index) => (
+                            
                             <tr key={index}>
                                 <th scope="row">{index + 1}</th>
                                 <td className='text-capitalize'>{hotel.hotel_name}</td>
                                 <td className='text-capitalize'>{hotel.address}</td>
                                 <td className='text-lowercase'>{hotel.hotel_email}</td>
                                 <td>{hotel.pan_no}</td>
-                                <td className='text-capitalize' onClick={changeStatus}>
+                                <td className='text-capitalize' onClick={()=>changeStatus(hotel)}>
                                     {hotel.hotel_validity ? (
                                         <span className='badge text-bg-success'>Active</span>
                                     ) : (
@@ -54,8 +57,9 @@ const Hoteltable = ({ hotel, auth }) => {
                     </tbody>
                 </table>
             </div>
-        </div>
-    )
+
+    </div>
+  )
 }
 
-export default Hoteltable
+export default HotelTable

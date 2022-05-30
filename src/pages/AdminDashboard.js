@@ -1,25 +1,19 @@
-import { useSelector, useDispatch } from 'react-redux'
-import { useEffect } from 'react'
-import { getHotels } from '../redux/actions/hotelAction'
-import Hoteltable from '../components/Admin/Hoteltable'
-import "../styles/admin.css"
+import MainDash from '../components/admin/MainDash/MainDash'
+import RightSide from '../components/admin/RigtSide/RightSide'
+import Sidebar from '../components/admin/Sidebar'
+import '../Global.css'
 
-const AdminDashboard = () => {
-  const dispatch = useDispatch()
-  const { auth, hotel } = useSelector(state => state)
-
-  useEffect(() => {
-    dispatch(getHotels(auth.token))
-  }, [auth, dispatch])
-
-
+function AdminDashboard() {
   return (
-    <div className='container'>
-      
-    <Hoteltable hotel={hotel} auth={auth}/>
+    <div className="App">
+      <div className="AppGlass">
+        <Sidebar/>
+        <MainDash/>
+        <RightSide/>
+      </div>
 
     </div>
-  )
+  );
 }
 
-export default AdminDashboard
+export default AdminDashboard;
