@@ -3,7 +3,7 @@ import RightSide from '../components/admin/RigtSide/RightSide'
 import Sidebar from '../components/admin/Sidebar'
 import '../Global.css'
 
-function App() {
+function AdminDashboard() {
   return (
     <div className="App">
       <div className="AppGlass">
@@ -15,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default AdminDashboard;
