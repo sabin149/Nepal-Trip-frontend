@@ -12,8 +12,6 @@ function AdminDashboard() {
         <RightSide/>
       </div>
 
-
-
     </div>
   );
 }
