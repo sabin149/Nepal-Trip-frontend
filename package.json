@@ -25,7 +25,6 @@
     "@iconscout/react-unicons": "^1.1.6",
     "@emotion/styled": "^11.8.1",
     "react-apexcharts": "^1.4.0"
-
   },
   "scripts": {
     "start": "react-scripts start",

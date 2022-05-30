@@ -32,16 +32,11 @@ function App() {
           <Route path="/" element={isAdmin ? <AdminDashboard token={token} /> : isVendor ? <VendorDashboard token={token} /> :
             <Home />
           } />
-
-        
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={ !token? <Login />:<Navigate to="/"/>} />
           <Route path="/hotel" element={isVendor ? <Hotel /> :<Navigate to="/"/>} />
           <Route path="/room" element={isVendor ? <Room /> :<Navigate to="/"/>} />
           <Route path="*" element={<NotFound />} />
-
-          
-          
         </Routes>
       </Router>
     </div>
