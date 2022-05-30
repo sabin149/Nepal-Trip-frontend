@@ -3,7 +3,6 @@ import RightSide from '../components/admin/RigtSide/RightSide'
 import Sidebar from '../components/admin/Sidebar'
 import '../Global.css'
 
-
 function AdminDashboard() {
   return (
     <div className="App">
