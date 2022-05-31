@@ -8,6 +8,7 @@ import Alert from "./components/alert/Alert"
 import AdminDashboard from "./pages/AdminDashboard"
 import VendorDashboard from "./pages/VendorDashboard"
 import Room from "./pages/room/[id]";
+import HotelList from "./components/Home/HotelList";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path="/login" element={ !token? <Login />:<Navigate to="/"/>} />
           <Route path="/hotel" element={isVendor ? <Hotel /> :<Navigate to="/"/>} />
           <Route path="/room" element={isVendor ? <Room /> :<Navigate to="/"/>} />
+          <Route path="/hotellist" element={<HotelList /> } />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>

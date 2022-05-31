@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-import React, { useState } from "react";
-// import {useNavigate} from 'react-router-dom'
-import { useDispatch, useSelector } from "react-redux";
-import { GLOBALTYPES } from "../../redux/actions/globalTypes";
-=======
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
->>>>>>> origin/main
 // import "../../styles/hotel.css"
 import uploadImage from "../../images/No_image.png";
 import { imageShow, videoShow } from "../../utils/mediaShow";
@@ -16,17 +9,10 @@ import { createHotel } from "../../redux/actions/hotelAction";
 import "../../styles/hotel.css";
 
 const Hotel = () => {
-<<<<<<< HEAD
-  const dispatch = useDispatch();
-  const { auth } = useSelector((state) => state);
-
-  // const navigate = useNavigate()
-=======
   const dispatch = useDispatch()
   const {auth} = useSelector(state => state)
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
->>>>>>> origin/main
 
   const initialState = {
     hotel_name: "",
@@ -78,39 +64,6 @@ const Hotel = () => {
     setHotel_Images([...hotel_images, ...newImages]);
   };
   const deleteImages = (index) => {
-<<<<<<< HEAD
-    const newArr = [...hotel_images];
-    newArr.splice(index, 1);
-    setHotel_Images(newArr);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (hotel_images.length === 0)
-      return dispatch({
-        type: GLOBALTYPES.ALERT,
-        payload: { error: "Please add hotel images." },
-      });
-    dispatch(
-      createHotel({
-        hotel_name,
-        address,
-        phone,
-        hotel_email,
-        pan_no,
-        price,
-        hotel_info,
-        hotel_facilities,
-        hotel_policies,
-        hotel_images,
-        auth,
-      })
-    );
-
-    // navigate("/")
-  };
-
-=======
     const newArr = [...hotel_images]
     newArr.splice(index, 1)
     setHotel_Images(newArr)
@@ -126,7 +79,6 @@ const Hotel = () => {
         navigate("/")
    }
  
->>>>>>> origin/main
   return (
     <div className="container ">
       <form onSubmit={handleSubmit}>
@@ -167,15 +119,7 @@ const Hotel = () => {
                 <>
                   <div className="file_upload">
                     <div className="d-flex">
-<<<<<<< HEAD
-                      <h6 className="btn btn-warning text-light me-2">
-                        Upload Images
-                      </h6>
-
-                      <i className="fas fa-image" />
-=======
                       <h6 className='btn btn-warning text-light me-2'>Upload Images</h6>
->>>>>>> origin/main
                     </div>
                     <input
                       type="file"
@@ -230,7 +174,7 @@ const Hotel = () => {
                 <label className="form-label">Phone Number</label>
                 <input
                   type="text"
-                  className="form-control hotel_input"
+                  className="form-control hotel_input "
                   id="exampleInputEmail1"
                   name="phone"
                   value={phone}
