@@ -7,28 +7,22 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./Table.css";
+import {useDispatch,useSelector} from 'react-redux'
+import moment from "moment"
+import { approveHotel, getHotels } from '../../../redux/actions/hotelAction'
 
-function createData(CompanyName, email, date, status) {
-  return { CompanyName, email, date, status };
-}
-
-const rows = [
-  createData("Lasania Chiken Fri", "sp554540@gmail.com", "2 March 2022", "Approved"),
-  createData("Big Baza Bang ", "sp554540@gmail.com", "2 March 2022", "Pending"),
-  createData("Mouth Freshner", "sp554540@gmail.com", "2 March 2022", "Approved"),
-  createData("Cupcake", "sp554540@gmail.com", "2 March 2022", "Delivered"),
-];
 
 
 const makeStyle=(status)=>{
-  if(status === 'Approved')
+
+  if(status === true)
   {
     return {
       background: 'rgb(145 254 159 / 47%)',
       color: 'green',
     }
   }
-  else if(status === 'Pending')
+  else if(status === false)
   {
     return{
       background: '#ffadad8f',
@@ -44,16 +38,25 @@ const makeStyle=(status)=>{
 }
 
 export default function BasicTable() {
+  const dispatch=useDispatch()
+  const {hotel} = useSelector(state => state)
+
+const token=localStorage.getItem('token')
+
+  React.useEffect(() => {
+    dispatch(getHotels(token))
+  }, [token, dispatch])
   return (
       <div className="Table">
       <h3>Vendors</h3>
         <TableContainer
           component={Paper}
-          style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
+          style={{ boxShadow: "0px 13px 20px 0px #80808029", overflow:"scroll"}}
         >
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
+                <TableCell>SN</TableCell>
                 <TableCell>CompanyName</TableCell>
                 <TableCell align="left">Email</TableCell>
                 <TableCell align="left">Registerd At</TableCell>
@@ -62,18 +65,21 @@ export default function BasicTable() {
               </TableRow>
             </TableHead>
             <TableBody style={{ color: "white" }}>
-              {rows.map((row) => (
+              {hotel.hotels.map((hotel,index) => (
                 <TableRow
-                  key={row.CompanyName}
+                  key={hotel._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.CompanyName}
+                    {index+1}
                   </TableCell>
-                  <TableCell align="left">{row.email}</TableCell>
-                  <TableCell align="left">{row.date}</TableCell>
+                  <TableCell component="th" scope="row">
+                    {hotel.hotel_name}
+                  </TableCell>
+                  <TableCell align="left">{hotel.hotel_email}</TableCell>
+                  <TableCell align="left">{moment(hotel.createdAt).format('YYYY-MM-DD')}</TableCell>
                   <TableCell align="left">
-                    <span className="status" style={makeStyle(row.status)}>{row.status}</span>
+                    <span className="status" style={makeStyle(hotel.hotel_validity)}>{hotel.hotel_validity?"Approved":"Pending"}</span>
                   </TableCell>
                   <TableCell align="left" className="Details">Details</TableCell>
                 </TableRow>
