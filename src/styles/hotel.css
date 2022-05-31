@@ -57,3 +57,9 @@
     font-weight: bolder;
 }
 
+.hotel_input{
+    border-color:#212529;
+    border-radius:0%;
+    text-transform: none;
+    background-color: #f9f9f9;
+}

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
-import uploadImage from "../../images/Upload_Image.png"
+import No_image from "../../images/No_image.png"
 import { imageShow, videoShow } from "../../utils/mediaShow"
 import "../../styles/room.css"
 import { createHotelRoom } from '../../redux/actions/roomAction'
@@ -102,7 +102,7 @@ const hotel1=hotel.hotels.filter(hotel=>hotel.user===userID)
 
                   ) :
 
-                  <img src={uploadImage} alt=".." style={{ "width": "5rem" }} />
+                  <img src={No_image} alt=".." style={{ "width": "5rem" }} />
 
               }
             </div>
