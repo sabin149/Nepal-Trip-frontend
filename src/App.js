@@ -3,6 +3,9 @@ import Register from "./pages/Register"
 import Login from "./pages/Login"
 import Hotel from "./pages/hotel/[id]";
 import Home from "./pages/Home";
+import Header from "./components/Home/Header";
+import Footer from "./components/Home/Footer";
+import { Hotelinfo } from "./pages/Hotelinfo";
 import NotFound from "./components/NotFound";
 import Alert from "./components/alert/Alert"
 import AdminDashboard from "./pages/AdminDashboard"
@@ -28,11 +31,16 @@ function App() {
   return (
     <div >
       <Router>
-        <Alert />
+         <Alert />
+        <Header/> 
+       
         <Routes>
           <Route path="/" element={isAdmin ? <AdminDashboard token={token} /> : isVendor ? <VendorDashboard token={token} /> :
             <Home />
           } />
+          
+          <Route path="/createhotel" element={<Hotel />} />
+          <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={ !token? <Login />:<Navigate to="/"/>} />
           <Route path="/hotel" element={isVendor ? <Hotel /> :<Navigate to="/"/>} />
@@ -40,7 +48,8 @@ function App() {
           <Route path="/hotellist" element={<HotelList /> } />
           <Route path="*" element={<NotFound />} />
         </Routes>
-      </Router>
+        <Footer/>
+        </Router>
     </div>
   );
 }
