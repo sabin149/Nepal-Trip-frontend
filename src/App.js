@@ -22,6 +22,10 @@ function App() {
   const isAdmin = token && role === "admin"
   const isVendor = token && role === "vendor"
 
+  
+
+
+
   // const {auth} = useSelector(state => state)
 
   // const isAdmin = auth.token && auth.user.role === "admin"
@@ -33,7 +37,9 @@ function App() {
     <div >
       <Router>
          <Alert />
-        <Header/> 
+       
+
+       <Header/>
        
         <Routes>
           <Route path="/" element={isAdmin ? <AdminDashboard token={token} /> : isVendor ? <VendorDashboard token={token} /> :
