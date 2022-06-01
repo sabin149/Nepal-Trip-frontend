@@ -5,6 +5,7 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
+import {Link} from "react-router-dom"
 
 const Home = () => {
   
@@ -41,7 +42,7 @@ const Home = () => {
             <h1> Make Memories</h1>
             <div className="headerSearch">
               <div className="headerSearchItem">
-                <i class="fa-solid fa-location-dot"></i>
+                <i className="fa-solid fa-location-dot"></i>
                 <input
                   type="text"
                   placeholder="Where are you going?"
@@ -49,7 +50,7 @@ const Home = () => {
                 />
               </div>
               <div className="headerSearchItem">
-                <i class="fa-solid fa-calendar-days"></i>
+                <i className="fa-solid fa-calendar-days"></i>
                 <span  onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                   date[0].endDate,
                   "MM/dd/yyyy"
@@ -67,7 +68,7 @@ const Home = () => {
                 
               </div>
               <div className="headerSearchItem">
-                <i class="fa-solid fa-person"></i>
+                <i className="fa-solid fa-person"></i>
                 <span onClick={() => setOpenOptions(!openOptions)}
                 className="headerSearchText">
                 {`${options.adult} adult · ${options.children} children · ${options.room} room`}
@@ -118,7 +119,7 @@ const Home = () => {
             <div className="featuredItem">
               <img
                 src="https://cdn.pixabay.com/photo/2019/09/15/07/31/everest-base-camp-4477525__340.jpg"
-                alt=""
+                alt="projectimages"
                 className="featuredImg"
               />
               <div className="featuredTitles"></div>
@@ -127,7 +128,7 @@ const Home = () => {
             <div className="featuredItem">
               <img
                 src="https://cdn1.matadornetwork.com/blogs/1/2019/08/Nepalese-village-in-the-Himalaya-mountains-near-Pokhara-in-Nepal-1200x854.jpg"
-                alt=""
+                alt="projectimages"
                 className="featuredImg"
               />
               <div className="featuredTitles"></div>
@@ -135,7 +136,7 @@ const Home = () => {
             <div className="featuredItem">
               <img
                 src="https://media.istockphoto.com/photos/patan-picture-id637268486?b=1&k=20&m=637268486&s=170667a&w=0&h=7ovZBRq98SgR3z73ls6P4h-6_gMgQisjmWJp4fvnz2k="
-                alt=""
+                alt="projectimages"
                 className="featuredImg"
               />
               <div className="featuredTitles"></div>
@@ -145,11 +146,11 @@ const Home = () => {
 
         {/* Nepal's Top Destination */}
         <div className="destination_nepal">
-          <div class="ui container top">
+          <div className="ui container top">
             <h3>Nepal's Top Destination</h3>
           </div>
           <div>
-            <figure class="destination">
+            <figure className="destination">
               <img
                 src="https://assets.xceltrip.com/destination-1619006759329-5961c.WEBP"
                 alt="sample89"
@@ -158,9 +159,9 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <a href="#"></a>
+              <Link to="/"></Link>
             </figure>
-            <figure class="destination">
+            <figure className="destination">
               <img
                 src="https://assets.xceltrip.com/destination-1619006781422-8f33b.WEBP"
                 alt="sample94"
@@ -168,9 +169,9 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <a href="#"></a>
+          <Link to="/"></Link>
             </figure>
-            <figure class="destination">
+            <figure className="destination">
               <img
                 src="https://photographylife.com/wp-content/uploads/2015/08/DSC0577.jpg"
                 alt="sample92"
@@ -178,11 +179,11 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <a href="#"></a>
+          <Link to="/"></Link>
             </figure>
           </div>
           <div>
-            <figure class="destination">
+            <figure className="destination">
               <img
                 src="https://trainsplanesandtuktuks.com/Wordpress/wp-content/uploads/2018/05/Nepal-2018-308-edited-1024x683.jpg"
                 alt="sample89"
@@ -191,9 +192,9 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <a href="#"></a>
+          <Link to="/"></Link>
             </figure>
-            <figure class="destination">
+            <figure className="destination">
               <img
                 src="https://admin.buddhaair.com/upload/blog/thumbnail/1574327436_bCB0U_1566982540-dvsvz-pashupatinath.webp"
                 alt="sample94"
@@ -201,9 +202,9 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <a href="#"></a>
+          <Link to="/"></Link>
             </figure>
-            <figure class="destination">
+            <figure className="destination">
               <img
                 src="https://admin.buddhaair.com/upload/blog/mainimage/1554008274_maWAR_Elephant_Bathing_at_Chitwan.jpg"
                 alt="sample92"
@@ -211,7 +212,7 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <a href="#"></a>
+          <Link to="/"></Link>
             </figure>
           </div>
         </div>

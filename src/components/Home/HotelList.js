@@ -8,27 +8,27 @@ const HotelList = () => {
   return (
     <div>
         <div className="sub-header d-flex flex-row mb-3 justify-content-center align-item-center" style={{height:"100px"}}>
-            <div class=" flex-px-3 app" style={{marginLeft:'20px'}}>
+            <div className=" flex-px-3 app" style={{marginLeft:'20px'}}>
                 <span style={{fontSize:'14px'}}>Destination</span>
                 <h5 style={{fontSize:'14px'}}>Kathmandu, Nepal</h5>
                 </div>
-            <div class=" flex-px-3 app" >
+            <div className=" flex-px-3 app" >
                 <span style={{fontSize:'14px'}}>Check In</span>
                 <h5 style={{fontSize:'14px'}}>01 July, 2022</h5>
             </div>
-            <div class="flex-px-3 app">
+            <div className="flex-px-3 app">
                 <span style={{fontSize:'14px'}}>Check Out</span>
                 <h5 style={{fontSize:'14px'}}>05 July, 2022</h5>
             </div>
-            <div class="flex-px-3 app">
+            <div className="flex-px-3 app">
                 <span style={{fontSize:'14px'}}>Rooms(2)</span>
                 <h5 style={{fontSize:'14px'}}>1</h5>
             </div>
-            <div class="flex-px-3 app">
+            <div className="flex-px-3 app">
                 <span style={{fontSize:'14px'}}>Adults(2)</span>
                 <h5 style={{fontSize:'14px'}}>2</h5>
             </div>
-            <div class="flex-px-3 app">
+            <div className="flex-px-3 app">
                 <span style={{fontSize:'14px'}}>Children(2)</span>
                 <h5 style={{fontSize:'14px'}}>0</h5>
             </div>            
@@ -107,7 +107,7 @@ const HotelList = () => {
                         <div className='row'>
                             <div className='col-md-4'>
                             <div className='img-holder'>
-                                <img src={uploadImage} alt="..." style={{width:"15rem"}} />
+                                <img src={uploadImage} alt="projectimages" style={{width:"15rem"}} />
                             </div>
                             </div> 
                             <div className='col-md-5'>
@@ -138,7 +138,7 @@ const HotelList = () => {
                                     (excluding Taxes)
                                     </span>
                                 </div>
-                                <button class="button" className='bt'>CHOOSE</button> 
+                                <button className="button" className='bt'>CHOOSE</button> 
                             </div>
                         </div>
                     </div>
@@ -147,7 +147,7 @@ const HotelList = () => {
                         <div className='row'>
                             <div className='col-md-4'>
                             <div className='img-holder'>
-                                <img src={uploadImage} alt="..." style={{width:"15rem"}} />
+                                <img src={uploadImage} alt="projectimages" style={{width:"15rem"}} />
                             </div>
                             </div> 
                             <div className='col-md-5 '>
@@ -178,7 +178,7 @@ const HotelList = () => {
                                     (excluding Taxes)
                                     </span>
                                 </div>
-                                <button class="button" className='bt'>CHOOSE</button> 
+                                <button className="button" className='bt'>CHOOSE</button> 
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/hotelinfo.css'
+import { Link } from 'react-router-dom'
 
 export const Hotelinfo = () => {
   return (
@@ -56,7 +57,7 @@ export const Hotelinfo = () => {
                 </p>
                 <h5> 0 </h5>
             </div>
-            <button class='ml-4 primary-b'>
+            <button className='ml-4 primary-b'>
                 <span> Modify Search</span>
             </button>
         </div>
@@ -64,28 +65,28 @@ export const Hotelinfo = () => {
             </div>
         </div>
         <div className='second-nav'>
-                <div class="container clearfix">
-                    <div class="float-left">
+                <div className="container clearfix">
+                    <div className="float-left">
                         <div className='menu'>
                             <div className='Item'>
-                                <a>
+                                <Link to="">
                                     <span>Overview </span>
-                                </a>
+                                </Link>
                             </div>
                             <div className='Item'>
-                                <a>
+                                <Link to="">
                                     <span>Room Info & price</span>
-                                </a>
+                                </Link>
                             </div>
                             <div className='Item'>
-                                <a>
+                                <Link to="">
                                     <span> Hotel Amenities</span>
-                                </a>
+                                </Link>
                             </div>
                             <div className='Item'>
-                                <a>
+                                <Link to="">
                                     <span>Hotel Policies</span>
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -93,23 +94,23 @@ export const Hotelinfo = () => {
             
         </div>
         <span> </span>
-        <div class="container pd-top-md">
+        <div className="container pd-top-md">
             <div>
                 <h2>Hotel Da Yatra Courtyard</h2>
                 <p>Street no 15, Lakeside  
-                    <a class="block-in-mobile">
-                    <i class="fa-solid fa-location-dot"></i>
+                    <Link to="" className="block-in-mobile">
+                    <i className="fa-solid fa-location-dot"></i>
                     <span> view in map </span>
-                    </a>
+                    </Link>
                 </p>
                 <div className='carousel'>
-                    <div class="row">
-                        <div class="col-lg-8">
+                    <div className="row">
+                        <div className="col-lg-8">
                             <div className='mainimage'>
-                                <img src='https://assets.xceltrip.com/gallery-1583997472633-34394.jpg' alt='hotel image'/>
+                                <img src='https://assets.xceltrip.com/gallery-1583997472633-34394.jpg' alt='hotel_image'/>
                             </div>
                         </div>
-                        <div class="col-6 col-lg-4">.col-6 .col-lg-4</div>
+                        <div className="col-6 col-lg-4">.col-6 .col-lg-4</div>
                         </div>
                 </div>
             </div>

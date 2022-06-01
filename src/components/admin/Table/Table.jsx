@@ -7,53 +7,62 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import "./Table.css";
-import {useDispatch,useSelector} from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import moment from "moment"
 import { approveHotel, getHotels } from '../../../redux/actions/hotelAction'
+import axios from "axios";
+import { GLOBALTYPES } from "../../../redux/actions/globalTypes";
 
+const makeStyle = (status) => {
 
-
-const makeStyle=(status)=>{
-
-  if(status === true)
-  {
+  if (status === true) {
     return {
       background: 'rgb(145 254 159 / 47%)',
       color: 'green',
     }
   }
-  else if(status === false)
-  {
-    return{
+  else if (status === false) {
+    return {
       background: '#ffadad8f',
       color: 'red',
     }
   }
-  else{
-    return{
+  else {
+    return {
       background: '#59bfff',
       color: 'white',
     }
   }
 }
 
-export default function BasicTable() {
-  const dispatch=useDispatch()
-  const {hotel} = useSelector(state => state)
+function BasicTable() {
 
-const token=localStorage.getItem('token')
+  const dispatch = useDispatch()
+  const { hotel } = useSelector(state => state)
+
+  const token = localStorage.getItem('token')
 
   React.useEffect(() => {
     dispatch(getHotels(token))
   }, [token, dispatch])
+
+  const changeStatus = async ({ item }) => {
+    dispatch(approveHotel({hotel: item, token}))
+    // try {
+     
+  }
+
+
   return (
-      <div className="Table">
+
+    <div className="Table">
       <h3>Vendors</h3>
+      <form>
         <TableContainer
           component={Paper}
-          style={{ boxShadow: "0px 13px 20px 0px #80808029", overflow:"scroll"}}
+          style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
         >
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <Table sx={{ minWidth: 650 , maxWidth:1300}} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>SN</TableCell>
@@ -65,28 +74,36 @@ const token=localStorage.getItem('token')
               </TableRow>
             </TableHead>
             <TableBody style={{ color: "white" }}>
-              {hotel.hotels.map((hotel,index) => (
+              {hotel.hotels.map((item, index) => (
                 <TableRow
-                  key={hotel._id}
+                  key={item._id}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
-                  <TableCell component="th" scope="row">
-                    {index+1}
+                  <TableCell  align="left">
+                    {index + 1}
                   </TableCell>
                   <TableCell component="th" scope="row">
-                    {hotel.hotel_name}
+                    {item.hotel_name}
                   </TableCell>
-                  <TableCell align="left">{hotel.hotel_email}</TableCell>
-                  <TableCell align="left">{moment(hotel.createdAt).format('YYYY-MM-DD')}</TableCell>
+                  <TableCell align="left">{item.hotel_email}</TableCell>
+                  <TableCell align="left">{moment(item.createdAt).format('YYYY-MM-DD')}</TableCell>
                   <TableCell align="left">
-                    <span className="status" style={makeStyle(hotel.hotel_validity)}>{hotel.hotel_validity?"Approved":"Pending"}</span>
+                    <button type="button" onClick={() => {
+                      // const hotel=item
+                      // dispatch(approveHotel({hotel, token}))
+                      changeStatus({ item })
+
+                    }} className="status" style={makeStyle(item.hotel_validity)}>{item.hotel_validity ? "Approved" : "Pending"}</button>
                   </TableCell>
+
                   <TableCell align="left" className="Details">Details</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-        </TableContainer>
-      </div>
+        </TableContainer></form>
+    </div>
   );
 }
+
+export default BasicTable;
