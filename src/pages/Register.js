@@ -28,8 +28,8 @@ import React,{useState,useEffect} from 'react'
      return (
        <div className='auth_page'>
          <form onSubmit={handleSubmit}>
-           <h3 className='text-uppercase text-center mb-4'>REGISTER FORM 
-           {/* <span className='text-primary'>Trip</span> */}
+         <h3 className='text-uppercase text-center mb-4 text-warning'>REGISTER  
+           <span className='text-dark'>FORM</span>
            </h3>
            <div className="form-group">
                     <label htmlFor="fullname">Full Name</label>
@@ -77,7 +77,7 @@ import React,{useState,useEffect} from 'react'
                         onChange={handleChangeInput} value={password} name="password"
                         style={{background: `${alert.password ? '#fd2d6a14' : ''}`}} />
                         <small onClick={() => setTypePass(!typePass)}>
-                            {typePass ? <i className="fas fa-eye"></i> :<i className="fas fa-eye-slash"></i>}
+                            {typePass ? <i className="fa-regular fa-eye"></i> :<i className="fa-regular fa-eye-slash"></i>}
                         </small>
                     </div>
                     <small className="form-text text-danger">
@@ -92,7 +92,7 @@ import React,{useState,useEffect} from 'react'
                         onChange={handleChangeInput} value={password_confirmation} name="password_confirmation"
                         style={{background: `${alert.password_confirmation ? '#fd2d6a14' : ''}`}} />
                         <small onClick={() => setTypeCfPass(!typeCfPass)}>
-                            {typeCfPass ? <i className="fas fa-eye"></i> :<i className="fas fa-eye-slash"></i>}
+                            {typeCfPass ?  <i className="fa-regular fa-eye"></i> :<i className="fa-regular fa-eye-slash"></i>}
                         </small>
                     </div>
                     <small className="form-text text-danger">
@@ -113,7 +113,7 @@ import React,{useState,useEffect} from 'react'
                         value="other" onChange={handleChangeInput} />
                     </label>
                 </div>
-                <button type="submit" className="btn btn-dark w-100">
+                <button type="submit" className="btn btn-warning w-100">
                     Register
                 </button>
            <p className='my-2'>

@@ -5,20 +5,20 @@ export const getDataAPI = async (url, token) => {
     })
     return res;
 }
-export const postDataAPI = async (url, post, token) => {
-    const res = await axios.post(`/api/${url}`, post, {
+export const postDataAPI = async (url, hotel, token) => {
+    const res = await axios.post(`/api/${url}`, hotel, {
         headers: { Authorization: token}
     })
     return res;
 }
-export const putDataAPI = async (url, post, token) => {
-    const res = await axios.put(`/api/${url}`, post, {
+export const putDataAPI = async (url, hotel, token) => {
+    const res = await axios.put(`/api/${url}`, hotel, {
         headers: { Authorization: token}
     })
     return res;
 }
-export const patchDataAPI = async (url, post, token) => {
-    const res = await axios.patch(`/api/${url}`, post, {
+export const patchDataAPI = async (url, hotel, token) => {
+    const res = await axios.patch(`/api/${url}`, hotel, {
         headers: { Authorization: token}
     })
     return res;

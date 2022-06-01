@@ -43,7 +43,7 @@ const Login = () => {
               onChange={handleChangeInput} value={password}
             />
             <small onClick={() => setTypePass(!typePass)}>
-              {typePass ? <i className="fas fa-eye"></i> :<i className="fas fa-eye-slash"></i>}
+              {typePass ? <i className="fa-regular fa-eye"></i> :<i className="fa-regular fa-eye-slash"></i>}
             </small>
           </div>
         </div>

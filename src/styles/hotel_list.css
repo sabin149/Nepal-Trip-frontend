@@ -1,0 +1,86 @@
+.sub-header{
+    background: linear-gradient(#1081c0,#003c75);
+}
+
+.app{
+    margin-left: 50px;
+    font-size: 14px;
+    color: white;
+    margin-top: 25px;
+}
+h4{
+    color: #003c75;
+    font-weight: 500;
+    font-size: 1.28 rem;
+}
+.hotel-card{
+    margin-bottom: 20px;
+}
+
+.hotel_list{
+    margin-top: 10px;
+    background-color:white;
+    border:1px solid rgb(218, 218, 218);
+    height: 200px;
+    display: flex;
+}
+.card-box{
+    padding-top: 10px;
+}
+
+.img-holder{
+    background-color: fffff;
+    border-radius: 2px;
+    box-sizing: black;
+    display: block;
+    flex-basis: 220px;
+    height: 180px;
+    line-height: 21px;
+    margin-right: 20px;
+    min-width: 220px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative;
+    padding: 10px 10px 10px 10px;
+
+}
+
+ .img{
+    max-width: none;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    overflow-x: hidden;
+}
+
+
+.icn-holder{
+    padding: 0px 10px 14px 0;
+    min-height: 50px;
+}
+
+.icn-holder span{
+    padding-right: 10px;
+}
+
+.hotel-price{
+    margin-top: 20px;
+    font-size: 22px;
+    color: #009b59;
+    font-weight: 600;
+}
+
+
+.bt {
+    background-color: #3b72c4;
+    border: none;
+    color: white;
+    padding: 5px 35px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
