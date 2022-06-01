@@ -1,5 +1,13 @@
+.sub-header{
+    background: linear-gradient(#1081c0,#003c75);
+}
 
-
+.app{
+    margin-left: 50px;
+    font-size: 14px;
+    color: white;
+    margin-top: 25px;
+}
 h4{
     color: #003c75;
     font-weight: 500;

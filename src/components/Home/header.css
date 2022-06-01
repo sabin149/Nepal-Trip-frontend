@@ -1,0 +1,52 @@
+.navbar{
+    height: 50px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+  
+  .navContainer{
+    width: 100%;
+    max-width: 1024px;
+    color: rgb(0, 0, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo{
+    font-weight: 500;
+  }
+  
+  
+  .navButton{
+    margin-left: 20px;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    color: #ffffff;
+    border-radius: 5px;
+    background-color: #3b72c4;
+  }
+
+.hotel{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.flight{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+  .navItems{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+    font-family: Poppins;
+   font-size: 13px;
+  }
