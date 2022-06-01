@@ -9,6 +9,7 @@ import AdminDashboard from "./pages/AdminDashboard"
 import VendorDashboard from "./pages/VendorDashboard"
 import Room from "./pages/room/[id]";
 import HotelList from "./components/Home/HotelList";
+import VendormainDashboard from "./pages/VendormainDashboard";
 
 
 function App() {
@@ -39,6 +40,8 @@ function App() {
           <Route path="/room" element={isVendor ? <Room /> :<Navigate to="/"/>} />
           <Route path="/hotellist" element={<HotelList /> } />
           <Route path="*" element={<NotFound />} />
+          <Route path="/mainvendor" element={<VendormainDashboard/> } />
+          
         </Routes>
       </Router>
     </div>
