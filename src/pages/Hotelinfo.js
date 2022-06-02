@@ -93,7 +93,7 @@ export const Hotelinfo = () => {
             
         </div>
         <span> </span>
-        <div class="container pd-top-md">
+        {/* <div class="container pd-top-md">
             <div>
                 <h2>Hotel Da Yatra Courtyard</h2>
                 <p>Street no 15, Lakeside  
@@ -113,7 +113,7 @@ export const Hotelinfo = () => {
                         </div>
                 </div>
             </div>
-        </div>
+        </div> */}
     </div>
   )
 }

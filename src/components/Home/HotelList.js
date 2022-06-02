@@ -1,4 +1,4 @@
-import { red } from '@mui/material/colors';
+// import { red } from '@mui/material/colors';
 import React from 'react'
 import "../../styles/hotel_list.css";
 import { Paper } from '@mui/material';
