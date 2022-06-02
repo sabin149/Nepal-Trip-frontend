@@ -61,13 +61,10 @@ export const Hotelinfo = () => {
                 <span> Modify Search</span>
             </button>
         </div>
-      </div>
+             </div>
             </div>
         </div>
-        <div className='second-nav'>
-                <div className="container clearfix">
-                    <div className="float-left">
-                        <div className='menu'>
+        <div className='second-nav d-flex'>
                             <div className='Item'>
                                 <Link to="">
                                     <span>Overview </span>
@@ -87,18 +84,10 @@ export const Hotelinfo = () => {
                                 <Link to="">
                                     <span>Hotel Policies</span>
                                 </Link>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-        </div>
+                            </div>                 
+            </div>
         <span> </span>
-<<<<<<< HEAD
-        {/* <div class="container pd-top-md">
-=======
         <div className="container pd-top-md">
->>>>>>> 73bd305dd373fb020d4f8d2d613774414a037456
             <div>
                 <h2>Hotel Da Yatra Courtyard</h2>
                 <p>Street no 15, Lakeside  
@@ -118,7 +107,7 @@ export const Hotelinfo = () => {
                         </div>
                 </div>
             </div>
-        </div> */}
+        </div>
     </div>
   )
 }
