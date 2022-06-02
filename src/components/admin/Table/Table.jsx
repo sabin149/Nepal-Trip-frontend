@@ -10,8 +10,6 @@ import "./Table.css";
 import { useDispatch, useSelector } from 'react-redux'
 import moment from "moment"
 import { approveHotel, getHotels } from '../../../redux/actions/hotelAction'
-import axios from "axios";
-import { GLOBALTYPES } from "../../../redux/actions/globalTypes";
 
 const makeStyle = (status) => {
 
@@ -46,12 +44,10 @@ function BasicTable() {
     dispatch(getHotels(token))
   }, [token, dispatch])
 
-  const changeStatus = async ({ item }) => {
+  const changeStatus =  ({ item }) => {
     dispatch(approveHotel({hotel: item, token}))
-    // try {
-     
+ 
   }
-
 
   return (
 
@@ -62,11 +58,11 @@ function BasicTable() {
           component={Paper}
           style={{ boxShadow: "0px 13px 20px 0px #80808029" }}
         >
-          <Table sx={{ minWidth: 650 , maxWidth:1300}} aria-label="simple table">
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>SN</TableCell>
-                <TableCell>CompanyName</TableCell>
+                <TableCell align="left">SN</TableCell>
+                <TableCell align="left">CompanyName</TableCell>
                 <TableCell align="left">Email</TableCell>
                 <TableCell align="left">Registerd At</TableCell>
                 <TableCell align="left">Status</TableCell>
@@ -88,12 +84,12 @@ function BasicTable() {
                   <TableCell align="left">{item.hotel_email}</TableCell>
                   <TableCell align="left">{moment(item.createdAt).format('YYYY-MM-DD')}</TableCell>
                   <TableCell align="left">
-                    <button type="button" onClick={() => {
+                    <span type="button" onClick={() => {
                       // const hotel=item
                       // dispatch(approveHotel({hotel, token}))
                       changeStatus({ item })
 
-                    }} className="status" style={makeStyle(item.hotel_validity)}>{item.hotel_validity ? "Approved" : "Pending"}</button>
+                    }} className="status" style={makeStyle(item.hotel_validity)}>{item.hotel_validity ? "Approved" : "Pending"}</span>
                   </TableCell>
 
                   <TableCell align="left" className="Details">Details</TableCell>

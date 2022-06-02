@@ -1,8 +1,8 @@
 import React from 'react'
-import '../styles/hotelinfo.css'
+import './hotelinfo.css'
 import { Link } from 'react-router-dom'
 
-export const Hotelinfo = () => {
+const Hotelinfo = () => {
   return (
     <div className='main_content'>
         <div className='search_result'>
@@ -94,11 +94,7 @@ export const Hotelinfo = () => {
             
         </div>
         <span> </span>
-<<<<<<< HEAD
-        {/* <div class="container pd-top-md">
-=======
         <div className="container pd-top-md">
->>>>>>> 73bd305dd373fb020d4f8d2d613774414a037456
             <div>
                 <h2>Hotel Da Yatra Courtyard</h2>
                 <p>Street no 15, Lakeside  
@@ -118,7 +114,9 @@ export const Hotelinfo = () => {
                         </div>
                 </div>
             </div>
-        </div> */}
+        </div> 
     </div>
   )
 }
+
+export default  Hotelinfo

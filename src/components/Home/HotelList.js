@@ -1,10 +1,11 @@
 // import { red } from '@mui/material/colors';
 import React from 'react'
-import "../../styles/hotel_list.css";
-import { Paper } from '@mui/material';
+import "./hotel_list.css";
 import uploadImage from "../../images/hotel_image.png"
+import { useNavigate } from 'react-router-dom';
 
 const HotelList = () => {
+    const navigate=useNavigate()
   return (
     <div>
         <div className="sub-header d-flex flex-row mb-3 justify-content-center align-item-center" style={{height:"100px"}}>
@@ -138,7 +139,9 @@ const HotelList = () => {
                                     (excluding Taxes)
                                     </span>
                                 </div>
-                                <button className="button" className='bt'>CHOOSE</button> 
+                                <button className="button" onClick={()=>{
+                                    navigate("/hotelinfo")
+                                }}>CHOOSE</button> 
                             </div>
                         </div>
                     </div>
@@ -178,7 +181,7 @@ const HotelList = () => {
                                     (excluding Taxes)
                                     </span>
                                 </div>
-                                <button className="button" className='bt'>CHOOSE</button> 
+                                <button className="button">CHOOSE</button> 
                             </div>
                         </div>
                     </div>

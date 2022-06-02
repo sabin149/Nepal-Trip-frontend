@@ -1,13 +1,15 @@
 import React from "react";
-import "../styles/home.css";
+import "./home.css";
 import { useState } from "react";
 import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 const Home = () => {
+
+  const navigate = useNavigate();
   
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
@@ -106,7 +108,9 @@ const Home = () => {
                 )}
               </div>
               <div className="headerSearchItem">
-                <button className="headerBtn">Let's Go</button>
+                <button className="headerBtn" onClick={()=>{
+                  navigate("/hotellist")
+                }}>Let's Go</button>
               </div>
             </div>
             <div></div>

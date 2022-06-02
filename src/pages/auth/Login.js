@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useNavigate } from "react-router-dom"
-import { login } from '../redux/actions/authAction'
+import { login } from '../../redux/actions/authAction'
 import { useDispatch, useSelector } from "react-redux"
-import "../styles/auth.css"
+import "./auth.css"
 const Login = () => {
   const initialState = { email: "", password: "" }
   const [userData, setUserData] = useState(initialState) 
