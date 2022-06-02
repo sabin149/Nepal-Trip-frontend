@@ -13,6 +13,7 @@ import VendorDashboard from "./pages/VendorDashboard"
 import Room from "./pages/room/[id]";
 import HotelList from "./components/Home/HotelList";
 import VendormainDashboard from "./pages/VendormainDashboard";
+import DataTable from "./components/admin/Try";
 
 
 function App() {
@@ -49,6 +50,11 @@ function App() {
           <Route path="/hotellist" element={<HotelList /> } />
           <Route path="*" element={<NotFound />} />
           <Route path="/mainvendor" element={<VendormainDashboard/> } />
+
+          <Route path="/datatable" element={<DataTable/> } />
+
+
+          DataTable
           
         </Routes>
         <Footer/>
