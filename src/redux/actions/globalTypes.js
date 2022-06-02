@@ -13,9 +13,9 @@ export const GLOBALTYPES = {
         return newData;
     }
 
-    export const EditData = (data, id, post) => {
+    export const EditData = (data, id, hotel) => {
         const newData = data.map(item => 
-            (item._id === id ? post : item)
+            (item._id === id ? hotel : item)
         )
         return newData;
     }

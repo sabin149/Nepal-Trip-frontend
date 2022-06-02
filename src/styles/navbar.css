@@ -87,7 +87,7 @@ h3{
     transition: 0.5s ease-in;
   }
 }
-/* Active Class */
+/* Active className */
 .nav__active {
   transform: translateX(0%);
 }

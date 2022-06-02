@@ -1,6 +1,6 @@
 .auth_page{
     width: 100%;
-    min-height: 100vh;
+    min-height: 75vh;
     background: #fdfdfd;
     display: flex;
     align-items: center;
