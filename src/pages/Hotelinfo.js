@@ -94,7 +94,11 @@ export const Hotelinfo = () => {
             
         </div>
         <span> </span>
+<<<<<<< HEAD
+        {/* <div class="container pd-top-md">
+=======
         <div className="container pd-top-md">
+>>>>>>> 73bd305dd373fb020d4f8d2d613774414a037456
             <div>
                 <h2>Hotel Da Yatra Courtyard</h2>
                 <p>Street no 15, Lakeside  
@@ -114,7 +118,7 @@ export const Hotelinfo = () => {
                         </div>
                 </div>
             </div>
-        </div>
+        </div> */}
     </div>
   )
 }
