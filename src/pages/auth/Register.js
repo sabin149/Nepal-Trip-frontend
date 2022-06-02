@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
  import {useSelector,useDispatch} from "react-redux"
  import {useNavigate,Link} from "react-router-dom"
- import {register} from "../redux/actions/authAction"
- import "../styles/auth.css"
+ import {register} from "../../redux/actions/authAction"
+ import "./auth.css"
  const Register = () => {
     const { auth, alert } = useSelector(state => state)
     const dispatch = useDispatch()

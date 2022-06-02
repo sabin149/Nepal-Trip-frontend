@@ -1,8 +1,8 @@
 import React from 'react'
-import '../styles/hotelinfo.css'
+import './hotelinfo.css'
 import { Link } from 'react-router-dom'
 
-export const Hotelinfo = () => {
+const Hotelinfo = () => {
   return (
     <div className='main_content'>
         <div className='search_result'>
@@ -107,7 +107,9 @@ export const Hotelinfo = () => {
                         </div>
                 </div>
             </div>
-        </div>
+        </div> 
     </div>
   )
 }
+
+export default  Hotelinfo
