@@ -7,7 +7,6 @@ import {
   UilHome,
   UilChart,
   UilComment,
-  UilSignOutAlt,
 } from "@iconscout/react-unicons";
 
 
@@ -16,26 +15,32 @@ export const SidebarData = [
   {
     icon: UilEstate,
     heading: "Home",
+    path: "/",
   },
   {
     icon: UilClipboardAlt,
     heading: "Bookings",
+    path: "/bookings",
   },
   {
     icon: UilUsersAlt,
     heading: "Customers",
+    path: "/customers",
   },
   {
     icon: UilHome,
-    heading: 'Hotels'
+    heading: 'Hotels',
+    path:"/hotel"
   },
   {
     icon: UilChart,
-    heading: 'Vendors'
+    heading: 'Rooms',
+    path:"/room"
   },
   {
     icon: UilMoneyBill,
-    heading: 'Payments'
+    heading: 'Payments',
+    path:"/payments"
   },
   
 ];

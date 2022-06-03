@@ -1,5 +1,5 @@
 import React from 'react'
-import "../../styles/loading.css"
+import "./loading.css"
 const Loading = () => {
     return (
         <div className='position-fixed w-100 h-100 text-center loading'

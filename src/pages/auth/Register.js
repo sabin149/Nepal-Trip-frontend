@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
  import {useSelector,useDispatch} from "react-redux"
  import {useNavigate,Link} from "react-router-dom"
- import {register} from "../redux/actions/authAction"
- import "../styles/auth.css"
+ import {register} from "../../redux/actions/authAction"
+ import "./auth.css"
  const Register = () => {
     const { auth, alert } = useSelector(state => state)
     const dispatch = useDispatch()
@@ -15,7 +15,7 @@ import React,{useState,useEffect} from 'react'
     const [typePass, setTypePass] = useState(false)
     const [typeCfPass, setTypeCfPass] = useState(false)
      useEffect(()=>{
-    if(auth.token) navigate('/')
+    if(auth.token) window.location.href = "/"
      },[auth.token,navigate])
      const handleChangeInput = e => {
        const { name, value } = e.target
@@ -26,7 +26,7 @@ import React,{useState,useEffect} from 'react'
       dispatch(register(userData))
      }
      return (
-       <div className='auth_page'>
+       <div className='auth_page' style={{  minHeight: "90vh"}}>
          <form onSubmit={handleSubmit}>
          <h3 className='text-uppercase text-center mb-4 text-warning'>REGISTER  
            <span className='text-dark'>FORM</span>
@@ -117,7 +117,7 @@ import React,{useState,useEffect} from 'react'
                     Register
                 </button>
            <p className='my-2'>
-             Already have an account? <Link to="/login" style={{ color: "crimson" }}>Login Now</Link>
+             Already have an account? <Link to="#" style={{ color: "crimson" }} data-bs-target="#exampleModal" data-bs-toggle="modal">Login Now</Link>
            </p>
          </form>
        </div>

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import No_image from "../../images/No_image.png"
 import { imageShow, videoShow } from "../../utils/mediaShow"
-import "../../styles/room.css"
+import "./room.css"
 import { createHotelRoom } from '../../redux/actions/roomAction'
 
 const CreateRoom = ({hotel}) => {
