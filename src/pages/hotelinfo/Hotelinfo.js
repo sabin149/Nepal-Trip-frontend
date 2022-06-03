@@ -1,8 +1,13 @@
 import React from 'react'
 import './hotelinfo.css'
-import { Link } from 'react-router-dom'
+import { Link,useLocation } from 'react-router-dom'
+
 
 const Hotelinfo = () => {
+    const location=useLocation()
+
+    const hotel=location.state.hotel
+    console.log(hotel);
   return (
     <div className='main_content'>
         <div className='search_result'>

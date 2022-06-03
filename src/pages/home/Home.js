@@ -5,12 +5,18 @@ import { DateRange } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
-import {Link, useNavigate} from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import axios from "axios";
+import { useDispatch } from "react-redux"
+import { GLOBALTYPES } from "../../redux/actions/globalTypes"
 
 const Home = () => {
 
-  const navigate = useNavigate();
-  
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const [search, setSearch] = useState("")
+
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
     {
@@ -36,8 +42,42 @@ const Home = () => {
     });
   };
 
+
+  const handleSearch = async (e) => {
+    e.preventDefault()
+    if (search.length === 0) {
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "Field cannnot be empty..." } })
+      return
+    }
+
+    dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
+    const res = await axios.get(`api/search?address=${search}`)
+
+
+    if (res.data.status === "failed") {
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { error: res.data.msg } })
+      return
+    }
+
+
+    if (res.status === 200) {
+      navigate('/hotellist', {
+        state: {
+          searchData: res.data, searchInfo: {
+            search, date, options
+          }
+        }
+      })
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
+    }
+
+
+  }
+
   return (
-    <div>
+    <>
+
       <div className="homepage">
         <div className="booking">
           <div className="ui container">
@@ -45,7 +85,7 @@ const Home = () => {
             <div className="headerSearch">
               <div className="headerSearchItem">
                 <i className="fa-solid fa-location-dot"></i>
-                <input
+                <input value={search} onChange={(e) => setSearch(e.target.value)}
                   type="text"
                   placeholder="Where are you going?"
                   className="headerSearchInput"
@@ -53,7 +93,7 @@ const Home = () => {
               </div>
               <div className="headerSearchItem">
                 <i className="fa-solid fa-calendar-days"></i>
-                <span  onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+                <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                   date[0].endDate,
                   "MM/dd/yyyy"
                 )}`}</span>
@@ -67,50 +107,50 @@ const Home = () => {
                     minDate={new Date()}
                   />
                 )}
-                
+
               </div>
               <div className="headerSearchItem">
                 <i className="fa-solid fa-person"></i>
                 <span onClick={() => setOpenOptions(!openOptions)}
-                className="headerSearchText">
-                {`${options.adult} adult · ${options.children} children · ${options.room} room`}
+                  className="headerSearchText">
+                  {`${options.adult} adult · ${options.children} children · ${options.room} room`}
                 </span>
                 {openOptions && (
                   <div className="options">
-                      <div className="optionItem">
-                        <span className="optionText">Adult</span>
-                        <div className="optionCounter">
-                        <button  disabled={options.adult <= 1}
-                        className='optionCounterButton'  onClick={() => handleOption("adult", "d")}>-</button>
+                    <div className="optionItem">
+                      <span className="optionText">Adult</span>
+                      <div className="optionCounter">
+                        <button disabled={options.adult <= 1}
+                          className='optionCounterButton' onClick={() => handleOption("adult", "d")}>-</button>
                         <span className='optionCounterNumber'>{options.adult}</span>
-                        <button className='optionCounterButton'  onClick={() => handleOption("adult", "i")}>+</button>
-                     </div>
+                        <button className='optionCounterButton' onClick={() => handleOption("adult", "i")}>+</button>
                       </div>
-                      <div className="optionItem">
-                        <span className="optionText">Children</span>
-                        <div className="optionCounter">
+                    </div>
+                    <div className="optionItem">
+                      <span className="optionText">Children</span>
+                      <div className="optionCounter">
                         <button disabled={options.children <= 0}
-                        className='optionCounterButton'  onClick={() => handleOption("children", "d")}>-</button>
+                          className='optionCounterButton' onClick={() => handleOption("children", "d")}>-</button>
                         <span className='optionCounterNumber'>{options.children}</span>
-                        <button className='optionCounterButton'  onClick={() => handleOption("children", "i")}>+</button>
-                     </div>
+                        <button className='optionCounterButton' onClick={() => handleOption("children", "i")}>+</button>
                       </div>
-                      <div className="optionItem">
-                        <span className="optionText">Room</span>
-                        <div className="optionCounter">
+                    </div>
+                    <div className="optionItem">
+                      <span className="optionText">Room</span>
+                      <div className="optionCounter">
                         <button disabled={options.room <= 1}
-                        className='optionCounterButton'  onClick={() => handleOption("room", "d")}>-</button>
+                          className='optionCounterButton' onClick={() => handleOption("room", "d")}>-</button>
                         <span className='optionCounterNumber'>{options.room}</span>
-                        <button className='optionCounterButton'  onClick={() => handleOption("room", "i")}>+</button>
+                        <button className='optionCounterButton' onClick={() => handleOption("room", "i")}>+</button>
                       </div>
-                      </div>
+                    </div>
                   </div>
                 )}
               </div>
               <div className="headerSearchItem">
-                <button className="headerBtn" onClick={()=>{
-                  navigate("/hotellist")
-                }}>Let's Go</button>
+                {/* <form onSubmit={handleSearch}> */}
+                  <button  onClick={handleSearch} className="headerBtn">Let's Go</button>
+                  {/* </form> */}
               </div>
             </div>
             <div></div>
@@ -173,7 +213,7 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-          <Link to="/"></Link>
+              <Link to="/"></Link>
             </figure>
             <figure className="destination">
               <img
@@ -183,7 +223,7 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-          <Link to="/"></Link>
+              <Link to="/"></Link>
             </figure>
           </div>
           <div>
@@ -196,7 +236,7 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-          <Link to="/"></Link>
+              <Link to="/"></Link>
             </figure>
             <figure className="destination">
               <img
@@ -206,7 +246,7 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-          <Link to="/"></Link>
+              <Link to="/"></Link>
             </figure>
             <figure className="destination">
               <img
@@ -216,12 +256,12 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-          <Link to="/"></Link>
+              <Link to="/"></Link>
             </figure>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -13,7 +13,6 @@ const columns = [
   // {
   //   field: 'address', headerName: 'Address', width: 150,
   // },
-
   { field: 'registerdAt', headerName: 'Registered At', width: 160 },
 
   {
