@@ -50,10 +50,7 @@ function App() {
           <Route path="/hotellist" element={<HotelList /> } />
           <Route path="*" element={<NotFound />} />
           <Route path="/mainvendor" element={<VendormainDashboard/> } />
-
           <Route path="/datatable" element={<DataTable/> } />
-
-
           DataTable
           
         </Routes>
