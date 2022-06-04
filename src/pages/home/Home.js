@@ -42,7 +42,6 @@ const Home = () => {
     });
   };
 
-
   const handleSearch = async (e) => {
     e.preventDefault()
     if (search.length === 0) {
@@ -52,7 +51,6 @@ const Home = () => {
 
     dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
     const res = await axios.get(`api/search?address=${search}`)
-
 
     if (res.data.status === "failed") {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
@@ -148,9 +146,9 @@ const Home = () => {
                 )}
               </div>
               <div className="headerSearchItem">
-                {/* <form onSubmit={handleSearch}> */}
-                  <button  onClick={handleSearch} className="headerBtn">Let's Go</button>
-                  {/* </form> */}
+          
+                <button onClick={handleSearch} className="headerBtn">Let's Go</button>
+               
               </div>
             </div>
             <div></div>

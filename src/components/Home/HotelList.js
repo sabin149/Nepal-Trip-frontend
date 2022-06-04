@@ -10,9 +10,10 @@ const HotelList = () => {
     const location = useLocation()
 
     const searchData = location.state.searchData
-    const searchInfo= location.state.searchInfo
+    const searchInfo = location.state.searchInfo
+    
     return (
-        <div>
+        <>
             <div className="sub-header d-flex flex-row mb-3 justify-content-center align-item-center" style={{ height: "100px" }}>
                 <div className=" flex-px-3 app" style={{ marginLeft: '20px' }}>
                     <span style={{ fontSize: '14px' }}>Destination</span>
@@ -103,7 +104,6 @@ const HotelList = () => {
                             {
 
                                 searchData.hotels.map((hotel) => (
-
                                     <div key={hotel._id} className='card hotel-card'>
                                         <div className='row'>
                                             <div className='col-md-4'>
@@ -129,15 +129,15 @@ const HotelList = () => {
 
                                                             <span key={index}>
 
-                                                                {       
-                                                                        facility==="good" &&
-                                                                        <i className="fa-solid fa-wifi"></i> 
-                                                                        
+                                                                {
+                                                                    facility === "good" &&
+                                                                    <i className="fa-solid fa-wifi"></i>
+
                                                                 }
-                                                                {       
-                                                                        facility!=="good" &&
-                                                                        <i className="fa-solid fa-cross"></i> 
-                                                                        
+                                                                {
+                                                                    facility !== "good" &&
+                                                                    <i className="fa-solid fa-cross"></i>
+
                                                                 }
                                                                 {/* {       
                                                                         facility==="noice" &&
@@ -164,13 +164,14 @@ const HotelList = () => {
                                                     </span>
                                                 </div>
                                                 <button className="button btn btn-primary" onClick={() => {
-                                                    navigate("/hotelinfo",{state:{hotel:hotel}})
-                                                
+                                                    navigate("/hotelinfo", { state: { hotel: hotel } })
+
                                                 }}>CHOOSE</button>
                                             </div>
                                         </div>
                                     </div>
                                 ))
+
                             }
                         </div>
 
@@ -180,7 +181,7 @@ const HotelList = () => {
                 </div>
 
             </div>
-        </div>
+        </>
 
     )
 }
