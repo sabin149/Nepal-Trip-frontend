@@ -25,11 +25,6 @@ footer {
     text-decoration: none;
   }
   
-  .copy {
-    font-size: 12px;
-    padding: 10px;
-    border-top: 1px solid #FFFFFF;
-  }
   
   .footer-middle {
     padding-top: 2em;
@@ -129,13 +124,11 @@ footer {
     background-color: #F9F9F9;
   }
   
-
-.col-md-12 {
-    border-top: solid .5px #eeeeee;
+ .copyright {
+    border-top: solid 1px #eeeeee;
     color: black;
     font-family: poppins;
-    font-size: 13px;
-
+    font-size: 12px; 
 }
 
 ul.footer_payment li>img{
