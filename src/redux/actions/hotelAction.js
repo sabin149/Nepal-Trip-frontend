@@ -8,6 +8,7 @@ export const HOTEL_TYPES = {
     GET_HOTELS: "GET_HOTELS",
     UPDATE_HOTEL: "UPDATE_HOTEL",
     APPROVE_HOTEL: "APPROVE_HOTEL",
+    GET_HOTEL_ROOMS: "GET_HOTEL_ROOMS",
 }
 
 export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, auth, token }) => async (dispatch) => {

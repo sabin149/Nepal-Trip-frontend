@@ -57,9 +57,10 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="row">
-          <div className="col-md-12 copy">
-            <p className="text-center">&copy; Copyright 2022 - Nepal Trip. All rights reserved.</p>
+      <div className="d-flex justify-content-center align-content-center">
+      <hr className='copyright_hr' />
+          <div className="copyright pt-3">
+            <p>&copy; Copyright 2022 - Nepal Trip. All rights reserved.</p>
           </div>
         </div>
     </div>

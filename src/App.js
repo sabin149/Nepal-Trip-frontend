@@ -47,7 +47,6 @@ function App() {
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
           <Route path="*" element={<NotFound />} />
-
         </Routes>
 
         {isAdmin ? <EHeader /> : isVendor ? <EFooter /> : <Footer />}
@@ -55,6 +54,7 @@ function App() {
 
       </Router>
     </>
+
   );
 }
 
