@@ -9,7 +9,6 @@ import {
   UilComment,
 } from "@iconscout/react-unicons";
 
-
 // Sidebar Data
 export const SidebarData = [
   {
@@ -24,8 +23,8 @@ export const SidebarData = [
   },
   {
     icon: UilUsersAlt,
-    heading: "Customers",
-    path: "/customers",
+    heading: "Users",
+    path: "/users",
   },
   {
     icon: UilHome,
@@ -63,9 +62,9 @@ export const cardsData = [
       },
     ],
   },
+  
   {
-    title: "HOTELS",
-    
+    title: "HOTELS", 
     color: {
       backGround: "linear-gradient(180deg, #ffcc2f 0%, #ef5734 100%)",
      

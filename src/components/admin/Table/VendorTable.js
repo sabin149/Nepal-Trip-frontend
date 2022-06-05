@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { approveHotel, getHotels } from '../../../redux/actions/hotelAction'
+import "./Table.css"
 
 const VendorTable = () => {
     const dispatch = useDispatch()
     const { hotel } = useSelector(state => state)
 
     const token = localStorage.getItem('token')
-
+    
     useEffect(() => {
         dispatch(getHotels(token))
     }, [token, dispatch])
@@ -19,13 +20,15 @@ const VendorTable = () => {
     }
 
     return (
-        <div className='mx-5'>
+        <div className='mx-5 vendor_list_table' >
             <h2 className="text-danger text-capitalize text-center mt-2">
                 All Vendors
             </h2>
             <div className='hotel-table'>
-                <table className="table table-bordered table-hover  ">
-                    <thead className='bg-info text-light'>
+                <table className="table table-bordered table-hover" style={{
+                    border: '1px solid #ddd',
+                }}>
+                    <thead>
                         <tr>
                             <th scope="col">SN</th>
                             <th scope="col">Hotel Name</th>

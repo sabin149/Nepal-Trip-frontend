@@ -13,6 +13,7 @@ import VendorDashboard from "./pages/VendorDashboard"
 import Room from "./pages/room/[id]";
 import HotelList from "./components/Home/HotelList";
 import VendorTable from "./components/admin/Table/VendorTable";
+import UserListTable from "./components/admin/Table/UserListTable";
 
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
+          <Route path="/users" element={<UserListTable />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 

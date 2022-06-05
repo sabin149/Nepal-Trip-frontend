@@ -16,7 +16,7 @@ export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, p
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         if (hotel_images.length > 0) media = await imageUpload(hotel_images)
-        const res = await postDataAPI('hotel', { hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images: media },token)
+        const res = await postDataAPI('hotel', { hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images: media }, token)
         dispatch({
             type: HOTEL_TYPES.CREATE_HOTEL,
             payload: { ...res.data.newHotel, user: auth.user }
@@ -58,12 +58,14 @@ export const getHotels = (token) => async (dispatch) => {
 
 export const approveHotel = ({ hotel, token }) => async (dispatch) => {
     try {
- dispatch({ type: HOTEL_TYPES.APPROVE_HOTEL, payload: hotel })
- const res=  await patchDataAPI(`approveHotel/${hotel._id}`, token)
-   dispatch({
-    type: GLOBALTYPES.ALERT,
-    payload: { success: res.data.msg }
-})
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
+        const res = await patchDataAPI(`approveHotel/${hotel._id}`, token)
+        dispatch({ type: HOTEL_TYPES.APPROVE_HOTEL, payload: res.data.newHotel })
+
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { success: res.data.msg }
+        })
     } catch (err) {
         dispatch({
             type: GLOBALTYPES.ALERT,
