@@ -40,3 +40,17 @@ th {
     width: 23rem;
   }
 }
+
+body{
+  color: var(--black);
+  background: linear-gradient(
+    106.37deg,
+    #ffe1bc 29.63%,
+    #ffcfd1 51.55%,
+    #f3c6f1 90.85%
+  );
+}
+
+.css-1jbbcbn-MuiDataGrid-columnHeaderTitle{
+  font-weight: 800;
+}
