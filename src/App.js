@@ -53,7 +53,6 @@ function App() {
 
         {isAdmin ? <EHeader /> : isVendor ? <EFooter /> : <Footer />}
 
-
       </Router>
     </>
 
