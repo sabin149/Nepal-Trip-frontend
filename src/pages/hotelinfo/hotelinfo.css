@@ -48,17 +48,18 @@ h5{
     position: absolute;
     height: 55px;
     margin: auto;
+    gap:50px
 }
 
 
 .menu{
-    margin-top: 5px;
-    color: #000;
+    color: rgb(0, 0, 0);
     display: flex;
     gap: 50px;
-/* margin: auto; */
-    
+    margin: auto;
+
 }
+
 
 .Item{
     font-weight: 500;
@@ -68,11 +69,6 @@ h5{
     font-size: 15px;
     gap: 40px
    
-}
-
-.Item>a
-{
-    cursor: pointer;
 }
 
 /* container pd-top-md */
@@ -93,10 +89,10 @@ h2{
 .block-in-mobile>i{
     margin-left: 20px;
     cursor: pointer;
-     color:#2374c2;
+     color:#000000;
 }
 .block-in-mobile>span{
-
+ 
     cursor: pointer;
      color:#2374c2;
 }
