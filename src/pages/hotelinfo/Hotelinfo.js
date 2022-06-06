@@ -363,13 +363,88 @@ const Hotelinfo = () => {
                 </li>
               </ul>
             </div>
-
           </div>
           <div className="segment">
             <h3 className="bold">
               <span>Map</span>
             </h3>
           </div>
+
+        </div>
+        <div className="segment">
+          <h3 className="bold">
+          Hotel Policies
+          </h3>
+          <hr></hr>
+          <h4 className="allpolicy">
+          <h3 className="policy">Check in and Check out Policy</h3> <br></br>
+          Check in time: 12::0<br></br>
+          Check out time: 12::0
+          <br></br>
+          Goverment issued photo ID(for ex: valid passport, valid driving license) required for Check-in.
+          <h3 className="policy">Payment Method Accepted</h3> <br></br>
+          E-sewa<br></br>
+          Khalti
+          <br></br>
+          <h3 className="policy">Child Policy</h3> <br></br>
+          Child age: 4 - 6 years<br></br>
+          Infant age: 0 - 3 years
+          <br></br>
+          <h3 className="policy">More Policies</h3> <br></br>
+          Pan Card accepted<br></br>
+          Hotel fit for children
+          <br></br>
+          <h3 className="policy">You need to know</h3> <br></br>
+          <ul className="bulleted">
+            <li>
+            We do not support modifications to hotel bookings on website or App. You’ll have to cancel (cancellation charges may apply as mention in above cancelation policy) your existing booking and make a new one.
+            </li>
+            <li>
+            The hotel might not refund for late check-in and early check-out.            
+            </li>
+            <li>
+            Stay extensions will required a new reservation.
+            </li>
+            <li>
+              Individual aged 18 and above are required to present a valid Photo ID ( passport, driver’s license, government-issued photo ID etc) at the time of check-in.     
+          </li>
+          <li>
+          Along with the Government issued ID proof, you will also have to carry the itinerary on your phone or Tab or a printout will do.          
+          </li>
+          </ul>
+          </h4> 
+        
+        </div>
+        <div className="segment">
+          <h3 className="bold">
+            <span>Map</span>
+            <hr/>
+          </h3>
+        </div>
+        <div className="segment">
+          <h3 className="bold">
+            <span>Review & Rating </span>
+            <hr/>
+          </h3>
+          <div>
+                <div class="content">
+                  <p>Rating (select a star amount):</p>
+                </div>
+                <div class="wrapper">
+                  <input name="ratingRadio" type="radio" id="st1" value="1" />
+                  <label for="st1"></label>
+                  <input name="ratingRadio" type="radio" id="st2" value="2" />
+                  <label for="st2"></label>
+                  <input name="ratingRadio" type="radio" id="st3" value="3" />
+                  <label for="st3"></label>
+                  <input name="ratingRadio" type="radio" id="st4" value="4" />
+                  <label for="st4"></label>
+                  <input name="ratingRadio" type="radio" id="st5" value="5" />
+                  <label for="st5"></label>
+                </div>
+          </div>
+        </div>
+
         </div>
       </div>
     </div>
