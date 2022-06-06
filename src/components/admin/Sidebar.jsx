@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.css";
 import Logo from "./imgs/Logo.svg";
-import { UilSignOutAlt } from "@iconscout/react-unicons";
 import { SidebarData } from "./Data/Data";
 import { UilBars } from "@iconscout/react-unicons";
 import { motion } from "framer-motion";
@@ -45,16 +44,24 @@ const Sidebar = () => {
                 key={index}
                 onClick={() => setSelected(index)}
               >
-                <item.icon />
-                <span>{item.heading}</span>
+                <Link to={item.path} className="text-decoration-none text-dark">
+                  <item.icon />
+                  <span>{item.heading}</span>
+                </Link>
+
               </div>
             );
           })}
 
           <div className="menuItem">
             <Link to="/"
-              onClick={() => dispatch(logout())}>
-              <UilSignOutAlt />
+              onClick={() => {
+                if (window.confirm('Are you sure you want to logout?')) {
+                  dispatch(logout())
+                }
+              }}
+            >
+              <i className="fa-solid fa-right-from-bracket" style={{ fontSize: "1.5rem" }}></i>
             </Link>
           </div>
         </div>

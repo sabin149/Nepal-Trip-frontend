@@ -1,7 +1,7 @@
 import MainDash from '../components/admin/MainDash/MainDash'
 import RightSide from '../components/admin/RigtSide/RightSide'
 import Sidebar from '../components/admin/Sidebar'
-import '../Global.css'
+import '../styles/dashboard.css'
 
 function AdminDashboard() {
   return (
@@ -11,7 +11,6 @@ function AdminDashboard() {
         <MainDash/>
         <RightSide/>
       </div>
-
     </div>
   );
 }

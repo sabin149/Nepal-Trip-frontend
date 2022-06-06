@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
  import {useSelector,useDispatch} from "react-redux"
  import {useNavigate,Link} from "react-router-dom"
- import {register} from "../redux/actions/authAction"
- import "../styles/auth.css"
+ import {register} from "../../redux/actions/authAction"
+ import "./auth.css"
  const Register = () => {
     const { auth, alert } = useSelector(state => state)
     const dispatch = useDispatch()
@@ -15,7 +15,7 @@ import React,{useState,useEffect} from 'react'
     const [typePass, setTypePass] = useState(false)
     const [typeCfPass, setTypeCfPass] = useState(false)
      useEffect(()=>{
-    if(auth.token) navigate('/')
+    if(auth.token) window.location.href = "/"
      },[auth.token,navigate])
      const handleChangeInput = e => {
        const { name, value } = e.target
@@ -26,7 +26,7 @@ import React,{useState,useEffect} from 'react'
       dispatch(register(userData))
      }
      return (
-       <div className='auth_page'>
+       <div className='auth_page' style={{  minHeight: "90vh"}}>
          <form onSubmit={handleSubmit}>
          <h3 className='text-uppercase text-center mb-4 text-warning'>REGISTER  
            <span className='text-dark'>FORM</span>
@@ -50,8 +50,8 @@ import React,{useState,useEffect} from 'react'
                     </small>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" name="email"
+                    <label htmlFor="exampleInputEmail2">Email address</label>
+                    <input type="email" className="form-control" id="exampleInputEmail2" name="email"
                     onChange={handleChangeInput} value={email}
                     style={{background: `${alert.email ? '#fd2d6a14' : ''}`}} />
                     <small className="form-text text-danger">
@@ -70,10 +70,10 @@ import React,{useState,useEffect} from 'react'
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Password</label>
+                    <label htmlFor="exampleInputPassword2">Password</label>
                     <div className="pass">
                         <input type={ typePass ? "text" : "password" } 
-                        className="form-control" id="exampleInputPassword1"
+                        className="form-control" id="exampleInputPassword2"
                         onChange={handleChangeInput} value={password} name="password"
                         style={{background: `${alert.password ? '#fd2d6a14' : ''}`}} />
                         <small onClick={() => setTypePass(!typePass)}>
@@ -117,7 +117,7 @@ import React,{useState,useEffect} from 'react'
                     Register
                 </button>
            <p className='my-2'>
-             Already have an account? <Link to="/login" style={{ color: "crimson" }}>Login Now</Link>
+             Already have an account? <Link to="#" style={{ color: "crimson" }} data-bs-target="#exampleModal" data-bs-toggle="modal">Login Now</Link>
            </p>
          </form>
        </div>

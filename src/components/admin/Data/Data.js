@@ -3,40 +3,38 @@ import {
   UilEstate,
   UilClipboardAlt,
   UilUsersAlt,
-  UilMoneyBill,
   UilHome,
   UilChart,
   UilComment,
-  UilSignOutAlt,
 } from "@iconscout/react-unicons";
-
 
 // Sidebar Data
 export const SidebarData = [
   {
     icon: UilEstate,
     heading: "Home",
+    path: "/",
   },
   {
     icon: UilClipboardAlt,
     heading: "Bookings",
+    path: "/bookings",
   },
   {
     icon: UilUsersAlt,
-    heading: "Customers",
+    heading: "Users",
+    path: "/users",
   },
   {
     icon: UilHome,
-    heading: 'Hotels'
+    heading: 'Hotels',
+    path: '/hotels',
   },
   {
     icon: UilChart,
-    heading: 'Vendors'
-  },
-  {
-    icon: UilMoneyBill,
-    heading: 'Payments'
-  },
+    heading: 'Vendors',
+    path: '/vendors',
+  }
   
 ];
 
@@ -53,14 +51,14 @@ export const cardsData = [
     png: UilUsersAlt,
     series: [
       {
-        name: "Sales",
+        name: "Growth",
         data: [31, 40, 28, 51, 42, 109, 100],
       },
     ],
   },
+  
   {
-    title: "HOTELS",
-    
+    title: "HOTELS", 
     color: {
       backGround: "linear-gradient(180deg, #ffcc2f 0%, #ef5734 100%)",
      

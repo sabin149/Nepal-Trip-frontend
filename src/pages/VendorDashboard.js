@@ -1,15 +1,18 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import MainDash from '../components/vendor/components/VendorMainDash/MainDash'
+import RightSide from '../components/vendor/components/VendorRigtSide/RightSide'
+import Sidebar from '../components/vendor/components/VendorSidebar'
+import '../styles/dashboard.css'
 
-const VendorDashboard = () => {
+function VendorDashboard() {
   return (
-    <div className='container'>
-      <h2>VendorDashBoard</h2>
-      <Link to="/hotel" className='btn btn-warning me-2'>Add Hotel</Link>
-      <Link to="/room" className='btn btn-warning'>Add Room</Link>
-
+    <div className="App">
+      <div className="AppGlass">
+        <Sidebar/>
+        <MainDash/>
+        <RightSide/>
+      </div>
     </div>
-  )
+  );
 }
 
-export default VendorDashboard
+export default VendorDashboard;
