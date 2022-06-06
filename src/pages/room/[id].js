@@ -7,8 +7,6 @@ const Room = () => {
   const dispatch = useDispatch()
   const token = localStorage.getItem("token")
 
-
-
   useEffect(() => {
     dispatch(getHotels(token))
   }, [token, dispatch]);

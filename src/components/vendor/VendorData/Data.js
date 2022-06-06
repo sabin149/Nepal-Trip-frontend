@@ -36,12 +36,7 @@ export const SidebarData = [
     icon: UilChart,
     heading: 'Rooms',
     path:"/room"
-  },
-  {
-    icon: UilMoneyBill,
-    heading: 'Payments',
-    path:"/payments"
-  },
+  }
   
 ];
 

@@ -72,7 +72,7 @@ const CreateRoom = ({ hotel }) => {
     <div className="container ">
       <form onSubmit={handleSubmit}>
         <h2 className='text-danger text-center mt-3'>Add hotel Room</h2>
-        <div className="d-flex justify-content-center mx-0 mb-1">
+        <div className="d-flex justify-content-center align-content-center" >
           <div className="col-6 add_hotel" >
             <div className="show_images">
               {
@@ -102,7 +102,9 @@ const CreateRoom = ({ hotel }) => {
 
                   ) :
 
+
                   <img src={No_image} alt=".." style={{ "width": "5rem" }} />
+
 
               }
             </div>
