@@ -11,6 +11,8 @@ const HotelList = () => {
 
     const searchData = location.state.searchData
     const searchInfo = location.state.searchInfo
+
+    console.log(searchData)
     
     return (
         <>
@@ -100,15 +102,16 @@ const HotelList = () => {
 
                                 </div>
                             </div>
-
                             {
-
                                 searchData.hotels.map((hotel) => (
                                     <div key={hotel._id} className='card hotel-card'>
                                         <div className='row'>
                                             <div className='col-md-4'>
                                                 <div className='img-holder'>
-                                                    <img src={hotel.hotel_images[0]} alt="projectimages" style={{ width: "15rem" }} />
+                                                    <img src={
+                                                       hotel.hotel_images[0].url?hotel.hotel_images[0].url:
+                                                       hotel.hotel_images[0]
+                                                    } alt="projectimages" style={{ width: "15rem" }} />
                                                 </div>
                                             </div>
                                             <div className='col-md-5'>

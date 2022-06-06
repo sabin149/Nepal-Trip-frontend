@@ -3,7 +3,6 @@ import {
   UilEstate,
   UilClipboardAlt,
   UilUsersAlt,
-  UilMoneyBill,
   UilHome,
   UilChart,
   UilComment,
@@ -35,12 +34,7 @@ export const SidebarData = [
     icon: UilChart,
     heading: 'Vendors',
     path: '/vendors',
-  },
-  {
-    icon: UilMoneyBill,
-    heading: 'Payments',
-    path: '/payments',
-  },
+  }
   
 ];
 
@@ -57,7 +51,7 @@ export const cardsData = [
     png: UilUsersAlt,
     series: [
       {
-        name: "Sales",
+        name: "Growth",
         data: [31, 40, 28, 51, 42, 109, 100],
       },
     ],

@@ -44,11 +44,11 @@ const Sidebar = () => {
                 key={index}
                 onClick={() => setSelected(index)}
               >
-              <Link to={item.path} className="text-decoration-none text-dark">
-              <item.icon />
-                <span>{item.heading}</span>
-              </Link>
-               
+                <Link to={item.path} className="text-decoration-none text-dark">
+                  <item.icon />
+                  <span>{item.heading}</span>
+                </Link>
+
               </div>
             );
           })}
@@ -59,11 +59,9 @@ const Sidebar = () => {
                 if (window.confirm('Are you sure you want to logout?')) {
                   dispatch(logout())
                 }
-
               }}
-
             >
-             <i className="fa-solid fa-right-from-bracket" style={{fontSize:"1.5rem"}}></i>
+              <i className="fa-solid fa-right-from-bracket" style={{ fontSize: "1.5rem" }}></i>
             </Link>
           </div>
         </div>
