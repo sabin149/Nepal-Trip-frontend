@@ -14,6 +14,7 @@ import Room from "./pages/room/[id]";
 import HotelList from "./components/Home/HotelList";
 import VendorTable from "./components/admin/Table/VendorTable";
 import EditHotel from "./pages/hotel/editHotel";
+import EditRoom from "./components/room/EditRoom";
 
 function App() {
   const token = localStorage.getItem('token')
@@ -38,7 +39,6 @@ function App() {
           <Route path="/" element={isAdmin ? <AdminDashboard token={token} /> : isVendor ? <VendorDashboard token={token} /> :
             <Home />
           } />
-
           <Route path="/addhotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
           <Route path="/hotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
           <Route path="/room" element={isVendor ? <Room /> : <Navigate to="/" />} />
@@ -46,6 +46,8 @@ function App() {
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
           <Route path="/edithotel" element={<EditHotel />} />
+          <Route path="/editromm" element={<EditRoom />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
 
