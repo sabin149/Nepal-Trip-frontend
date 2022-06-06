@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Card.css";
 // import { CircularProgressbar } from "react-circular-progressbar";
 // import "react-circular-progressbar/dist/styles.css";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { UilTimes } from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
+import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "../../../redux/actions/userAction";
 
 // parent Card
 
@@ -23,6 +25,14 @@ const Card = (props) => {
 
 // Compact Card
 function CompactCard({ param, setExpanded }) {
+  const dispatch = useDispatch();
+  const { user,hotel } = useSelector(state => state)
+  const token = localStorage.getItem('token')
+
+  useEffect(() => {
+    dispatch(getUsers(token))
+  }, [token, dispatch])
+
   const Png = param.png;
   return (
     <motion.div
@@ -35,16 +45,22 @@ function CompactCard({ param, setExpanded }) {
       onClick={setExpanded}
     >
       <div className="radialBar">
-        {/* <CircularProgressbar
-          value={param.barValue}
-          text={`${param.barValue}%`}
-        /> */}
         <span>{param.title}</span>
       </div>
       <div className="detail">
         <Png />
-        <span>${param.value}</span>
-        <span>Last 24 hours</span>
+        <span>{
+          param.title === 'USERS' ?
+            user.count :
+            param.title === 'HOTELS' ?
+              hotel.count :
+              param.title === 'BOOKINGS' ?
+                "100" :
+                param.title === 'REVIEWS' ?
+                  "200" :
+                  "0"
+        }</span>
+        <span>Total</span>
       </div>
     </motion.div>
   );
@@ -91,13 +107,13 @@ function ExpandedCard({ param, setExpanded }) {
       xaxis: {
         type: "datetime",
         categories: [
-          "2018-09-19T00:00:00.000Z",
-          "2018-09-19T01:30:00.000Z",
-          "2018-09-19T02:30:00.000Z",
-          "2018-09-19T03:30:00.000Z",
-          "2018-09-19T04:30:00.000Z",
-          "2018-09-19T05:30:00.000Z",
-          "2018-09-19T06:30:00.000Z",
+          "2022-05-19",
+          "2022-06-19",
+          "2022-07-19",
+          "2022-08-19",
+          "2022-09-19",
+          "2022-10-19",
+          "2022-11-19",
         ],
       },
     },
@@ -115,11 +131,11 @@ function ExpandedCard({ param, setExpanded }) {
       <div style={{ alignSelf: "flex-end", cursor: "pointer", color: "white" }}>
         <UilTimes onClick={setExpanded} />
       </div>
-        <span>{param.title}</span>
+      <span>{param.title}</span>
       <div className="chartContainer">
         <Chart options={data.options} series={param.series} type="area" />
       </div>
-      <span>Last 24 hours</span>
+      <span>Last 30 Days</span>
     </motion.div>
   );
 }
