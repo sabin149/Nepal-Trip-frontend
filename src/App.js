@@ -13,7 +13,7 @@ import VendorDashboard from "./pages/VendorDashboard"
 import Room from "./pages/room/[id]";
 import HotelList from "./components/Home/HotelList";
 import VendorTable from "./components/admin/Table/VendorTable";
-// import EditHotel from "./components/Home/EditHotel";
+import EditHotel from "./pages/hotel/editHotel";
 
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
-          {/* <Route path="/edithotel" element={<EditHotel />} /> */}
+          <Route path="/edithotel" element={<EditHotel />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 
