@@ -103,6 +103,7 @@ h4{
     font-family: Poppins,sans-serif;
     font-weight: 599;
  }
+
  span.facilities{
     color:#003c75 ; 
     font-size: 14px;
@@ -114,27 +115,18 @@ h4{
 .block-in-mobile>i{
     margin-left: 20px;
     cursor: pointer;
-     color:#000000;
+    color:#000000;
 }
 .block-in-mobile>span{
- 
     cursor: pointer;
-     color:#2374c2;
+    color:#2374c2;
 }
 .slider {
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
+    /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
     /* background-color: #003c75; */
     /* height: 515px; */
 }
 
-.carousel.slide{}
-/* .mainimage>img{
-    background-color: #00529B;
-    max-width:100%;
-    max-height:100%;
-    object-fit: fill;
-
-  } */
 .abouthotel{
     /* background-color:#f7f7f7; */
     /*box-shadow: 0 2px 4px 0 rgba(0,0,0,.5); */
@@ -150,7 +142,7 @@ h4{
     min-height: 100%;
 }
 .box-shadow {
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.5);
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .bg-light-gray {
@@ -327,7 +319,7 @@ padding-left: 5px;
     font-family: Poppins,sans-serif;
   }
 .active{
-    background-color: #009b59;
+    background-color: #ffffff !important;
 }
 .my-4 {
     margin: 40px 0 !important;
@@ -336,7 +328,7 @@ padding-left: 5px;
 .segment {
     position: relative;
     background: #fff;
-    box-shadow: 0 0 2px #d4d4d4;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     margin: 1rem 0;
     padding: 1em;
     border-radius: .28571429rem;}

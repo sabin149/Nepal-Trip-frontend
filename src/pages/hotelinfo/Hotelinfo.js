@@ -1,12 +1,8 @@
 import React from "react";
-import './hotelinfo.css'
-import { Link,useLocation } from 'react-router-dom'
+import "./hotelinfo.css";
+import { Link } from "react-router-dom";
 
 const Hotelinfo = () => {
-    const location=useLocation()
-
-    const hotel=location.state.hotel
-    console.log(hotel);
   return (
     <div className="main_content">
       <div className="search_result">
@@ -96,13 +92,16 @@ const Hotelinfo = () => {
               <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://assets.xceltrip.com/gallery-1583997472633-34394.jpg" class="d-block w-100" alt="roomimage"></img>
+      <img src="https://assets.xceltrip.com/gallery-1583997472633-34394.jpg" class="d-block w-100
+      " alt="roomimage"></img>
     </div>
     <div class="carousel-item">
-      <img src="https://assets.xceltrip.com/gallery-1583998379908-af66c.jpg" class="d-block w-100" alt="roomimage"></img>
+      <img src="https://assets.xceltrip.com/gallery-1583998379908-af66c.jpg" class="d-block w-100
+      " alt="roomimage"></img>
     </div>
     <div class="carousel-item">
-      <img src="https://assets.xceltrip.com/gallery-1583998204817-44478.jpg" class="d-block w-100" alt="roomimage"></img>
+      <img src="https://assets.xceltrip.com/gallery-1583998204817-44478.jpg" class="d-block w-100
+      " alt="roomimage"></img>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
