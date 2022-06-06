@@ -15,7 +15,6 @@ import HotelList from "./components/Home/HotelList";
 import VendorTable from "./components/admin/Table/VendorTable";
 import EditHotel from "./pages/hotel/editHotel";
 
-
 function App() {
   const token = localStorage.getItem('token')
   const role = localStorage.getItem('role')

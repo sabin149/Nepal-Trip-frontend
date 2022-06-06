@@ -50,8 +50,8 @@ import React,{useState,useEffect} from 'react'
                     </small>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" name="email"
+                    <label htmlFor="exampleInputEmail2">Email address</label>
+                    <input type="email" className="form-control" id="exampleInputEmail2" name="email"
                     onChange={handleChangeInput} value={email}
                     style={{background: `${alert.email ? '#fd2d6a14' : ''}`}} />
                     <small className="form-text text-danger">
@@ -70,10 +70,10 @@ import React,{useState,useEffect} from 'react'
                 </div>
 
                 <div className="form-group">
-                    <label htmlFor="exampleInputPassword1">Password</label>
+                    <label htmlFor="exampleInputPassword2">Password</label>
                     <div className="pass">
                         <input type={ typePass ? "text" : "password" } 
-                        className="form-control" id="exampleInputPassword1"
+                        className="form-control" id="exampleInputPassword2"
                         onChange={handleChangeInput} value={password} name="password"
                         style={{background: `${alert.password ? '#fd2d6a14' : ''}`}} />
                         <small onClick={() => setTypePass(!typePass)}>

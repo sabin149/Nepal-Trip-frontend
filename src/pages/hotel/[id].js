@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
-// import "../../styles/hotel.css"
 import uploadImage from "../../images/No_image.png";
 import { imageShow, videoShow } from "../../utils/mediaShow";
 import { createHotel } from "../../redux/actions/hotelAction";
@@ -10,7 +9,7 @@ import "./hotel.css";
 
 const Hotel = () => {
   const dispatch = useDispatch()
-  const {auth} = useSelector(state => state)
+  const { auth } = useSelector(state => state)
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
 
@@ -69,16 +68,16 @@ const Hotel = () => {
     setHotel_Images(newArr)
   }
 
-   const handleSubmit = e => {
-     e.preventDefault()
-     if(hotel_images.length === 0)
-        return dispatch({ 
-            type: GLOBALTYPES.ALERT, payload: {error: "Please add hotel images."}
-        })
-        dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info,hotel_facilities, hotel_policies, hotel_images,auth,token }))
-        navigate("/")
-   }
- 
+  const handleSubmit = e => {
+    e.preventDefault()
+    if (hotel_images.length === 0)
+      return dispatch({
+        type: GLOBALTYPES.ALERT, payload: { error: "Please add hotel images." }
+      })
+    dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images, auth, token }))
+    navigate("/")
+  }
+
   return (
     <div class="container ">
       <form onSubmit={handleSubmit}>
@@ -86,54 +85,54 @@ const Hotel = () => {
         <div class="row">
           <div class="d-flex justify-content-around mx-0 mb-1">
             <div class="col-2">
-              
+
             </div>
             <div class="col-6 add_hotel ">
 
-            <div class="show_images">
-              {hotel_images.length > 0 ? (
-                hotel_images.map((img, index) => (
-                  <div key={index} id="file_img">
-                    {img.url ? (
-                      <>
-                        {img.url.match(/video/i)
-                          ? videoShow(img.url)
-                          : imageShow(img.url)}
-                      </>
-                    ) : (
-                      <>
-                        {img.type.match(/video/i)
-                          ? videoShow(URL.createObjectURL(img))
-                          : imageShow(URL.createObjectURL(img))}
-                      </>
-                    )}
-                    <span onClick={() => deleteImages(index)}>&times;</span>
-                  </div>
-                ))
-              ) : (
-                <img src={uploadImage} alt=".." style={{ width: "5rem" }} />
-              )}
-            </div>
-            <div class="input_images">
-              {
-                <>
-                  <div class="file_upload">
-                    <div class="d-flex">
-                      <h6 class='btn btn-warning text-light me-2'>Upload Images</h6>
+              <div class="show_images">
+                {hotel_images.length > 0 ? (
+                  hotel_images.map((img, index) => (
+                    <div key={index} id="file_img">
+                      {img.url ? (
+                        <>
+                          {img.url.match(/video/i)
+                            ? videoShow(img.url)
+                            : imageShow(img.url)}
+                        </>
+                      ) : (
+                        <>
+                          {img.type.match(/video/i)
+                            ? videoShow(URL.createObjectURL(img))
+                            : imageShow(URL.createObjectURL(img))}
+                        </>
+                      )}
+                      <span onClick={() => deleteImages(index)}>&times;</span>
                     </div>
-                    <input
-                      type="file"
-                      name="file"
-                      id="file"
-                      multiple
-                      accept="image/*,video/*"
-                      onChange={handleChangeImages}
-                    />
-                  </div>
-                </>
-              }
-            
-            </div>
+                  ))
+                ) : (
+                  <img src={uploadImage} alt=".." style={{ width: "5rem" }} />
+                )}
+              </div>
+              <div class="input_images">
+                {
+                  <>
+                    <div class="file_upload">
+                      <div class="d-flex">
+                        <h6 class='btn btn-warning text-light me-2'>Upload Images</h6>
+                      </div>
+                      <input
+                        type="file"
+                        name="file"
+                        id="file"
+                        multiple
+                        accept="image/*,video/*"
+                        onChange={handleChangeImages}
+                      />
+                    </div>
+                  </>
+                }
+
+              </div>
 
               <div class="hotel_label">
                 <label class="form-label">Hotel Name</label>
@@ -300,14 +299,14 @@ const Hotel = () => {
               </div>
             </div>
 
-          <div class="d-flex align-items-center justify-content-center">
+            <div class="d-flex align-items-center justify-content-center">
 
-        
-          <div class="col-6">
-            
-            
-          </div>
-  </div>
+
+              <div class="col-6">
+
+
+              </div>
+            </div>
           </div>
 
         </div>
