@@ -122,10 +122,13 @@ const HotelList = () => {
                                 <div className='mb-2' style={{color:'#2374c2',fontSize:'14px'}}>
                                     Show In Map
                                 </div>
-                                <div className='icn-holder' style={{cursor:"pointer"}}>
-                                    <span>aaa</span>
-                                    <span>bbb</span>
-                                    <span>ccc</span>
+                                <div className='icn-holder ' style={{cursor:"pointer"}}>
+                                    
+                                    <i class="fa-solid fa-ban-smoking icn"></i>
+                                    <i class="fa-solid fa-taxi icn"></i>
+                                    <i class="fa-solid fa-wifi icn"></i>
+                                    
+
                                 </div>
                             </div>
                             <div className='col md-3'>
