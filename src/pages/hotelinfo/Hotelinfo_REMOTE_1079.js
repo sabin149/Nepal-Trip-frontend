@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import "./hotelinfo.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
+
 const Hotelinfo = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
   const { hotel, searchInfo } = location.state;
+
   const { date, options } = searchInfo
+
   const [selectedRoom, setSelectedRoom] = useState()
+
   return (
     <div className="main_content">
       <div className="search_result">
@@ -125,6 +130,7 @@ const Hotelinfo = () => {
                   </button>
                 </div>
               </div>
+
               <div className="col-lg-4 abouthotel">
                 <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                   <div>
@@ -242,11 +248,16 @@ const Hotelinfo = () => {
                               }}>
                                 Room Selected
                               </button>
+
                           }
+
+
                         </td>
                       </tr>
                     )
                   }
+
+
                 </tbody>
               </table>
             </div>
@@ -257,8 +268,10 @@ const Hotelinfo = () => {
                 </h4>
                 <hr></hr>
                 {!selectedRoom ? <div className="empty-selection red">
+
                   <span>No Room Selected</span>
                 </div> :
+
                   <div>
                     <p className="h5">{selectedRoom.room_type}</p>
                     <h6> 1 room(s), 1 night(s):</h6>
@@ -278,6 +291,7 @@ const Hotelinfo = () => {
                 }
               </div>
             </div>
+
           </div>
           {/* "Room Selected" 
                 Deluxe Room
@@ -303,7 +317,9 @@ const Hotelinfo = () => {
               <div className="col"><li><i className="fa-solid fa-elevator"></i><span className="amen">Elevator</span></li></div>
               <div className="col"><li><i className="fa-solid fa-mug-hot"></i><span className="amen">Coffee shop</span></li></div>
               <div className="col"><li><i className="fa-solid fa-wheelchair"></i><span className="amen">Facilities for disabled guests</span></li></div>
+
             </div>
+
           </div>
           <div className="segment">
             <h3 className="bold">
@@ -340,21 +356,72 @@ const Hotelinfo = () => {
                   Stay extensions will required a new reservation.
                 </li>
                 <li>
-                  Individual aged 18 and above are required to present a valid Photo ID ( passport, drivers license, government-issued photo ID etc) at the time of check-in.
+                  Individual aged 18 and above are required to present a valid Photo ID ( passport, driver’s license, government-issued photo ID etc) at the time of check-in.
                 </li>
                 <li>
                   Along with the Government issued ID proof, you will also have to carry the itinerary on your phone or Tab or a printout will do.
                 </li>
               </ul>
             </div>
-
           </div>
           <div className="segment">
             <h3 className="bold">
               <span>Map</span>
             </h3>
           </div>
-          <div className="segment">
+
+        </div>
+        <div className="segment">
+          <h3 className="bold">
+          Hotel Policies
+          </h3>
+          <hr></hr>
+          <h4 className="allpolicy">
+          <h3 className="policy">Check in and Check out Policy</h3> <br></br>
+          Check in time: 12::0<br></br>
+          Check out time: 12::0
+          <br></br>
+          Goverment issued photo ID(for ex: valid passport, valid driving license) required for Check-in.
+          <h3 className="policy">Payment Method Accepted</h3> <br></br>
+          E-sewa<br></br>
+          Khalti
+          <br></br>
+          <h3 className="policy">Child Policy</h3> <br></br>
+          Child age: 4 - 6 years<br></br>
+          Infant age: 0 - 3 years
+          <br></br>
+          <h3 className="policy">More Policies</h3> <br></br>
+          Pan Card accepted<br></br>
+          Hotel fit for children
+          <br></br>
+          <h3 className="policy">You need to know</h3> <br></br>
+          <ul className="bulleted">
+            <li>
+            We do not support modifications to hotel bookings on website or App. You’ll have to cancel (cancellation charges may apply as mention in above cancelation policy) your existing booking and make a new one.
+            </li>
+            <li>
+            The hotel might not refund for late check-in and early check-out.            
+            </li>
+            <li>
+            Stay extensions will required a new reservation.
+            </li>
+            <li>
+              Individual aged 18 and above are required to present a valid Photo ID ( passport, driver’s license, government-issued photo ID etc) at the time of check-in.     
+          </li>
+          <li>
+          Along with the Government issued ID proof, you will also have to carry the itinerary on your phone or Tab or a printout will do.          
+          </li>
+          </ul>
+          </h4> 
+        
+        </div>
+        <div className="segment">
+          <h3 className="bold">
+            <span>Map</span>
+            <hr/>
+          </h3>
+        </div>
+        <div className="segment">
           <h3 className="bold">
             <span>Review & Rating </span>
             <hr/>
@@ -377,9 +444,11 @@ const Hotelinfo = () => {
                 </div>
           </div>
         </div>
+
         </div>
       </div>
     </div>
   );
 };
+
 export default Hotelinfo;
