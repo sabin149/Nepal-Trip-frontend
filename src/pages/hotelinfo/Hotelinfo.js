@@ -299,6 +299,28 @@ const Hotelinfo = () => {
                 Non-refundable*/ }
           <div className="my-4">
           </div>
+
+        <div className="my-4">
+        </div>
+        <div className="segment">
+          <h3 className="bold">
+          Hotel Amenities
+          </h3>
+          <hr></hr>
+          <div class="row row-cols-4">
+                  <div class="col"><li><i class="fa-solid fa-hot-tub-person"></i> <span className="amen">24hrs Hot Shower</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-wifi"></i><span className="amen">24hrs Free Wi-Fi</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-smoking"></i><span className="amen">Smoking Area Available</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-car"></i><span className="amen">Transportation Facility</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-money-bills-simple"></i><span className="amen">ATM/cash machine on site</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-broom"></i><span className="amen">Daily housekeeping</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-shirt"></i><span className="amen">Laundry service</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-bowl-rice"></i><span className="amen">Continental breakfast</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-utensils"></i><span className="amen">Restaurant</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-elevator"></i><span className="amen">Elevator</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-mug-hot"></i><span className="amen">Coffee shop</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-wheelchair"></i><span className="amen">Facilities for disabled guests</span></li></div>
+
           <div className="segment">
             <h3 className="bold">
               Hotel Amenities
