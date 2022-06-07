@@ -309,6 +309,7 @@ const Hotelinfo = () => {
                   <div class="col"><li><i class="fa-solid fa-wifi"></i><span className="amen">24hrs Free Wi-Fi</span></li></div>
                   <div class="col"><li><i class="fa-solid fa-smoking"></i><span className="amen">Smoking Area Available</span></li></div>
                   <div class="col"><li><i class="fa-solid fa-car"></i><span className="amen">Transportation Facility</span></li></div>
+                  <div class="col"><li><i class="fa-solid fa-money-bills-simple"></i><span className="amen">ATM/cash machine on site</span></li></div>
                   <div class="col"><li><i class="fa-solid fa-broom"></i><span className="amen">Daily housekeeping</span></li></div>
                   <div class="col"><li><i class="fa-solid fa-shirt"></i><span className="amen">Laundry service</span></li></div>
                   <div class="col"><li><i class="fa-solid fa-bowl-rice"></i><span className="amen">Continental breakfast</span></li></div>

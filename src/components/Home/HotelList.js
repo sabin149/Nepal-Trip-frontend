@@ -11,8 +11,6 @@ const HotelList = () => {
 
     const searchData = location.state.searchData
     const searchInfo = location.state.searchInfo
-
-    console.log(searchData)
     
     return (
         <>
@@ -167,7 +165,7 @@ const HotelList = () => {
                                                     </span>
                                                 </div>
                                                 <button className="button btn btn-primary" onClick={() => {
-                                                    navigate("/hotelinfo", { state: { hotel: hotel } })
+                                                    navigate("/hotelinfo", { state: { hotel: hotel,searchInfo } })
 
                                                 }}>CHOOSE</button>
                                             </div>
