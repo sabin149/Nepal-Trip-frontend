@@ -59,9 +59,6 @@ h4{
     min-height: 50px;
 }
 
-.icn-holder span{
-    padding-right: 10px;
-}
 
 .hotel-price{
     margin-top: 20px;
@@ -69,7 +66,16 @@ h4{
     color: #009b59;
     font-weight: 600;
 }
+.icn{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    text-align: center;
+    padding: 3px;
+    border: 1px solid gray;
 
+}
 
 .bt {
     background-color: #3b72c4;

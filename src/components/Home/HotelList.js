@@ -100,15 +100,16 @@ const HotelList = () => {
 
                                 </div>
                             </div>
-
                             {
-
                                 searchData.hotels.map((hotel) => (
                                     <div key={hotel._id} className='card hotel-card'>
                                         <div className='row'>
                                             <div className='col-md-4'>
                                                 <div className='img-holder'>
-                                                    <img src={hotel.hotel_images[0]} alt="projectimages" style={{ width: "15rem" }} />
+                                                    <img src={
+                                                       hotel.hotel_images[0].url?hotel.hotel_images[0].url:
+                                                       hotel.hotel_images[0]
+                                                    } alt="projectimages" style={{ width: "15rem" }} />
                                                 </div>
                                             </div>
                                             <div className='col-md-5'>
@@ -164,7 +165,7 @@ const HotelList = () => {
                                                     </span>
                                                 </div>
                                                 <button className="button btn btn-primary" onClick={() => {
-                                                    navigate("/hotelinfo", { state: { hotel: hotel } })
+                                                    navigate("/hotelinfo", { state: { hotel: hotel,searchInfo } })
 
                                                 }}>CHOOSE</button>
                                             </div>
