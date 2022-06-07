@@ -299,28 +299,6 @@ const Hotelinfo = () => {
                 Non-refundable*/ }
           <div className="my-4">
           </div>
-
-        <div className="my-4">
-        </div>
-        <div className="segment">
-          <h3 className="bold">
-          Hotel Amenities
-          </h3>
-          <hr></hr>
-          <div class="row row-cols-4">
-                  <div class="col"><li><i class="fa-solid fa-hot-tub-person"></i> <span className="amen">24hrs Hot Shower</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-wifi"></i><span className="amen">24hrs Free Wi-Fi</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-smoking"></i><span className="amen">Smoking Area Available</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-car"></i><span className="amen">Transportation Facility</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-money-bills-simple"></i><span className="amen">ATM/cash machine on site</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-broom"></i><span className="amen">Daily housekeeping</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-shirt"></i><span className="amen">Laundry service</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-bowl-rice"></i><span className="amen">Continental breakfast</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-utensils"></i><span className="amen">Restaurant</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-elevator"></i><span className="amen">Elevator</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-mug-hot"></i><span className="amen">Coffee shop</span></li></div>
-                  <div class="col"><li><i class="fa-solid fa-wheelchair"></i><span className="amen">Facilities for disabled guests</span></li></div>
-
           <div className="segment">
             <h3 className="bold">
               Hotel Amenities
@@ -378,72 +356,21 @@ const Hotelinfo = () => {
                   Stay extensions will required a new reservation.
                 </li>
                 <li>
-                  Individual aged 18 and above are required to present a valid Photo ID ( passport, driver’s license, government-issued photo ID etc) at the time of check-in.
+                  Individual aged 18 and above are required to present a valid Photo ID ( passport, drivers license, government-issued photo ID etc) at the time of check-in.
                 </li>
                 <li>
                   Along with the Government issued ID proof, you will also have to carry the itinerary on your phone or Tab or a printout will do.
                 </li>
               </ul>
             </div>
+
           </div>
           <div className="segment">
             <h3 className="bold">
               <span>Map</span>
             </h3>
           </div>
-
-        </div>
-        <div className="segment">
-          <h3 className="bold">
-          Hotel Policies
-          </h3>
-          <hr></hr>
-          <h4 className="allpolicy">
-          <h3 className="policy">Check in and Check out Policy</h3> <br></br>
-          Check in time: 12::0<br></br>
-          Check out time: 12::0
-          <br></br>
-          Goverment issued photo ID(for ex: valid passport, valid driving license) required for Check-in.
-          <h3 className="policy">Payment Method Accepted</h3> <br></br>
-          E-sewa<br></br>
-          Khalti
-          <br></br>
-          <h3 className="policy">Child Policy</h3> <br></br>
-          Child age: 4 - 6 years<br></br>
-          Infant age: 0 - 3 years
-          <br></br>
-          <h3 className="policy">More Policies</h3> <br></br>
-          Pan Card accepted<br></br>
-          Hotel fit for children
-          <br></br>
-          <h3 className="policy">You need to know</h3> <br></br>
-          <ul className="bulleted">
-            <li>
-            We do not support modifications to hotel bookings on website or App. You’ll have to cancel (cancellation charges may apply as mention in above cancelation policy) your existing booking and make a new one.
-            </li>
-            <li>
-            The hotel might not refund for late check-in and early check-out.            
-            </li>
-            <li>
-            Stay extensions will required a new reservation.
-            </li>
-            <li>
-              Individual aged 18 and above are required to present a valid Photo ID ( passport, driver’s license, government-issued photo ID etc) at the time of check-in.     
-          </li>
-          <li>
-          Along with the Government issued ID proof, you will also have to carry the itinerary on your phone or Tab or a printout will do.          
-          </li>
-          </ul>
-          </h4> 
-        
-        </div>
-        <div className="segment">
-          <h3 className="bold">
-            <span>Map</span>
-            <hr/>
-          </h3>
-        </div>
-        <div className="segment">
+          <div className="segment">
           <h3 className="bold">
             <span>Review & Rating </span>
             <hr/>
