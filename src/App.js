@@ -40,13 +40,12 @@ function App() {
           } />
 
           <Route path="/addhotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
-
           <Route path="/hotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
           <Route path="/room" element={isVendor ? <Room /> : <Navigate to="/" />} />
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
-          <Route path="/edithotel" element={<EditHotel />} />
+          <Route path="/edithotel" element={isVendor&& <EditHotel />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
 
