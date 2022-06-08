@@ -1,4 +1,4 @@
-import { EditData } from "../actions/globalTypes";
+import { DeleteData, EditData } from "../actions/globalTypes";
 import { HOTEL_TYPES } from "../actions/hotelAction";
 const initialState = {
     loading: false,
@@ -35,7 +35,12 @@ const hotelReducer = (state = initialState, action) => {
             return {
                 ...state,
                 hotels: EditData(state.hotels, action.payload._id, action.payload)
-            }
+            };
+        case HOTEL_TYPES.DELETE_HOTEL:
+            return {
+                ...state,
+                hotels: DeleteData(state.hotels, action.payload._id)
+            };
         default:
             return state;
     }

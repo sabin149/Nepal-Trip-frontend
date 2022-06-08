@@ -1,6 +1,6 @@
-import { GLOBALTYPES } from './globalTypes'
+import { EditData, GLOBALTYPES } from './globalTypes'
 import { imageUpload } from '../../utils/imageUpload'
-import { getDataAPI, postDataAPI } from '../../utils/fetchData'
+import { getDataAPI, patchDataAPI, postDataAPI } from '../../utils/fetchData'
 import { HOTEL_TYPES } from './hotelAction'
 
 export const createHotelRoom = ({ hotel, newRoom, room_images, token }) => async (dispatch) => {
@@ -44,5 +44,29 @@ export const getHotelRooms = (hotelId) => async (dispatch) => {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
     }
 }
+
+export const updateHotelRoom = ({ roomData,newRoomData,hotel, token }) => async (dispatch) => {
+    const newRooms=EditData(hotel.rooms,roomData,roomData._id,{
+        ...roomData,newRoomData
+    })
+    const newHotel={
+        ...hotel,
+        rooms:newRooms
+}
+    dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: newHotel })
+    try {
+       patchDataAPI(`room/${roomData._id}`, { newRoomData }, token)
+    } catch (error) {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error.response.data.msg } })
+    }
+
+}
+
+
+
+
+
+
+
 
 

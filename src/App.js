@@ -16,7 +16,9 @@ import VendorTable from "./components/admin/Table/VendorTable";
 import EditHotel from "./pages/hotel/editHotel";
 import EditRoom from "./components/room/EditRoom";
 import Checkout from "./pages/checkout/Checkout";
-import UserListTable from "./components/admin/Table/UserListTable";
+import UserListTable from "./components/admin/Table/user/UserListTable";
+import EditUser from "./components/admin/Table/user/EditUser";
+
 function App() {
   const token = localStorage.getItem('token')
   const role = localStorage.getItem('role')
@@ -46,6 +48,8 @@ function App() {
           <Route path="/editromm" element={<EditRoom />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/users" element={<UserListTable />} />
+          <Route path="/admin/edituser" element={<EditUser />} />
+          
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdmin ? <EHeader /> : isVendor ? <EFooter /> : <Footer />}
