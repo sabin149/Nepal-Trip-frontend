@@ -111,10 +111,10 @@ const HotelList = () => {
                                                     <img src={
                                                        hotel.hotel_images[0].url?hotel.hotel_images[0].url:
                                                        hotel.hotel_images[0]
-                                                    } alt="projectimages" style={{ width: "15rem" }} />
+                                                    } alt="projectimages" style={{ width: "100%" }} />
                                                 </div>
                                             </div>
-                                            <div className='col-md-5'>
+                                            <div className='col-md-5 hotel_detail' >
                                                 <h4>
                                                     <div className='mt-2 mb-2' style={{ cursor: "pointer" }}>
                                                         {hotel.hotel_name}
@@ -184,6 +184,9 @@ const HotelList = () => {
                 </div>
 
             </div>
+            
+           
+
         </>
 
     )

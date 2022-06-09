@@ -46,7 +46,7 @@ function App() {
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
           <Route path="/edithotel" element={<EditHotel />} />
-          <Route path="/editromm" element={<EditRoom />} />
+          <Route path="/editroom" element={isVendor &&<EditRoom />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>
