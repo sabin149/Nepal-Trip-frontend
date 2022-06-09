@@ -93,23 +93,12 @@ const Hotelinfo = () => {
               <div className="col-lg-8 slider">
                 <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                   <div className="carousel-inner">
-                    {/* <div className="carousel-item active">
-                      <img src="https://assets.xceltrip.com/gallery-1583997472633-34394.jpg" className="d-block w-100
-      " alt="roomimage"></img>
-                    </div>
-                    <div className="carousel-item">
-                      <img src="https://assets.xceltrip.com/gallery-1583998379908-af66c.jpg" className="d-block w-100
-      " alt="roomimage"></img>
-                    </div>
-                    <div className="carousel-item">
-                      <img src="https://assets.xceltrip.com/gallery-1583998204817-44478.jpg" className="d-block w-100
-      " alt="roomimage"></img>
-                    </div> */}
+              
                     {
                       hotel.hotel_images.map((image, index) => {
                         return (
                           <div key={index} className="carousel-item active">
-                            <img src={image} className="d-block" alt="roomimage" style={{ height: "480px", width: "770px" }}></img>
+                            <img src={image.url} className="d-block" alt="roomimage" style={{ height: "480px", width: "770px" }}></img>
                           </div>
                         )
                       })
@@ -132,11 +121,7 @@ const Hotelinfo = () => {
                       About {hotel.hotel_name}
                     </h4>
                     <div className="caption">
-                      We are a “NeoclassNameical Luxury Hotel” in the helm of the
-                      tourist hub of Pokhara .69 Kms from lake Fewa. The hotel
-                      offers an assortment of 46 rooms with satori evoking views
-                      of the Himalayas and lake from lake-view rooms and the
-                      terrace. Host meetings
+                    {hotel.hotel_info}
                     </div>
                     <span className="blue pointer">
                       <span> Read More </span>
@@ -195,7 +180,7 @@ const Hotelinfo = () => {
                         <td className="" rowSpan="1">
                           <h3 className="color-dark-blue bold pointer"> {room.room_type}</h3>
                           <div className="image-holder bg-light-gray height160">
-                            <img className="room-image" src={room.room_images[0]} alt="roomimage"></img>
+                            <img className="room-image" src={room.room_images[0].url} alt="roomimage"></img>
                           </div>
                           <div>
                             <ul className="mg-top-sm ">
