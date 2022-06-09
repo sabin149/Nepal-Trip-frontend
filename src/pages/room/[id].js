@@ -15,7 +15,6 @@ const Room = () => {
   return (
     <div>
           <CreateRoom hotel={hotel} key={hotel._id} />
-
     </div>
   )
 }
