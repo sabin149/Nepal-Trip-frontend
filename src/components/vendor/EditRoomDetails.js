@@ -1,20 +1,23 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import No_image from "../../images/No_image.png"
 import { imageShow, videoShow } from "../../utils/mediaShow"
-import "./room.css"
-import { createHotelRoom } from '../../redux/actions/roomAction'
+import "../room/room.css"
 
-const CreateRoom = ({ hotel }) => {
+const EditRoomDetails = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
   const userID = localStorage.getItem('userID')
 
-  const hotel1 = hotel.hotels.filter(hotel => hotel.user._id === userID)
+  const location = useLocation()
+
+  const {room}=location.state
+
+  console.log(room)
   
   const initialState = {
     room_type: '', room_price: '', room_options: '', room_facilities: ''
@@ -64,14 +67,14 @@ const CreateRoom = ({ hotel }) => {
       room_type, room_price, room_options, room_facilities, user: userID
 
     }
-    dispatch(createHotelRoom({ hotel: hotel1, newRoom, room_images, token }))
+
     navigate("/")
   }
 
   return (
     <div className="container ">
       <form onSubmit={handleSubmit}>
-        <h2 className='text-danger text-center mt-3'>Add hotel Room</h2>
+        <h2 className='text-danger text-center mt-3'>Update hotel Room</h2>
         <div className="d-flex justify-content-center align-content-center" >
           <div className="col-6 add_hotel" >
             <div className="show_images">
@@ -151,4 +154,4 @@ const CreateRoom = ({ hotel }) => {
   )
 }
 
-export default CreateRoom
+export default EditRoomDetails

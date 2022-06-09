@@ -27,6 +27,13 @@ export const SidebarData = [
     heading: "Customers",
     path: "/customers",
   },
+  
+  {
+    icon: UilHome,
+    heading: 'View Hotel',
+    path:"/viewHotel"
+  },
+
   {
     icon: UilHome,
     heading: 'Hotels',
