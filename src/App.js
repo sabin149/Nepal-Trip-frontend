@@ -48,13 +48,15 @@ function App() {
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
           <Route path="/edithotel" element={<EditHotel />} />
-          <Route path="/editroom" element={<EditRoom />} />
+
+          <Route path="/editroom" element={isVendor &&<EditRoom />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/users" element={<UserListTable />} />
           <Route path="/admin/edituser" element={<EditUser />} />
           <Route path="/viewHotel" element={<ViewHotelDetails/>}/>
           <Route path="/editHotelDetails/:id" element={<EditHotelDetails/>}/>
           <Route path="/editRoomDetails/:id" element={<EditRoomDetails/>}/>
+
 
           <Route path="*" element={<NotFound />} />
         </Routes>
