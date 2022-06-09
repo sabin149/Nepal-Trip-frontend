@@ -52,7 +52,6 @@ const Sidebar = () => {
               </div>
             );
           })}
-
           <div className="menuItem">
             <Link to="/"
               onClick={() => {

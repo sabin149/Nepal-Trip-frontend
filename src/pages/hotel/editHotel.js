@@ -5,21 +5,15 @@ import "./hotel.css";
 
 const EditHotel = () => {
  
-  return (
-      
-      
+  return (   
     <div class="container ">
-      <form>
-        <h2 class="text-danger text-center mt-3">Add hotel</h2>
+        <h2 class="text-danger text-center mt-3">Edit hotel</h2>
         <div class="row">
-          <div class="d-flex justify-content-around mx-0 mb-1">
-            <div class="col-2">
-                
-              
-            </div>
+        < div class="d-flex align-items-center justify-content-center">
+
             <div class="col-6 add_hotel ">
             <div class="input_images">
-              {
+              {/* {
                 <>
                   <div class="file_upload">
                     <div class="d-flex">
@@ -35,7 +29,7 @@ const EditHotel = () => {
                     />
                   </div>
                 </>
-              }
+              } */}
             
             </div>
 
@@ -157,18 +151,10 @@ const EditHotel = () => {
               </div>
             </div>
 
-          <div class="d-flex align-items-center justify-content-center">
-
-        
-          <div class="col-6">
-            
-            
-          </div>
-  </div>
+          
           </div>
 
         </div>
-      </form>
     </div>
   );
 };

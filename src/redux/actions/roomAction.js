@@ -5,9 +5,13 @@ import { HOTEL_TYPES } from './hotelAction'
 
 export const createHotelRoom = ({ hotel, newRoom, room_images, token }) => async (dispatch) => {
 
+
+
     const rooms = hotel.map(hotel => hotel.rooms)
+
     const hotelId = hotel.map(hotel => hotel._id)
-    const hotelUserId = hotel.map(hotel => hotel.user)
+ 
+    const hotelUserId = hotel.map(hotel => hotel.user._id)
 
     let media = []
     dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
@@ -44,5 +48,13 @@ export const getHotelRooms = (hotelId) => async (dispatch) => {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
     }
 }
+
+
+
+
+
+
+
+
 
 

@@ -79,7 +79,7 @@ const Hotel = () => {
   }
 
   return (
-    <div class="container ">
+    <div class="container">
       <form onSubmit={handleSubmit}>
         <h2 class="text-danger text-center mt-3">Add hotel</h2>
         <div class="row">
