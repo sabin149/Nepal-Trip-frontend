@@ -4,9 +4,6 @@ import { getDataAPI, postDataAPI } from '../../utils/fetchData'
 import { HOTEL_TYPES } from './hotelAction'
 
 export const createHotelRoom = ({ hotel, newRoom, room_images, token }) => async (dispatch) => {
-
-
-
     const rooms = hotel.map(hotel => hotel.rooms)
 
     const hotelId = hotel.map(hotel => hotel._id)
