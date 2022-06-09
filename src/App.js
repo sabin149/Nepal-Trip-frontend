@@ -45,11 +45,10 @@ function App() {
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
           <Route path="/edithotel" element={<EditHotel />} />
-          <Route path="/editromm" element={<EditRoom />} />
+          <Route path="/editroom" element={<EditRoom />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/users" element={<UserListTable />} />
           <Route path="/admin/edituser" element={<EditUser />} />
-          
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdmin ? <EHeader /> : isVendor ? <EFooter /> : <Footer />}

@@ -14,8 +14,16 @@ const CreateRoom = ({ hotel }) => {
   const token = localStorage.getItem('token')
   const userID = localStorage.getItem('userID')
 
-  const hotel1 = hotel.hotels.filter(hotel => hotel.user === userID)
+  // const hotel1 = hotel.hotels.filter(hotel => hotel.user)
+  const hotel1 = hotel.hotels.filter(hotel => hotel.user._id === userID)
 
+  // console.log(hotel1)
+
+ const hotelDetails= hotel1.map(hotel => hotel)
+  // console.log(detailshotel.address);
+
+  // console.log(hotelDetails.address);
+  
   const initialState = {
     room_type: '', room_price: '', room_options: '', room_facilities: ''
   }
@@ -65,7 +73,7 @@ const CreateRoom = ({ hotel }) => {
 
     }
     dispatch(createHotelRoom({ hotel: hotel1, newRoom, room_images, token }))
-    navigate("/")
+    // navigate("/")
   }
 
   return (
