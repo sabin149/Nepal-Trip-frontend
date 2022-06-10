@@ -1,10 +1,11 @@
 import { DataGrid } from '@mui/x-data-grid'
 import moment from 'moment'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getUsers } from "../../../../redux/actions/userAction"
+import { deleteUser, getUsers } from "../../../../redux/actions/userAction"
 import "../Table.css"
 import { Link, useNavigate } from 'react-router-dom'
+import { Input } from '@mui/material'
 
 
 
@@ -19,6 +20,8 @@ const UserListTable = () => {
     useEffect(() => {
         dispatch(getUsers(token))
     }, [token, dispatch])
+
+
 
     const columns = [
         { field: 'id', headerName: 'SN', width: 90 },
@@ -35,24 +38,27 @@ const UserListTable = () => {
 
         { field: 'registerdAt', headerName: 'Registered At', width: 160, align: 'center' },
         {
-            field: 'role', headerName: 'Role', width: 100,
+            field: 'role', headerName: 'Role', width: 100
         },
         {
             field: "action", headerName: "Action", width: 240, sortable: false, align: "center",
             renderCell: (userData) =>
 
                 <span>
-                    <span className='me-2 btn btn-warning btn-sm' onClick={()=>{
-                    console.log("userData",userData.value)
-                    }} >Change</span>
+
+
+                    <span className='me-2 btn btn-warning btn-sm' onClick={() => {
+                        console.log(userData.value, "edit")
+                        handleChangeRole(userData.value)
+                    }}>Change</span>
 
                     <span className='me-2 btn btn-success btn-sm' onClick={() => {
-                        console.log(userData.value, "edit")
+                        // console.log(userData.value, "edit")
                         navigate("/admin/edituser", { state: { userData: userData.value } })
 
                     }}>Edit</span>
                     <span className='btn btn-danger btn-sm' onClick={() => {
-                        console.log(userData.value, "delete")
+                        handleDeleteUser({ user: userData.value })
                     }}>Delete</span>
                 </span>
         }
@@ -73,6 +79,16 @@ const UserListTable = () => {
         }
     })
 
+    const handleDeleteUser = ({ user }) => {
+        if (window.confirm("Are you sure you want to delete this user?")) {
+            dispatch(deleteUser({ user, token }))
+        }
+    }
+    const handleChangeRole = ({ user }) => {
+        if (window.confirm("Are you sure you want to change this user role?")) {
+            
+        }
+    }
     return (
         <>
             <span> <Link to="/" className="btn btn-primary btn-sm">Back</Link>  <h2 className='text-center mt-3 '>List of Users</h2></span>

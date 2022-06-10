@@ -81,23 +81,32 @@ export const updateHotel = ({ hotelData, hotel_images, token, hotelDetails }) =>
     const imgNewUrl = hotel_images.filter(img => !img.url)
     const imgOldUrl = hotel_images.filter(img => img.url)
 
-    if ( hotelData.hotel_name === hotelDetails.hotel_name && hotelData.address === hotelDetails.address && hotelData.phone === hotelDetails.phone && hotelData.hotel_email === hotelDetails.hotel_email && hotelData.pan_no === hotelDetails.pan_no && hotelData.price === hotelDetails.price && hotelData.hotel_info === hotelDetails.hotel_info && hotelData.hotel_facilities === hotelDetails.hotel_facilities && hotelData.hotel_policies === hotelDetails.hotel_policies
+    if (hotelData.hotel_name === hotelDetails.hotel_name && hotelData.address === hotelDetails.address && hotelData.phone === hotelDetails.phone && hotelData.hotel_email === hotelDetails.hotel_email && hotelData.pan_no === hotelDetails.pan_no && hotelData.price === hotelDetails.price && hotelData.hotel_info === hotelDetails.hotel_info && hotelData.hotel_facilities === hotelDetails.hotel_facilities && hotelData.hotel_policies === hotelDetails.hotel_policies
         && imgNewUrl.length === 0
         && imgOldUrl.length === hotelDetails.hotel_images.length
     ) return;
 
+
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
-        if (imgNewUrl.length > 0) media = await imageUpload(imgNewUrl)  
+        if (imgNewUrl.length > 0) media = await imageUpload(imgNewUrl)
+
         const res = await patchDataAPI(`hotel/${hotelDetails._id}`, {
-            hotelData, hotel_images: [...imgOldUrl, ...media]
+            hotel_name: hotelData.hotel_name,
+            address: hotelData.address,
+            phone: hotelData.phone,
+            hotel_email: hotelData.hotel_email,
+            pan_no: hotelData.pan_no,
+            price: hotelData.price,
+            hotel_info: hotelData.hotel_info,
+            hotel_facilities: hotelData.hotel_facilities,
+            hotel_policies: hotelData.hotel_policies,hotel_images: [...imgOldUrl, ...media]
         }, token)
 
         dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: res.data.newHotel })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
 
     } catch (err) {
-
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: { error: err.response.data.msg }

@@ -1,4 +1,4 @@
-import { EditData } from "../actions/globalTypes";
+import { DeleteData, EditData } from "../actions/globalTypes";
 import { USER_TYPES } from "../actions/userAction";
 
 const initialState = {
@@ -26,6 +26,11 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: EditData(state.users, action.payload._id, action.payload),
+            }
+        case USER_TYPES.DELETE_USER:
+            return {
+                ...state,
+                users: DeleteData(state.users, action.payload._id),
             }
         default:
             return state;

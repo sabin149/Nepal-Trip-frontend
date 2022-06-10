@@ -1,13 +1,13 @@
 import { GLOBALTYPES } from './globalTypes'
 import { imageUpload } from '../../utils/imageUpload'
-import { getDataAPI, postDataAPI } from '../../utils/fetchData'
+import { deleteDataAPI, getDataAPI, patchDataAPI, postDataAPI } from '../../utils/fetchData'
 import { HOTEL_TYPES } from './hotelAction'
 
 export const createHotelRoom = ({ hotel, newRoom, room_images, token }) => async (dispatch) => {
     const rooms = hotel.map(hotel => hotel.rooms)
 
     const hotelId = hotel.map(hotel => hotel._id)
- 
+
     const hotelUserId = hotel.map(hotel => hotel.user._id)
 
     let media = []
@@ -44,6 +44,59 @@ export const getHotelRooms = (hotelId) => async (dispatch) => {
     } catch (err) {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
     }
+}
+
+export const updateHotelRoom = ({ roomData, room_images, roomDetails, token }) => async (dispatch) => {
+    let media = []
+    const imgNewUrl = room_images.filter(img => !img.url)
+    const imgOldUrl = room_images.filter(img => img.url)
+
+    if (roomData.room_type === roomDetails.room_type
+        && roomData.room_price === roomDetails.room_price
+        && roomData.room_options === roomDetails.room_options
+        && roomData.room_facilities === roomDetails.room_facilities
+        && imgNewUrl.length === 0
+        && imgOldUrl.length === roomDetails.room_images.length
+    ) return;
+    try {
+
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
+        if (room_images.length > 0) media = await imageUpload(imgNewUrl)
+
+        const res = await patchDataAPI(`room/${roomDetails._id}`, {
+            room_options: roomData.room_options,
+            room_facilities: roomData.room_facilities,
+            room_type: roomData.room_type,
+            room_price: roomData.room_price,
+            room_images: [...imgOldUrl, ...media],
+        }, token)
+
+
+        dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: res.data.newRoom })
+    
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
+
+    } catch (error) {
+        console.log(error);
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error.response.data.msg } })
+    }
+
+}
+
+
+export const deleteHotelRoom = ({room, token}) => async (dispatch) => {
+            dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: room })
+    try {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
+        const res=await deleteDataAPI(`room/${room._id}`, token)
+
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
+    } catch (error) {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error.response.data.msg } })
+    }
+
+
+
 }
 
 
