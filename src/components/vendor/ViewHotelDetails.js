@@ -3,6 +3,7 @@ import "../../pages/hotelinfo/hotelinfo.css"
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotels } from "../../redux/actions/hotelAction";
+import { deleteHotelRoom } from "../../redux/actions/roomAction";
 
 const ViewHotelDetails = () => {
     const dispatch = useDispatch()
@@ -17,6 +18,14 @@ const ViewHotelDetails = () => {
     useEffect(() => {
         dispatch(getHotels(token))
     }, [token, dispatch])
+
+    const handleDeleteRoom = ({ room }) => {
+        if (window.confirm('Are you sure you want to delete this room?')) {
+            dispatch(deleteHotelRoom({ room, token }))
+            window.location.reload()
+        }
+    }
+
 
     return (
         <>
@@ -93,14 +102,12 @@ const ViewHotelDetails = () => {
                                             <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                                                 <div>
                                                     <h4 className="color-dark-blue bold">
-                                                        About hotelname
+                                                        About {hotel.hotel_name}
                                                     </h4>
                                                     <div className="caption">
-                                                        We are a “NeoclassNameical Luxury Hotel” in the helm of the
-                                                        tourist hub of Pokhara .69 Kms from lake Fewa. The hotel
-                                                        offers an assortment of 46 rooms with satori evoking views
-                                                        of the Himalayas and lake from lake-view rooms and the
-                                                        terrace. Host meetings
+                                                        {
+                                                            hotel.hotel_info
+                                                        }
                                                     </div>
                                                     <span className="blue pointer">
                                                         <span> Read More </span>
@@ -161,7 +168,7 @@ const ViewHotelDetails = () => {
                                                             <td className="" rowSpan="1">
                                                                 <h3 className="color-dark-blue bold pointer"> {room.room_type}</h3>
                                                                 <div className="image-holder bg-light-gray height160">
-                                                                    <img className="room-image" src={room.room_images[0].url} alt="roomimage"></img>
+                                                                    <img className="room-image" src={room.room_images[0].url} alt="roomimage" />
                                                                 </div>
                                                                 <div>
                                                                     <ul className="mg-top-sm ">
@@ -198,16 +205,20 @@ const ViewHotelDetails = () => {
                                                             </td>
 
                                                             <td className="d-flex justify-content-around align-content-between mt-5">
-                                                                <span onClick={()=>{
-                                                                    navigate(`/editRoomDetails/${room._id}`,{state:{
-                                                                        room
-                                                                    }})
+                                                                <span onClick={() => {
+                                                                    navigate(`/editRoomDetails/${room._id}`, {
+                                                                        state: {
+                                                                            room
+                                                                        }
+                                                                    })
                                                                 }}>
-                                                                <i className="fa-solid fa-pen-to-square text-success h5" style={{cursor:"pointer"}}></i>
+                                                                    <i className="fa-solid fa-pen-to-square text-success h5" style={{ cursor: "pointer" }}></i>
                                                                 </span>
-                                                              <span>
-                                                              <i className="fa-solid fa-trash-can text-danger h5" style={{cursor:"pointer"}}></i>
-                                                              </span>
+                                                                <span onClick={() => {
+                                                                    handleDeleteRoom({ room })
+                                                                }}>
+                                                                    <i className="fa-solid fa-trash-can text-danger h5" style={{ cursor: "pointer" }}></i>
+                                                                </span>
                                                             </td>
 
                                                         </tr>
@@ -248,8 +259,8 @@ const ViewHotelDetails = () => {
                                     <hr></hr>
                                     <div className="allpolicy">
                                         <h3 className="policy">Check in and Check out Policy</h3> <br></br>
-                                        Check in time: 12::0<br></br>
-                                        Check out time: 12::0
+                                        Check in time: 12:00<br></br>
+                                        Check out time: 12:00
                                         <br></br>
                                         Goverment issued photo ID(for ex: valid passport, valid driving license) required for Check-in.
                                         <h3 className="policy">Payment Method Accepted</h3> <br></br>

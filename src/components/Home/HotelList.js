@@ -102,6 +102,8 @@ const HotelList = () => {
                             </div>
                             {
                                 searchData.hotels.map((hotel) => (
+                                  hotel.hotel_validity===true&&
+                                 
                                     <div key={hotel._id} className='card hotel-card'>
                                         <div className='row'>
                                             <div className='col-md-4'>
@@ -171,6 +173,7 @@ const HotelList = () => {
                                             </div>
                                         </div>
                                     </div>
+
                                 ))
 
                             }

@@ -93,7 +93,7 @@ const Hotelinfo = () => {
               <div className="col-lg-8 slider">
                 <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                   <div className="carousel-inner">
-              
+
                     {
                       hotel.hotel_images.map((image, index) => {
                         return (
@@ -121,7 +121,7 @@ const Hotelinfo = () => {
                       About {hotel.hotel_name}
                     </h4>
                     <div className="caption">
-                    {hotel.hotel_info}
+                      {hotel.hotel_info}
                     </div>
                     <span className="blue pointer">
                       <span> Read More </span>
@@ -222,10 +222,10 @@ const Hotelinfo = () => {
                             }}>
                               Select Room
                             </button> :
-                              <button className="ui fluid success button width150 mt-2" onClick={() => {
+                              <button className={`ui fluid ${selectedRoom._id === room._id ? "success" : "primary"} button width150 mt-2}`} onClick={() => {
                                 setSelectedRoom(null)
                               }}>
-                                Room Selected
+                                {selectedRoom._id === room._id ? "Selected Room" : "Select Room"}
                               </button>
                           }
                         </td>
@@ -249,12 +249,12 @@ const Hotelinfo = () => {
                     <h6> 1 room(s), 1 night(s):</h6>
                     <h6 className="text-success">{selectedRoom.room_price} NPR</h6>
                     <p >Non-refundable</p>
-                    <button  to="/"className="ui fluid primary button " style={{
+                    <button to="/" className="ui fluid primary button " style={{
                       fontSize: '16px',
-                      width:"160px",
-                      height:"40px",
-                      margin:"0 auto"
-                    }} onClick={()=>{
+                      width: "160px",
+                      height: "40px",
+                      margin: "0 auto"
+                    }} onClick={() => {
                       navigate("/checkout")
                     }}>
                       Reserve Now
@@ -340,28 +340,28 @@ const Hotelinfo = () => {
             </h3>
           </div>
           <div className="segment">
-          <h3 className="bold">
-            <span>Review & Rating </span>
-            <hr/>
-          </h3>
-          <div>
-                <div class="content">
-                  <p>Rating (select a star amount):</p>
-                </div>
-                <div class="wrapper">
-                  <input name="ratingRadio" type="radio" id="st1" value="1" />
-                  <label for="st1"></label>
-                  <input name="ratingRadio" type="radio" id="st2" value="2" />
-                  <label for="st2"></label>
-                  <input name="ratingRadio" type="radio" id="st3" value="3" />
-                  <label for="st3"></label>
-                  <input name="ratingRadio" type="radio" id="st4" value="4" />
-                  <label for="st4"></label>
-                  <input name="ratingRadio" type="radio" id="st5" value="5" />
-                  <label for="st5"></label>
-                </div>
+            <h3 className="bold">
+              <span>Review & Rating </span>
+              <hr />
+            </h3>
+            <div>
+              <div class="content">
+                <p>Rating (select a star amount):</p>
+              </div>
+              <div class="wrapper">
+                <input name="ratingRadio" type="radio" id="st1" value="1" />
+                <label for="st1"></label>
+                <input name="ratingRadio" type="radio" id="st2" value="2" />
+                <label for="st2"></label>
+                <input name="ratingRadio" type="radio" id="st3" value="3" />
+                <label for="st3"></label>
+                <input name="ratingRadio" type="radio" id="st4" value="4" />
+                <label for="st4"></label>
+                <input name="ratingRadio" type="radio" id="st5" value="5" />
+                <label for="st5"></label>
+              </div>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import { GLOBALTYPES } from './globalTypes'
 
-import { getDataAPI, patchDataAPI} from '../../utils/fetchData'
+import { deleteDataAPI, getDataAPI, patchDataAPI} from '../../utils/fetchData'
 import {imageUpload} from "../../utils/imageUpload"
 
 export const USER_TYPES={
@@ -8,6 +8,7 @@ export const USER_TYPES={
     GET_USERS: "GET_USERS",
     UPDATE_USER: "UPDATE_USER",
     UPDATE_ROLE: "UPDATE_ROLE",
+    DELETE_USER: "DELETE_USER",
 }
 
 export const getUsers = (token) => async (dispatch) => {
@@ -87,7 +88,6 @@ export const updateUser = ({userData,id, avatar,token,defaultAvatar}) => async (
     }
 }
 
-
 export const changeUserRole = ({user,role,token}) => async (dispatch) => {
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
@@ -104,4 +104,22 @@ export const changeUserRole = ({user,role,token}) => async (dispatch) => {
             payload: { error: err.response.data.msg }
         })
     }
+}
+export const deleteUser = ({token,user}) => async (dispatch) => {
+    dispatch({ type: USER_TYPES.DELETE_USER, payload: user })
+
+    try {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
+        const res = await deleteDataAPI(`user/${user._id}`, token)
+
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { success: res.data.msg }
+        })
+    } catch (err) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { error: err.response.data.msg }
+        })
+    }   
 }
