@@ -36,10 +36,11 @@ export const login = (data) => async (dispatch) => {
 }
 
 export const refreshToken = () => async (dispatch) => {
-    const firstLogin = localStorage.getItem("firstLogin")
-    if(firstLogin){
+  const token=  localStorage.getItem("token" )
+ const role=   localStorage.getItem("role")
+  const userID=  localStorage.getItem("userID" )
+    if( token && role && userID ){
         dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: true} })
-
         try {
             const res = await postDataAPI('refresh_token')
             dispatch({ 

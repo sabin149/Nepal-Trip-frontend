@@ -40,7 +40,7 @@ h4{
     min-width: 220px;
     overflow-y: hidden;
     overflow-x: hidden;
-    position: relative;
+    /* position: relative; */
     padding: 10px 10px 10px 10px;
 
 }
@@ -90,3 +90,102 @@ h4{
     border-radius: 5px;
     margin-top: 10px;
   }
+  @media(max-width: 1000px){
+    .hotel_detail{
+        /* background-color: red; */
+    }
+}
+
+@media (min-width: 768px){
+    .col-md-5 {
+        flex: 0 0 auto;
+        width: 41.66666667%;
+        margin-left: 80px;
+    }
+}
+
+.box-card{
+    padding: 10px;
+    box-shadow: 0 0 2px red;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    background-color: #fff;
+}
+.twelve{
+    width: 75%;
+}
+
+
+.content-holder{
+    box-sizing :border-box;
+color :rgb(74, 74, 74);
+display :flex;
+font-family: Poppins, sans-serif;
+font-size :14px;
+height :180px;
+line-height: 21px;
+text-size-adjust :100%;
+width :606.688px;
+-webkit-box-direction :normal;
+}
+.imgee{
+ background-color: rgb(216, 216, 216);
+border-bottom-left-radius: 2px;
+border-bottom-right-radius: 2px;
+border-top-left-radius :2px;
+border-top-right-radius :2px;
+box-sizing :border-box;
+color :rgb(74, 74, 74);
+display: block;
+flex-basis :220px;
+flex-grow :0;
+flex-shrink: 0;
+font-family :Poppins, sans-serif;
+font-size :14px;
+height :180px;
+line-height: 21px;
+margin-right: 20px;
+min-width :220px;
+overflow-x :hidden;
+overflow-y :hidden;
+position :relative;
+text-size-adjust: 100%;
+width :220px;
+-webkit-box-direction: normal;
+}
+
+.imgee>img{
+    
+        max-width: none;
+        height: 100%;
+        position: absolute;
+        left: 50%;
+        z-index: 1;
+        transform: translateX(-50%);
+    
+}
+
+.flex-full {
+    box-sizing :border-box;
+color :rgb(74, 74, 74);
+display: block;
+flex-grow :1;
+font-family: Poppins, sans-serif;
+font-size :14px;
+height: 180px;
+line-height: 21px;
+text-size-adjust :100%;
+width :366.688px;
+-webkit-box-direction :normal;
+-webkit-box-flex :1;
+}
+
+.mh95 {
+    min-height: 95px;
+}
+
+h3 {
+    margin: 0;
+    color: #003c75;
+    font-weight: 500;
+}
