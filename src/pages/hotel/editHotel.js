@@ -7,7 +7,6 @@ const EditHotel = () => {
  
   return (   
     <div class="container ">
-        <h2 class="text-danger text-center mt-3">Edit hotel</h2>
         <div class="row">
         < div class="d-flex align-items-center justify-content-center">
 

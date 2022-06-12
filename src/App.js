@@ -16,6 +16,7 @@ import VendorTable from "./components/admin/Table/VendorTable";
 import EditHotel from "./pages/hotel/editHotel";
 import EditRoom from "./components/room/EditRoom";
 import Checkout from "./pages/checkout/Checkout";
+import Try from "./pages/auth/try";
 
 function App() {
   const token = localStorage.getItem('token')
@@ -47,6 +48,7 @@ function App() {
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
           <Route path="/edithotel" element={isVendor&& <EditHotel />} />
+          <Route path="/try" element={isVendor&& <Try />} />
           <Route path="/editromm" element={<EditRoom />} />
           <Route path="/checkout" element={<Checkout />} />
 

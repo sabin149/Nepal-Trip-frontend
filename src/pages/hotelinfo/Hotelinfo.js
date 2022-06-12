@@ -444,10 +444,8 @@ const Hotelinfo = () => {
                 </div>
           </div>
         </div>
-
         </div>
       </div>
-    </div>
   );
 };
 
