@@ -2,17 +2,12 @@ import React, { useState } from "react";
 import "./hotelinfo.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
-
 const Hotelinfo = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
   const { hotel, searchInfo } = location.state;
-
   const { date, options } = searchInfo
-
   const [selectedRoom, setSelectedRoom] = useState()
-
   return (
     <div className="main_content">
       <div className="search_result">
@@ -98,23 +93,12 @@ const Hotelinfo = () => {
               <div className="col-lg-8 slider">
                 <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
                   <div className="carousel-inner">
-                    {/* <div className="carousel-item active">
-                      <img src="https://assets.xceltrip.com/gallery-1583997472633-34394.jpg" className="d-block w-100
-      " alt="roomimage"></img>
-                    </div>
-                    <div className="carousel-item">
-                      <img src="https://assets.xceltrip.com/gallery-1583998379908-af66c.jpg" className="d-block w-100
-      " alt="roomimage"></img>
-                    </div>
-                    <div className="carousel-item">
-                      <img src="https://assets.xceltrip.com/gallery-1583998204817-44478.jpg" className="d-block w-100
-      " alt="roomimage"></img>
-                    </div> */}
+
                     {
                       hotel.hotel_images.map((image, index) => {
                         return (
                           <div key={index} className="carousel-item active">
-                            <img src={image} className="d-block" alt="roomimage" style={{ height: "480px", width: "770px" }}></img>
+                            <img src={image.url} className="d-block" alt="roomimage" style={{ height: "480px", width: "770px" }}></img>
                           </div>
                         )
                       })
@@ -130,7 +114,6 @@ const Hotelinfo = () => {
                   </button>
                 </div>
               </div>
-
               <div className="col-lg-4 abouthotel">
                 <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                   <div>
@@ -138,11 +121,7 @@ const Hotelinfo = () => {
                       About {hotel.hotel_name}
                     </h4>
                     <div className="caption">
-                      We are a “NeoclassNameical Luxury Hotel” in the helm of the
-                      tourist hub of Pokhara .69 Kms from lake Fewa. The hotel
-                      offers an assortment of 46 rooms with satori evoking views
-                      of the Himalayas and lake from lake-view rooms and the
-                      terrace. Host meetings
+                      {hotel.hotel_info}
                     </div>
                     <span className="blue pointer">
                       <span> Read More </span>
@@ -201,7 +180,7 @@ const Hotelinfo = () => {
                         <td className="" rowSpan="1">
                           <h3 className="color-dark-blue bold pointer"> {room.room_type}</h3>
                           <div className="image-holder bg-light-gray height160">
-                            <img className="room-image" src={room.room_images[0]} alt="roomimage"></img>
+                            <img className="room-image" src={room.room_images[0].url} alt="roomimage"></img>
                           </div>
                           <div>
                             <ul className="mg-top-sm ">
@@ -243,21 +222,16 @@ const Hotelinfo = () => {
                             }}>
                               Select Room
                             </button> :
-                              <button className="ui fluid success button width150 mt-2" onClick={() => {
+                              <button className={`ui fluid ${selectedRoom._id === room._id ? "success" : "primary"} button width150 mt-2}`} onClick={() => {
                                 setSelectedRoom(null)
                               }}>
-                                Room Selected
+                                {selectedRoom._id === room._id ? "Selected Room" : "Select Room"}
                               </button>
-
                           }
-
-
                         </td>
                       </tr>
                     )
                   }
-
-
                 </tbody>
               </table>
             </div>
@@ -268,21 +242,19 @@ const Hotelinfo = () => {
                 </h4>
                 <hr></hr>
                 {!selectedRoom ? <div className="empty-selection red">
-
                   <span>No Room Selected</span>
                 </div> :
-
                   <div>
                     <p className="h5">{selectedRoom.room_type}</p>
                     <h6> 1 room(s), 1 night(s):</h6>
                     <h6 className="text-success">{selectedRoom.room_price} NPR</h6>
                     <p >Non-refundable</p>
-                    <button  to="/"className="ui fluid primary button " style={{
+                    <button to="/" className="ui fluid primary button " style={{
                       fontSize: '16px',
-                      width:"160px",
-                      height:"40px",
-                      margin:"0 auto"
-                    }} onClick={()=>{
+                      width: "160px",
+                      height: "40px",
+                      margin: "0 auto"
+                    }} onClick={() => {
                       navigate("/checkout")
                     }}>
                       Reserve Now
@@ -291,7 +263,6 @@ const Hotelinfo = () => {
                 }
               </div>
             </div>
-
           </div>
           {/* "Room Selected" 
                 Deluxe Room
@@ -317,9 +288,7 @@ const Hotelinfo = () => {
               <div className="col"><li><i className="fa-solid fa-elevator"></i><span className="amen">Elevator</span></li></div>
               <div className="col"><li><i className="fa-solid fa-mug-hot"></i><span className="amen">Coffee shop</span></li></div>
               <div className="col"><li><i className="fa-solid fa-wheelchair"></i><span className="amen">Facilities for disabled guests</span></li></div>
-
             </div>
-
           </div>
           <div className="segment">
             <h3 className="bold">
@@ -356,97 +325,47 @@ const Hotelinfo = () => {
                   Stay extensions will required a new reservation.
                 </li>
                 <li>
-                  Individual aged 18 and above are required to present a valid Photo ID ( passport, driver’s license, government-issued photo ID etc) at the time of check-in.
+                  Individual aged 18 and above are required to present a valid Photo ID ( passport, drivers license, government-issued photo ID etc) at the time of check-in.
                 </li>
                 <li>
                   Along with the Government issued ID proof, you will also have to carry the itinerary on your phone or Tab or a printout will do.
                 </li>
               </ul>
             </div>
+
           </div>
           <div className="segment">
             <h3 className="bold">
               <span>Map</span>
             </h3>
           </div>
-
-        </div>
-        <div className="segment">
-          <h3 className="bold">
-          Hotel Policies
-          </h3>
-          <hr></hr>
-          <h4 className="allpolicy">
-          <h3 className="policy">Check in and Check out Policy</h3> <br></br>
-          Check in time: 12::0<br></br>
-          Check out time: 12::0
-          <br></br>
-          Goverment issued photo ID(for ex: valid passport, valid driving license) required for Check-in.
-          <h3 className="policy">Payment Method Accepted</h3> <br></br>
-          E-sewa<br></br>
-          Khalti
-          <br></br>
-          <h3 className="policy">Child Policy</h3> <br></br>
-          Child age: 4 - 6 years<br></br>
-          Infant age: 0 - 3 years
-          <br></br>
-          <h3 className="policy">More Policies</h3> <br></br>
-          Pan Card accepted<br></br>
-          Hotel fit for children
-          <br></br>
-          <h3 className="policy">You need to know</h3> <br></br>
-          <ul className="bulleted">
-            <li>
-            We do not support modifications to hotel bookings on website or App. You’ll have to cancel (cancellation charges may apply as mention in above cancelation policy) your existing booking and make a new one.
-            </li>
-            <li>
-            The hotel might not refund for late check-in and early check-out.            
-            </li>
-            <li>
-            Stay extensions will required a new reservation.
-            </li>
-            <li>
-              Individual aged 18 and above are required to present a valid Photo ID ( passport, driver’s license, government-issued photo ID etc) at the time of check-in.     
-          </li>
-          <li>
-          Along with the Government issued ID proof, you will also have to carry the itinerary on your phone or Tab or a printout will do.          
-          </li>
-          </ul>
-          </h4> 
-        
-        </div>
-        <div className="segment">
-          <h3 className="bold">
-            <span>Map</span>
-            <hr/>
-          </h3>
-        </div>
-        <div className="segment">
-          <h3 className="bold">
-            <span>Review & Rating </span>
-            <hr/>
-          </h3>
-          <div>
-                <div class="content">
-                  <p>Rating (select a star amount):</p>
-                </div>
-                <div class="wrapper">
-                  <input name="ratingRadio" type="radio" id="st1" value="1" />
-                  <label for="st1"></label>
-                  <input name="ratingRadio" type="radio" id="st2" value="2" />
-                  <label for="st2"></label>
-                  <input name="ratingRadio" type="radio" id="st3" value="3" />
-                  <label for="st3"></label>
-                  <input name="ratingRadio" type="radio" id="st4" value="4" />
-                  <label for="st4"></label>
-                  <input name="ratingRadio" type="radio" id="st5" value="5" />
-                  <label for="st5"></label>
-                </div>
+          <div className="segment">
+            <h3 className="bold">
+              <span>Review & Rating </span>
+              <hr />
+            </h3>
+            <div>
+              <div class="content">
+                <p>Rating (select a star amount):</p>
+              </div>
+              <div class="wrapper">
+                <input name="ratingRadio" type="radio" id="st1" value="1" />
+                <label for="st1"></label>
+                <input name="ratingRadio" type="radio" id="st2" value="2" />
+                <label for="st2"></label>
+                <input name="ratingRadio" type="radio" id="st3" value="3" />
+                <label for="st3"></label>
+                <input name="ratingRadio" type="radio" id="st4" value="4" />
+                <label for="st4"></label>
+                <input name="ratingRadio" type="radio" id="st5" value="5" />
+                <label for="st5"></label>
+              </div>
+            </div>
           </div>
         </div>
+
         </div>
       </div>
   );
 };
-
 export default Hotelinfo;

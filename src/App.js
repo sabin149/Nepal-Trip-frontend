@@ -16,27 +16,28 @@ import VendorTable from "./components/admin/Table/VendorTable";
 import EditHotel from "./pages/hotel/editHotel";
 import EditRoom from "./components/room/EditRoom";
 import Checkout from "./pages/checkout/Checkout";
-import Try from "./pages/auth/try";
+import UserListTable from "./components/admin/Table/user/UserListTable";
+import EditUser from "./components/admin/Table/user/EditUser";
+import ViewHotelDetails from "./components/vendor/ViewHotelDetails";
+import EditHotelDetails from "./components/vendor/EditHotelDetails";
+import EditRoomDetails from "./components/vendor/EditRoomDetails";
+
 
 function App() {
   const token = localStorage.getItem('token')
   const role = localStorage.getItem('role')
-
   const isAdmin = token && role === "admin"
   const isVendor = token && role === "vendor"
   const isUser = token && role === "user"
-
   // const {auth} = useSelector(state => state)
   // const isAdmin = auth.token && auth.user.role === "admin"
   // const isVendor = auth.token && auth.user.role === "vendor"
   // const token = auth.token
-
   return (
     <>
       <Router>
         <Alert />
         {isAdmin ? <EHeader /> : isVendor ? <EFooter /> : <Header isUser={isUser} />}
-
         <Routes>
           <Route path="/" element={isAdmin ? <AdminDashboard token={token} /> : isVendor ? <VendorDashboard token={token} /> :
             <Home />
@@ -47,22 +48,25 @@ function App() {
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
+
           <Route path="/edithotel" element={isVendor&& <EditHotel />} />
-          <Route path="/try" element={isVendor&& <Try />} />
           <Route path="/editromm" element={<EditRoom />} />
+          <Route path="/edithotel" element={<EditHotel />} />
+          <Route path="/editroom" element={isVendor &&<EditRoom />} />
+
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/users" element={<UserListTable />} />
+          <Route path="/admin/edituser" element={<EditUser />} />
+          <Route path="/viewHotel" element={<ViewHotelDetails/>}/>
+          <Route path="/editHotelDetails/:id" element={<EditHotelDetails/>}/>
+          <Route path="/editRoomDetails/:id" element={<EditRoomDetails/>}/>
+
 
           <Route path="*" element={<NotFound />} />
         </Routes>
-
         {isAdmin ? <EHeader /> : isVendor ? <EFooter /> : <Footer />}
-
       </Router>
     </>
-
   );
 }
-
 export default App;
-
-

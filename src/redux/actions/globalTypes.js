@@ -2,6 +2,7 @@ export const GLOBALTYPES = {
     AUTH: 'AUTH', 
     ALERT: 'ALERT', 
     HOTEL: 'HOTEL',  
+    STATUS: 'STATUS',
     }
     
     export const DeleteData = (data, id) => {
