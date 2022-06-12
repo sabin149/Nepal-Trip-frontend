@@ -16,7 +16,6 @@ import VendorTable from "./components/admin/Table/VendorTable";
 import EditHotel from "./pages/hotel/editHotel";
 import EditRoom from "./components/room/EditRoom";
 import Checkout from "./pages/checkout/Checkout";
-import Try from "./pages/auth/try";
 import UserListTable from "./components/admin/Table/user/UserListTable";
 import EditUser from "./components/admin/Table/user/EditUser";
 import ViewHotelDetails from "./components/vendor/ViewHotelDetails";
@@ -50,11 +49,10 @@ function App() {
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
           <Route path="/edithotel" element={isVendor&& <EditHotel />} />
-          <Route path="/try" element={isVendor&& <Try />} />
           <Route path="/editromm" element={<EditRoom />} />
           <Route path="/edithotel" element={<EditHotel />} />
-
           <Route path="/editroom" element={isVendor &&<EditRoom />} />
+
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/users" element={<UserListTable />} />
           <Route path="/admin/edituser" element={<EditUser />} />
