@@ -22,6 +22,7 @@ import ViewHotelDetails from "./components/vendor/ViewHotelDetails";
 import EditHotelDetails from "./components/vendor/EditHotelDetails";
 import EditRoomDetails from "./components/vendor/EditRoomDetails";
 
+
 function App() {
   const token = localStorage.getItem('token')
   const role = localStorage.getItem('role')
@@ -47,9 +48,12 @@ function App() {
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
-          <Route path="/edithotel" element={<EditHotel />} />
 
+          <Route path="/edithotel" element={isVendor&& <EditHotel />} />
+          <Route path="/editromm" element={<EditRoom />} />
+          <Route path="/edithotel" element={<EditHotel />} />
           <Route path="/editroom" element={isVendor &&<EditRoom />} />
+
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/users" element={<UserListTable />} />
           <Route path="/admin/edituser" element={<EditUser />} />
