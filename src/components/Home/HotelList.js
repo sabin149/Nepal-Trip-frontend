@@ -100,18 +100,21 @@ const HotelList = () => {
 
                                 </div>
                             </div>
-
                             {
-
                                 searchData.hotels.map((hotel) => (
+                                  hotel.hotel_validity===true&&
+                                 
                                     <div key={hotel._id} className='card hotel-card'>
                                         <div className='row'>
                                             <div className='col-md-4'>
                                                 <div className='img-holder'>
-                                                    <img src={hotel.hotel_images[0]} alt="projectimages" style={{ width: "15rem" }} />
+                                                    <img src={
+                                                       hotel.hotel_images[0].url?hotel.hotel_images[0].url:
+                                                       hotel.hotel_images[0]
+                                                    } alt="projectimages" style={{ width: "100%" }} />
                                                 </div>
                                             </div>
-                                            <div className='col-md-5'>
+                                            <div className='col-md-5 hotel_detail' >
                                                 <h4>
                                                     <div className='mt-2 mb-2' style={{ cursor: "pointer" }}>
                                                         {hotel.hotel_name}
@@ -164,12 +167,13 @@ const HotelList = () => {
                                                     </span>
                                                 </div>
                                                 <button className="button btn btn-primary" onClick={() => {
-                                                    navigate("/hotelinfo", { state: { hotel: hotel } })
+                                                    navigate("/hotelinfo", { state: { hotel: hotel,searchInfo } })
 
                                                 }}>CHOOSE</button>
                                             </div>
                                         </div>
                                     </div>
+
                                 ))
 
                             }
@@ -181,6 +185,9 @@ const HotelList = () => {
                 </div>
 
             </div>
+            
+           
+
         </>
 
     )

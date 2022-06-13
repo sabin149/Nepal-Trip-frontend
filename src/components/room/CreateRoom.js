@@ -14,8 +14,8 @@ const CreateRoom = ({ hotel }) => {
   const token = localStorage.getItem('token')
   const userID = localStorage.getItem('userID')
 
-  const hotel1 = hotel.hotels.filter(hotel => hotel.user === userID)
-
+  const hotel1 = hotel.hotels.filter(hotel => hotel.user._id === userID)
+  
   const initialState = {
     room_type: '', room_price: '', room_options: '', room_facilities: ''
   }
@@ -65,14 +65,14 @@ const CreateRoom = ({ hotel }) => {
 
     }
     dispatch(createHotelRoom({ hotel: hotel1, newRoom, room_images, token }))
-    navigate("/")
+    navigate("/viewHotel")
   }
 
   return (
     <div className="container ">
       <form onSubmit={handleSubmit}>
         <h2 className='text-danger text-center mt-3'>Add hotel Room</h2>
-        <div className="d-flex justify-content-center mx-0 mb-1">
+        <div className="d-flex justify-content-center align-content-center" >
           <div className="col-6 add_hotel" >
             <div className="show_images">
               {
@@ -102,7 +102,9 @@ const CreateRoom = ({ hotel }) => {
 
                   ) :
 
+
                   <img src={No_image} alt=".." style={{ "width": "5rem" }} />
+
 
               }
             </div>
