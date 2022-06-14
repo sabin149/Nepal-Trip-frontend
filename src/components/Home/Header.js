@@ -20,10 +20,18 @@ const Header = ({ isUser }) => {
         </div>
         <div className="navItems">
           <div className="hotel">
-            <i className="fa-solid fa-suitcase"> </i> <span> Hotel Booking </span>
+            {/* <i className="fa-solid fa-suitcase"> </i>  */}
+            <span class="material-symbols-rounded">
+              luggage
+            </span>
+            <span> Hotel Booking </span>
           </div>
           <div className="flight">
-            <i className="fa-solid fa-plane"> </i> <span> Flight Booking </span>
+            {/* <i className="fa-solid fa-plane"> </i>  */}
+            <span class="material-symbols-rounded">
+              flight
+            </span>
+            <span> Flight Booking </span>
           </div>
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
             <button className="navButton" onClick={() => {
@@ -31,7 +39,12 @@ const Header = ({ isUser }) => {
                 dispatch(logout())
                 window.href = "/"
               }
-            }}> Logout <i class="fa-solid fa-right-from-bracket" ></i></button>}
+            }}> Logout
+              {/* <i class="fa-solid fa-right-from-bracket" ></i> */}
+              <span class="material-symbols-rounded">
+                logout
+              </span>
+            </button>}
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div className="modal-dialog">
               <div className="modal-content" style={{ marginTop: "6rem" }}>

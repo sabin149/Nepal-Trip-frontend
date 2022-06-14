@@ -83,7 +83,11 @@ const Hotelinfo = () => {
           <p className="locationhotel text-capitalize">
             {hotel.address === "ktm" ? "Kathmandu, Nepal" : hotel.address + ",Nepal"}
             <Link to="" className="block-in-mobile">
-              <i className="fa-solid fa-location-dot"></i>
+              {/* <i className="fa-solid fa-location-dot"></i> */}
+              <span class="material-symbols-rounded">
+                  
+my_location
+                </span>
               <span> view in map </span>
             </Link>
           </p>
@@ -125,7 +129,10 @@ const Hotelinfo = () => {
                     </div>
                     <span className="blue pointer">
                       <span> Read More </span>
-                      <i className="fa-solid fa-angle-right"></i>
+                      {/* <i className="fa-solid fa-angle-right"></i> */}
+                      <span class="material-symbols-rounded">
+                        pin_drop
+                      </span>
                     </span>
                     <hr></hr>
                   </div>
@@ -133,13 +140,34 @@ const Hotelinfo = () => {
                     <span>Amenities & Facilities</span>
                   </h4>
                   <div className="ameneties-list">
-                    <i className="fa-solid fa-hot-tub-person"></i>
+                    {/* <i className="fa-solid fa-hot-tub-person"></i>
                     <i className="fa-solid fa-wifi"></i>
                     <i className="fa-solid fa-smoking"></i>
                     <i className="fa-solid fa-bowl-rice"></i>
                     <i className="fa-solid fa-car"></i>
                     <i className="fa-solid fa-user-shield"></i>
-                    <i className="fa-solid fa-swimmer"></i>
+                    <i className="fa-solid fa-swimmer"></i> */}
+                    <span class="material-symbols-rounded">
+                      hot_tub
+                    </span>
+                    <span class="material-symbols-rounded">
+                      wifi
+                    </span>
+                    <span class="material-symbols-rounded">
+                      smoking_rooms
+                    </span>
+                    <span class="material-symbols-rounded">
+                      dry_cleaning
+                    </span>
+                    <span class="material-symbols-rounded">
+                      car_rental
+                    </span>
+                    <span class="material-symbols-rounded">
+                      park
+                    </span>
+                    <span class="material-symbols-rounded">
+                      pets
+                    </span>
                   </div>
                   <hr></hr>
                   <div className="hotelmap">
@@ -184,11 +212,38 @@ const Hotelinfo = () => {
                           </div>
                           <div>
                             <ul className="mg-top-sm ">
-                              <li><i className="fa-solid fa-hot-tub-person"></i> <span className="amen">Hot Tub</span></li>
-                              <li><i className="fa-solid fa-wifi"></i><span className="amen">Free Wi-Fi</span></li>
-                              <li><i className="fa-solid fa-smoking"></i><span className="amen">Smoking Area</span></li>
-                              <li><i className="fa-solid fa-bowl-rice"></i><span className="amen">Free Breakfast</span></li>
-                              <li><i className="fa-solid fa-car"></i><span className="amen">Transport</span></li>
+                              <li>
+                                {/* <i className="fa-solid fa-hot-tub-person"></i>  */}
+                                <span class="material-symbols-rounded">
+                                  hot_tub
+                                </span>
+                                <span className="amen">Hot Tub</span></li>
+                              <li>
+                                {/* <i className="fa-solid fa-wifi"></i> */}
+
+                                <span class="material-symbols-rounded">
+                                  wifi
+                                </span>
+                                <span className="amen">Free Wi-Fi</span></li>
+                              <li>
+                                {/* <i className="fa-solid fa-smoking"></i> */}
+                                <span class="material-symbols-rounded">
+                                  smoking_rooms
+                                </span>
+                                <span className="amen">Smoking Area</span></li>
+                              <li>
+                                {/* <i className="fa-solid fa-bowl-rice"></i> */}
+                                <span class="material-symbols-rounded">
+                                  brunch_dining
+                                </span>
+                                <span className="amen">Free Breakfast</span></li>
+                              <li>
+                                {/* <i className="fa-solid fa-car"></i> */}
+                                <span class="material-symbols-rounded">
+                                  car_rental
+                                </span>
+
+                                <span className="amen">Transport</span></li>
                             </ul>
                           </div>
                         </td>
@@ -198,12 +253,22 @@ const Hotelinfo = () => {
                           <div>
                             <ul className="checklist">
                               <li>
-                                <i className="fa-solid fa-check"></i><span className="listoffer">Breakfast</span>
+                                {/* <i className="fa-solid fa-check"></i> */}
+                                <span class="material-symbols-rounded">
+                                  check
+                                </span>
+
+
+                                <span className="listoffer">Breakfast</span>
                               </li>
                             </ul>
                             <ul className="checklist">
                               <li>
-                                <i className="fa-solid fa-check"></i><span className="listoffer">10% discount on food <br></br> and beverage</span>
+                                {/* <i className="fa-solid fa-check"></i> */}
+                                <span class="material-symbols-rounded">
+                                  check
+                                </span>
+                                <span className="listoffer">10% discount on food <br></br> and beverage</span>
                               </li>
                             </ul>
                           </div>
@@ -276,18 +341,75 @@ const Hotelinfo = () => {
             </h3>
             <hr></hr>
             <div className="row row-cols-4">
-              <div className="col"><li><i className="fa-solid fa-hot-tub-person"></i> <span className="amen">24hrs Hot Shower</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-wifi"></i><span className="amen">24hrs Free Wi-Fi</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-smoking"></i><span className="amen">Smoking Area Available</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-car"></i><span className="amen">Transportation Facility</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-money-bill-simple"></i><span className="amen">ATM/cash machine on site</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-broom"></i><span className="amen">Daily housekeeping</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-shirt"></i><span className="amen">Laundry service</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-bowl-rice"></i><span className="amen">Continental breakfast</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-utensils"></i><span className="amen">Restaurant</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-elevator"></i><span className="amen">Elevator</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-mug-hot"></i><span className="amen">Coffee shop</span></li></div>
-              <div className="col"><li><i className="fa-solid fa-wheelchair"></i><span className="amen">Facilities for disabled guests</span></li></div>
+              <div className="col"><li>
+                {/* <i className="fa-solid fa-hot-tub-person">
+              </i>  */}
+                <span class="material-symbols-rounded">
+                  hot_tub
+                </span>
+                <span className="amen">24hrs Hot Shower</span></li></div>
+              <div className="col"><li>
+                {/* <i className="fa-solid fa-wifi"></i> */}
+                <span class="material-symbols-rounded">
+                  wifi
+                </span>
+                <span className="amen">24hrs Free Wi-Fi</span></li></div>
+              <div className="col"><li>
+                {/* <i className="fa-solid fa-smoking"> */}
+                <span class="material-symbols-rounded">
+                  smoking_rooms
+                </span>
+
+                {/* </i> */}
+                <span className="amen">Smoking Area Available</span></li></div>
+              <div className="col"><li>
+                {/* <i className="fa-solid fa-car"></i> */}
+                <span class="material-symbols-rounded">
+                  car_rental
+                </span>
+                <span className="amen">Transportation Facility</span></li></div>
+              <div className="col"><li>
+                {/* <i className="fa-solid fa-money-bill-simple"> */}
+
+                {/* </i> */}
+                <span class="material-symbols-rounded">
+                  attach_money
+                </span>
+                <span className="amen">ATM/cash machine on site</span></li></div>
+              <div className="col"><li>
+                {/* <i className="fa-solid fa-broom"></i> */}
+                <span class="material-symbols-rounded">
+                  shopping_basket
+                </span>
+                <span className="amen">Daily housekeeping</span></li></div>
+              <div className="col"><li>
+                {/* <i className="fa-solid fa-shirt"></i> */}
+                <span class="material-symbols-rounded">
+                  <span class="material-symbols-rounded">
+                    restaurant
+                  </span>
+                </span>
+                <span className="amen">Restaurant</span></li></div>
+              <div className="col"><li>
+                {/* <i className="fa-solid fa-elevator"></i> */}
+
+                <span class="material-symbols-rounded">
+                  elevator
+                </span>
+                <span className="amen">Elevator</span></li></div>
+              <div className="col"><li>
+                {/* <i className="fa-solid fa-mug-hot"></i> */}
+
+                <span class="material-symbols-rounded">
+                  coffee
+                </span>
+                <span className="amen">Coffee shop</span></li></div>
+              <div className="col"><li>
+                {/* <i className="fa-solid fa-wheelchair"></i> */}
+                <span class="material-symbols-rounded">
+                  accessible
+                </span>
+                <span className="amen">Facilities for disabled guests</span></li></div>
             </div>
           </div>
           <div className="segment">
@@ -363,9 +485,9 @@ const Hotelinfo = () => {
             </div>
           </div>
         </div>
-        </div>
+      </div>
 
-        </div>
+    </div>
   );
 };
 export default Hotelinfo;

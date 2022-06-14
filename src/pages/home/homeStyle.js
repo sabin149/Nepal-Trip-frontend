@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
         fontSize:'100px',
         textAlign:'center',
         color:'white',
-        ['@media (max-width:600px)']: {
+        '@media (max-width:600px)': {
             fontSize:'50px',
             textAlign:'left',
           },
@@ -23,8 +23,8 @@ export default makeStyles((theme) => ({
             maxWidth: '1024px',
             height: 'auto',
             margin: '0 auto',
-            padding: '10px',
-            ['@media (max-width:600px)']: {
+    
+            '@media (max-width:600px)': {
                 maxWidth:'300px',
                 alignItems:'left',
                 justifyContent:'initial',

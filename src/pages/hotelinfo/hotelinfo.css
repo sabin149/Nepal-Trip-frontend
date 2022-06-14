@@ -383,7 +383,6 @@ ul.bulleted li {
 .wrapper label:before {
   margin: 5px;
   content: "\f005";
-  font-family: FontAwesome;
   display: inline-block;
   font-size: 1.5em;
   color: #ccc;
