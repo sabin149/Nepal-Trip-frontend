@@ -48,7 +48,6 @@ function App() {
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
-
           <Route path="/edithotel" element={isVendor&& <EditHotel />} />
           <Route path="/editromm" element={<EditRoom />} />
           <Route path="/edithotel" element={<EditHotel />} />

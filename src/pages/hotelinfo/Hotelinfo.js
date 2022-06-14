@@ -346,7 +346,7 @@ const Hotelinfo = () => {
             </h3>
             <div>
               <div class="content">
-                <p>Rating (select a star amount):</p>
+                <p>Rating (select a star Amount):</p>
               </div>
               <div class="wrapper">
                 <input name="ratingRadio" type="radio" id="st1" value="1" />
@@ -363,9 +363,9 @@ const Hotelinfo = () => {
             </div>
           </div>
         </div>
+        </div>
 
         </div>
-      </div>
   );
 };
 export default Hotelinfo;

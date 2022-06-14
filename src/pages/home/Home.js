@@ -9,9 +9,11 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios";
 import { useDispatch } from "react-redux"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes"
+import {Grid} from '@mui/material';
+import useStyles from './homeStyle';
 
 const Home = () => {
-
+  const classes = useStyles();
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -76,12 +78,14 @@ const Home = () => {
   return (
     <>
 
-      <div className="homepage">
+      <div className="homepage" style={{
+        overflow:'hidden',
+      }}>
         <div className="booking">
           <div className="ui container">
-            <h1> Make Memories</h1>
-            <div className="headerSearch">
-              <div className="headerSearchItem">
+            <h1 className={classes.makeStyle} > Make Memories</h1>
+            <div className={classes.headerSearch}>
+              <div className={classes.headerSearchItem}>
                 <i className="fa-solid fa-location-dot"></i>
                 <input value={search} onChange={(e) => setSearch(e.target.value)}
                   type="text"
@@ -89,7 +93,7 @@ const Home = () => {
                   className="headerSearchInput"
                 />
               </div>
-              <div className="headerSearchItem">
+              <div className={classes.headerSearchItem}>
                 <i className="fa-solid fa-calendar-days"></i>
                 <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                   date[0].endDate,
@@ -107,7 +111,7 @@ const Home = () => {
                 )}
 
               </div>
-              <div className="headerSearchItem">
+              <div className={classes.headerSearchItem}>
                 <i className="fa-solid fa-person"></i>
                 <span onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText">
@@ -156,42 +160,9 @@ const Home = () => {
         </div>
 
         {/* Banner with images */}
-        <div className="homeContainer">
-          <div className="featured">
-            <div className="featuredItem">
-              <img
-                src="https://cdn.pixabay.com/photo/2019/09/15/07/31/everest-base-camp-4477525__340.jpg"
-                alt="projectimages"
-                className="featuredImg"
-              />
-              <div className="featuredTitles"></div>
-            </div>
-
-            <div className="featuredItem">
-              <img
-                src="https://cdn1.matadornetwork.com/blogs/1/2019/08/Nepalese-village-in-the-Himalaya-mountains-near-Pokhara-in-Nepal-1200x854.jpg"
-                alt="projectimages"
-                className="featuredImg"
-              />
-              <div className="featuredTitles"></div>
-            </div>
-            <div className="featuredItem">
-              <img
-                src="https://media.istockphoto.com/photos/patan-picture-id637268486?b=1&k=20&m=637268486&s=170667a&w=0&h=7ovZBRq98SgR3z73ls6P4h-6_gMgQisjmWJp4fvnz2k="
-                alt="projectimages"
-                className="featuredImg"
-              />
-              <div className="featuredTitles"></div>
-            </div>
-          </div>
-        </div>
-
-        {/* Nepal's Top Destination */}
-        <div className="destination_nepal">
-          <div className="ui container top">
-            <h3>Nepal's Top Destination</h3>
-          </div>
-          <div>
+        {/* <div className="homeContainer"> */}
+          <div className="destination_nepal">
+          <Grid item xs={12} sm={6} md={4} lg={3}>
             <figure className="destination">
               <img
                 src="https://assets.xceltrip.com/destination-1619006759329-5961c.WEBP"
@@ -223,6 +194,49 @@ const Home = () => {
               </figcaption>
               <Link to="/"></Link>
             </figure>
+            </Grid>
+          </div>
+        {/* </div> */}
+
+        {/* Nepal's Top Destination */}
+        <div className="destination_nepal">
+          <div className="ui container top">
+            <h3>Nepal's Top Destination</h3>
+          </div>
+          <div>
+          <Grid item xs={12} sm={6} md={4} lg={3}>
+            <figure className="destination">
+              <img
+                src="https://assets.xceltrip.com/destination-1619006759329-5961c.WEBP"
+                alt="sample89"
+              />
+
+              <figcaption>
+                <h2>Book Now</h2>
+              </figcaption>
+              <Link to="/"></Link>
+            </figure>
+            <figure className="destination">
+              <img
+                src="https://assets.xceltrip.com/destination-1619006781422-8f33b.WEBP"
+                alt="sample94"
+              />
+              <figcaption>
+                <h2>Book Now</h2>
+              </figcaption>
+              <Link to="/"></Link>
+            </figure>
+            <figure className="destination">
+              <img
+                src="https://photographylife.com/wp-content/uploads/2015/08/DSC0577.jpg"
+                alt="sample92"
+              />
+              <figcaption>
+                <h2>Book Now</h2>
+              </figcaption>
+              <Link to="/"></Link>
+            </figure>
+            </Grid>
           </div>
           <div>
             <figure className="destination">

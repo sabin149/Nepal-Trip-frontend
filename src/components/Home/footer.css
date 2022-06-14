@@ -6,6 +6,7 @@ footer {
     color: white;
     margin-top:100px;
     border-top: solid .5px #eeeeee;
+    overflow: hidden;
   }
   
   footer a {

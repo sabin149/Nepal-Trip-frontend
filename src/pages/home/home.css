@@ -2,15 +2,6 @@
   min-height: 300px;
   
 }
- .ui.container>h1{
-  font-family: 'Great Vibes';
-  color: white;
-  font-size: 100px;
-  font-weight: bold;
-  /* padding-left: 100px; */
-  text-align: center;
- 
-}
 
 .ui.container>p{
   font-family: Poppins, sans-serif;
@@ -38,28 +29,6 @@
     height: auto;
 }
 /* search bar */
-.headerSearch {
-  
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 10px 0px;
-  border-radius: 5px;
-  position: relative;
-  bottom: -25px;
-  width: 100%;
-  max-width: 1024px;
-  height: auto;
-  margin: 0 auto;
-  padding: 10px;
-  
-}
-.headerSearchItem {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 .headerSearchInput {
   border: none;
   outline: none;
@@ -111,7 +80,7 @@
 }
 
 .headerBtn{
-  margin-left: 20px;
+  /* margin-left: 20px; */
   border: none;
   padding: 5px 10px;
   cursor: pointer;
@@ -120,6 +89,9 @@
   background-color: #e29b29;;
   font-family: Poppins;
   font-size: 15px;
+  text-align: center;
+  display: block;
+  width: 100%;
 }
 
 
@@ -160,27 +132,8 @@
   justify-content: space-between;
   gap: 20px;
   z-index: 1;
-
 }
 
-.featuredItem{
-  position: relative;
-  color: rgb(0, 0, 0);
-  overflow: hidden;
-  height: 250px;
-  flex:1
-}
-
-.featuredImg{
-  width: 100%;
-  height: 80%;
-}
-
-.featuredTitles{
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-}
 
 .ui.container.top{
   font-family: 'Kaushan Script';font-size: 22px;
@@ -261,6 +214,7 @@
   backface-visibility: hidden;
   max-width: 100%;
   vertical-align: top;
+  background-position: center;
 }
 
 .destination figcaption {
