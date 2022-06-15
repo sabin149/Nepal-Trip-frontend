@@ -21,6 +21,7 @@ import EditUser from "./components/admin/Table/user/EditUser";
 import ViewHotelDetails from "./components/vendor/ViewHotelDetails";
 import EditHotelDetails from "./components/vendor/EditHotelDetails";
 import EditRoomDetails from "./components/vendor/EditRoomDetails";
+import Bookings from "./pages/bookings/bookingDetails";
 
 
 function App() {
@@ -44,6 +45,7 @@ function App() {
           } />
           <Route path="/addhotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
           <Route path="/hotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
+          {/* <Route path="/bookings" element={isVendor ? <Bookings /> : <Navigate to="/" />} /> */}
           <Route path="/room" element={isVendor ? <Room /> : <Navigate to="/" />} />
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo" element={<Hotelinfo />} />
@@ -59,6 +61,7 @@ function App() {
           <Route path="/viewHotel" element={<ViewHotelDetails/>}/>
           <Route path="/editHotelDetails/:id" element={<EditHotelDetails/>}/>
           <Route path="/editRoomDetails/:id" element={<EditRoomDetails/>}/>
+          <Route path="/bookings" element={<Bookings />} />
 
 
           <Route path="*" element={<NotFound />} />
