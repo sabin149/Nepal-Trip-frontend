@@ -134,17 +134,13 @@ const HotelList = () => {
 
                                                                 {
                                                                     facility === "good" &&
-                                                                    <span class="material-symbols-rounded">
-                                                                        wifi
-                                                                    </span>
+                                                                    <i className="fa-solid fa-wifi"></i>
 
                                                                 }
                                                                 {
                                                                     facility !== "good" &&
 
-                                                                    <span class="material-symbols-rounded">
-                                                                        bed
-                                                                    </span>
+                                                                    <i className="fa-solid fa-bed"></i>
 
                                                                 }
                                                                 {/* {       

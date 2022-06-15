@@ -13,11 +13,11 @@ footer {
     color: #b6b6b6;
     font-size: 14px;
     transition-duration: 0.2s;
-    font-family: Poppins,sans-serif;
+    font-family: "Poppins",sans-serif;
     font-size: 15px;
   }
   h6{
-    font-family: Poppins,sans-serif;
+    font-family: "Poppins",sans-serif;
     font-size: 15px;
     color: black;
   }
@@ -128,7 +128,7 @@ footer {
  .copyright {
     border-top: solid 1px #eeeeee;
     color: black;
-    font-family: poppins;
+    font-family: "Poppins",sans-serif;
     font-size: 12px; 
 }
 

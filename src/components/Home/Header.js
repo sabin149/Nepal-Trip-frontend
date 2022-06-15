@@ -20,17 +20,13 @@ const Header = ({ isUser }) => {
         </div>
         <div className="navItems">
           <div className="hotel">
-            {/* <i className="fa-solid fa-suitcase"> </i>  */}
-            <span class="material-symbols-rounded">
-              luggage
-            </span>
+            <i className="fa-solid fa-suitcase"> </i> 
+        
             <span> Hotel Booking </span>
           </div>
           <div className="flight">
-            {/* <i className="fa-solid fa-plane"> </i>  */}
-            <span class="material-symbols-rounded">
-              flight
-            </span>
+            <i className="fa-solid fa-plane"> </i> 
+        
             <span > Flight Booking </span>
           </div>
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
@@ -40,10 +36,8 @@ const Header = ({ isUser }) => {
                 window.href = "/"
               }
             }}> Logout
-              {/* <i class="fa-solid fa-right-from-bracket" ></i> */}
-              <span class="material-symbols-rounded">
-                logout
-              </span>
+              <i className="fa-solid fa-right-from-bracket" ></i>
+
             </button>}
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div className="modal-dialog">

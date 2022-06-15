@@ -64,15 +64,9 @@ const VendorTable = () => {
                                         )}
                                     </td>
                                     <td className='d-flex justify-content-evenly'>
-                                        {/* <i className="fa-solid fa-pen-to-square text-success"></i>
-                                        <i className="fa-solid fa-trash-can text-danger"></i> */}
-                                        <span class="material-symbols-rounded">
-                                            edit
-                                        </span> 
-                                        <span class="material-symbols-rounded">
-                                            delete
-
-                                        </span>
+                                        <i className="fa-solid fa-pen-to-square text-success"></i>
+                                        <i className="fa-solid fa-trash-can text-danger"></i>
+                                        
                                     </td>
                                 </tr>
                             ))}

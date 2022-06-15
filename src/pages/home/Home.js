@@ -13,7 +13,7 @@ import { Grid } from '@mui/material';
 import useStyles from './homeStyle';
 
 const Home = () => {
-  const classes = useStyles();
+  const classNamees = useStyles();
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
@@ -54,7 +54,8 @@ const Home = () => {
     dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
     const res = await axios.get(`api/search?address=${search}`)
 
-    if (res.data.status === "failed") {
+
+    if (res.status === 200 && res.data.status === "failed") {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
       dispatch({ type: GLOBALTYPES.ALERT, payload: { error: res.data.msg } })
       return
@@ -83,11 +84,11 @@ const Home = () => {
       }}>
         <div className="booking">
           <div className="ui container">
-            <h1 className={classes.makeStyle} > Make Memories</h1>
-            <div className={classes.headerSearch}>
-              <div className={classes.headerSearchItem}>
+            <h1 className={classNamees.makeStyle} > Make Memories</h1>
+            <div className={classNamees.headerSearch}>
+              <div className={classNamees.headerSearchItem}>
                 {/* <i className="fa-solid fa-location-dot"></i> */}
-                <span class="material-symbols-rounded">
+                <span className="material-symbols-rounded">
                   my_location
                 </span>
                 <input value={search} onChange={(e) => setSearch(e.target.value)}
@@ -96,12 +97,9 @@ const Home = () => {
                   className="headerSearchInput"
                 />
               </div>
-              <div className={classes.headerSearchItem}>
-                {/* <i className="fa-solid fa-calendar-days"></i> */}
-                <span class="material-symbols-rounded">
-
-                  calendar_today
-                </span>
+              <div className={classNamees.headerSearchItem}>
+                <i className="fa-solid fa-calendar-days"></i>
+                
                 <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                   date[0].endDate,
                   "MM/dd/yyyy"
@@ -118,11 +116,9 @@ const Home = () => {
                 )}
 
               </div>
-              <div className={classes.headerSearchItem}>
-                {/* <i className="fa-solid fa-person"></i> */}
-                <span class="material-symbols-rounded">
-                  people
-                </span>
+              <div className={classNamees.headerSearchItem}>
+                <i className="fa-solid fa-person"></i>
+             
                 <span onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText">
                   {`${options.adult} adult · ${options.children} children · ${options.room} room`}
@@ -184,7 +180,7 @@ const Home = () => {
                 src="https://cdn1.matadornetwork.com/blogs/1/2019/08/Nepalese-village-in-the-Himalaya-mountains-near-Pokhara-in-Nepal-1200x854.jpg"
                 alt="sample94"
               />
-             
+
             </figure>
             <figure className="secbanner">
               <img
@@ -192,7 +188,7 @@ const Home = () => {
                 alt="sample92"
               />
 
-              
+
             </figure>
           </Grid>
         </div>
@@ -232,7 +228,7 @@ const Home = () => {
                   alt="sample92"
                 />
                 <figcaption>
-                  
+
                   <h2>Book Now</h2>
                 </figcaption>
                 <Link to="/"></Link>
