@@ -171,38 +171,28 @@ const Home = () => {
 
         {/* Banner with images */}
         {/* <div className="homeContainer"> */}
-        <div className="destination_nepal">
+        <div className="secondary_banner">
           <Grid item xs={12} sm={6} md={4} lg={3}>
-            <figure className="destination">
+            <figure className="secbanner">
               <img
-                src="https://assets.xceltrip.com/destination-1619006759329-5961c.WEBP"
+                src="https://cdn.pixabay.com/photo/2019/09/15/07/31/everest-base-camp-4477525__340.jpg"
                 alt="sample89"
               />
-
-              <figcaption>
-                <h2>Book Now</h2>
-              </figcaption>
-              <Link to="/"></Link>
             </figure>
-            <figure className="destination">
+            <figure className="secbanner">
               <img
-                src="https://assets.xceltrip.com/destination-1619006781422-8f33b.WEBP"
+                src="https://cdn1.matadornetwork.com/blogs/1/2019/08/Nepalese-village-in-the-Himalaya-mountains-near-Pokhara-in-Nepal-1200x854.jpg"
                 alt="sample94"
               />
-              <figcaption>
-                <h2>Book Now</h2>
-              </figcaption>
-              <Link to="/"></Link>
+             
             </figure>
-            <figure className="destination">
+            <figure className="secbanner">
               <img
-                src="https://photographylife.com/wp-content/uploads/2015/08/DSC0577.jpg"
+                src="https://media.istockphoto.com/photos/patan-picture-id637268486?b=1&k=20&m=637268486&s=170667a&w=0&h=7ovZBRq98SgR3z73ls6P4h-6_gMgQisjmWJp4fvnz2k="
                 alt="sample92"
               />
-              <figcaption>
-                <h2>Book Now</h2>
-              </figcaption>
-              <Link to="/"></Link>
+
+              
             </figure>
           </Grid>
         </div>
@@ -242,6 +232,7 @@ const Home = () => {
                   alt="sample92"
                 />
                 <figcaption>
+                  
                   <h2>Book Now</h2>
                 </figcaption>
                 <Link to="/"></Link>
