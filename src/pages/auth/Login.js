@@ -44,17 +44,11 @@ const Login = () => {
             />
             <small onClick={() => setTypePass(!typePass)}>
               {typePass ?
-
-                <span class="material-symbols-rounded">
-                  visibility
-                </span> :
-                <span class="material-symbols-rounded">
-                  visibility_off
-
-                </span>
-
-
+                <i className='fas fa-eye'></i> :
+                <i className='fas fa-eye-slash'></i>
               }
+
+
             </small>
           </div>
         </div>

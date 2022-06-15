@@ -8,7 +8,7 @@
   color: rgb(255, 255, 255);
   display: flex;
   justify-content: center;
-  font-family: Poppins;
+  font-family: Poppins, sans-serif;
   font-size: 14px;
   margin: auto;
 }
@@ -57,7 +57,7 @@ h5{
   font-weight: 500;
   align-items: center;
   position: relative;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
   font-size: 15px;
   gap: 40px
 }
@@ -77,10 +77,10 @@ h2{
 p.locationhotel{
   color:#003c75 ; 
   font-size: 14px;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
 }
 h3.bold{
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
   color:#003c75 ;
   font-size: 16px;
   font-weight: 550;
@@ -89,13 +89,13 @@ h3.bold{
 h4{
   color:#003c75 ; 
   font-size: 14px;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
   font-weight: 599;
 }
 span.facilities{
   color:#003c75 ; 
   font-size: 14px;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
   font-weight: 599;
 }
 .block-in-mobile>i{
@@ -135,12 +135,12 @@ span.facilities{
 .caption{
   color: #4a4a4a;
   font-size: 14px;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
 }
 .blue {
   color: #00529b;
   font-weight: 500;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
   font-size: 14px;
 }
 .pointer {
@@ -173,7 +173,7 @@ thead{
 }
 th{
   font-size: 12px;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
 }
 .color-dark-blue.bold.pointer{
   margin-top: 0px;
@@ -210,18 +210,18 @@ ul{
   padding-left: 5px;
   color:#003c75 ; 
   font-size: 14px;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
 }
 h4.bold{
   color:#003c75 ; 
   font-size: 14px;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
   font-weight: 599;
   color: #1f1f1f;
 }
 .mg-top-0{
   margin-top: 0px;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
 }
 .listoffer{
 color: #4a4a4a;
@@ -234,7 +234,7 @@ padding-left: 5px;
 .color-green.bold{
   color: #009b59;
   font-weight: 500;
-  font-family: Poppins;
+  font-family: "Poppins",sans-serif;
 }
 .button.width150 {
   width: 120px;
@@ -244,7 +244,7 @@ padding-left: 5px;
 .primary.button,.success.button{
   color: white;
   background-color: #c48a2b;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
   font-size: 13px;
   border-style: none;
   border-radius: 5px;
@@ -252,7 +252,7 @@ padding-left: 5px;
 .success.button{
   color: white;
   background-color:  #05b625;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
   font-size: 13px;
   border-style: none;
   border-radius: 5px;
@@ -282,13 +282,13 @@ padding-left: 5px;
 .selection{
   color:#4a4a4a ; 
   font-size: 15px;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
   font-weight: 500;
 }
 .red{
   color: #fb6107;
   font-size: 15px;
-  font-family: Poppins,sans-serif;
+  font-family: "Poppins",sans-serif;
 }
 .active{
   background-color: #ffffff !important;
@@ -304,14 +304,14 @@ padding-left: 5px;
   padding: 1em;
   border-radius: .28571429rem;}
 h3.policy{
-      font-family: Poppins,sans-serif;
+      font-family: "Poppins",sans-serif;
       color:#363636 ;
       font-size: 16px;
       font-weight: 550;
       padding-top: 30px;
   }
 h4.allpolicy{
-      font-family: Poppins,sans-serif;
+      font-family: "Poppins",sans-serif;
       color:#4a4a4a ;
   }
 ul.bulleted li {
@@ -325,7 +325,7 @@ ul.bulleted li {
   text-align: center;
 }
 .content h1 {
-  font-family: 'Sansita', sans-serif;
+  font-family: Poppins, sans-serif;
   letter-spacing: 1px;
   font-size: 50px;
   color: #282828;
