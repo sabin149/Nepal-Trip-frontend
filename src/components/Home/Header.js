@@ -31,7 +31,7 @@ const Header = ({ isUser }) => {
             <span class="material-symbols-rounded">
               flight
             </span>
-            <span> Flight Booking </span>
+            <span > Flight Booking </span>
           </div>
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
             <button className="navButton" onClick={() => {

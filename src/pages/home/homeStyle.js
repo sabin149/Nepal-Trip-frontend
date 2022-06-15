@@ -4,10 +4,30 @@ export default makeStyles((theme) => ({
     makeStyle:{
         fontSize:'100px',
         textAlign:'center',
+        // color:'#003c75',
         color:'white',
+        fontFamily: 'Kaushan Script,cursive',
+        // fontWeight:'bold',
+
         '@media (max-width:600px)': {
             fontSize:'50px',
             textAlign:'left',
+
+            // .ui.container>h1{
+            //     font-family: 'Great Vibes';
+            //     color: white;
+            //     font-size: 100px;
+            //     font-weight: bold;
+            //     /* padding-left: 100px; */
+            //     text-align: center;
+               
+            //   }
+
+
+
+
+
+
           },
     },
     headerSearch:{
