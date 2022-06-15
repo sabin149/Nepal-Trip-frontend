@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom"
 import axios from "axios";
 import { useDispatch } from "react-redux"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes"
-import {Grid} from '@mui/material';
+import { Grid } from '@mui/material';
 import useStyles from './homeStyle';
 
 const Home = () => {
@@ -79,14 +79,17 @@ const Home = () => {
     <>
 
       <div className="homepage" style={{
-        overflow:'hidden',
+        overflow: 'hidden',
       }}>
         <div className="booking">
           <div className="ui container">
             <h1 className={classes.makeStyle} > Make Memories</h1>
             <div className={classes.headerSearch}>
               <div className={classes.headerSearchItem}>
-                <i className="fa-solid fa-location-dot"></i>
+                {/* <i className="fa-solid fa-location-dot"></i> */}
+                <span class="material-symbols-rounded">
+                  my_location
+                </span>
                 <input value={search} onChange={(e) => setSearch(e.target.value)}
                   type="text"
                   placeholder="Where are you going?"
@@ -94,7 +97,11 @@ const Home = () => {
                 />
               </div>
               <div className={classes.headerSearchItem}>
-                <i className="fa-solid fa-calendar-days"></i>
+                {/* <i className="fa-solid fa-calendar-days"></i> */}
+                <span class="material-symbols-rounded">
+
+                  calendar_today
+                </span>
                 <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                   date[0].endDate,
                   "MM/dd/yyyy"
@@ -112,7 +119,10 @@ const Home = () => {
 
               </div>
               <div className={classes.headerSearchItem}>
-                <i className="fa-solid fa-person"></i>
+                {/* <i className="fa-solid fa-person"></i> */}
+                <span class="material-symbols-rounded">
+                  people
+                </span>
                 <span onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText">
                   {`${options.adult} adult · ${options.children} children · ${options.room} room`}
@@ -150,9 +160,9 @@ const Home = () => {
                 )}
               </div>
               <div className="headerSearchItem">
-          
+
                 <button onClick={handleSearch} className="headerBtn">Let's Go</button>
-               
+
               </div>
             </div>
             <div></div>
@@ -161,7 +171,7 @@ const Home = () => {
 
         {/* Banner with images */}
         {/* <div className="homeContainer"> */}
-          <div className="destination_nepal">
+        <div className="destination_nepal">
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <figure className="destination">
               <img
@@ -194,8 +204,8 @@ const Home = () => {
               </figcaption>
               <Link to="/"></Link>
             </figure>
-            </Grid>
-          </div>
+          </Grid>
+        </div>
         {/* </div> */}
 
         {/* Nepal's Top Destination */}
@@ -204,38 +214,38 @@ const Home = () => {
             <h3>Nepal's Top Destination</h3>
           </div>
           <div>
-          <Grid item xs={12} sm={6} md={4} lg={3}>
-            <figure className="destination">
-              <img
-                src="https://assets.xceltrip.com/destination-1619006759329-5961c.WEBP"
-                alt="sample89"
-              />
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <figure className="destination">
+                <img
+                  src="https://assets.xceltrip.com/destination-1619006759329-5961c.WEBP"
+                  alt="sample89"
+                />
 
-              <figcaption>
-                <h2>Book Now</h2>
-              </figcaption>
-              <Link to="/"></Link>
-            </figure>
-            <figure className="destination">
-              <img
-                src="https://assets.xceltrip.com/destination-1619006781422-8f33b.WEBP"
-                alt="sample94"
-              />
-              <figcaption>
-                <h2>Book Now</h2>
-              </figcaption>
-              <Link to="/"></Link>
-            </figure>
-            <figure className="destination">
-              <img
-                src="https://photographylife.com/wp-content/uploads/2015/08/DSC0577.jpg"
-                alt="sample92"
-              />
-              <figcaption>
-                <h2>Book Now</h2>
-              </figcaption>
-              <Link to="/"></Link>
-            </figure>
+                <figcaption>
+                  <h2>Book Now</h2>
+                </figcaption>
+                <Link to="/"></Link>
+              </figure>
+              <figure className="destination">
+                <img
+                  src="https://assets.xceltrip.com/destination-1619006781422-8f33b.WEBP"
+                  alt="sample94"
+                />
+                <figcaption>
+                  <h2>Book Now</h2>
+                </figcaption>
+                <Link to="/"></Link>
+              </figure>
+              <figure className="destination">
+                <img
+                  src="https://photographylife.com/wp-content/uploads/2015/08/DSC0577.jpg"
+                  alt="sample92"
+                />
+                <figcaption>
+                  <h2>Book Now</h2>
+                </figcaption>
+                <Link to="/"></Link>
+              </figure>
             </Grid>
           </div>
           <div>

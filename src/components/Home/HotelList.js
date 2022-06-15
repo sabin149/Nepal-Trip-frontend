@@ -11,7 +11,7 @@ const HotelList = () => {
 
     const searchData = location.state.searchData
     const searchInfo = location.state.searchInfo
-    
+
     return (
         <>
             <div className="sub-header d-flex flex-row mb-3 justify-content-center align-item-center" style={{ height: "100px" }}>
@@ -102,16 +102,16 @@ const HotelList = () => {
                             </div>
                             {
                                 searchData.hotels.map((hotel) => (
-                                  hotel.hotel_validity===true&&
-                                 
+                                    hotel.hotel_validity === true &&
+
                                     <div key={hotel._id} className='card hotel-card'>
                                         <div className='row'>
                                             <div className='col-md-4'>
                                                 <div className='img-holder'>
                                                     <img src={
-                                                       hotel.hotel_images[0].url?hotel.hotel_images[0].url:
-                                                       hotel.hotel_images[0]
-                                                    } alt="projectimages" style={{ width: "100%" }} />
+                                                        hotel.hotel_images[0].url ? hotel.hotel_images[0].url :
+                                                            hotel.hotel_images[0]
+                                                    } alt="projectimages" style={{ width: "15rem" }} />
                                                 </div>
                                             </div>
                                             <div className='col-md-5 hotel_detail' >
@@ -134,12 +134,17 @@ const HotelList = () => {
 
                                                                 {
                                                                     facility === "good" &&
-                                                                    <i className="fa-solid fa-wifi"></i>
+                                                                    <span class="material-symbols-rounded">
+                                                                        wifi
+                                                                    </span>
 
                                                                 }
                                                                 {
                                                                     facility !== "good" &&
-                                                                    <i className="fa-solid fa-cross"></i>
+
+                                                                    <span class="material-symbols-rounded">
+                                                                        bed
+                                                                    </span>
 
                                                                 }
                                                                 {/* {       
@@ -167,7 +172,7 @@ const HotelList = () => {
                                                     </span>
                                                 </div>
                                                 <button className="button btn btn-primary" onClick={() => {
-                                                    navigate("/hotelinfo", { state: { hotel: hotel,searchInfo } })
+                                                    navigate("/hotelinfo", { state: { hotel: hotel, searchInfo } })
 
                                                 }}>CHOOSE</button>
                                             </div>
