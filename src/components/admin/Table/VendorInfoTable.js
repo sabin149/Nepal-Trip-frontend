@@ -12,7 +12,7 @@ function VendorInfoTable() {
   const token = localStorage.getItem('token')
 
   useEffect(() => {
-    dispatch(getHotels(token))
+    dispatch(getHotels())
   }, [token, dispatch])
 
         

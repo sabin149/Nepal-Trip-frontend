@@ -1,13 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./hotelinfo.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import { getHotel } from "../../redux/actions/hotelAction";
+import Carousel from "../../components/Carousel";
 const Hotelinfo = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
   const { hotel, searchInfo } = location.state;
+
+  useEffect(() => {
+    dispatch(getHotel({ id }))
+
+  }, [dispatch, id])
+
+  const hotelInfo = useSelector(state => state.hotel.hotels);
+
   const { date, options } = searchInfo
   const [selectedRoom, setSelectedRoom] = useState()
+
+  const [readMore, setReadMore] = useState(false)
+
   return (
     <div className="main_content">
       <div className="search_result">
@@ -81,53 +98,44 @@ const Hotelinfo = () => {
         <div>
           <h2 className="text-capitalize">{hotel.hotel_name}</h2>
           <p className="locationhotel text-capitalize">
-            {hotel.address === "ktm" ? "Kathmandu, Nepal" : hotel.address + ",Nepal"}
+            {hotelInfo.address === "ktm" ? "Kathmandu, Nepal" : hotelInfo.address + ",Nepal"}
             <Link to="" className="block-in-mobile">
               <i className="fa-solid fa-location-dot"></i>
 
               <span> view in map </span>
             </Link>
           </p>
-          <div className="carousel">
+          <div>
             <div className="row">
               {/* Carousel Row */}
-              <div className="col-lg-8 slider">
-                <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-                  <div className="carousel-inner">
-
-                    {
-                      hotel.hotel_images.map((image, index) => {
-                        return (
-                          <div key={index} className="carousel-item active">
-                            <img src={image.url} className="d-block" alt="roomimage" style={{ height: "480px", width: "770px" }}></img>
-                          </div>
-                        )
-                      })
-                    }
-                  </div>
-                  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                  </button>
-                  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                  </button>
-                </div>
+              <div className="col-lg-8">
+                <Carousel images={hotel.hotel_images} />
               </div>
+
               <div className="col-lg-4 abouthotel">
                 <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                   <div>
                     <h4 className="color-dark-blue bold">
-                      About {hotel.hotel_name}
+                      About {hotelInfo.hotel_name}
                     </h4>
                     <div className="caption">
-                      {hotel.hotel_info}
+                    <span>
+                    {
+                      hotelInfo.hotel_info.length < 200
+                            ? hotelInfo.hotel_info
+                            : readMore ?hotelInfo.hotel_info + ' ' : hotelInfo.hotel_info.slice(0, 200) + '.....'
+                    }
+                </span>
                     </div>
                     <span className="blue pointer">
-                      <span> Read More </span>
-                      <i className="fa-solid fa-angle-right"></i>
+                      <span className="readMore" onClick={() => setReadMore(!readMore)}>
+                        {readMore ? 'Read Less' : <span>
+                          Read More <i className="fa-solid fa-angle-right"></i>
+                        </span> }
+                      </span>
+                      
                     </span>
+                    
                     <hr></hr>
                   </div>
                   <h4 className="color-dark-blue bold">
@@ -320,11 +328,11 @@ const Hotelinfo = () => {
                 <span className="amen">ATM/cash machine on site</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-broom"></i>
-               
+
                 <span className="amen">Daily housekeeping</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-shirt"></i>
-               
+
                 <span className="amen">Restaurant</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-elevator"></i>

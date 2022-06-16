@@ -1,5 +1,3 @@
-// import { red } from '@mui/material/colors';
-import React from 'react'
 import "./hotel_list.css";
 import { useNavigate, useLocation } from 'react-router-dom';
 import moment from "moment"
@@ -14,7 +12,7 @@ const HotelList = () => {
 
     return (
         <>
-            <div className="sub-header d-flex flex-row mb-3 justify-content-center align-item-center" style={{ height: "100px" }}>
+            <div className="sub-header d-flex flex-row mb-3 justify-content-center align-item-center" style={{ height: "80px" }}>
                 <div className=" flex-px-3 app" style={{ marginLeft: '20px' }}>
                     <span style={{ fontSize: '14px' }}>Destination</span>
                     <h5 style={{ fontSize: '14px' }} className="text-capitalize">{searchInfo.search}, Nepal</h5>
@@ -157,7 +155,7 @@ const HotelList = () => {
                                                     }
                                                 </div>
                                             </div>
-                                            <div className='col md-3'>
+                                            <div className='col'>
                                                 <div>
                                                     <p className='hotel-price'>
                                                         NPR {hotel.price}
@@ -168,7 +166,7 @@ const HotelList = () => {
                                                     </span>
                                                 </div>
                                                 <button className="button btn btn-primary" onClick={() => {
-                                                    navigate("/hotelinfo", { state: { hotel: hotel, searchInfo } })
+                                                    navigate(`/hotelinfo/${hotel._id}`, { state: { hotel: hotel, searchInfo } })
 
                                                 }}>CHOOSE</button>
                                             </div>
@@ -186,8 +184,8 @@ const HotelList = () => {
                 </div>
 
             </div>
-            
-           
+
+
 
         </>
 
