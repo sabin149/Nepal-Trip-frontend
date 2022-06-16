@@ -87,10 +87,7 @@ const Home = () => {
             <h1 className={classNamees.makeStyle} > Make Memories</h1>
             <div className={classNamees.headerSearch}>
               <div className={classNamees.headerSearchItem}>
-                {/* <i className="fa-solid fa-location-dot"></i> */}
-                <span className="material-symbols-rounded">
-                  my_location
-                </span>
+                <i className="fa-solid fa-location-dot"></i>
                 <input value={search} onChange={(e) => setSearch(e.target.value)}
                   type="text"
                   placeholder="Where are you going?"
@@ -99,7 +96,7 @@ const Home = () => {
               </div>
               <div className={classNamees.headerSearchItem}>
                 <i className="fa-solid fa-calendar-days"></i>
-                
+
                 <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                   date[0].endDate,
                   "MM/dd/yyyy"
@@ -118,7 +115,7 @@ const Home = () => {
               </div>
               <div className={classNamees.headerSearchItem}>
                 <i className="fa-solid fa-person"></i>
-             
+
                 <span onClick={() => setOpenOptions(!openOptions)}
                   className="headerSearchText">
                   {`${options.adult} adult · ${options.children} children · ${options.room} room`}
@@ -155,16 +152,16 @@ const Home = () => {
                   </div>
                 )}
               </div>
-              <div className="headerSearchItem">
+              <form onSubmit={handleSearch}>
+                <div className="headerSearchItem">
 
-                <button onClick={handleSearch} className="headerBtn">Let's Go</button>
+                  <button className="headerBtn">Let's Go</button>
 
-              </div>
+                </div></form>
             </div>
             <div></div>
           </div>
         </div>
-
         {/* Banner with images */}
         {/* <div className="homeContainer"> */}
         <div className="secondary_banner">

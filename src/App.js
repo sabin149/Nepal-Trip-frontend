@@ -48,7 +48,7 @@ function App() {
           {/* <Route path="/bookings" element={isVendor ? <Bookings /> : <Navigate to="/" />} /> */}
           <Route path="/room" element={isVendor ? <Room /> : <Navigate to="/" />} />
           <Route path="/hotellist" element={<HotelList />} />
-          <Route path="/hotelinfo" element={<Hotelinfo />} />
+          <Route path="/hotelinfo/:id" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
           <Route path="/edithotel" element={isVendor&& <EditHotel />} />
           <Route path="/editromm" element={<EditRoom />} />

@@ -167,6 +167,7 @@ overflow: -moz-hidden-unscrollable;
 } */
 .maphotel{
       max-width: 100%;
+      height: 10rem;
 }
 thead{
   background: #f9fafb;
@@ -398,4 +399,8 @@ ul.bulleted li {
 }
 .wrapper label:hover:before {
   color: #FFC107;
+}
+
+.fa-solid .fa-angle-right{
+  color:#003c75
 }
