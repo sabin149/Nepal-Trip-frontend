@@ -1,3 +1,4 @@
+//importing the components from the material ui library 
 import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
@@ -22,13 +23,7 @@ export default makeStyles((theme) => ({
             //     text-align: center;
                
             //   }
-
-
-
-
-
-
-          },
+},
     },
     headerSearch:{
             backgroundColor: 'white',
