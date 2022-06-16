@@ -3,7 +3,6 @@ import "../../pages/hotelinfo/hotelinfo.css"
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotels } from "../../redux/actions/hotelAction";
-import { deleteHotelRoom } from "../../redux/actions/roomAction";
 import Carousel from "../Carousel";
 import RoomTable from "./RoomTable";
 
