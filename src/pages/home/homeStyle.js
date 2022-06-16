@@ -1,3 +1,4 @@
+//importing the components from the material ui library 
 import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
@@ -11,8 +12,8 @@ export default makeStyles((theme) => ({
         '@media (max-width:600px)': {
             fontSize:'50px',
             textAlign:'left',
-
           },
+
     },
     headerSearch:{
             backgroundColor: 'white',
