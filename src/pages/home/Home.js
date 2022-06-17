@@ -54,22 +54,25 @@ const Home = () => {
     dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
     const res = await axios.get(`api/search?address=${search}`)
 
-
     if (res.status === 200 && res.data.status === "failed") {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
       dispatch({ type: GLOBALTYPES.ALERT, payload: { error: res.data.msg } })
       return
     }
 
-
     if (res.status === 200) {
-      navigate('/hotellist', {
+      navigate(`/hotellist?address=${search}`,
+       {
         state: {
-          searchData: res.data, searchInfo: {
-            search, date, options
-          }
+          // searchData: res.data, 
+          // searchInfo: {
+          //   search, date, options
+          // }
         }
-      })
+      }
+      
+      )
+
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
     }
 
