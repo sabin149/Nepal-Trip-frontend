@@ -1,28 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./hotelinfo.css";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import moment from "moment";
-import { useSelector, useDispatch } from "react-redux";
-import { getHotel } from "../../redux/actions/hotelAction";
+// import { useSelector, useDispatch } from "react-redux";
+// import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
 import RoomTable from "../../components/room/RoomTable";
 const Hotelinfo = () => {
   const location = useLocation();
-  const { id } = useParams();
-  const dispatch = useDispatch();
+  // const { id } = useParams();
+  // const dispatch = useDispatch();
 
   const { hotel, searchInfo } = location.state;
 
-  useEffect(() => {
-    dispatch(getHotel({ id }))
+  // useEffect(() => {
+  //   dispatch(getHotel({ id }))
 
-  }, [dispatch, id])
+  // }, [dispatch, id])
 
-  const hotelInfo = useSelector(state => state.hotel.hotels);
+  // const hotelInfo = useSelector(state => state.hotel.hotels);
+
+  // console.log(hotelInfo)
 
   const { date, options } = searchInfo
-
-
   const [readMore, setReadMore] = useState(false)
 
   return (
