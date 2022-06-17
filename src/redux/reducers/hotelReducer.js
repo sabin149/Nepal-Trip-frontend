@@ -25,6 +25,11 @@ const hotelReducer = (state = initialState, action) => {
                 count: action.payload.count,
                 page: action.payload.page
             };
+        case HOTEL_TYPES.GET_HOTEL:
+            return {
+                ...state,
+                hotels: action.payload
+            };
 
         case HOTEL_TYPES.APPROVE_HOTEL:
             return {

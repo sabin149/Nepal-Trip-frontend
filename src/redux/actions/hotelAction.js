@@ -6,6 +6,7 @@ export const HOTEL_TYPES = {
     CREATE_HOTEL: "CREATE_HOTEL",
     LOADING_HOTEL: "LOADING_HOTEL",
     GET_HOTELS: "GET_HOTELS",
+    GET_HOTEL: "GET_HOTEL",
     UPDATE_HOTEL: "UPDATE_HOTEL",
     APPROVE_HOTEL: "APPROVE_HOTEL",
     GET_HOTEL_ROOMS: "GET_HOTEL_ROOMS",
@@ -38,14 +39,13 @@ export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, p
     }
 }
 
-export const getHotels = (token) => async (dispatch) => {
+export const getHotels = () => async (dispatch) => {
     try {
-
         dispatch({ type: HOTEL_TYPES.LOADING_HOTEL, payload: true })
-        const res = await getDataAPI('hotel', token)
+        const res = await getDataAPI('hotel')
         dispatch({
             type: HOTEL_TYPES.GET_HOTELS,
-            payload: { ...res.data, page: 2 }
+            payload: { ...res.data, page:  1}
         })
 
         dispatch({ type: HOTEL_TYPES.LOADING_HOTEL, payload: false })
@@ -54,6 +54,24 @@ export const getHotels = (token) => async (dispatch) => {
             type: GLOBALTYPES.ALERT,
             payload: { error: err.response.data.msg }
         })
+    }
+}
+
+export const getHotel = ({id}) => async (dispatch) => {
+    try {
+        dispatch({ type: HOTEL_TYPES.LOADING_HOTEL, payload: true })
+        const res = await getDataAPI(`hotel/${id}`)
+        dispatch({
+            type: HOTEL_TYPES.GET_HOTEL,
+            payload: res.data.hotel 
+        })
+        dispatch({ type: HOTEL_TYPES.LOADING_HOTEL, payload: false })
+        
+    } catch (error) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { error: error.response.data.msg }
+        })  
     }
 }
 
