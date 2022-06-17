@@ -8,7 +8,7 @@ const Room = () => {
   const token = localStorage.getItem("token")
 
   useEffect(() => {
-    dispatch(getHotels(token))
+    dispatch(getHotels())
   }, [token, dispatch]);
   const { hotel } = useSelector(state => state)
 

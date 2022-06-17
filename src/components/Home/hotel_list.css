@@ -90,11 +90,8 @@ h4{
     border-radius: 5px;
     margin-top: 10px;
   }
-  @media(max-width: 1000px){
-    .hotel_detail{
-        /* background-color: red; */
-    }
-}
+  
+
 
 @media (min-width: 768px){
     .col-md-5 {

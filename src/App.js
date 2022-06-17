@@ -22,6 +22,7 @@ import ViewHotelDetails from "./components/vendor/ViewHotelDetails";
 import EditHotelDetails from "./components/vendor/EditHotelDetails";
 import EditRoomDetails from "./components/vendor/EditRoomDetails";
 import Bookings from "./pages/bookings/bookingDetails";
+import EditBookingDetails from "./components/booking/EditBookingDetails";
 
 
 function App() {
@@ -48,13 +49,12 @@ function App() {
           {/* <Route path="/bookings" element={isVendor ? <Bookings /> : <Navigate to="/" />} /> */}
           <Route path="/room" element={isVendor ? <Room /> : <Navigate to="/" />} />
           <Route path="/hotellist" element={<HotelList />} />
-          <Route path="/hotelinfo" element={<Hotelinfo />} />
+          <Route path="/hotelinfo/:id" element={<Hotelinfo />} />
           <Route path="/vendors" element={<VendorTable />} />
           <Route path="/edithotel" element={isVendor&& <EditHotel />} />
           <Route path="/editromm" element={<EditRoom />} />
           <Route path="/edithotel" element={<EditHotel />} />
           <Route path="/editroom" element={isVendor &&<EditRoom />} />
-
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/users" element={<UserListTable />} />
           <Route path="/admin/edituser" element={<EditUser />} />
@@ -62,6 +62,7 @@ function App() {
           <Route path="/editHotelDetails/:id" element={<EditHotelDetails/>}/>
           <Route path="/editRoomDetails/:id" element={<EditRoomDetails/>}/>
           <Route path="/bookings" element={<Bookings />} />
+          <Route path="/editBookingDetails" element={EditBookingDetails}/>
 
 
           <Route path="*" element={<NotFound />} />

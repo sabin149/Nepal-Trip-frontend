@@ -1,30 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "../../pages/hotelinfo/hotelinfo.css"
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotels } from "../../redux/actions/hotelAction";
-import { deleteHotelRoom } from "../../redux/actions/roomAction";
+import Carousel from "../Carousel";
+import RoomTable from "./RoomTable";
 
 const ViewHotelDetails = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { hotel } = useSelector(state => state)
 
+    const [readMore, setReadMore] = useState(false)
+
     const token = localStorage.getItem('token')
     const userID = localStorage.getItem('userID')
 
     const oneHotel = hotel.hotels.filter(hotel => hotel.user._id === userID)
 
-    useEffect(() => {
-        dispatch(getHotels(token))
-    }, [token, dispatch])
 
-    const handleDeleteRoom = ({ room }) => {
-        if (window.confirm('Are you sure you want to delete this room?')) {
-            dispatch(deleteHotelRoom({ room, token }))
-            window.location.reload()
-        }
-    }
+
+    useEffect(() => {
+        dispatch(getHotels())
+    }, [token, dispatch])
 
 
     return (
@@ -69,76 +67,63 @@ const ViewHotelDetails = () => {
                                     {hotel.hotel_address}
                                     <Link to="" className="block-in-mobile">
                                         <i className="fa-solid fa-location-dot"></i>
-                                       
+
                                         <span> view in map </span>
                                     </Link>
                                 </p>
-                                <div className="carousel">
-                                    <div className="row">
-                                        {/* Carousel Row */}
-                                        <div className="col-lg-8 slider">
-                                            <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-                                                <div className="carousel-inner">
-                                                    {
-                                                        hotel.hotel_images.map((image, index) => {
-                                                            return (
-                                                                <div key={index} className="carousel-item active">
-                                                                    <img src={image.url} className="d-block" alt="roomimage" style={{ height: "480px", width: "770px" }}></img>
-                                                                </div>
-                                                            )
-                                                        })
-                                                    }
-                                                </div>
-                                                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span className="visually-hidden">Previous</span>
-                                                </button>
-                                                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span className="visually-hidden">Next</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <div className="col-lg-4 abouthotel">
-                                            <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
-                                                <div>
-                                                    <h4 className="color-dark-blue bold">
-                                                        About {hotel.hotel_name}
-                                                    </h4>
-                                                    <div className="caption">
-                                                        {
-                                                            hotel.hotel_info
-                                                        }
-                                                    </div>
-                                                    <span className="blue pointer">
-                                                        <span> Read More </span>
-                                                        <i className="fa-solid fa-angle-right"></i>
-                                                       
-                                                    </span>
-                                                    <hr></hr>
-                                                </div>
+                                <div className="row">
+                                    {/* Carousel Row */}
+                                    <div className="col-lg-8">
+                                        <Carousel images={hotel.hotel_images} />
+                                    </div>
+
+                                    <div className="col-lg-4 abouthotel">
+                                        <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
+                                            <div>
                                                 <h4 className="color-dark-blue bold">
-                                                    <span>Amenities & Facilities</span>
+                                                    About {hotel.hotel_name}
                                                 </h4>
-                                                <div className="ameneties-list">
-                                                    <i className="fa-solid fa-hot-tub-person"></i>
-                                                    <i className="fa-solid fa-wifi"></i>
-                                                    <i className="fa-solid fa-smoking"></i>
-                                                    <i className="fa-solid fa-bowl-rice"></i>
-                                                    <i className="fa-solid fa-car"></i>
-                                                    <i className="fa-solid fa-user-shield"></i>
-                                                    <i className="fa-solid fa-swimmer"></i>
-                                                   
+                                                <div className="caption">
+                                                    <span>
+                                                        {
+                                                            hotel.hotel_info.length < 200
+                                                                ? hotel.hotel_info
+                                                                : readMore ? hotel.hotel_info + ' ' : hotel.hotel_info.slice(0, 200) + '.....'
+                                                        }
+                                                    </span>
                                                 </div>
+                                                <span className="blue pointer">
+                                                    <span className="readMore" onClick={() => setReadMore(!readMore)}>
+                                                        {readMore ? 'Read Less' : <span>
+                                                            Read More <i className="fa-solid fa-angle-right"></i>
+                                                        </span>}
+                                                    </span>
+
+                                                </span>
+
                                                 <hr></hr>
-                                                <div className="hotelmap">
-                                                    <h4 className="color-dark-blue bold">
-                                                        <span>Location</span>
-                                                    </h4>
-                                                    <Link to="">
-                                                        <img className="maphotel" src="https://maps.google.com/maps/api/staticmap?markers=color:red|28,84&maptype=roadmap&zoom=12&size=500x160&key=AIzaSyDrMdzB3i4v3U62r4Xww5blaRIjg9dji14" alt="map" />
-                                                    </Link>
-                                                </div>
+                                            </div>
+                                            <h4 className="color-dark-blue bold">
+                                                <span>Amenities & Facilities</span>
+                                            </h4>
+                                            <div className="ameneties-list">
+                                                <i className="fa-solid fa-hot-tub-person"></i>
+                                                <i className="fa-solid fa-wifi"></i>
+                                                <i className="fa-solid fa-smoking"></i>
+                                                <i className="fa-solid fa-bowl-rice"></i>
+                                                <i className="fa-solid fa-car"></i>
+                                                <i className="fa-solid fa-user-shield"></i>
+                                                <i className="fa-solid fa-swimmer"></i>
+
+                                            </div>
+                                            <hr></hr>
+                                            <div className="hotelmap">
+                                                <h4 className="color-dark-blue bold">
+                                                    <span>Location</span>
+                                                </h4>
+                                                <Link to="">
+                                                    <img className="maphotel" src="https://maps.google.com/maps/api/staticmap?markers=color:red|28,84&maptype=roadmap&zoom=12&size=500x160&key=AIzaSyDrMdzB3i4v3U62r4Xww5blaRIjg9dji14" alt="map" />
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
@@ -150,114 +135,8 @@ const ViewHotelDetails = () => {
                                     </span>
                                 </h3>
                                 {/* Price Table of Room */}
-                                <div className="row pricetable">
-                                    <div className="col-lg-8 pricehotel">
-                                        <table className="table table-bordered">
-                                            <thead >
-                                                <tr>
-                                                    <th scope="col"> <span className=""> Room Type</span> </th>
-                                                    <th scope="col">Options</th>
-                                                    <th scope="col">Price Per Night </th>
-                                                    <th scope="col">Actions</th>
-
-                                                </tr>
-                                            </thead>
-                                            {/* Deluxe Room */}
-                                            <tbody>
-
-                                                {
-                                                    hotel.rooms.map(room => (
-                                                        <tr key={room._id}  >
-                                                            <td className="" rowSpan="1">
-                                                                <h3 className="color-dark-blue bold pointer"> {room.room_type}</h3>
-                                                                <div className="image-holder bg-light-gray height160">
-                                                                    <img className="room-image" src={room.room_images[0].url} alt="roomimage" />
-                                                                </div>
-                                                                <div>
-
-                                                                    <ul className="mg-top-sm ">
-                                                                        <li>
-                                                                            <i className="fa-solid fa-hot-tub-person"></i> 
-                                                                            
-                                                                            <span className="amen">Hot Tub</span></li>
-                                                                        <li>
-                                                                            <i className="fa-solid fa-wifi"></i>
-
-                                                                        
-                                                                            <span className="amen">Free Wi-Fi</span></li>
-                                                                        <li>
-                                                                            <i className="fa-solid fa-smoking"></i>
-                                                                          
-                                                                            <span className="amen">Smoking Area</span></li>
-                                                                        <li>
-                                                                            <i className="fa-solid fa-bowl-rice"></i>
-                                                                            
-                                                                            <span className="amen">Free Breakfast</span></li>
-                                                                        <li>
-                                                                            <i className="fa-solid fa-car"></i>
-                                                                           
-
-                                                                            <span className="amen">Transport</span></li>
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                            <td className="">
-                                                                <h4 className="bold">FREE Breakfast</h4>
-                                                                <h5 className="mg-top-0">Non-refundable</h5>
-                                                                <div>
-                                                                    <ul className="checklist">
-                                                                        <li>
-                                                                            <i className="fa-solid fa-check"></i>
-                                                                            
-
-                                                                            <span className="listoffer">Breakfast</span>
-                                                                        </li>
-                                                                    </ul>
-                                                                    <ul className="checklist">
-                                                                        <li>
-                                                                            <i className="fa-solid fa-check"></i>
-                                                                            
-                                                                            <span className="listoffer">10% discount on food <br></br> and beverage</span>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </td>
-                                                            <td className="">
-                                                                <div className="align-right">
-                                                                    <div></div>
-                                                                    <br></br>
-                                                                    <div className="text-center"> <span className="color-green bold text-center">{room.room_price} NPR</span></div>
-                                                                </div>
-                                                            </td>
-
-                                                            <td className="d-flex justify-content-around align-content-between mt-5">
-                                                                <span onClick={() => {
-                                                                    navigate(`/editRoomDetails/${room._id}`, {
-                                                                        state: {
-                                                                            room
-                                                                        }
-                                                                    })
-                                                                }}>
-                                                                    <i className="fa-solid fa-pen-to-square text-success h5" style={{ cursor: "pointer" }}></i>
-                                                                   
-                                                                </span>
-                                                                <span onClick={() => {
-                                                                    handleDeleteRoom({ room })
-                                                                }}>
-                                                                    <i className="fa-solid fa-trash-can text-danger h5" style={{ cursor: "pointer" }}></i>
-                                                                    
-                                                                </span>
-                                                            </td>
-
-                                                        </tr>
-                                                    ))
-                                                }
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-
-                                </div>
+                                <RoomTable hotel={hotel}/>
+                                
                                 <div className="my-4">
                                 </div>
                                 <div className="segment">
@@ -268,41 +147,41 @@ const ViewHotelDetails = () => {
                                     <div className="row row-cols-4">
                                         <div className="col"><li>
                                             <i className="fa-solid fa-hot-tub-person">
-              </i> 
-                                          
+                                            </i>
+
                                             <span className="amen">24hrs Hot Shower</span></li></div>
                                         <div className="col"><li>
                                             <i className="fa-solid fa-wifi"></i>
-                                           
+
                                             <span className="amen">24hrs Free Wi-Fi</span></li></div>
                                         <div className="col"><li>
                                             <i className="fa-solid fa-smoking">
-                                           
+
 
                                             </i>
                                             <span className="amen">Smoking Area Available</span></li></div>
                                         <div className="col"><li>
                                             <i className="fa-solid fa-car"></i>
-                                            
+
                                             <span className="amen">Transportation Facility</span></li></div>
                                         <div className="col"><li>
                                             <i className="fa-solid fa-money-bill-simple">
 
                                             </i>
-                                          
+
                                             <span className="amen">ATM/cash machine on site</span></li></div>
                                         <div className="col"><li>
                                             <i className="fa-solid fa-broom"></i>
-                                            
+
                                             <span className="amen">Daily housekeeping</span></li></div>
                                         <div className="col"><li>
                                             <i className="fa-solid fa-shirt"></i>
-                                            
+
                                             <span className="amen">Restaurant</span></li></div>
                                         <div className="col"><li>
                                             <i className="fa-solid fa-elevator"></i>
 
-                                           
+
                                             <span className="amen">Elevator</span></li></div>
                                         <div className="col"><li>
                                             <i className="fa-solid fa-mug-hot"></i>
@@ -310,7 +189,7 @@ const ViewHotelDetails = () => {
                                             <span className="amen">Coffee shop</span></li></div>
                                         <div className="col"><li>
                                             <i className="fa-solid fa-wheelchair"></i>
-                                           
+
                                             <span className="amen">Facilities for disabled guests</span></li></div>
                                     </div>
                                 </div>

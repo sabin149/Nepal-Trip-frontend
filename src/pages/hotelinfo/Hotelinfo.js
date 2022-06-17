@@ -1,13 +1,30 @@
 import React, { useState } from "react";
 import "./hotelinfo.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import moment from "moment";
+// import { useSelector, useDispatch } from "react-redux";
+// import { getHotel } from "../../redux/actions/hotelAction";
+import Carousel from "../../components/Carousel";
+import RoomTable from "../../components/room/RoomTable";
 const Hotelinfo = () => {
   const location = useLocation();
-  const navigate = useNavigate();
+  // const { id } = useParams();
+  // const dispatch = useDispatch();
+
   const { hotel, searchInfo } = location.state;
+
+  // useEffect(() => {
+  //   dispatch(getHotel({ id }))
+
+  // }, [dispatch, id])
+
+  // const hotelInfo = useSelector(state => state.hotel.hotels);
+
+  // console.log(hotelInfo)
+
   const { date, options } = searchInfo
-  const [selectedRoom, setSelectedRoom] = useState()
+  const [readMore, setReadMore] = useState(false)
+
   return (
     <div className="main_content">
       <div className="search_result">
@@ -88,33 +105,13 @@ const Hotelinfo = () => {
               <span> view in map </span>
             </Link>
           </p>
-          <div className="carousel">
+          <div>
             <div className="row">
               {/* Carousel Row */}
-              <div className="col-lg-8 slider">
-                <div id="carouselExampleControls" className="carousel slide" data-bs-ride="carousel">
-                  <div className="carousel-inner">
-
-                    {
-                      hotel.hotel_images.map((image, index) => {
-                        return (
-                          <div key={index} className="carousel-item active">
-                            <img src={image.url} className="d-block" alt="roomimage" style={{ height: "480px", width: "770px" }}></img>
-                          </div>
-                        )
-                      })
-                    }
-                  </div>
-                  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                  </button>
-                  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                  </button>
-                </div>
+              <div className="col-lg-8">
+                <Carousel images={hotel.hotel_images} />
               </div>
+
               <div className="col-lg-4 abouthotel">
                 <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                   <div>
@@ -122,12 +119,23 @@ const Hotelinfo = () => {
                       About {hotel.hotel_name}
                     </h4>
                     <div className="caption">
-                      {hotel.hotel_info}
+                    <span>
+                    {
+                      hotel.hotel_info.length < 200
+                            ? hotel.hotel_info
+                            : readMore ?hotel.hotel_info + ' ' : hotel.hotel_info.slice(0, 200) + '.....'
+                    }
+                </span>
                     </div>
                     <span className="blue pointer">
-                      <span> Read More </span>
-                      <i className="fa-solid fa-angle-right"></i>
+                      <span className="readMore" onClick={() => setReadMore(!readMore)}>
+                        {readMore ? 'Read Less' : <span>
+                          Read More <i className="fa-solid fa-angle-right"></i>
+                        </span> }
+                      </span>
+                      
                     </span>
+                    
                     <hr></hr>
                   </div>
                   <h4 className="color-dark-blue bold">
@@ -163,130 +171,8 @@ const Hotelinfo = () => {
             </span>
           </h3>
           {/* Price Table of Room */}
-          <div className="row pricetable">
-            <div className="col-lg-8 pricehotel">
-              <table className="table table-bordered">
-                <thead >
-                  <tr>
-                    <th scope="col"> <span className=""> Room Type</span> </th>
-                    <th scope="col">Options</th>
-                    <th scope="col">Price Per Night </th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                {/* Deluxe Room */}
-                <tbody>
-                  {
-                    hotel.rooms.map((room) =>
-                      <tr key={room._id} >
-                        <td className="" rowSpan="1">
-                          <h3 className="color-dark-blue bold pointer"> {room.room_type}</h3>
-                          <div className="image-holder bg-light-gray height160">
-                            <img className="room-image" src={room.room_images[0].url} alt="roomimage"></img>
-                          </div>
-                          <div>
-                            <ul className="mg-top-sm ">
-                              <li>
-                                <i className="fa-solid fa-hot-tub-person"></i>
-
-                                <span className="amen">Hot Tub</span></li>
-                              <li>
-                                <i className="fa-solid fa-wifi"></i>
-
-                                <span className="amen">Free Wi-Fi</span></li>
-                              <li>
-                                <i className="fa-solid fa-smoking"></i>
-
-                                <span className="amen">Smoking Area</span></li>
-                              <li>
-                                <i className="fa-solid fa-bowl-rice"></i>
-
-                                <span className="amen">Free Breakfast</span></li>
-                              <li>
-                                <i className="fa-solid fa-car"></i>
-                                <span className="amen">Transport</span></li>
-                            </ul>
-                          </div>
-                        </td>
-                        <td className="">
-                          <h4 className="bold">FREE Breakfast</h4>
-                          <h5 className="mg-top-0">Non-refundable</h5>
-                          <div>
-                            <ul className="checklist">
-                              <li>
-                                <i className="fa-solid fa-check"></i>
-                                <span className="listoffer">Breakfast</span>
-                              </li>
-                            </ul>
-                            <ul className="checklist">
-                              <li>
-                                <i className="fa-solid fa-check"></i>
-
-                                <span className="listoffer">10% discount on food <br></br> and beverage</span>
-                              </li>
-                            </ul>
-                          </div>
-                        </td>
-                        <td className="">
-                          <div className="align-right">
-                            <div></div>
-                            <br></br>
-                            <div> <span className="color-green bold">{room.room_price} NPR</span></div>
-                          </div>
-                        </td>
-                        <td className="">
-                          {
-                            !selectedRoom ? <button className="ui fluid primary button width150 mt-2" onClick={() => {
-                              setSelectedRoom(room)
-                            }}>
-                              Select Room
-                            </button> :
-                              <button className={`ui fluid ${selectedRoom._id === room._id ? "success" : "primary"} button width150 mt-2}`} onClick={() => {
-                                setSelectedRoom(null)
-                              }}>
-                                {selectedRoom._id === room._id ? "Selected Room" : "Select Room"}
-                              </button>
-                          }
-                        </td>
-                      </tr>
-                    )
-                  }
-                </tbody>
-              </table>
-            </div>
-            <div className="col-lg-4 yourselection">
-              <div className="colored-box">
-                <h4 className="selection">
-                  Your Selection
-                </h4>
-                <hr></hr>
-                {!selectedRoom ? <div className="empty-selection red">
-                  <span>No Room Selected</span>
-                </div> :
-                  <div>
-                    <p className="h5">{selectedRoom.room_type}</p>
-                    <h6> 1 room(s), 1 night(s):</h6>
-                    <h6 className="text-success">{selectedRoom.room_price} NPR</h6>
-                    <p >Non-refundable</p>
-                    <button className="ui fluid primary button " style={{
-                      fontSize: '16px',
-                      width: "160px",
-                      height: "40px",
-                      margin: "0 auto"
-                    }} onClick={() => {
-                      navigate("/checkout")
-                    }}>
-                      Reserve Now
-                    </button>
-                  </div>
-                }
-              </div>
-            </div>
-          </div>
-          {/* "Room Selected" 
-                Deluxe Room
-                1 room(s), 1 night(s):1698 NPR
-                Non-refundable*/ }
+          <RoomTable hotel={hotel}/>
+          
           <div className="my-4">
           </div>
           <div className="segment">
@@ -320,11 +206,11 @@ const Hotelinfo = () => {
                 <span className="amen">ATM/cash machine on site</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-broom"></i>
-               
+
                 <span className="amen">Daily housekeeping</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-shirt"></i>
-               
+
                 <span className="amen">Restaurant</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-elevator"></i>

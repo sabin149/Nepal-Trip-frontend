@@ -1,8 +1,12 @@
 import React from "react";
 import "./bookingDetails.css";
 import { Link } from "react-router-dom";
-
-const Hotelinfo = () => {
+import React, { useEffect } from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+// import {approveHotel, getHotels } from './../../../redux/actions/hotelAction';
+const BookingDetails = () => {
   return (
     <div className="main_content">
       <div className="container pd-top-md">
@@ -54,7 +58,7 @@ const Hotelinfo = () => {
             <table className="table table-bordered facilities">
               {/* Deluxe Room */}
               <tbody className="facilities">
-                <tr >
+                <tr>
                   <td className="" rowspan="1">
                     <h3 className="color-black bold pointer">
                       {" "}
@@ -120,28 +124,16 @@ const Hotelinfo = () => {
                 <tbody>
                   <tr className="">
                     <td className="" rowspan="1">
-                      <h3 className="color-black bold pointer">
-                        {" "}
-                       SP Channel
-                      </h3>
+                      <h3 className="color-black bold pointer"> SP Channel</h3>
                     </td>
                     <td className="" rowspan="2">
-                      <h3 className="color-black bold pointer">
-                        {" "}
-                        Deluxe Room
-                      </h3>
+                      <h3 className="color-black bold pointer"> Deluxe Room</h3>
                     </td>
                     <td className="" rowspan="3">
-                      <h3 className="color-lack bold pointer">
-                        {" "}
-                       240 sq.ft
-                      </h3>
+                      <h3 className="color-lack bold pointer"> 240 sq.ft</h3>
                     </td>
                     <td className="" rowspan="4">
-                      <h3 className="color-black bold pointer">
-                        {" "}
-                       King Bed
-                      </h3>
+                      <h3 className="color-black bold pointer"> King Bed</h3>
                     </td>
                   </tr>
                 </tbody>
@@ -166,28 +158,16 @@ const Hotelinfo = () => {
                 <tbody>
                   <tr className="">
                     <td className="" rowspan="1">
-                      <h3 className="color-black bold pointer">
-                        {" "}
-                       1
-                      </h3>
+                      <h3 className="color-black bold pointer"> 1</h3>
                     </td>
                     <td className="" rowspan="2">
-                      <h3 className="color-black bold pointer">
-                        {" "}
-                        2
-                      </h3>
+                      <h3 className="color-black bold pointer"> 2</h3>
                     </td>
                     <td className="" rowspan="3">
-                      <h3 className="color-lack bold pointer">
-                        {" "}
-                       0
-                      </h3>
+                      <h3 className="color-lack bold pointer"> 0</h3>
                     </td>
                     <td className="" rowspan="4">
-                      <h3 className="color-black bold pointer">
-                        {" "}
-                       Breakfast
-                      </h3>
+                      <h3 className="color-black bold pointer"> Breakfast</h3>
                     </td>
                   </tr>
                 </tbody>
@@ -195,33 +175,18 @@ const Hotelinfo = () => {
             </div>
           </div>
 
-
-
           <div className="row">
             <div className="col-sm-6 ">
-            <h4>Total Price:</h4>
+              <h4>Total Price:</h4>
             </div>
             <div className="col-sm-9 abouthotel">
               <div className="pd-all-sm ">
                 <div>
                   <h4>RS. 14000</h4>
-                  
-                  
-                  
                 </div>
-             
               </div>
             </div>
           </div>
-
-
-
-
-
-
-
-
-
 
           <div className="my-4"></div>
           <div className="segment">
@@ -279,4 +244,4 @@ const Hotelinfo = () => {
   );
 };
 
-export default Hotelinfo;
+export default BookingDetails;

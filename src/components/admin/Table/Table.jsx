@@ -41,7 +41,7 @@ function BasicTable() {
   const token = localStorage.getItem('token')
 
   React.useEffect(() => {
-    dispatch(getHotels(token))
+    dispatch(getHotels())
   }, [token, dispatch])
 
   const changeStatus =  ({ item }) => {
