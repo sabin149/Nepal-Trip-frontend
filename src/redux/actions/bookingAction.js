@@ -1,8 +1,10 @@
 import { GLOBALTYPES } from "./globalTypes";
-import { postDataAPI } from "../../utils/fetchData";
+import { postDataAPI, getDataAPI } from "../../utils/fetchData";
 export const BOOKING_TYPES = {
     CREATE_BOOKING: "CREATE_BOOKING",
-    LOADING_BOOKING: "LOADING_BOOKING"
+    LOADING_BOOKING: "LOADING_BOOKING",
+    GET_BOOKINGS: "GET_BOOKINGS",
+    GET_BOOKING: "GET_BOOKING",
 }
 export const createBooking = ({ booking, token }) => async (dispatch) => {
     try {
@@ -19,4 +21,39 @@ export const createBooking = ({ booking, token }) => async (dispatch) => {
             type: GLOBALTYPES.ALERT,
             payload: { error: error.response.data.msg }
         })
-    }}
+    }
+}
+
+export const getBookings = ({ token }) => async (dispatch) => {
+    try {
+        dispatch({ type: BOOKING_TYPES.LOADING_BOOKING, payload: true })
+        const res = await getDataAPI('booking', token)
+        dispatch({
+            type: BOOKING_TYPES.GET_BOOKINGS,
+            payload: { ...res.data, page: 1, count: res.data.count }
+        })
+        dispatch({ type: BOOKING_TYPES.LOADING_BOOKING, payload: false })
+    } catch (err) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { error: err.response.data.msg }
+        })
+    }
+}
+export const getBooking = ({ id, token }) => async (dispatch) => {
+    try {
+        dispatch({ type: BOOKING_TYPES.LOADING_BOOKING, payload: true })
+        const res = await getDataAPI(`booking/${id}`, token)
+        dispatch({
+            type: BOOKING_TYPES.GET_BOOKING,
+            payload: res.data.booking
+        })
+        dispatch({ type: BOOKING_TYPES.LOADING_BOOKING, payload: false })
+    } catch (error) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { error: error.response.data.msg }
+        })
+    }
+}
+

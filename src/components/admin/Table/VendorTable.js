@@ -22,7 +22,7 @@ const VendorTable = () => {
     return (
         <div className='vendor_table'>
             <div className='vendor_list_table container-sm'  >
-                <h2 className="text-danger text-capitalize text-center mt-3">
+                <h2 className="text-danger text-capitalize text-center mt-3 text-decoration-underline">
                     List of All Vendors
                 </h2>
                 <div className='hotel-table'>
@@ -32,7 +32,9 @@ const VendorTable = () => {
                             fontWeight: 'bold'
 
                         }}>
-                            <tr>
+                            <tr style={{
+                                backgroundColor: '#ffe1bc'
+                            }}>
                                 <th scope="col">SN</th>
                                 <th scope="col">Hotel Name</th>
                                 <th scope="col">Address</th>

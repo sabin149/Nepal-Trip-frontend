@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { deleteHotelRoom } from '../../redux/actions/roomAction';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
-import DialogTitle from '@mui/material/DialogTitle';
+
 
 const RoomTable = ({ hotel }) => {
     const navigate = useNavigate();
@@ -59,7 +59,6 @@ const RoomTable = ({ hotel }) => {
                         <tbody>
                             {
                                 hotel.rooms.map(room => (
-                            console.log(room),
                                     <tr key={room._id}  >
                                         <td className="" rowSpan="1">
                                             <h3 className="color-dark-blue bold pointer" onClick={handleClickOpen('body')}> {room.room_type}</h3>

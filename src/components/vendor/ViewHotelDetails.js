@@ -75,7 +75,7 @@ const ViewHotelDetails = () => {
                                         <Carousel images={hotel.hotel_images} />
                                     </div>
 
-                                    <div className="col-lg-4 abouthotel">
+                                    <div className="col abouthotel">
                                         <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                                             <div>
                                                 <h4 className="color-dark-blue bold">

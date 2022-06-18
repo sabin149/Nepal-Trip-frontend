@@ -1,4 +1,4 @@
-import React, { createContext } from "react";
+import React from "react";
 import "./home.css";
 import { useState } from "react";
 import { DateRange } from "react-date-range";
@@ -45,6 +45,13 @@ const Home = () => {
     });
   };
 
+  
+  const searchInfo = {
+    search,
+    date,
+    options
+  }
+
   const handleSearch = async (e) => {
     e.preventDefault()
     if (search.length === 0) {
@@ -65,19 +72,13 @@ const Home = () => {
       navigate(`/hotellist?address=${search}&& startDate=${format(date[0].startDate, "yyyy-MM-dd")}&& endDate=${format(date[0].endDate, "yyyy-MM-dd")}&& adult=${options.adult}&& children=${options.children}&& room=${options.room}`
       )
 
-      dispatch(createSearchInfo({ searchInfo: { search, date, options } }))
-
+      dispatch(createSearchInfo({ searchInfo }))
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
     }
 
 
   }
 
-  const searchInfo = {
-    search,
-    date,
-    options
-  }
 
   return (
     <>
