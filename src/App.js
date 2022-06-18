@@ -44,25 +44,24 @@ function App() {
           <Route path="/" element={isAdmin ? <AdminDashboard token={token} /> : isVendor ? <VendorDashboard token={token} /> :
             <Home />
           } />
-          <Route path="/addhotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
+
           <Route path="/hotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
-          {/* <Route path="/bookings" element={isVendor ? <Bookings /> : <Navigate to="/" />} /> */}
           <Route path="/room" element={isVendor ? <Room /> : <Navigate to="/" />} />
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo/:id" element={<Hotelinfo />} />
-          <Route path="/vendors" element={<VendorTable />} />
-          <Route path="/edithotel" element={isVendor&& <EditHotel />} />
-          <Route path="/editromm" element={<EditRoom />} />
-          <Route path="/edithotel" element={<EditHotel />} />
-          <Route path="/editroom" element={isVendor &&<EditRoom />} />
+          <Route path="/vendors" element={isAdmin ? <VendorTable /> : <Navigate to="/" />} />
+          <Route path="/edithotel" element={isVendor ? <EditHotel /> : <Navigate to="/" />} />
+          <Route path="/editromm" element={isVendor ? <EditRoom /> : <Navigate to="/" />} />
+          <Route path="/edithotel" element={isVendor ? <EditHotel /> : <Navigate to="/" />} />
+          <Route path="/editroom" element={isVendor ? <EditRoom /> : <Navigate to="/" />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/users" element={<UserListTable />} />
-          <Route path="/admin/edituser" element={<EditUser />} />
-          <Route path="/viewHotel" element={<ViewHotelDetails/>}/>
-          <Route path="/editHotelDetails/:id" element={<EditHotelDetails/>}/>
-          <Route path="/editRoomDetails/:id" element={<EditRoomDetails/>}/>
-          <Route path="/bookings" element={<Bookings />} />
-          <Route path="/editBookingDetails" element={<EditBookingDetails />}/>
+          <Route path="/users" element={isAdmin ? <UserListTable /> : <Navigate to="/" />} />
+          <Route path="/admin/edituser" element={isAdmin ? <EditUser /> : <Navigate to="/" />} />
+          <Route path="/viewHotel" element={isAdmin ? <ViewHotelDetails /> : <Navigate to="/" />} />
+          <Route path="/editHotelDetails/:id" element={isVendor ? <EditHotelDetails /> : <Navigate to="/" />} />
+          <Route path="/editRoomDetails/:id" element={isVendor ? <EditRoomDetails /> : <Navigate to="/" />} />
+          <Route path="/bookings" element={isUser ? <Bookings /> : <Navigate to="/" />} />
+          <Route path="/editBookingDetails" element={isUser ? <EditBookingDetails /> : <Navigate to="/" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdmin ? <EHeader /> : isVendor ? <EFooter /> : <Footer />}

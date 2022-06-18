@@ -1,5 +1,6 @@
 import { GLOBALTYPES } from "./globalTypes";
 import { postDataAPI, getDataAPI } from "../../utils/fetchData";
+
 export const BOOKING_TYPES = {
     CREATE_BOOKING: "CREATE_BOOKING",
     LOADING_BOOKING: "LOADING_BOOKING",
@@ -7,9 +8,10 @@ export const BOOKING_TYPES = {
     GET_BOOKING: "GET_BOOKING",
 }
 export const createBooking = ({ booking, token }) => async (dispatch) => {
+  
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
-        const res = await postDataAPI('booking', { booking }, token)
+        const res = await postDataAPI('booking', booking , token)
         dispatch({
             type: BOOKING_TYPES.CREATE_BOOKING,
             payload: { ...res.data.booking }
