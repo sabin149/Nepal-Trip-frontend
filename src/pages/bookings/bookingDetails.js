@@ -199,18 +199,6 @@ const userBooking= booking.filter(booking=>booking.user._id===userID)
               </table>
             </div>
           </div>
-          <div className="row">
-            <div className="col-sm-6 ">
-            <h4>Total Price:</h4>
-            </div>
-            <div className="col-sm-9 abouthotel">
-              <div className="pd-all-sm ">
-                <div>
-                  <h4>RS. 14000</h4>
-                </div>
-              </div>
-            </div>
-          </div>
           <div className="my-4"></div>
           <div className="segment">
             <h3 className="bold">Hotel Policies</h3>
