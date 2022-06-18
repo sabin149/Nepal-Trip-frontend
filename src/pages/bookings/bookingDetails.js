@@ -1,12 +1,22 @@
-import React from "react";
 import "./bookingDetails.css";
 import { Link } from "react-router-dom";
-import React, { useEffect } from "react";
-import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
-// import {approveHotel, getHotels } from './../../../redux/actions/hotelAction';
+import { useEffect } from "react";
+import { getBookings } from "../../redux/actions/bookingAction";
 const BookingDetails = () => {
+  const dispatch=useDispatch()
+  const token=localStorage.getItem("token")
+  const userID=localStorage.getItem("userID")
+  useEffect(()=>{
+    dispatch(getBookings({token}))
+  },[dispatch, token])
+  const booking=useSelector(state=>state.booking.bookings)
+  // console.log(booking,"booking");
+const bookingUserID=booking&& booking.map(booking=>booking.user._id)
+// console.log(bookingUserID,"bookingUserID");
+// console.log(userID,"userID");
+const userBooking= booking.filter(booking=>booking.user._id===userID)
+  console.log(userBooking,"userBooking");
   return (
     <div className="main_content">
       <div className="container pd-top-md">
@@ -15,7 +25,7 @@ const BookingDetails = () => {
           <hr></hr>
           <div className="row">
             <div className="col-sm-4 BookingImage">
-              <img src="https://assets.xceltrip.com/gallery-1583997472633-34394.jpg"></img>
+              <img src="https://assets.xceltrip.com/gallery-1583997472633-34394.jpg" alt="room_image"/>
             </div>
             <div className="col-sm abouthotel">
               <div className="pd-all-sm ">
@@ -27,22 +37,18 @@ const BookingDetails = () => {
                   <div className="caption">
                     <Link to="" className="block-in-mobile">
                       <i className="fa-solid fa-location-dot"></i>
-
                       <span> view in map </span>
                     </Link>
                   </div>
-
                   <div className="caption">
                     <Link to="" className="block-in-mobile">
                       <i className="fa-solid fa-phone"></i>
-
                       <span> 9840108690 </span>
                     </Link>
                   </div>
                   <div className="caption">
                     <Link to="" className="block-in-mobile">
                       <i className="fa-solid fa-envelope"></i>
-
                       <span> sp554540@gmail.com </span>
                     </Link>
                   </div>
@@ -51,33 +57,32 @@ const BookingDetails = () => {
               </div>
             </div>
           </div>
-
           {/* Room and Info */}
           {/* Price Table of Room */}
           <div className="row pricetable">
             <table className="table table-bordered facilities">
               {/* Deluxe Room */}
               <tbody className="facilities">
-                <tr>
-                  <td className="" rowspan="1">
+                <tr >
+                  <td className="" rowSpan="1">
                     <h3 className="color-black bold pointer">
                       {" "}
                       1 No.of Room(s)
                     </h3>
                   </td>
-                  <td className="" rowspan="2">
+                  <td className="" rowSpan="2">
                     <h3 className="color-black bold pointer">
                       {" "}
                       1 No.of Night(s)
                     </h3>
                   </td>
-                  <td className="" rowspan="3">
+                  <td className="" rowSpan="3">
                     <h3 className="color-lack bold pointer">
                       {" "}
                       15th Jun, 2022 12::0:0 check-in
                     </h3>
                   </td>
-                  <td className="" rowspan="4">
+                  <td className="" rowSpan="4">
                     <h3 className="color-black bold pointer">
                       {" "}
                       16th Jun, 2022 12::0:0 check-out
@@ -89,14 +94,13 @@ const BookingDetails = () => {
             </table>
           </div>
           <hr></hr>
-
           <div className="row">
             <div className="col-sm-12">
               <h3 className="policy">
                 Your payment will be handled by Hotel: Orchid hotel
               </h3>
-              <hr></hr>
-              <br></br>
+              <hr/>
+              <br/>
               Total amount to be paid is:<br></br>
               3120.31 NPR
               <hr></hr>
@@ -105,7 +109,6 @@ const BookingDetails = () => {
               <div className="pd-all-sm "></div>
             </div>
           </div>
-
           <div className="row pricetable">
             <div className="col-lg-8 pricehotel">
               <table className="table table-bordered">
@@ -120,20 +123,31 @@ const BookingDetails = () => {
                     <th scope="col"> Bed Type</th>
                   </tr>
                 </thead>
-
                 <tbody>
                   <tr className="">
-                    <td className="" rowspan="1">
-                      <h3 className="color-black bold pointer"> SP Channel</h3>
+                    <td className="" rowSpan="1">
+                      <h3 className="color-black bold pointer">
+                        {" "}
+                       SP Channel
+                      </h3>
                     </td>
-                    <td className="" rowspan="2">
-                      <h3 className="color-black bold pointer"> Deluxe Room</h3>
+                    <td className="" rowSpan="2">
+                      <h3 className="color-black bold pointer">
+                        {" "}
+                        Deluxe Room
+                      </h3>
                     </td>
-                    <td className="" rowspan="3">
-                      <h3 className="color-lack bold pointer"> 240 sq.ft</h3>
+                    <td className="" rowSpan="3">
+                      <h3 className="color-lack bold pointer">
+                        {" "}
+                       240 sq.ft
+                      </h3>
                     </td>
-                    <td className="" rowspan="4">
-                      <h3 className="color-black bold pointer"> King Bed</h3>
+                    <td className="" rowSpan="4">
+                      <h3 className="color-black bold pointer">
+                        {" "}
+                       King Bed
+                      </h3>
                     </td>
                   </tr>
                 </tbody>
@@ -154,30 +168,40 @@ const BookingDetails = () => {
                     <th scope="col"> Inclusions</th>
                   </tr>
                 </thead>
-
                 <tbody>
                   <tr className="">
-                    <td className="" rowspan="1">
-                      <h3 className="color-black bold pointer"> 1</h3>
+                    <td className="" rowSpan="1">
+                      <h3 className="color-black bold pointer">
+                        {" "}
+                       1
+                      </h3>
                     </td>
-                    <td className="" rowspan="2">
-                      <h3 className="color-black bold pointer"> 2</h3>
+                    <td className="" rowSpan="2">
+                      <h3 className="color-black bold pointer">
+                        {" "}
+                        2
+                      </h3>
                     </td>
-                    <td className="" rowspan="3">
-                      <h3 className="color-lack bold pointer"> 0</h3>
+                    <td className="" rowSpan="3">
+                      <h3 className="color-lack bold pointer">
+                        {" "}
+                       0
+                      </h3>
                     </td>
-                    <td className="" rowspan="4">
-                      <h3 className="color-black bold pointer"> Breakfast</h3>
+                    <td className="" rowSpan="4">
+                      <h3 className="color-black bold pointer">
+                        {" "}
+                       Breakfast
+                      </h3>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
-
           <div className="row">
             <div className="col-sm-6 ">
-              <h4>Total Price:</h4>
+            <h4>Total Price:</h4>
             </div>
             <div className="col-sm-9 abouthotel">
               <div className="pd-all-sm ">
@@ -187,12 +211,11 @@ const BookingDetails = () => {
               </div>
             </div>
           </div>
-
           <div className="my-4"></div>
           <div className="segment">
             <h3 className="bold">Hotel Policies</h3>
             <hr></hr>
-            <h4 className="allpolicy">
+            <div className="allpolicy">
               <h3 className="policy">Check in and Check out Policy</h3>{" "}
               <br></br>
               Check in time: 12::0<br></br>
@@ -236,12 +259,11 @@ const BookingDetails = () => {
                   do.
                 </li>
               </ul>
-            </h4>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default BookingDetails;
