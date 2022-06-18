@@ -1,11 +1,10 @@
 import "./hotel_list.css";
 import { useNavigate, useLocation } from 'react-router-dom';
 import moment from "moment"
-import { useEffect } from "react";
+import {useState, useEffect, useContext} from "react";
 import axios from "axios";
-import { useState } from "react";
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-
+import { useSelector } from "react-redux";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -16,28 +15,23 @@ const HotelList = () => {
     const query = useQuery();
     const title = query.get("address");
     const sort = query.get("sort");
-    const filter = query.get("filter")
     const hotelSearch = query.get("search")
     const page = query.get("page")
-
-
-    //price[gte]=1100
 
     let hotelQuery = {
         address: title ? title : "Pokhara",
         sort: sort ? sort : "-createdAt",
-        filter: filter ? filter : "gt",
         hotelSearch: hotelSearch ? hotelSearch : "",
         page: page ? page : 1
 
     }
+
+
     const address = title ? title : "Pokhara";
 
     const navigate = useNavigate()
-    const location = useLocation()
 
-    // const searchData = location.state.searchData
-    // const searchInfo = location.state.searchInfo
+    // const {searchInfo} = useSelector(state => state.searchInfo)
 
     const [hotelData, setHotelData] = useState("");
     const [sortData, setSortData] = useState("-createdAt")
@@ -56,18 +50,18 @@ const HotelList = () => {
         hotelQuery = {
             address,
             sort: e.target.value,
-            filter
+            hotelSearch,
         }
         const hotelprice = price ? price : 0
-        const res = await axios.get(`api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}&&price[${filterData}]=${hotelprice}`);
+        const res = await axios.get(`api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}&&price[${filterData}]=${hotelprice}&&search=${hotelQuery.hotelSearch}`);
         setHotelData(res.data)
-        navigate(`/hotellist?address=${address}&&sort=${e.target.value}&&price[${filterData}]=${hotelprice}`)
+        navigate(`/hotellist?address=${address}&&sort=${e.target.value}&&price[${filterData}]=${hotelprice}&&search=${hotelQuery.hotelSearch}`)
     };
 
     const handleFilter = async (e) => {
         e.preventDefault();
         if (!price.trim()) return
-        const res = await axios.get(`api/search?address=${address}&&sort=${sortData}&&price[${filterData}]=${price}`);
+        const res = await axios.get(`api/search?address=${address}&&sort=${sortData}&&price[${filterData}]=${price}&&search=${hotelQuery.hotelSearch}`);
         setHotelData(res.data)
         navigate(`/hotellist?search=${address}&&sort=${sortData}&&price[${filterData}]=${price}`)
     };
@@ -79,7 +73,6 @@ const HotelList = () => {
         hotelQuery = {
             address,
             sort,
-            filter,
             hotelSearch: e.target.value
         }
 
@@ -90,6 +83,33 @@ const HotelList = () => {
     }
     return (
         <>
+        {/* <div className="sub-header d-flex flex-row mb-3 justify-content-center align-item-center" style={{ height: "80px" }}>
+                <div className=" flex-px-3 app" style={{ marginLeft: '20px' }}>
+                    <span style={{ fontSize: '14px' }}>Destination</span>
+                    <h5 style={{ fontSize: '14px' }} className="text-capitalize">{searchInfo.search}, Nepal</h5>
+                </div>
+                <div className=" flex-px-3 app" >
+                    <span style={{ fontSize: '14px' }}>Check In</span>
+                    <h5 style={{ fontSize: '14px' }}> {moment(searchInfo.date.startDate).format("DD MMMM YYYY")}</h5>
+
+                </div>
+                <div className="flex-px-3 app">
+                    <span style={{ fontSize: '14px' }}>Check Out</span>
+                    <h5 style={{ fontSize: '14px' }}>{moment(searchInfo.date.endDate).format("DD MMMM YYYY")}</h5>
+                </div>
+                <div className="flex-px-3 app">
+                    <span style={{ fontSize: '14px' }}>Rooms</span>
+                    <h5 style={{ fontSize: '14px' }}>{searchInfo.options.room}</h5>
+                </div>
+                <div className="flex-px-3 app">
+                    <span style={{ fontSize: '14px' }}>Adults</span>
+                    <h5 style={{ fontSize: '14px' }}>{searchInfo.options.adult}</h5>
+                </div>
+                <div className="flex-px-3 app">
+                    <span style={{ fontSize: '14px' }}>Children</span>
+                    <h5 style={{ fontSize: '14px' }}>{searchInfo.options.children}</h5>
+                </div>
+            </div> */}
             <div className='container'>
                 <div className='row mt-4 mx-auto'>
                     <div className='col-lg-3'>
@@ -248,7 +268,7 @@ const HotelList = () => {
                                                 </span>
                                             </div>
                                             <button className="button btn btn-primary" onClick={() => {
-                                                // navigate(`/hotelinfo/${hotel._id}`, { state: { hotel: hotel, searchInfo } })
+                                                navigate(`/hotelinfo/${hotel._id}`)
 
                                             }}>CHOOSE</button>
                                         </div>

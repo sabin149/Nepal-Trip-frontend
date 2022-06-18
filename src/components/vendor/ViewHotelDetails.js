@@ -18,8 +18,6 @@ const ViewHotelDetails = () => {
 
     const oneHotel = hotel.hotels.filter(hotel => hotel.user._id === userID)
 
-
-
     useEffect(() => {
         dispatch(getHotels())
     }, [token, dispatch])
