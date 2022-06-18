@@ -56,3 +56,4 @@ export const getBooking = ({ id, token }) => async (dispatch) => {
         })
     }
 }
+
