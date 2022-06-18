@@ -14,7 +14,8 @@ const Checkout = () => {
 <div className="col-lg-8 detailform">
   <form className='ui form'>
     <div className='card-box'> 
-    <h3>User Details</h3>
+    <h3>User Details</h3>\
+    {/* First Name and Last Name form field */}
     <div className='fields'>
       <div className='fname'>
       <input class="form-control fnameform" type="text" placeholder="First Name"></input>
@@ -23,16 +24,20 @@ const Checkout = () => {
       <input class="form-control fnameform" type="text" placeholder="Last Name"></input>
       </div>
     </div>
+    {/* Email Address field */}
     <div className='fields'>
       <div className='emailad'>
       <input class="form-control fnameform" type="text" placeholder="Email address" aria-label="default input example">
 </input>
       </div>
     </div>
-    <div className='fields'>
+    {/* Contact number and Address field */}
+    <div className='fields'> 
+      {/* Contact number*/}
       <div className='contactdet'>
       <input class="form-control fnameform" type="text" placeholder="Mobile Number"></input>
       </div>
+      {/* Address */}
       <div className='addresloc'>
       <input class="form-control fnameform" type="text" placeholder="Address"></input>
       </div>
