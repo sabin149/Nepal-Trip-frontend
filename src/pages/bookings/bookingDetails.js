@@ -4,26 +4,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getBookings } from "../../redux/actions/bookingAction";
 import Carousel from "../../components/Carousel"
-
-
 const BookingDetails = () => {
-
   const dispatch = useDispatch()
   const token = localStorage.getItem("token")
   const userID = localStorage.getItem("userID")
-
   useEffect(() => {
     dispatch(getBookings({ token }))
   }, [dispatch, token])
-
   const booking = useSelector(state => state.booking.bookings)
-
   const userBooking = booking.filter(booking => booking?.user?._id === userID)
-
   const hotelDetails = userBooking && userBooking?.map(booking => booking.hotel)
-
   const roomDetails = userBooking && userBooking?.map(booking => booking.room)
-
   // console.log(hotel_images)
   return (
     <div className="main_content">
