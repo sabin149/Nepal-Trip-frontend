@@ -133,19 +133,19 @@ const userBooking= booking.filter(booking=>booking.user._id===userID)
                     </td>
                     <td className="" rowSpan="2">
                       <h3 className="color-black bold pointer">
-                        {" "}
+                        
                         Deluxe Room
                       </h3>
                     </td>
                     <td className="" rowSpan="3">
                       <h3 className="color-lack bold pointer">
-                        {" "}
+               
                        240 sq.ft
                       </h3>
                     </td>
                     <td className="" rowSpan="4">
                       <h3 className="color-black bold pointer">
-                        {" "}
+                    
                        King Bed
                       </h3>
                     </td>
