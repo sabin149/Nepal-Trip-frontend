@@ -16,6 +16,5 @@ const DataProvider = ({children}) => {
         </Provider>
     )
 }
-
 export default DataProvider
 
