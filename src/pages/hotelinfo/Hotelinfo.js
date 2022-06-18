@@ -1,33 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./hotelinfo.css";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import moment from "moment";
-// import { useSelector, useDispatch } from "react-redux";
-// import { getHotel } from "../../redux/actions/hotelAction";
+import { useSelector, useDispatch } from "react-redux";
+import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
 import RoomTable from "../../components/room/RoomTable";
+
 const Hotelinfo = () => {
-  const location = useLocation();
-  // const { id } = useParams();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const { id } = useParams();
 
-  const { hotel, searchInfo } = location.state;
 
-  // useEffect(() => {
-  //   dispatch(getHotel({ id }))
+  useEffect(() => {
+    dispatch(getHotel({ id }))
+  }, [dispatch, id])
 
-  // }, [dispatch, id])
-
-  // const hotelInfo = useSelector(state => state.hotel.hotels);
-
-  // console.log(hotelInfo)
-
-  const { date, options } = searchInfo
+  const hotel = useSelector(state => state.hotel.hotels);
+  const {searchInfo} = useSelector(state => state.searchInfo);
+  const {options,date}=searchInfo
   const [readMore, setReadMore] = useState(false)
 
   return (
+    
     <div className="main_content">
-      <div className="search_result">
+      {/* <div className="search_result">
         <div className="search_result nav">
           <div className="search_result navContainer">
             <div className="flex py-2">
@@ -70,7 +67,7 @@ const Hotelinfo = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="second-nav d-flex">
         <div className="Item">
           <Link to="">
@@ -109,7 +106,8 @@ const Hotelinfo = () => {
             <div className="row">
               {/* Carousel Row */}
               <div className="col-lg-8">
-                <Carousel images={hotel.hotel_images} />
+                {/* <Carousel images={hotel.hotel_images} /> */}
+                <Carousel images={hotel?.hotel_images} />
               </div>
 
               <div className="col-lg-4 abouthotel">
@@ -121,9 +119,9 @@ const Hotelinfo = () => {
                     <div className="caption">
                     <span>
                     {
-                      hotel.hotel_info.length < 200
-                            ? hotel.hotel_info
-                            : readMore ?hotel.hotel_info + ' ' : hotel.hotel_info.slice(0, 200) + '.....'
+                   hotel&&   hotel?.hotel_info?.length < 200
+                            ? hotel?.hotel_info
+                            : readMore ?hotel?.hotel_info + ' ' : hotel?.hotel_info?.slice(0, 200) + '.....'
                     }
                 </span>
                     </div>

@@ -37,7 +37,7 @@ export default function Carousel({images}) {
         className="mySwiper"
       >
         {
-            images.map((image,index) => (
+         images&& images?.map((image,index) => (
                 <SwiperSlide key={index}>
                     <img src={image.url} alt="hotel" style={{width:720, height:550}} />
                 </SwiperSlide>

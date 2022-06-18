@@ -19,7 +19,7 @@ const RoomTable = ({hotel}) => {
                 </thead>
                 <tbody>
                   {
-                    hotel.rooms.map((room) =>
+                   hotel&& hotel?.rooms?.map((room) =>
                       <tr key={room._id} >
                         <td className="" rowSpan="1">
                           <h3 className="color-dark-blue bold pointer"> {room.room_type}</h3>
