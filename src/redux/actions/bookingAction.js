@@ -19,5 +19,4 @@ export const createBooking = ({ booking, token }) => async (dispatch) => {
             type: GLOBALTYPES.ALERT,
             payload: { error: error.response.data.msg }
         })
-    }
-}
+    }}
