@@ -62,7 +62,7 @@ function App() {
           <Route path="/editHotelDetails/:id" element={<EditHotelDetails/>}/>
           <Route path="/editRoomDetails/:id" element={<EditRoomDetails/>}/>
           <Route path="/bookings" element={<Bookings />} />
-          <Route path="/editBookingDetails" element={EditBookingDetails}/>
+          <Route path="/editBookingDetails" element={<EditBookingDetails/>}/>
 
 
           <Route path="*" element={<NotFound />} />

@@ -1,7 +1,6 @@
 import "./hotel_list.css";
 import { useNavigate, useLocation } from 'react-router-dom';
-import moment from "moment"
-import {useState, useEffect, useContext} from "react";
+import {useState, useEffect} from "react";
 import axios from "axios";
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { useSelector } from "react-redux";
@@ -31,7 +30,8 @@ const HotelList = () => {
 
     const navigate = useNavigate()
 
-    // const {searchInfo} = useSelector(state => state.searchInfo)
+    const {searchInfo} = useSelector(state => state.searchInfo)
+    console.log(searchInfo);
 
     const [hotelData, setHotelData] = useState("");
     const [sortData, setSortData] = useState("-createdAt")
@@ -42,6 +42,7 @@ const HotelList = () => {
     useEffect(() => async () => {
         const res = await axios.get(`api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}`)
         setHotelData(res.data)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleSort = async (e) => {
@@ -53,7 +54,7 @@ const HotelList = () => {
             hotelSearch,
         }
         const hotelprice = price ? price : 0
-        const res = await axios.get(`api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}&&price[${filterData}]=${hotelprice}&&search=${hotelQuery.hotelSearch}`);
+        const res = await axios.get(`api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}&&price[${filterData}]=${hotelprice}&&hotelSearch=${hotelQuery.hotelSearch}`);
         setHotelData(res.data)
         navigate(`/hotellist?address=${address}&&sort=${e.target.value}&&price[${filterData}]=${hotelprice}&&search=${hotelQuery.hotelSearch}`)
     };

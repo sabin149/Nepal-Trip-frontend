@@ -9,7 +9,8 @@ import "./hotel.css";
 
 const Hotel = () => {
   const dispatch = useDispatch()
-  const { auth } = useSelector(state => state)
+
+
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
 
@@ -74,7 +75,7 @@ const Hotel = () => {
       return dispatch({
         type: GLOBALTYPES.ALERT, payload: { error: "Please add hotel images." }
       })
-    dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images, auth, token }))
+    dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images, token }))
     navigate("/")
   }
 

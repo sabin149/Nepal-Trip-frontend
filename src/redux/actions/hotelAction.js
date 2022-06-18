@@ -13,7 +13,7 @@ export const HOTEL_TYPES = {
     DELETE_HOTEL: "DELETE_HOTEL",
 }
 
-export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, auth, token }) => async (dispatch) => {
+export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, token }) => async (dispatch) => {
     let media = []
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
@@ -21,7 +21,7 @@ export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, p
         const res = await postDataAPI('hotel', { hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images: media }, token)
         dispatch({
             type: HOTEL_TYPES.CREATE_HOTEL,
-            payload: { ...res.data.newHotel, user: auth.user }
+            payload: { ...res.data.newHotel, }
         })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
         dispatch({
@@ -45,7 +45,7 @@ export const getHotels = () => async (dispatch) => {
         const res = await getDataAPI('hotel')
         dispatch({
             type: HOTEL_TYPES.GET_HOTELS,
-            payload: { ...res.data, page:  1}
+            payload: { ...res.data, page:  1, count: res.data.count }
         })
 
         dispatch({ type: HOTEL_TYPES.LOADING_HOTEL, payload: false })
