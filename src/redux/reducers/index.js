@@ -11,6 +11,6 @@ auth,
 hotel,
 alert,
 user,
-searchInfo
+searchInfo,
 booking
 });

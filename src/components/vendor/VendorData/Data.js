@@ -3,7 +3,6 @@ import {
   UilEstate,
   UilClipboardAlt,
   UilUsersAlt,
-  UilMoneyBill,
   UilHome,
   UilChart,
   UilComment,

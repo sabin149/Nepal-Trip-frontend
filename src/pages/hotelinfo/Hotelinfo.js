@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./hotelinfo.css";
 import { Link, useParams } from "react-router-dom";
-import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
@@ -17,8 +16,8 @@ const Hotelinfo = () => {
   }, [dispatch, id])
 
   const hotel = useSelector(state => state.hotel.hotels);
-  const {searchInfo} = useSelector(state => state.searchInfo);
-  const {options,date}=searchInfo
+  // const {searchInfo} = useSelector(state => state.searchInfo);
+  // const {options,date}=searchInfo
   const [readMore, setReadMore] = useState(false)
 
   return (
@@ -104,13 +103,11 @@ const Hotelinfo = () => {
           </p>
           <div>
             <div className="row">
-              {/* Carousel Row */}
               <div className="col-lg-8">
-                {/* <Carousel images={hotel.hotel_images} /> */}
                 <Carousel images={hotel?.hotel_images} />
               </div>
 
-              <div className="col-lg-4 abouthotel">
+              <div className="col abouthotel">
                 <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                   <div>
                     <h4 className="color-dark-blue bold">
