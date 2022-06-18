@@ -3,20 +3,19 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getBookings } from "../../redux/actions/bookingAction";
+import Carousel from "../../components/Carousel"
 const BookingDetails = () => {
-  const dispatch=useDispatch()
-  const token=localStorage.getItem("token")
-  const userID=localStorage.getItem("userID")
-  useEffect(()=>{
-    dispatch(getBookings({token}))
-  },[dispatch, token])
-  const booking=useSelector(state=>state.booking.bookings)
-  // console.log(booking,"booking");
-const bookingUserID=booking&& booking.map(booking=>booking.user._id)
-// console.log(bookingUserID,"bookingUserID");
-// console.log(userID,"userID");
-const userBooking= booking.filter(booking=>booking.user._id===userID)
-  console.log(userBooking,"userBooking");
+  const dispatch = useDispatch()
+  const token = localStorage.getItem("token")
+  const userID = localStorage.getItem("userID")
+  useEffect(() => {
+    dispatch(getBookings({ token }))
+  }, [dispatch, token])
+  const booking = useSelector(state => state.booking.bookings)
+  const userBooking = booking.filter(booking => booking?.user?._id === userID)
+  const hotelDetails = userBooking && userBooking?.map(booking => booking.hotel)
+  const roomDetails = userBooking && userBooking?.map(booking => booking.room)
+  // console.log(hotel_images)
   return (
     <div className="main_content">
       <div className="container pd-top-md">
@@ -24,13 +23,13 @@ const userBooking= booking.filter(booking=>booking.user._id===userID)
           <h2>Booking Date: Wed Jun 15 00:00:00 GMT 2022</h2>
           <hr></hr>
           <div className="row">
-            <div className="col-sm-4 BookingImage">
-              <img src="https://assets.xceltrip.com/gallery-1583997472633-34394.jpg" alt="room_image"/>
+            <div className="col-sm-8 BookingImage">
+              <Carousel images={hotelDetails[0]?.hotel_images} />
             </div>
             <div className="col-sm abouthotel">
               <div className="pd-all-sm ">
                 <div>
-                  <h4>Hotel Da Yatra Courtyard</h4>
+                  <h4>Pokhara</h4>
                   <div className="caption">
                     Street No. 7, Gaurighat, Lakeside
                   </div>
@@ -43,13 +42,13 @@ const userBooking= booking.filter(booking=>booking.user._id===userID)
                   <div className="caption">
                     <Link to="" className="block-in-mobile">
                       <i className="fa-solid fa-phone"></i>
-                      <span> 9840108690 </span>
+                      <span> {hotelDetails[0]?.phone} </span>
                     </Link>
                   </div>
                   <div className="caption">
                     <Link to="" className="block-in-mobile">
                       <i className="fa-solid fa-envelope"></i>
-                      <span> sp554540@gmail.com </span>
+                      <span> {hotelDetails[0]?.hotel_email} </span>
                     </Link>
                   </div>
                 </div>
@@ -97,12 +96,12 @@ const userBooking= booking.filter(booking=>booking.user._id===userID)
           <div className="row">
             <div className="col-sm-12">
               <h3 className="policy">
-                Your payment will be handled by Hotel: Orchid hotel
+                Your payment will be handled by Hotel: {hotelDetails[0]?.hotel_name}
               </h3>
-              <hr/>
-              <br/>
+              <hr />
+              <br />
               Total amount to be paid is:<br></br>
-              3120.31 NPR
+              {userBooking[0]?.total_amount} NPR
               <hr></hr>
             </div>
             <div className="col-sm-9 abouthotel">
@@ -110,7 +109,7 @@ const userBooking= booking.filter(booking=>booking.user._id===userID)
             </div>
           </div>
           <div className="row pricetable">
-            <div className="col-lg-8 pricehotel">
+            <div className="col-lg-12 pricehotel">
               <table className="table table-bordered">
                 <thead>
                   <tr>
@@ -128,25 +127,25 @@ const userBooking= booking.filter(booking=>booking.user._id===userID)
                     <td className="" rowSpan="1">
                       <h3 className="color-black bold pointer">
                         {" "}
-                       SP Channel
+                       {userBooking[0]?.name}
                       </h3>
                     </td>
                     <td className="" rowSpan="2">
                       <h3 className="color-black bold pointer">
-                        
-                        Deluxe Room
+                        {" "}
+                       {roomDetails[0]?.room_type}
                       </h3>
                     </td>
                     <td className="" rowSpan="3">
                       <h3 className="color-lack bold pointer">
-               
-                       240 sq.ft
+                        {" "}
+                        240 sq.ft
                       </h3>
                     </td>
                     <td className="" rowSpan="4">
                       <h3 className="color-black bold pointer">
-                    
-                       King Bed
+                        {" "}
+                        King Bed
                       </h3>
                     </td>
                   </tr>
@@ -155,7 +154,7 @@ const userBooking= booking.filter(booking=>booking.user._id===userID)
             </div>
           </div>
           <div className="row pricetable">
-            <div className="col-lg-8 pricehotel">
+            <div className="col-lg-12 pricehotel">
               <table className="table table-bordered">
                 <thead>
                   <tr>
@@ -173,30 +172,42 @@ const userBooking= booking.filter(booking=>booking.user._id===userID)
                     <td className="" rowSpan="1">
                       <h3 className="color-black bold pointer">
                         {" "}
-                       1
+                        1
                       </h3>
                     </td>
                     <td className="" rowSpan="2">
                       <h3 className="color-black bold pointer">
                         {" "}
-                        2
+                        1
                       </h3>
                     </td>
                     <td className="" rowSpan="3">
                       <h3 className="color-lack bold pointer">
                         {" "}
-                       0
+                        0
                       </h3>
                     </td>
                     <td className="" rowSpan="4">
                       <h3 className="color-black bold pointer">
                         {" "}
-                       Breakfast
+                        Breakfast
                       </h3>
                     </td>
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-sm-6 ">
+              <h4>Total Price:</h4>
+            </div>
+            <div className="col-sm-9 abouthotel">
+              <div className="pd-all-sm ">
+                <div>
+                  <h4>RS. {userBooking[0]?.total_amount}</h4>
+                </div>
+              </div>
             </div>
           </div>
           <div className="my-4"></div>
