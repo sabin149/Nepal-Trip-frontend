@@ -24,11 +24,6 @@ const BookingDetails = () => {
 
   const roomDetails = userBooking && userBooking?.map(booking => booking.room)
 
-
-
-
-
-
   // console.log(hotel_images)
   return (
     <div className="main_content">
