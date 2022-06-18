@@ -1,35 +1,16 @@
 import React from 'react'
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import Carousel from '../Carousel';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteHotelRoom } from '../../redux/actions/roomAction';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 
-const modalBoxstyle = {
-    position: 'absolute',
-    top: '55%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    maxWidth: '60vw',
-    width: '60vw',
-    // height:"100vh",
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4, 
-    borderTop: "5px solid #c48d3b",
-    borderBottom:" 1px solid rgba(34,36,38,.25)",
-    zIndex:1,
-};
-
-const RoomTable = ({hotel}) => {
+const RoomTable = ({ hotel }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+
     const token = localStorage.getItem('token');
 
     const handleDeleteRoom = ({ room }) => {
@@ -38,9 +19,30 @@ const RoomTable = ({hotel}) => {
             window.location.reload()
         }
     }
+
+    const [open, setOpen] = React.useState(false);
+    const [scroll, setScroll] = React.useState('paper');
+
+    const handleClickOpen = (scrollType) => () => {
+        setOpen(true);
+        setScroll(scrollType);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const descriptionElementRef = React.useRef(null);
+    React.useEffect(() => {
+        if (open) {
+            const { current: descriptionElement } = descriptionElementRef;
+            if (descriptionElement !== null) {
+                descriptionElement.focus();
+            }
+        }
+    }, [open]);
     return (
         <>
-
             <div className="row pricetable">
                 <div className="col-lg-8 pricehotel">
                     <table className="table table-bordered">
@@ -53,44 +55,38 @@ const RoomTable = ({hotel}) => {
 
                             </tr>
                         </thead>
-                        {/* Deluxe Room */}
+
                         <tbody>
-
-
                             {
                                 hotel.rooms.map(room => (
+                            console.log(room),
                                     <tr key={room._id}  >
                                         <td className="" rowSpan="1">
-                                            <h3 className="color-dark-blue bold pointer" onClick={handleOpen}> {room.room_type}</h3>
+                                            <h3 className="color-dark-blue bold pointer" onClick={handleClickOpen('body')}> {room.room_type}</h3>
                                             <div>
-                                                <Modal sx={{
-                                                    overflowY: 'scroll',
 
-                                                    width: '100%',
-
+                                                <Dialog sx={{
+                                                    zIndex:"1",
+                                                    backgroundBlendMode:"darken",
+                                                    backgroundColor:"rgba(0,0,0,0.5)",
                                                 }}
                                                     open={open}
                                                     onClose={handleClose}
-                                                    aria-labelledby="modal-modal-title"
-                                                    aria-describedby="modal-modal-description"
+                                                    scroll={scroll}
+                                                    aria-labelledby="scroll-dialog-title"
+                                                    aria-describedby="scroll-dialog-description"
                                                 >
-                                                    <Box sx={modalBoxstyle}>
-                                                        <Typography id="modal-modal-title" variant="h6" component="h2">
-                                                            Text in a modal
-                                                        </Typography>
-                                                        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                                            <Carousel images={room.room_images} />
+                                                    <h3 className='mt-3' style={{
+                                                        marginLeft:"23px",
+                                                    }}>Room Details</h3>
+                                                    <hr />
+                                                    <DialogContent dividers={scroll === 'paper'}>
+                                                       
+                                                       <Carousel images={room.room_images} />
+                                                    </DialogContent>
 
-                                                            <Typography>
-                                                                {console.log(room.room_type)}
-
-                                                            </Typography>
-
-                                                        </Typography>
-                                                    </Box>
-                                                </Modal>
+                                                </Dialog>
                                             </div>
-
                                             <div className="image-holder bg-light-gray height160">
                                                 <img className="room-image" src={room.room_images[0].url} alt="roomimage" />
                                             </div>

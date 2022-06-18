@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext } from "react";
 import "./home.css";
 import { useState } from "react";
 import { DateRange } from "react-date-range";
@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes"
 import { Grid } from '@mui/material';
 import useStyles from './homeStyle';
+import { createSearchInfo } from "../../redux/actions/searchInfoAction";
 
 const Home = () => {
   const classNamees = useStyles();
@@ -54,26 +55,28 @@ const Home = () => {
     dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
     const res = await axios.get(`api/search?address=${search}`)
 
-
     if (res.status === 200 && res.data.status === "failed") {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
       dispatch({ type: GLOBALTYPES.ALERT, payload: { error: res.data.msg } })
       return
     }
 
-
     if (res.status === 200) {
-      navigate('/hotellist', {
-        state: {
-          searchData: res.data, searchInfo: {
-            search, date, options
-          }
-        }
-      })
+      navigate(`/hotellist?address=${search}&& startDate=${format(date[0].startDate, "yyyy-MM-dd")}&& endDate=${format(date[0].endDate, "yyyy-MM-dd")}&& adult=${options.adult}&& children=${options.children}&& room=${options.room}`
+      )
+
+      dispatch(createSearchInfo({ searchInfo: { search, date, options } }))
+
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
     }
 
 
+  }
+
+  const searchInfo = {
+    search,
+    date,
+    options
   }
 
   return (
@@ -267,6 +270,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+
     </>
   );
 };
