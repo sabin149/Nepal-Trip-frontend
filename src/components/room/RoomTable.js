@@ -5,6 +5,9 @@ const RoomTable = ({ hotel }) => {
   const navigate = useNavigate()
   const [selectedRoom, setSelectedRoom] = useState()
 
+
+ 
+
   const searchInfo = {
     date: [{
       startDate: "06/18/2022",
@@ -39,7 +42,7 @@ const RoomTable = ({ hotel }) => {
                     <td className="" rowSpan="1">
                       <h3 className="color-dark-blue bold pointer"> {room.room_type}</h3>
                       <div className="image-holder bg-light-gray height160">
-                        <img className="room-image" src={room.room_images[0].url} alt="roomimage"></img>
+                        <img className="room-image" src={room?.room_images[0]?.url} alt="roomimage"></img>
                       </div>
                       <div>
                         <ul className="mg-top-sm ">

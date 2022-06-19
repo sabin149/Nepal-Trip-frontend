@@ -179,6 +179,8 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
+
+              
               <div className='field bb pb-1'>
                 <div className='note-description'>
                   <i>Note: Final price is subject to the latest exchange rate and may slightly vary.</i>
