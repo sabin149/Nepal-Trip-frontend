@@ -32,14 +32,14 @@ const Login = () => {
         <hr />
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
-          <input type="email" className="form-control" id="exampleInputEmail1"
+          <input type="email" className="form-control auth_input" id="exampleInputEmail1"
             name="email" onChange={handleChangeInput} value={email} />
 
         </div>
         <div className="form-group">
           <label htmlFor="exampleInputPassword1">Password</label>
           <div className="pass">
-            <input type={typePass ? "text" : "password"} className="form-control" id="exampleInputPassword1" name='password'
+            <input type={typePass ? "text" : "password"} className="form-control auth_input" id="exampleInputPassword1" name='password'
               onChange={handleChangeInput} value={password}
             />
             <small onClick={() => setTypePass(!typePass)}>
