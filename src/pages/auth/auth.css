@@ -25,12 +25,10 @@
     opacity: 0.5;
 }
 
-
-
-.form-control:focus {
+.auth_input:focus {
     color: #212529;
     background-color: #fff;
-    border-color: #ffc107;
+    border-color: #ff2c07 !important;
     outline: 0;
-    /* box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%); */
+    box-shadow:rgba(red, green, blue, alpha)
 }
