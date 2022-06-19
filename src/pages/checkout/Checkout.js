@@ -4,25 +4,18 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createBooking } from '../../redux/actions/bookingAction'
 import Khalti from '../../components/khalti/Khati'
-
 const Checkout = () => {
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
-
   const token = localStorage.getItem('token')
-
   const { hotel, room, searchInfo } = location.state
-
   const [userrequests, setUserRequests] = useState({
     requests: [],
     response: [],
   });
-
   const [ownRequest, setOwnRequest] = useState("");
-
   const [tcChecked, setTcChecked] = useState(false);
-
   const initialState = {
     firstName: "",
     lastName: "",
@@ -32,23 +25,19 @@ const Checkout = () => {
   }
   const [userData, setUserData] = useState(initialState);
   const { firstName, lastName, email, phone, address } = userData;
-
   const handleInput = e => {
     const { name, value } = e.target
     setUserData({ ...userData, [name]: value })
   }
-
   const handleChange = (e) => {
     const { value, checked } = e.target;
     const { requests } = userrequests;
-
     if (checked) {
       setUserRequests({
         requests: [...requests, value],
         response: [...requests, value],
       });
     }
-
     else {
       setUserRequests({
         requests: requests.filter((e) => e !== value),
@@ -56,7 +45,6 @@ const Checkout = () => {
       });
     }
   };
-
   const booking = {
     room: room._id,
     hotel: hotel._id,
@@ -76,7 +64,6 @@ const Checkout = () => {
     e.preventDefault();
     dispatch(createBooking(booking,navigate ,token)) 
   }
-
   return (
     <>
       <div className="container pd-top-md detailpage">
@@ -98,7 +85,6 @@ const Checkout = () => {
                 <div className='fields'>
                   <div className='emailad'>
                     <input className="form-control fnameform" type="text" placeholder="Email address" aria-label="default input example" value={email} name="email" onChange={handleInput} />
-
                   </div>
                 </div>
                 {/* Contact number and Address field */}
@@ -123,14 +109,12 @@ const Checkout = () => {
                         <input className="form-check-input" type="checkbox" name="requests" id="inlineCheckbox1" value="Early Check In" onChange={handleChange} />
                         <label className="form-check-label" htmlFor="inlineCheckbox1">Early Check-In</label>
                       </div>
-
                     </div>
                     <div className='field bb pb-1 '>
                       <div className="form-check form-check-inline">
                         <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="requests" onChange={handleChange} value="Late Check-In" />
                         <label className="form-check-label" htmlFor="inlineCheckbox2">Late Check-In</label>
                       </div>
-
                     </div>
                   </div>
                   <div className='equal width fields'>
@@ -139,14 +123,12 @@ const Checkout = () => {
                         <input className="form-check-input" type="checkbox" id="inlineCheckbox3" name="requests" onChange={handleChange} value="Large Bed" />
                         <label className="form-check-label" htmlFor="inlineCheckbox3">Large Bed</label>
                       </div>
-
                     </div>
                     <div className='field bb pb-1 '>
                       <div className="form-check form-check-inline">
                         <input className="form-check-input" type="checkbox" id="inlineCheckbox4" name="requests" onChange={handleChange} value="Twin Bed" />
                         <label className="form-check-label" htmlFor="inlineCheckbox4">Twin Bed</label>
                       </div>
-
                     </div>
                   </div>
                   <div className='equal width fields'>
@@ -155,7 +137,6 @@ const Checkout = () => {
                         <input className="form-check-input" type="checkbox" id="inlineCheckbox5" name="requests" onChange={handleChange} value="Smoking Room" />
                         <label className="form-check-label" htmlFor="inlineCheckbox5">Smoking Room</label>
                       </div>
-
                     </div>
                     <div className='field bb pb-1 '>
                       <div className="form-check form-check-inline">
@@ -172,8 +153,6 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-
-              
               <div className='field bb pb-1'>
                 <div className='note-description'>
                   <i>Note: Final price is subject to the latest exchange rate and may slightly vary.</i>
@@ -196,9 +175,7 @@ const Checkout = () => {
           </div>
         </div>
       </div>
-
     </>
   )
 }
-
 export default Checkout
