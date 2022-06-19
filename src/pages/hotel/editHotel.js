@@ -6,7 +6,7 @@ const EditHotel = () => {
   return (   
     <div className="container ">
         <div className="row">
-        < div className="d-flex align-items-center justify-content-center">
+        <div className="d-flex align-items-center justify-content-center">
 
             <div className="col-6 add_hotel ">
             <div className="input_images">

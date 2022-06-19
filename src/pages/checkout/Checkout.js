@@ -3,7 +3,7 @@ import "./checkout.css"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createBooking } from '../../redux/actions/bookingAction'
-
+import Khalti from '../../components/khalti/Khati'
 
 const Checkout = () => {
   const dispatch = useDispatch()
@@ -57,31 +57,24 @@ const Checkout = () => {
     }
   };
 
+  const booking = {
+    room: room._id,
+    hotel: hotel._id,
+    start_date: searchInfo?.date[0].startDate,
+    end_date: searchInfo?.date[0].endDate,
+    total_amount: room.room_price,
+    name: firstName + " " + lastName,
+    email,
+    phone,
+    address,
+    request: ownRequest ? [...userrequests.requests, ownRequest] : userrequests.requests,
+    tc: tcChecked,
+    payment_id: Math.floor(Math.random() * 1000000000),
+    payment_type: "Cash",
+  }
   const handlePayAtHotel = (e) => {
     e.preventDefault();
-    const booking = {
-      room: room._id,
-      hotel: hotel._id,
-      start_date: searchInfo?.date[0].startDate,
-      end_date: searchInfo?.date[0].endDate,
-      total_amount: room.room_price,
-      name: firstName + " " + lastName,
-      email,
-      phone,
-      address,
-      request: ownRequest ? [...userrequests.requests, ownRequest] : userrequests.requests,
-      tc: tcChecked,
-      payment_id: Math.floor(Math.random() * 1000000000),
-      payment_type: "Cash",
-    }
-    dispatch(createBooking({ booking, token }))
-
-    setTimeout(() => {
-      navigate("/bookings")
-    }
-      , 5000);
-
-
+    dispatch(createBooking(booking,navigate ,token)) 
   }
 
   return (
@@ -191,9 +184,8 @@ const Checkout = () => {
                 </div>
               </div>
               <div className='align-right'>
-                <button className='btn btn-primary me-2' onClick={handlePayAtHotel}>Pay At Hotel <i className="fa-solid fa-angle-right text-light"></i></button>
-                <button className='btn btn-primary'>Pay Now <i className="fa-solid fa-angle-right text-light"></i></button>
-
+                <button className='btn btn-primary me-2 payHotelBtn' onClick={handlePayAtHotel}>Pay At Hotel <i className="fa-solid fa-angle-right text-light"></i></button>
+                  <Khalti booking={booking} token={token} />
               </div>
             </form>
           </div>

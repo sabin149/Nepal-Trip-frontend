@@ -119,10 +119,10 @@ i{
   .fa-angle-right {
     color: #e5e5e5;
   }
-.btn-primary{
+.payHotelBtn{
     background-color: #c48a2b;
     border-radius: .28571429rem;
     border: none;}
-.btn-primary:hover{
+.payHotelBtn:hover{
     background-color: #f3a932;
 }

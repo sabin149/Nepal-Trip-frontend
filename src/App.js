@@ -57,7 +57,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/users" element={isAdmin ? <UserListTable /> : <Navigate to="/" />} />
           <Route path="/admin/edituser" element={isAdmin ? <EditUser /> : <Navigate to="/" />} />
-          <Route path="/viewHotel" element={isAdmin ? <ViewHotelDetails /> : <Navigate to="/" />} />
+          <Route path="/viewHotel" element={isVendor ? <ViewHotelDetails /> : <Navigate to="/" />} />
           <Route path="/editHotelDetails/:id" element={isVendor ? <EditHotelDetails /> : <Navigate to="/" />} />
           <Route path="/editRoomDetails/:id" element={isVendor ? <EditRoomDetails /> : <Navigate to="/" />} />
           <Route path="/bookings" element={isUser ? <Bookings /> : <Navigate to="/" />} />
