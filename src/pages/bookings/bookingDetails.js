@@ -15,7 +15,6 @@ const BookingDetails = () => {
   const userBooking = booking.filter(booking => booking?.user?._id === userID)
   const hotelDetails = userBooking && userBooking?.map(booking => booking.hotel)
   const roomDetails = userBooking && userBooking?.map(booking => booking.room)
-
   return (
     <>
     { userBooking.length>0?
@@ -269,11 +268,9 @@ const BookingDetails = () => {
             <h2 className="position-absolute text-secondary"
                 style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                 No Booking Found
-              
             </h2>
             <Link to="/" className="position-absolute"
                 style={{ top: '55%', left: '50%', transform: 'translate(-50%, -50%)' }}>Go to Homepage</Link>
-
         </div>
       }
       </>
