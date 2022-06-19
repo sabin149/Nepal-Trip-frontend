@@ -187,7 +187,7 @@ const Checkout = () => {
               </div>
               <div className='align-right'>
                 <button className='btn btn-primary me-2 payHotelBtn' onClick={handlePayAtHotel}>Pay At Hotel <i className="fa-solid fa-angle-right text-light"></i></button>
-                  <Khalti booking={booking} token={token} />
+                  <Khalti booking={booking} token={token} navigate={navigate} />
               </div>
             </form>
           </div>

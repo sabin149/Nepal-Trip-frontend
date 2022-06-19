@@ -7,7 +7,6 @@ import Register from "../../pages/auth/Register";
 import { logout } from "../../redux/actions/authAction";
 import { useDispatch } from "react-redux";
 
-
 const Header = ({ isUser }) => {
   const dispatch = useDispatch();
   return (
@@ -20,13 +19,12 @@ const Header = ({ isUser }) => {
         </div>
         <div className="navItems">
           <div className="hotel">
-            <i className="fa-solid fa-suitcase"> </i> 
-        
-            <span> Hotel Booking </span>
+            <i className="fa-solid fa-suitcase"> </i>
+            <span> <Link to="/bookings" className="text-decoration-none text-dark">Hotel Booking</Link> </span>
           </div>
           <div className="flight">
-            <i className="fa-solid fa-plane"> </i> 
-        
+            <i className="fa-solid fa-plane"> </i>
+
             <span > Flight Booking </span>
           </div>
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
@@ -36,7 +34,7 @@ const Header = ({ isUser }) => {
                 window.href = "/"
               }
             }}> Logout
-             <span> <i className="fa-solid fa-right-from-bracket text-light" ></i></span>
+              <span> <i className="fa-solid fa-right-from-bracket text-light" ></i></span>
 
             </button>}
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true" >
