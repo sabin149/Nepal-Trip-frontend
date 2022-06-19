@@ -1,31 +1,13 @@
 import "./bookingDetails.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getBookings } from "../../redux/actions/bookingAction";
 import Carousel from "../../components/Carousel"
-import { Dialog, DialogContent } from "@mui/material";
-
 const BookingDetails = () => {
   const dispatch = useDispatch()
   const token = localStorage.getItem("token")
   const userID = localStorage.getItem("userID")
-
-
-
-  const [open, setOpen] =useState(false);
-  const [scroll, setScroll] =useState('paper');
-
-  const handleClickOpen = (scrollType) => () => {
-      setOpen(true);
-      setScroll(scrollType);
-  };
-
-  const handleClose = () => {
-      setOpen(false);
-      console.log("working")
-  };
-
   useEffect(() => {
     dispatch(getBookings({ token }))
   }, [dispatch, token])
@@ -33,42 +15,6 @@ const BookingDetails = () => {
   const userBooking = booking.filter(booking => booking?.user?._id === userID)
   const hotelDetails = userBooking && userBooking?.map(booking => booking.hotel)
   const roomDetails = userBooking && userBooking?.map(booking => booking.room)
-
-  // console.log(hotel_images)
-  return (
-    <div className="main_content">
-      <div className="container pd-top-md">
-        <div>
-          <h2>Booking Date: Wed Jun 15 00:00:00 GMT 2022</h2>
-          <hr></hr>
-          <div className="row">
-            <div className="col-lg-7 BookingImage">
-              <Carousel images={hotelDetails[0]?.hotel_images} />
-            </div>
-            <div className="col-sm abouthotel">
-              <div className="pd-all-sm ">
-                <div>
-                  <h4>Pokhara</h4>
-                  <div className="caption">
-                    Street No. 7, Gaurighat, Lakeside
-                  </div>
-                  <div className="caption">
-                    <Link to="" className="block-in-mobile">
-                      <i className="fa-solid fa-location-dot"></i>
-                      <span> view in map </span>
-                    </Link>
-                  </div>
-                  <div className="caption">
-                    <Link to="" className="block-in-mobile">
-                      <i className="fa-solid fa-phone"></i>
-                      <span> {hotelDetails[0]?.phone} </span>
-                    </Link>
-                  </div>
-                  <div className="caption">
-                    <Link to="" className="block-in-mobile">
-                      <i className="fa-solid fa-envelope"></i>
-                      <span> {hotelDetails[0]?.hotel_email} </span>
-                    </Link>
   return (
     <>
     { userBooking.length>0?
@@ -125,36 +71,6 @@ const BookingDetails = () => {
                       </h3>
                     </td>
                     <td className="" rowSpan="2">
-
-                      <h3 className="color-black bold pointer" onClick={handleClickOpen('body')}>
-                       {roomDetails[0]?.room_type}
-                       <div>
-
-<Dialog sx={{
-    zIndex:"1",
-    backgroundBlendMode:"darken",
-    backgroundColor:"rgba(0,0,0,0.1)",
-}}
-    open={open}
-    onClose={handleClose}
-    scroll={scroll}
-    aria-labelledby="scroll-dialog-title"
-    aria-describedby="scroll-dialog-description"
->
-    <h3 className='mt-3' style={{
-        marginLeft:"23px",
-    }}>Room Details</h3>
-  <span  onClick={handleClose}> Close <i class="fa-solid fa-xmark"></i></span>
-    <hr />
-    <DialogContent dividers={scroll === 'paper'} >
-       
-       <Carousel images={roomDetails[0]?.room_images} />
-    </DialogContent>
-
-</Dialog>
-</div>
-
-
                       <h3 className="color-black bold pointer">
                         {" "}
                         1 No.of Night(s)
@@ -352,11 +268,9 @@ const BookingDetails = () => {
             <h2 className="position-absolute text-secondary"
                 style={{ top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
                 No Booking Found
-              
             </h2>
             <Link to="/" className="position-absolute"
                 style={{ top: '55%', left: '50%', transform: 'translate(-50%, -50%)' }}>Go to Homepage</Link>
-
         </div>
       }
       </>
