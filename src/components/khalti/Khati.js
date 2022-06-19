@@ -2,18 +2,15 @@ import React from "react";
 import KhaltiCheckout from "khalti-checkout-web";
 import { Button } from "@material-ui/core";
 import myKey from "./KhaltiConfig"
-
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { createBooking } from "../../redux/actions/bookingAction";
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 
 const Khalti = ({
-    booking, token
+    booking, token, navigate
 }) => {
 
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     let config = {
         publicKey: myKey.publicTestKey,
@@ -22,8 +19,7 @@ const Khalti = ({
         productUrl: "http://localhost:3000/checkout",
         eventHandler: {
             onSuccess() {
-                dispatch(createBooking({ ...booking, payment_type: "Khalti" }, token))
-                navigate('/')
+                dispatch(createBooking({ ...booking, payment_type: "Khalti" }, navigate,token))
             },
             onError(error) {
                 dispatch({ type: GLOBALTYPES.ALERT, payload: { error: error } })

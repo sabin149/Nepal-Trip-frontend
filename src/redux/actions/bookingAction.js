@@ -9,6 +9,7 @@ export const BOOKING_TYPES = {
     UPDATE_BOOKING: "UPDATE_BOOKING"
 }
 export const createBooking = (booking,navigate,token) => async (dispatch) => {
+    console.log(booking,navigate,token);
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         const res = await postDataAPI('booking', booking, token)
