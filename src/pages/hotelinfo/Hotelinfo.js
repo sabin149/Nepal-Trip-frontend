@@ -15,7 +15,7 @@ const Hotelinfo = () => {
     dispatch(getHotel({ id }))
   }, [dispatch, id])
 
-  const hotel = useSelector(state => state.hotel.hotels);
+  const hotel = useSelector(state => state?.hotel?.hotels);
   // const {searchInfo} = useSelector(state => state.searchInfo);
   // const {options,date}=searchInfo
   const [readMore, setReadMore] = useState(false)
