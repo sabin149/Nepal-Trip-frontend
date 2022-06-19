@@ -13,9 +13,10 @@ export const HOTEL_TYPES = {
     DELETE_HOTEL: "DELETE_HOTEL",
 }
 
-export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, token }) => async (dispatch) => {
+export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies,navigate ,token }) => async (dispatch) => {
     let media = []
     try {
+        
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         if (hotel_images.length > 0) media = await imageUpload(hotel_images)
         const res = await postDataAPI('hotel', { hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images: media }, token)
@@ -23,13 +24,14 @@ export const createHotel = ({ hotel_name, address, phone, hotel_email, pan_no, p
             type: HOTEL_TYPES.CREATE_HOTEL,
             payload: { ...res.data.newHotel, }
         })
-        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
+
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: {
                 success: res.data.msg
             }
         })
+        navigate('/viewHotel')
 
     } catch (err) {
         dispatch({
@@ -93,7 +95,7 @@ export const approveHotel = ({ hotel, token }) => async (dispatch) => {
     }
 }
 
-export const updateHotel = ({ hotelData, hotel_images, token, hotelDetails }) => async (dispatch) => {
+export const updateHotel = ({ hotelData, hotel_images,navigate, token, hotelDetails }) => async (dispatch) => {
 
     let media = []
     const imgNewUrl = hotel_images.filter(img => !img.url)
@@ -123,6 +125,7 @@ export const updateHotel = ({ hotelData, hotel_images, token, hotelDetails }) =>
 
         dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: res.data.newHotel })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
+        navigate('/viewHotel');
 
     } catch (err) {
         dispatch({

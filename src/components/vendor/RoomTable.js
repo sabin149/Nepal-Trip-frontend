@@ -68,7 +68,7 @@ const RoomTable = ({ hotel }) => {
                                                 <Dialog sx={{
                                                     zIndex:"1",
                                                     backgroundBlendMode:"darken",
-                                                    backgroundColor:"rgba(0,0,0,0.5)",
+                                                    backgroundColor:"rgba(0,0,0,0.1)",
                                                 }}
                                                     open={open}
                                                     onClose={handleClose}

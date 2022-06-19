@@ -18,6 +18,8 @@ const RoomTable = ({ hotel }) => {
     search:"Pokhara",
   }
 
+  console.log(hotel);
+
 
   return (
     <>

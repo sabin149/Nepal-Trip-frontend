@@ -64,8 +64,7 @@ const CreateRoom = ({ hotel }) => {
       room_type, room_price, room_options, room_facilities, user: userID
 
     }
-    dispatch(createHotelRoom({ hotel: hotel1, newRoom, room_images, token }))
-    navigate("/viewHotel")
+    dispatch(createHotelRoom({ hotel: hotel1, newRoom, room_images,navigate, token }))
   }
 
   return (
