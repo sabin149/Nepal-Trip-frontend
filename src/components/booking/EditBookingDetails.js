@@ -205,6 +205,4 @@ const EditBookingDetails = ({ booking,token }) => {
   )
 }
 
-
-
 export default EditBookingDetails
