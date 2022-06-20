@@ -100,7 +100,7 @@ const EditHotelDetails = () => {
           <h2 className="text-danger text-center mt-3">Update hotel</h2>
           <div className="row">
             <div className="d-flex justify-content-around mx-0 mb-1">
-              <div className="col-2">
+              <div className="col-sm-1">
 
               </div>
               <div className="col-6 add_hotel ">
