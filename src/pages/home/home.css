@@ -33,6 +33,7 @@
   border: none;
   outline: none;
   font-family: Poppins, sans-serif;
+  margin-left: 3px;
 }
 .headerSearchText {
   color: rgb(90, 90, 90);
@@ -80,7 +81,7 @@
 }
 
 .headerBtn{
-  /* margin-left: 20px; */
+  margin-left: 15px;
   border: none;
   padding: 5px 10px;
   cursor: pointer;
@@ -88,10 +89,10 @@
   border-radius: 5px;
   background-color: #e29b29;;
   font-family: Poppins;
-  font-size: 15px;
+  font-size: 14px;
   text-align: center;
   display: block;
-  width: 100%;
+  width:80px;
 }
 
 
@@ -138,12 +139,13 @@
 .ui.container.top{
   font-family: 'Kaushan Script';font-size: 22px;
   color: #003c75;
+  margin-left:250px;
 
 }
 
 
 /* Hover */
-.destinationn_nepal{
+.destination_nepal{
   width: 100%;
   display: flex;
   align-items: center;
@@ -151,27 +153,13 @@
   flex-wrap: wrap;
 }
 
-.destinationn {
-  background-color: rgb(0, 0, 0);
-  display: inline-block;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  margin: 10px;
-  max-width: 315px;
-  min-width: 230px;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  width: 100%;
-}
-
 
 .secondary_banner{
+  width: 100%;
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 1024px;
   gap: 20px;
 }
 
