@@ -6,6 +6,7 @@ import {
   UilHome,
   UilChart,
   UilComment,
+  UilUser, 
 } from "@iconscout/react-unicons";
 
 
@@ -19,12 +20,17 @@ export const SidebarData = [
   {
     icon: UilClipboardAlt,
     heading: "Bookings",
-    path: "/bookings",
+    path: "vendor/bookings",
   },
   {
     icon: UilUsersAlt,
     heading: "Customers",
     path: "/customers",
+  },
+  {
+    icon: UilUser,
+    heading: "Reviews",
+    path: "/vendor/reviews",
   },
   
   {
@@ -35,12 +41,12 @@ export const SidebarData = [
 
   {
     icon: UilHome,
-    heading: 'Hotels',
+    heading: 'Add Hotel',
     path:"/hotel"
   },
   {
     icon: UilChart,
-    heading: 'Rooms',
+    heading: 'Add Rooms',
     path:"/room"
   }
   
@@ -55,7 +61,7 @@ export const cardsData = [
       
     },
     barValue: 70,
-    value: "25,970",
+    value: "25",
     png: UilUsersAlt,
     series: [
       {
@@ -72,7 +78,7 @@ export const cardsData = [
      
     },
     barValue: 80,
-    value: "14,270",
+    value: "1",
     png: UilHome,
     series: [
       {
@@ -88,7 +94,7 @@ export const cardsData = [
       
     },
     barValue: 60,
-    value: "4,270",
+    value: "10",
     png: UilClipboardAlt,
     series: [
       {
@@ -103,7 +109,7 @@ export const cardsData = [
       backGround: "linear-gradient(180deg, #fe0944 0%, #feae96 100%)",
       
     },
-    barValue: 60,
+    barValue: 20,
     value: "4,270",
     png: UilComment,
     series: [

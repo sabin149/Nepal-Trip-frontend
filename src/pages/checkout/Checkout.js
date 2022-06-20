@@ -63,7 +63,7 @@ const Checkout = () => {
   }
   const handlePayAtHotel = (e) => {
     e.preventDefault();
-    dispatch(createBooking(booking,navigate ,token)) 
+    dispatch(createBooking(booking, navigate, token))
   }
   return (
     <>
@@ -154,6 +154,7 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
+
               <div className='field bb pb-1'>
                 <div className='note-description'>
                   <i>Note: Final price is subject to the latest exchange rate and may slightly vary.</i>
@@ -167,7 +168,7 @@ const Checkout = () => {
               </div>
               <div className='align-right'>
                 <button className='btn btn-primary me-2 payHotelBtn' onClick={handlePayAtHotel}>Pay At Hotel <i className="fa-solid fa-angle-right text-light"></i></button>
-                  <Khalti booking={booking} token={token} navigate={navigate} />
+                <Khalti booking={booking} token={token} navigate={navigate} />
               </div>
             </form>
           </div>

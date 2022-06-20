@@ -18,7 +18,7 @@ export const SidebarData = [
   {
     icon: UilClipboardAlt,
     heading: "Bookings",
-    path: "/bookings",
+    path: "/admin/bookings",
   },
   {
     icon: UilUsersAlt,

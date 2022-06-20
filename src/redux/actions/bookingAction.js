@@ -9,7 +9,6 @@ export const BOOKING_TYPES = {
     UPDATE_BOOKING: "UPDATE_BOOKING"
 }
 export const createBooking = (booking,navigate,token) => async (dispatch) => {
-    console.log(booking,navigate,token);
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         const res = await postDataAPI('booking', booking, token)
@@ -31,7 +30,6 @@ export const createBooking = (booking,navigate,token) => async (dispatch) => {
         })
     }
 }
-
 export const getBookings = ({ token }) => async (dispatch) => {
     try {
         dispatch({ type: BOOKING_TYPES.LOADING_BOOKING, payload: true })
@@ -65,16 +63,16 @@ export const getBooking = ({ id, token }) => async (dispatch) => {
     }
 
 }
-export const updateBooking = ({ booking, token }) => async (dispatch) => {
+export const updateBooking = ({ booking,navigate, token }) => async (dispatch) => {
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
-        const res = await patchDataAPI(`booking/${booking._id}`, { booking }, token)
+        const res = await patchDataAPI(`booking/${booking.id}`, booking , token)
         dispatch({
             type: BOOKING_TYPES.UPDATE_BOOKING,
             payload: { ...res.data.booking }
         })
-        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
+
     } catch (error) {
         dispatch({
             type: GLOBALTYPES.ALERT,

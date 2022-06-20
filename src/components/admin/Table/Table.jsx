@@ -46,7 +46,7 @@ function BasicTable() {
 
   const changeStatus =  ({ item }) => {
     dispatch(approveHotel({hotel: item, token}))
- 
+
   }
 
   return (
@@ -85,8 +85,6 @@ function BasicTable() {
                   <TableCell align="left">{moment(item.createdAt).format('YYYY-MM-DD')}</TableCell>
                   <TableCell align="left">
                     <span type="button" onClick={() => {
-                      // const hotel=item
-                      // dispatch(approveHotel({hotel, token}))
                       changeStatus({ item })
 
                     }} className="status" style={makeStyle(item.hotel_validity)}>{item.hotel_validity ? "Approved" : "Pending"}</span>
