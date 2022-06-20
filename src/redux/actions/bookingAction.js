@@ -8,8 +8,7 @@ export const BOOKING_TYPES = {
     GET_BOOKING: "GET_BOOKING",
     UPDATE_BOOKING: "UPDATE_BOOKING"
 }
-export const createBooking = ({ booking, token }) => async (dispatch) => {
-  
+export const createBooking = ({ booking, token }) => async (dispatch) => {  
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         const res = await postDataAPI('booking', booking , token)
@@ -58,7 +57,6 @@ export const getBooking = ({ id, token }) => async (dispatch) => {
             payload: { error: error.response.data.msg }
         })
     }
-
 }
 export const updateBooking = ({ booking, token }) => async (dispatch) => {
     try {
