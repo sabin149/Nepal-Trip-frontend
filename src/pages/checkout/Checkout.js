@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import "./checkout.css"
+
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createBooking } from '../../redux/actions/bookingAction'
@@ -171,7 +172,100 @@ const Checkout = () => {
             </form>
           </div>
           <div className="col-lg-4 detailroom">
-            Hello
+            <div className='card-box'>
+                <h4 class="pd-top-sm">Hotel Orchid</h4>
+                    <div className='stars-group'>
+                    <i class="fa-solid fa-star"></i>  
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>                 
+                    </div>
+                  <div className='flex flex-box'>
+                      <div className='box'>
+                      <p><span>Check-in</span></p>
+                      <h5>Jun 20</h5>
+                      </div>
+                      <div className='box'>
+                      <p><span>Check-Out</span></p>
+                      <h5>Jun 20</h5>
+                      </div>
+                      <div className='box b-lDuration'>
+                      <p><span>Duration</span></p>
+                      <h5>1 Night</h5>
+                      </div>
+                    </div>
+                    <h3 className='mt'> 1 X Deluxe Room</h3>
+                  <div className='flex'>
+                      <div className='roomimg'>
+                      <img class="image-medium" src="https://assets.xceltrip.com/gallery-1581047283451-70e02.jpg" alt="roomimage"></img>
+                      </div>
+                      <div className='suite'>
+                              <p> 2 Adults</p>
+                              <p> Non-refundable</p>
+                      </div>
+                  </div>
+                  <div className='inclu'>
+                  <b>
+                  <span>Inclusions</span>
+                  </b>
+                  <div class="color-green text-sm">Breakfast</div>
+                  <br/>
+                  <b>
+                  <span>Cancellation policy:</span>
+                  </b>
+                  <p className='text-muted text-sm'>
+                  <span>0 to 3 day's prior from Check-in 100% charges will apply<br/></span>
+                  <span>In case of no show 100% charges will apply<br/></span>
+
+                  </p>
+                  </div>
+                  
+            </div>
+            <div className='card-box'>
+                  <div className='flex'>
+                      <div>
+                      <span className=''>Total Room Price</span>
+                      <br/>
+                      <span className='text-muted'>1 Night</span>
+                      </div>
+                      <div className='ml-auto blue'>
+                      2,510.94 NPR
+                      </div>
+                  </div>
+                  <div className='flex bb'>
+                    <p><b>Price Before Taxes</b></p>
+                    <p className='ml-auto'>
+                    <b>2,510.94 NPR</b>
+                    </p>
+                  </div>
+                  <div className='flex bb'>
+                    <p>Taxes & Surcharge</p>
+                    <p className='ml-auto'>
+                    <b>610.16 NPR</b>
+                    </p>
+                  </div>
+                  <div className='flex bb'>
+                    <p>Service Fees</p>
+                    <p className='ml-auto'>
+                    <b>0.00 NPR</b>
+                    </p>
+                  </div>
+                  <div className='flex py-1'>
+                  <div>
+                      <span className=''>Total Amount</span>
+                      <br/>
+                      <span className='text-muted'>With Taxes & Fees</span>
+                    </div>
+                    <div className='ml-auto align-right'>
+                        <span className='color-green text-md'>
+                        3121 NPR
+                        </span><br/>
+                        <p className='dollar-price'> 
+                        $ 25.00
+                        </p>
+                    </div>
+                  </div>
+            </div>
           </div>
         </div>
       </div>
