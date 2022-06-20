@@ -39,6 +39,9 @@ const BookingDetails = () => {
       {userBooking.length > 0 ? (
         <div className="main_content">
           <div className="container pd-top-md">
+            <div >
+              <h3 className="confirm">Booking Confirmed</h3>
+            </div>
             <div>
               <h2>Booking Date: Wed Jun 15 00:00:00 GMT 2022</h2>
               <hr></hr>
@@ -285,42 +288,42 @@ const BookingDetails = () => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-sm-6 ">
+                {/* <div className="col-sm-6 ">
                   <h4>Total Price:</h4>
-                </div>
-                <div className="col-sm-9 abouthotel">
+                </div> */}
+                {/* <div className="col-sm-9 abouthotel">
                   <div className="pd-all-sm ">
                     <div>
                       <h4>RS. {userBooking[0]?.total_amount}</h4>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="my-4"></div>
               <div className="segment">
-                <h3 className="bold">Hotel Policies</h3>
+                <h3 className="">Hotel Policies:</h3>
                 <hr></hr>
                 <div className="allpolicy">
-                  <h3 className="policy">Check in and Check out Policy</h3>{" "}
+                  <h3 className="checkin">Check in and Check out Policy:</h3>{" "}
                   <br></br>
                   Check in time: 12::0<br></br>
                   Check out time: 12::0
                   <br></br>
                   Goverment issued photo ID(for ex: valid passport, valid
                   driving license) required for Check-in.
-                  <h3 className="policy">Payment Method Accepted</h3> <br></br>
+                  <h3 className="checkin">Payment Method Accepted:</h3> <br></br>
                   E-sewa<br></br>
                   Khalti
                   <br></br>
-                  <h3 className="policy">Child Policy</h3> <br></br>
+                  <h3 className="checkin">Child Policy:</h3> <br></br>
                   Child age: 4 - 6 years<br></br>
                   Infant age: 0 - 3 years
                   <br></br>
-                  <h3 className="policy">More Policies</h3> <br></br>
+                  <h3 className="checkin">More Policies:</h3> <br></br>
                   Pan Card accepted<br></br>
                   Hotel fit for children
                   <br></br>
-                  <h3 className="policy">You need to know</h3> <br></br>
+                  <h3 className="checkin">You need to know:</h3> <br></br>
                   <ul className="bulleted">
                     <li>
                       We do not support modifications to hotel bookings on
