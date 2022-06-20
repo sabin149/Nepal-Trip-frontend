@@ -1,8 +1,13 @@
-/* .detailform{
-    background-color: aqua;
-} */
-.detailroom{
-    background-color: rgb(90, 95, 95);
+
+.detailroom .card-box h4 {
+    font-size: 18px;
+    color: #4a4a4a;
+    letter-spacing: 0;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+.stars-group .fa-star{
+    color: #e9a537;
 }
 .detailpage{
     padding-top: 40px;
@@ -126,3 +131,91 @@ i{
 .payHotelBtn:hover{
     background-color: #f3a932;
 }
+
+/* hotel name and room detail in checkout */
+.flex{
+    display: flex;
+}
+.flex.flex-box{
+    border-top: 1px solid #e5e5e5;
+border-bottom: 1px solid #e5e5e5;
+}
+.box {
+    padding: 5px 18px;
+    border-radius: 0;
+    text-align: center;
+  }
+
+.box>p{
+    font-size: 12px;
+    color: #9b9b9b;
+    letter-spacing: 0;
+    margin: 0;
+  }
+.box>h5{
+    font-size: 16px;
+color: #4a4a4a;
+font-weight: 500;
+letter-spacing: 0;
+}
+.b-l{
+    border-left: 1px solid #e5e5e5;
+}
+.mt{
+    margin-top: 10px;
+}
+.image-medium{
+    width: 200px;
+    height: auto;
+    display: block;
+    position: relative;
+}
+
+.suite{
+    padding: 10px 20px;
+    width: 80%;
+}
+.suite>p{
+    font-size: 12px;
+    color: #4a4a4a;
+    margin: 0;
+}
+.inclu span{
+    color: #4a4a4a;
+    font-size: 14px;
+    font-weight: 500 !important;
+}
+.color-green {
+    color: #009b59;
+  }
+
+.text-sm{
+    font-size: 13px;
+ } 
+
+.text-muted{
+    color: #999;
+    font-size: 13px;
+ }
+.text-muted span{
+    color: #999;
+    font-size: 13px;
+}
+
+.flex>span{
+    font-size: 12px;
+}
+.ml-auto{
+    margin-left: auto;
+}
+b{
+    font-weight: 500 !important;
+}
+.text-md{
+    font-size: 24px;
+    line-height: 24px;
+}
+.dollar-price {
+    font-size: 18px;
+    color: #9b9b9b;
+  }

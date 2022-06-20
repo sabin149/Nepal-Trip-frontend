@@ -16,57 +16,12 @@ const Hotelinfo = () => {
   }, [dispatch, id])
 
   const hotel = useSelector(state => state?.hotel?.hotels);
-  // const {searchInfo} = useSelector(state => state.searchInfo);
-  // const {options,date}=searchInfo
   const [readMore, setReadMore] = useState(false)
 
   return (
     
     <div className="main_content">
-      {/* <div className="search_result">
-        <div className="search_result nav">
-          <div className="search_result navContainer">
-            <div className="flex py-2">
-              <div className="px-3">
-                <p>
-                  <span>Destination</span>
-                </p>
-                <h5 className="text-capitalize"> {hotel.hotel_name} </h5>
-              </div>
-              <div className="px-3">
-                <p>
-                  <span>Check In</span>
-                </p>
-                <h5>{moment(date.startDate).format("DD MMMM YYYY")} </h5>
-              </div>
-              <div className="px-3">
-                <p>
-                  <span>Check Out</span>
-                </p>
-                <h5>{moment(date.endDate).format("DD MMMM YYYY")}</h5>
-              </div>
-              <div className="px-3">
-                <p>
-                  <span>Room(s)</span>
-                </p>
-                <h5> {options.room} </h5>
-              </div>
-              <div className="px-3">
-                <p>
-                  <span>Adult(s)</span>
-                </p>
-                <h5> {options.adult} </h5>
-              </div>
-              <div className="px-3">
-                <p>
-                  <span>Children(s)</span>
-                </p>
-                <h5> {options.children} </h5>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */}
+      
       <div className="second-nav d-flex">
         <div className="Item">
           <Link to="">
@@ -168,8 +123,7 @@ const Hotelinfo = () => {
           {/* Price Table of Room */}
           <RoomTable hotel={hotel}/>
           
-          <div className="my-4">
-          </div>
+         
           <div className="segment">
             <h3 className="bold">
               Hotel Amenities
