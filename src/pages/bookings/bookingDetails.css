@@ -4,11 +4,10 @@
    font-size: 14px;
    font-weight: 500;
    font-family: Poppins,sans-serif;
-   /* font-weight: 600; */
+
   }
 
 .BookingImage img{
-    width: 100%;
     margin-top: 30px;
     padding-bottom: 2%;
 }
@@ -20,13 +19,22 @@
     font-weight: 550;
     padding-top: 30px;
   }
+
+  .confirm{
+    /* font-family: "Poppins",sans-serif; */
+    color:green;
+    font-size: 25px;
+    font-weight: bold;
+    padding-left: 840px;
+
+  }
   h4{
     color:#101010 ; 
     font-size: 15px;
     font-family: "Poppins",sans-serif;
     font-weight: 1000;
     padding-top: 2px;
-    /* padding-top: 6px; */
+ 
   }
   .block-in-mobile>i{
     margin-left: 20px;
@@ -78,9 +86,7 @@
     height: 0;
     overflow: visible;
   }
-  /* .active{
-    background: #f7f7f7;
-  } */
+
   .ameneties-list{
     color: #00529B;
     display:flex;
@@ -88,9 +94,6 @@
    max-width: 100%;
   overflow: -moz-hidden-unscrollable;
   }
-  /* .carousel-item img {
-    opacity: 0.5;
-  } */
   .maphotel{
         max-width: 100%;
   }
@@ -138,6 +141,21 @@
     font-size: 14px;
     font-family: "Poppins",sans-serif;
   }
+
+  .allpolicy{ 
+    font-size: 17px;
+    font-family: "Poppins",sans-serif;
+    font-weight: 599;
+    color: #000000;
+  }
+  .checkin{
+    font-size: 20px;
+    color:black;
+    font-weight: bold;
+    padding-top: 30px;
+  }
+
+
   h4.bold{
     color:#003c75 ; 
     font-size: 14px;
@@ -192,13 +210,7 @@
   .success{
     background-color: #05b625;
   }
-  /* .selectroom{
-    background-color: #c48a2b;
-    border-color: white;
-    width: 140px;
-    margin: 0 auto;
-    display: block;
-  } */
+
   .colored-box {
     background: #fff8ea;
     padding: 10px;
@@ -222,13 +234,17 @@
   .my-4 {
     margin: 40px 0 !important;
   }
-  .segment {
-    position: relative;
-    background: #fff;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    margin: 1rem 0;
-    padding: 1em;
-    border-radius: .28571429rem;}
+.amenities {
+      position: relative;
+      background: #fff;
+      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+      margin: 1rem 0;
+      padding: 1em;
+      border-radius: .28571429rem;
+    }
+
+
+
   h3.policy{
         font-family: "Poppins",sans-serif;
         color:#363636 ;
@@ -301,6 +317,7 @@
     clip: rect(1px, 1px, 1px, 1px);
     opacity: 0;
   }
+
   .wrapper label {
     position: relative;
     float: right;

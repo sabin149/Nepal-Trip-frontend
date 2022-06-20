@@ -75,23 +75,9 @@ const Hotel = () => {
         type: GLOBALTYPES.ALERT,
         payload: { error: "Please add hotel images." },
       });
-    dispatch(
-      createHotel({
-        hotel_name,
-        address,
-        phone,
-        hotel_email,
-        pan_no,
-        price,
-        hotel_info,
-        hotel_facilities,
-        hotel_policies,
-        hotel_images,
-        token,
-      })
-    );
-    navigate("/");
-  };
+
+    dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images,navigate, token }))
+  }
 
   return (
     <div className="container">

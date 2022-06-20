@@ -8,16 +8,23 @@ export const BOOKING_TYPES = {
     GET_BOOKING: "GET_BOOKING",
     UPDATE_BOOKING: "UPDATE_BOOKING"
 }
-export const createBooking = ({ booking, token }) => async (dispatch) => {  
+
+export const createBooking = (booking,navigate,token) => async (dispatch) => {
+
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
-        const res = await postDataAPI('booking', booking , token)
+        const res = await postDataAPI('booking', booking, token)
         dispatch({
             type: BOOKING_TYPES.CREATE_BOOKING,
             payload: { ...res.data.booking }
         })
-        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
-        dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
+        dispatch({
+            type: GLOBALTYPES.ALERT, payload: {
+                success: res.data.msg
+            }
+        })
+        navigate('/bookings')
+        
     } catch (error) {
         dispatch({
             type: GLOBALTYPES.ALERT,
@@ -25,7 +32,6 @@ export const createBooking = ({ booking, token }) => async (dispatch) => {
         })
     }
 }
-
 export const getBookings = ({ token }) => async (dispatch) => {
     try {
         dispatch({ type: BOOKING_TYPES.LOADING_BOOKING, payload: true })
@@ -58,16 +64,16 @@ export const getBooking = ({ id, token }) => async (dispatch) => {
         })
     }
 }
-export const updateBooking = ({ booking, token }) => async (dispatch) => {
+export const updateBooking = ({ booking,navigate, token }) => async (dispatch) => {
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
-        const res = await patchDataAPI(`booking/${booking._id}`, { booking }, token)
+        const res = await patchDataAPI(`booking/${booking.id}`, booking , token)
         dispatch({
             type: BOOKING_TYPES.UPDATE_BOOKING,
             payload: { ...res.data.booking }
         })
-        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
+
     } catch (error) {
         dispatch({
             type: GLOBALTYPES.ALERT,

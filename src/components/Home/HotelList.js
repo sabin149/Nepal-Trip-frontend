@@ -54,15 +54,15 @@ const HotelList = () => {
             hotelSearch,
         }
         const hotelprice = price ? price : 0
-        const res = await axios.get(`api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}&&price[${filterData}]=${hotelprice}&&hotelSearch=${hotelQuery.hotelSearch}`);
+        const res = await axios.get(`api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}&&price[${filterData}]=${hotelprice}`);
         setHotelData(res.data)
-        navigate(`/hotellist?address=${address}&&sort=${e.target.value}&&price[${filterData}]=${hotelprice}&&search=${hotelQuery.hotelSearch}`)
+        navigate(`/hotellist?address=${address}&&sort=${e.target.value}&&price[${filterData}]=${hotelprice}`)
     };
 
     const handleFilter = async (e) => {
         e.preventDefault();
         if (!price.trim()) return
-        const res = await axios.get(`api/search?address=${address}&&sort=${sortData}&&price[${filterData}]=${price}&&search=${hotelQuery.hotelSearch}`);
+        const res = await axios.get(`api/search?address=${address}&&sort=${sortData}&&price[${filterData}]=${price}`);
         setHotelData(res.data)
         navigate(`/hotellist?search=${address}&&sort=${sortData}&&price[${filterData}]=${price}`)
     };

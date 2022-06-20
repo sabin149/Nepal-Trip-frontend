@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {  useLocation, Link } from 'react-router-dom'
+import {  useLocation,useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import uploadImage from "../../images/No_image.png";
@@ -9,6 +9,8 @@ import { updateHotel } from "../../redux/actions/hotelAction";
 const EditHotelDetails = () => {
   const dispatch = useDispatch()
   const location = useLocation()
+
+  const navigate = useNavigate()
 
   const token = localStorage.getItem('token')
 
@@ -85,7 +87,7 @@ const EditHotelDetails = () => {
     const hotelData = {
       hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies
     }
-  dispatch(updateHotel({ hotelData, hotel_images, hotelDetails, token }))
+  dispatch(updateHotel({ hotelData, hotel_images, hotelDetails,navigate, token }))
   }
  
 
@@ -98,7 +100,7 @@ const EditHotelDetails = () => {
           <h2 className="text-danger text-center mt-3">Update hotel</h2>
           <div className="row">
             <div className="d-flex justify-content-around mx-0 mb-1">
-              <div className="col-2">
+              <div className="col-sm-1">
 
               </div>
               <div className="col-6 add_hotel ">
