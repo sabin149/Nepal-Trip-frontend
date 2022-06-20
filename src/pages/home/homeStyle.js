@@ -25,7 +25,7 @@ export default makeStyles((theme) => ({
             position: 'relative',
             bottom: '-25px',
             width: '100%',
-            maxWidth: '1024px',
+            maxWidth: '830px',
             height: 'auto',
             margin: '0 auto',
     
@@ -44,10 +44,11 @@ export default makeStyles((theme) => ({
     headerSearchItem:{
         display: 'flex',
         alignItems: 'center',
-        gap: '10px',
-        padding:'10px',
+        gap: '5px',
+        // padding:'3px',
         justifyContent:'center',
         alignContent:'center'
+    
     }
 
 }))

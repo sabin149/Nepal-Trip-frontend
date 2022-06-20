@@ -91,7 +91,7 @@ const Home = () => {
             <h1 className={classNamees.makeStyle} > Make Memories</h1>
             <div className={classNamees.headerSearch}>
               <div className={classNamees.headerSearchItem}>
-                <i className="fa-solid fa-location-dot"></i>
+                <i className="fa-solid fa-location-dot m-1"></i>
                 <input value={search} onChange={(e) => setSearch(e.target.value)}
                   type="text"
                   placeholder="Where are you going?"
