@@ -1,13 +1,29 @@
 import "./bookingDetails.css";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getBookings } from "../../redux/actions/bookingAction";
 import Carousel from "../../components/Carousel"
+import { Dialog, DialogContent } from "@mui/material";
 const BookingDetails = () => {
   const dispatch = useDispatch()
   const token = localStorage.getItem("token")
   const userID = localStorage.getItem("userID")
+
+  const [open, setOpen] =useState(false);
+  const [scroll, setScroll] =useState('paper');
+
+  const handleClickOpen = (scrollType) => () => {
+      setOpen(true);
+      setScroll(scrollType);
+  };
+
+  const handleClose = () => {
+      setOpen(false);
+      console.log("working")
+  };
+
+
   useEffect(() => {
     dispatch(getBookings({ token }))
   }, [dispatch, token])
@@ -129,11 +145,41 @@ const BookingDetails = () => {
                         <h3 className="color-black bold pointer">
                           {" "}
                           {userBooking[0]?.name}
+
+
+                          <div>
+
+<Dialog sx={{
+    zIndex:"1",
+    backgroundBlendMode:"darken",
+    backgroundColor:"rgba(0,0,0,0.1)",
+}}
+    open={open}
+    onClose={handleClose}
+    scroll={scroll}
+    aria-labelledby="scroll-dialog-title"
+    aria-describedby="scroll-dialog-description"
+>
+    <h3 className='mt-3' style={{
+        marginLeft:"23px",
+    }}>Room Details</h3>
+  
+    <hr />
+    <DialogContent dividers={scroll === 'paper'} >
+
+       <Carousel images={roomDetails[0]?.room_images} />
+    </DialogContent>
+
+</Dialog>
+</div>
+
+
+
                         </h3>
                       </td>
                       <td className="" rowSpan="2">
-                        <h3 className="color-black bold pointer">
-                          {" "}
+                      <h3 className="color-black bold pointer" onClick={handleClickOpen('body')}>
+                          
                           {roomDetails[0]?.room_type}
                         </h3>
                       </td>
