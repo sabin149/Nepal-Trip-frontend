@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { GLOBALTYPES } from "../../redux/actions/globalTypes";
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import uploadImage from "../../images/No_image.png";
 import { imageShow, videoShow } from "../../utils/mediaShow";
 import { createHotel } from "../../redux/actions/hotelAction";
