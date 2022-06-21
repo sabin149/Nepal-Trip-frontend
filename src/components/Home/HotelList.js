@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import {useState, useEffect} from "react";
 import axios from "axios";
 import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 function useQuery() {
     return new URLSearchParams(useLocation().search);
@@ -30,8 +30,8 @@ const HotelList = () => {
 
     const navigate = useNavigate()
 
-    const {searchInfo} = useSelector(state => state.searchInfo)
-    console.log(searchInfo);
+    // const {searchInfo} = useSelector(state => state.searchInfo)
+ 
 
     const [hotelData, setHotelData] = useState("");
     const [sortData, setSortData] = useState("-createdAt")

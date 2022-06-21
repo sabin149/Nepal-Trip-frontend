@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import uploadImage from "../../images/No_image.png";
 import { imageShow, videoShow } from "../../utils/mediaShow";
