@@ -138,8 +138,6 @@ const RoomTable = ({ hotel }) => {
                       hotel,
                       room: selectedRoom,
                       searchInfo
-
-
                     }
                   })
                 }}>
