@@ -15,6 +15,7 @@ const Hotel = () => {
 
   const initialState = {
     hotel_name: "",
+    rating:"",
     address: "",
     phone: "",
     hotel_email: "",
@@ -27,6 +28,7 @@ const Hotel = () => {
   const [hotelData, setHotelData] = useState(initialState);
   const {
     hotel_name,
+    rating,
     address,
     phone,
     hotel_email,
@@ -72,11 +74,9 @@ const Hotel = () => {
     e.preventDefault();
     if (hotel_images.length === 0)
       return dispatch({
-        type: GLOBALTYPES.ALERT,
-        payload: { error: "Please add hotel images." },
-      });
-
-    dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images,navigate, token }))
+        type: GLOBALTYPES.ALERT, payload: { error: "Please add hotel images." }
+      })
+    dispatch(createHotel({ hotel_name,rating, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images,navigate, token }))
   }
 
   return (
@@ -133,29 +133,39 @@ const Hotel = () => {
                 }
               </div>
 
-              <div className="container" id="hh">
-                <div className="hotel_label">
-                  <label className="form-label">Hotel Name</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="hotel_name"
-                    value={hotel_name}
-                    onChange={handleChangeInput}
-                  />
-                </div>
-                <div className="hotel_label">
-                  <label className="form-label">Hotel Email</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="hotel_email"
-                    value={hotel_email}
-                    onChange={handleChangeInput}
-                  />
-                </div>
+              <div className="hotel_label">
+                <label className="form-label">Hotel Name</label>
+                <input
+                  type="text"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="hotel_name"
+                  value={hotel_name}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className="hotel_label">
+                <label className="form-label">Hotel Rating</label>
+                <input
+                  type="number"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="rating"
+                  value={rating}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className="hotel_label">
+                <label className="form-label">Hotel Email</label>
+                <input
+                  type="email"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="hotel_email"
+                  value={hotel_email}
+                  onChange={handleChangeInput}
+                />
+              </div>
 
                 <div className="hotel_label">
                   <label className="form-label">Address</label>
@@ -169,41 +179,41 @@ const Hotel = () => {
                   />
                 </div>
 
-                <div className="hotel_label">
-                  <label className="form-label">Phone Number</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input "
-                    id="exampleInputEmail1"
-                    name="phone"
-                    value={phone}
-                    onChange={handleChangeInput}
-                  />
-                </div>
+              <div className="hotel_label">
+                <label className="form-label">Phone Number</label>
+                <input
+                  type="number"
+                  className="form-control hotel_input "
+                  id="exampleInputEmail1"
+                  name="phone"
+                  value={phone}
+                  onChange={handleChangeInput}
+                />
+              </div>
 
-                <div className="hotel_label">
-                  <label className="form-label">PAN.No</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="pan_no"
-                    value={pan_no}
-                    onChange={handleChangeInput}
-                  />
-                </div>
+              <div className="hotel_label">
+                <label className="form-label">PAN.No</label>
+                <input
+                  type="number"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="pan_no"
+                  value={pan_no}
+                  onChange={handleChangeInput}
+                />
+              </div>
 
-                <div className="hotel_label">
-                  <label className="form-label">Price</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="price"
-                    value={price}
-                    onChange={handleChangeInput}
-                  />
-                </div>
+              <div className="hotel_label">
+                <label className="form-label">Price</label>
+                <input
+                  type="number"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="price"
+                  value={price}
+                  onChange={handleChangeInput}
+                />
+              </div>
 
                 <div className="hotel_label">
                   <label className="form-label">Hotel Info</label>
@@ -304,7 +314,6 @@ const Hotel = () => {
               <div className="col-6"></div>
             </div>
           </div>
-        </div>
       </form>
     </div>
   );

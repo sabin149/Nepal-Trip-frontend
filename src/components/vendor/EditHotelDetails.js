@@ -18,6 +18,7 @@ const EditHotelDetails = () => {
   //   console.log(hotelDetails.hotel_images);
   const initialState = {
     hotel_name: "",
+    rating:"",
     address: "",
     phone: "",
     hotel_email: "",
@@ -30,6 +31,7 @@ const EditHotelDetails = () => {
   const [hotelData, setHotelData] = useState(initialState);
   const {
     hotel_name,
+    rating,
     address,
     phone,
     hotel_email,
@@ -85,7 +87,7 @@ const EditHotelDetails = () => {
         type: GLOBALTYPES.ALERT, payload: { error: "Please add hotel images." }
       })
     const hotelData = {
-      hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies
+      hotel_name,rating, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies
     }
   dispatch(updateHotel({ hotelData, hotel_images, hotelDetails,navigate, token }))
   }
@@ -163,9 +165,20 @@ const EditHotelDetails = () => {
                   />
                 </div>
                 <div className="hotel_label">
+                  <label className="form-label">Hotel Rating</label>
+                  <input
+                    type="number"
+                    className="form-control hotel_input"
+                    id="exampleInputEmail1"
+                    name="rating"
+                    value={rating}
+                    onChange={handleChangeInput}
+                  />
+                </div>
+                <div className="hotel_label">
                   <label className="form-label">Hotel Email</label>
                   <input
-                    type="text"
+                    type="email"
                     className="form-control hotel_input"
                     id="exampleInputEmail1"
                     name="hotel_email"
@@ -189,7 +202,7 @@ const EditHotelDetails = () => {
                 <div className="hotel_label">
                   <label className="form-label">Phone Number</label>
                   <input
-                    type="text"
+                    type="number"
                     className="form-control hotel_input "
                     id="exampleInputEmail1"
                     name="phone"
@@ -201,7 +214,7 @@ const EditHotelDetails = () => {
                 <div className="hotel_label">
                   <label className="form-label">PAN No</label>
                   <input
-                    type="text"
+                    type="number"
                     className="form-control hotel_input"
                     id="exampleInputEmail1"
                     name="pan_no"
@@ -213,7 +226,7 @@ const EditHotelDetails = () => {
                 <div className="hotel_label">
                   <label className="form-label">Price</label>
                   <input
-                    type="text"
+                    type="number"
                     className="form-control hotel_input"
                     id="exampleInputEmail1"
                     name="price"

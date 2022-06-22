@@ -13,7 +13,6 @@ import VendorDashboard from "./pages/VendorDashboard"
 import Room from "./pages/room/[id]";
 import HotelList from "./components/Home/HotelList";
 import VendorTable from "./components/admin/Table/VendorTable";
-import EditHotel from "./pages/hotel/editHotel";
 import Checkout from "./pages/checkout/Checkout";
 import UserListTable from "./components/admin/Table/user/UserListTable";
 import EditUser from "./components/admin/Table/user/EditUser";
@@ -45,7 +44,6 @@ function App() {
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo/:id" element={<Hotelinfo />} />
           <Route path="/vendors" element={isAdmin ? <VendorTable /> : <Navigate to="/" />} />
-          <Route path="/edithotel" element={isVendor ? <EditHotel /> : <Navigate to="/" />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/users" element={isAdmin ? <UserListTable /> : <Navigate to="/" />} />
           <Route path="/admin/edituser" element={isAdmin ? <EditUser /> : <Navigate to="/" />} />

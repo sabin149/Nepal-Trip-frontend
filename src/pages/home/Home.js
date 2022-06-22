@@ -91,7 +91,8 @@ const Home = () => {
             <h1 className={classNamees.makeStyle} > Make Memories</h1>
             <div className={classNamees.headerSearch}>
               <div className={classNamees.headerSearchItem}>
-                <i className="fa-solid fa-location-dot m-1"></i>
+              <span className="me-2"></span>
+                <i className="fa-solid fa-location-dot "></i>
                 <input value={search} onChange={(e) => setSearch(e.target.value)}
                   type="text"
                   placeholder="Where are you going?"
@@ -101,7 +102,7 @@ const Home = () => {
               <div className={classNamees.headerSearchItem}>
                 <i className="fa-solid fa-calendar-days"></i>
 
-                <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+                <span onClick={() => setOpenDate(!openDate)} className="headerSearchText me-2">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                   date[0].endDate,
                   "MM/dd/yyyy"
                 )}`}</span>
@@ -112,7 +113,8 @@ const Home = () => {
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     className="date"
-                    minDate={new Date()}
+                    minDate={new Date()
+                    }
                   />
                 )}
 
