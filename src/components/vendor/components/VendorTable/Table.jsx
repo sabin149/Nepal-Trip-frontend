@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import "./Table.css";
+import "./VendorTable.css";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
