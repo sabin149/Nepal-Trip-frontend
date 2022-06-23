@@ -18,6 +18,8 @@ const Hotelinfo = () => {
   const hotel = useSelector(state => state?.hotel?.hotels);
   const [readMore, setReadMore] = useState(false)
 
+  console.log(hotel);
+
   return (
     
     <div className="main_content">
