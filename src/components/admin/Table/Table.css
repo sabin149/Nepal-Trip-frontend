@@ -30,6 +30,18 @@ th {
   }
 }
 
+/* 
+@media screen and (min-width: 1200px) {
+  .Admin_Cards{
+    position:relative;
+    top:8%;
+    bottom:0;
+    right:0;
+    left:0;
+  }
+  
+} */
+
 
 @media screen and (max-width: 768px) {
   .Table{
@@ -40,9 +52,6 @@ th {
     width: 23rem;
   }
 }
-
-
-
 
 .css-1jbbcbn-MuiDataGrid-columnHeaderTitle{
   font-weight: 800;

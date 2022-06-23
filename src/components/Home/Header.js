@@ -22,10 +22,12 @@ const Header = ({ isUser }) => {
             <i className="fa-solid fa-suitcase"> </i>
             <span> <Link to="/bookings" className="text-decoration-none text-dark">Hotel Booking</Link> </span>
           </div>
-          <div className="flight">
+
+          <div className="favourite">
           <i class="fa-solid fa-heart"></i>
             <span > My Favourite </span>
           </div>
+
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
             <button className="navButton" onClick={() => {
               if (window.confirm('Are you sure you want to logout?')) {
