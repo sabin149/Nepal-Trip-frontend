@@ -5,45 +5,59 @@ import { DataGrid } from '@mui/x-data-grid';
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
-    field: 'firstName',
-    headerName: 'First name',
+    field: 'hotelname',
+    headerName: 'Hotel Name',
     width: 150,
     editable: true,
   },
   {
-    field: 'lastName',
-    headerName: 'Last name',
+    field: 'bookedat',
+    headerName: 'Booked At',
+    type:'number',
     width: 150,
     editable: true,
   },
+  
   {
-    field: 'age',
-    headerName: 'Age',
-    type: 'number',
-    width: 110,
-    editable: true,
-  },
-  {
-    field: 'fullName',
-    headerName: 'Full name',
+    field: 'bookedby',
+    headerName: 'Booked By',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
-    width: 160,
+    width: 140,
     valueGetter: (params) =>
       `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+  },
+  {
+    field: 'totalrooms',
+    headerName: 'TotalRooms',
+    type: 'number',
+    width: 100,
+    editable: true,
+  },
+  {
+    field: 'email',
+    headerName: 'Email',
+    width: 190,
+    editable: true,
+  },
+  {
+    field: 'status',
+    headerName: 'Status',
+    width: 150,
+    editable: true,
   },
 ];
 
 const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-  { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
+  { id: 1, hotelname: 'Snow',bookedat:"2020/12/2" ,firstName: 'Jon', totalrooms: 35, email:'sp554540@gmail.com' },
+  { id: 2, hotelname: 'Lannister', bookedat:"2020/12/2" ,firstName: 'Cersei', totalrooms: 42, email:'sp554540@gmail.com' },
+  { id: 3, hotelname: 'Lannister', bookedat:"2020/12/2" ,firstName: 'Jaime', totalrooms: 45, email:'sp554540@gmail.com' },
+  { id: 4, hotelname: 'Stark', bookedat:"2020/12/2" ,firstName: 'Arya', totalrooms: 16, email:'sp554540@gmail.com' },
+  { id: 5, hotelname: 'Targaryen', bookedat:"2020/12/2" ,firstName: 'Daenerys', totalrooms: 55, email:'sp554540@gmail.com' },
+  { id: 6, hotelname: 'Melisandre', bookedat:"2020/12/2" ,firstName: null, totalrooms: 150, email:'sp554540@gmail.com' },
+  { id: 7, hotelname: 'Clifford', bookedat:"2020/12/2" ,firstName: 'Ferrara', totalrooms: 44, email:'sp554540@gmail.com' },
+  { id: 8, hotelname: 'Frances', bookedat:"2020/12/2" ,firstName: 'Rossini', totalrooms: 36, email:'sp554540@gmail.com' },
+  { id: 9, hotelname: 'Roxie', bookedat:"2020/12/2" ,firstName: 'Harvey', totalrooms: 65, email:'sp554540@gmail.com' },
 ];
 
 export default function DataGridDemo() {

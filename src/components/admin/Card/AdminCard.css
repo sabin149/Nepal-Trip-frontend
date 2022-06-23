@@ -80,7 +80,7 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (max-width: 600px) {
   .MainDash {
     position: relative;
     top: 2rem;
