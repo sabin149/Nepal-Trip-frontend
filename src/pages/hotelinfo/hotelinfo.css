@@ -405,7 +405,7 @@ ul.bulleted li {
   margin-bottom: 50px !important;
   border: 1px solid #edeff2;
   border-radius: 2px;
-  padding: 50px 70px;
+  padding-right: 70px;
   border:1px solid #ffffff;
 }
 
@@ -436,12 +436,19 @@ ul.bulleted li {
 .be-comment-content span {
   display: inline-block;
   width: 49%;
-  margin-bottom: 15px;
+  margin-bottom: 5px !important;
 }
 
 .be-comment-name {
   font-size: 13px;
   font-family: 'Poppins', sans-serif;
+  
+}
+.be-comment-name.repsec{
+  margin: 10px;
+}
+.be-comment-name.editsec{
+  margin: 10px;
 }
 
 .be-comment-content a {
@@ -454,9 +461,9 @@ ul.bulleted li {
   margin-bottom: 15px;
 }
 
-.be-comment-time {
+/* .be-comment-time {
   text-align: right;
-}
+} */
 
 .be-comment-time {
   font-size: 11px;
@@ -516,3 +523,17 @@ ul.bulleted li {
   padding-top: 1rem !important;
 }
 
+.replysec{
+  text-align: right;
+  width: 95%;
+  color: #00529B;
+  
+  
+}
+
+.be-comment.afterreply{
+  margin-left: 75px;
+}
+.row.reviewtype{
+  margin-top: 35px;
+}

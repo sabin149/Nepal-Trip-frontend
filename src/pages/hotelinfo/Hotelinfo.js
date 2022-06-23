@@ -254,6 +254,36 @@ const Hotelinfo = () => {
             </h3>
           <div class="container">
 <div class="be-comment-block">
+  {/* list of reviews */}
+<div class="be-comment">
+		<div class="be-img-comment">	
+			
+				<img src="http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" class="be-ava-comment"></img>
+			
+		</div>
+		<div class="be-comment-content">
+			
+				<span class="be-comment-name">
+					User Name
+					</span><br/>
+				<span class="be-comment-time">
+					<i class="fa fa-clock-o"></i>
+					Jun 23 , 2022 at 7:14am
+				</span>
+
+			<p class="be-comment-text">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+			</p>
+		</div>
+    <div className="replysec">
+          <span class="be-comment-name repsec">
+					Reply
+					</span>
+          {/* <span class="be-comment-name">
+					Edit
+					</span> */}
+          </div>
+	</div>
 	<div class="be-comment">
 		<div class="be-img-comment">	
 			
@@ -264,7 +294,7 @@ const Hotelinfo = () => {
 			
 				<span class="be-comment-name">
 					Ravi Lamechhane
-					</span>
+					</span><br/>
 				<span class="be-comment-time">
 					<i class="fa fa-clock-o"></i>
 					Jun 21 , 2022 at 3:14am
@@ -274,6 +304,14 @@ const Hotelinfo = () => {
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 			</p>
 		</div>
+    <div className="replysec">
+          <span class="be-comment-name repsec">
+					Reply
+					</span>
+          {/* <span class="be-comment-name">
+					Edit
+					</span> */}
+          </div>
 	</div>
 	<div class="be-comment">
 		<div class="be-img-comment">
@@ -282,7 +320,7 @@ const Hotelinfo = () => {
 		<div class="be-comment-content">
 			<span class="be-comment-name">
 				Hari Bahadur
-			</span>
+			</span><br/>
 			<span class="be-comment-time">
 				<i class="fa fa-clock-o"></i>
 				Jun 21 , 2022 at 3:14am
@@ -291,6 +329,14 @@ const Hotelinfo = () => {
       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
 			</p>
 		</div>
+    <div className="replysec">
+          <span class="be-comment-name repsec">
+					Reply
+					</span>
+          {/* <span class="be-comment-name">
+					Edit
+					</span> */}
+          </div>
 	</div>
 	<div class="be-comment">
 		<div class="be-img-comment">
@@ -299,7 +345,7 @@ const Hotelinfo = () => {
 		<div class="be-comment-content">
 			<span class="be-comment-name">
 			Rajesh Hamal
-			</span>
+			</span><br/>
 			<span class="be-comment-time">
 				<i class="fa fa-clock-o"></i>
 				Jun 21 , 2022 at 3:14am
@@ -309,9 +355,51 @@ const Hotelinfo = () => {
 
 			</p>
 		</div>
+    <div className="replysec">
+          <span class="be-comment-name repsec">
+					Reply
+					</span>
+          {/* <span class="be-comment-name">
+					Edit
+					</span> */}
+          </div>
+
+          {/* after replying */}
+
+          <div class="be-comment afterreply">
+		<div class="be-img-comment">	
+			
+				<img src="http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" class="be-ava-comment"></img>
+			
+		</div>
+		<div class="be-comment-content">
+			
+				<span class="be-comment-name">
+					User Name
+					</span><br/>
+				<span class="be-comment-time">
+					<i class="fa fa-clock-o"></i>
+					Jun 23 , 2022 at 7:14am
+				</span>
+
+			<p class="be-comment-text">
+Hello Rajesh Hamal sir big fan			</p>
+		</div>
+    <div className="replysec">
+          <span class="be-comment-name repsec">
+					Reply
+					</span>
+          <span class="be-comment-name editsec">
+					Edit
+					</span>
+          <span class="be-comment-name">
+					Remove
+					</span>
+          </div>
+	</div>
 	</div>
 	<form class="form-block">
-		<div class="row">
+		<div class="row reviewtype">
 			<div class="col-xs-12">									
 				<div class="form-group">
 					<textarea class="form-input" required="" placeholder="Type Your Review Here"></textarea>

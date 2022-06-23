@@ -23,9 +23,8 @@ const Header = ({ isUser }) => {
             <span> <Link to="/bookings" className="text-decoration-none text-dark">Hotel Booking</Link> </span>
           </div>
           <div className="flight">
-            <i className="fa-solid fa-plane"> </i>
-
-            <span > Flight Booking </span>
+          <i class="fa-solid fa-heart"></i>
+            <span > My Favourite </span>
           </div>
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
             <button className="navButton" onClick={() => {
