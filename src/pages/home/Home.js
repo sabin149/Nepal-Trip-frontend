@@ -200,7 +200,7 @@ const Home = () => {
         {/* Nepal's Top Destination */}
         <div className="destination_nepal">
           <div className="ui container top">
-            <h3>Nepal's Top Destination</h3>
+            <h3 className="topdestination">Nepal's Top Destination</h3>
           </div>
           <div>
             <Grid item xs={12} sm={6} md={4} lg={3}>

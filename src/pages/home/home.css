@@ -113,10 +113,10 @@
 }
 
 .ui.container.top {
-  font-family: "Kaushan Script";
+  font-family: "Kaushan Script", cursive;
   font-size: 22px;
   color: #003c75;
-  margin-left: 250px;
+  margin-left: 170px;
 }
 
 /* Hover */
@@ -280,6 +280,10 @@
   -webkit-transform: translate(-50%, -50%) scale(1);
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
+}
+
+.topdestination{
+  font-family: Kaushan Script,cursive;
 }
 
 
