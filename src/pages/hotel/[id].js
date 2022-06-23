@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import uploadImage from "../../images/No_image.png";
 import { imageShow, videoShow } from "../../utils/mediaShow";
@@ -8,14 +8,14 @@ import { createHotel } from "../../redux/actions/hotelAction";
 import "./hotel.css";
 
 const Hotel = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-
-  const navigate = useNavigate()
-  const token = localStorage.getItem('token')
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   const initialState = {
     hotel_name: "",
+    rating:"",
     address: "",
     phone: "",
     hotel_email: "",
@@ -28,6 +28,7 @@ const Hotel = () => {
   const [hotelData, setHotelData] = useState(initialState);
   const {
     hotel_name,
+    rating,
     address,
     phone,
     hotel_email,
@@ -64,18 +65,18 @@ const Hotel = () => {
     setHotel_Images([...hotel_images, ...newImages]);
   };
   const deleteImages = (index) => {
-    const newArr = [...hotel_images]
-    newArr.splice(index, 1)
-    setHotel_Images(newArr)
-  }
+    const newArr = [...hotel_images];
+    newArr.splice(index, 1);
+    setHotel_Images(newArr);
+  };
 
-  const handleSubmit = e => {
-    e.preventDefault()
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (hotel_images.length === 0)
       return dispatch({
         type: GLOBALTYPES.ALERT, payload: { error: "Please add hotel images." }
       })
-    dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images,navigate, token }))
+    dispatch(createHotel({ hotel_name,rating, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images,navigate, token }))
   }
 
   return (
@@ -84,11 +85,8 @@ const Hotel = () => {
         <h2 className="text-danger text-center mt-3">Add hotel</h2>
         <div className="row">
           <div className="d-flex justify-content-around mx-0 mb-1">
-            <div className="col-2">
-
-            </div>
+            <div className="col-2"></div>
             <div className="col-6 add_hotel ">
-
               <div className="show_images">
                 {hotel_images.length > 0 ? (
                   hotel_images.map((img, index) => (
@@ -118,7 +116,9 @@ const Hotel = () => {
                   <>
                     <div className="file_upload">
                       <div className="d-flex">
-                        <h6 className='btn btn-warning text-light me-2'>Upload Images</h6>
+                        <h6 className="btn btn-warning text-light me-2">
+                          Upload Images
+                        </h6>
                       </div>
                       <input
                         type="file"
@@ -131,7 +131,6 @@ const Hotel = () => {
                     </div>
                   </>
                 }
-
               </div>
 
               <div className="hotel_label">
@@ -146,9 +145,20 @@ const Hotel = () => {
                 />
               </div>
               <div className="hotel_label">
+                <label className="form-label">Hotel Rating</label>
+                <input
+                  type="number"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="rating"
+                  value={rating}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className="hotel_label">
                 <label className="form-label">Hotel Email</label>
                 <input
-                  type="text"
+                  type="email"
                   className="form-control hotel_input"
                   id="exampleInputEmail1"
                   name="hotel_email"
@@ -157,22 +167,22 @@ const Hotel = () => {
                 />
               </div>
 
-              <div className="hotel_label">
-                <label className="form-label">Address</label>
-                <input
-                  type="text"
-                  className="form-control hotel_input"
-                  id="exampleInputEmail1"
-                  name="address"
-                  value={address}
-                  onChange={handleChangeInput}
-                />
-              </div>
+                <div className="hotel_label">
+                  <label className="form-label">Address</label>
+                  <input
+                    type="text"
+                    className="form-control hotel_input"
+                    id="exampleInputEmail1"
+                    name="address"
+                    value={address}
+                    onChange={handleChangeInput}
+                  />
+                </div>
 
               <div className="hotel_label">
                 <label className="form-label">Phone Number</label>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control hotel_input "
                   id="exampleInputEmail1"
                   name="phone"
@@ -184,7 +194,7 @@ const Hotel = () => {
               <div className="hotel_label">
                 <label className="form-label">PAN.No</label>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control hotel_input"
                   id="exampleInputEmail1"
                   name="pan_no"
@@ -196,7 +206,7 @@ const Hotel = () => {
               <div className="hotel_label">
                 <label className="form-label">Price</label>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control hotel_input"
                   id="exampleInputEmail1"
                   name="price"
@@ -205,30 +215,30 @@ const Hotel = () => {
                 />
               </div>
 
-              <div className="hotel_label">
-                <label className="form-label">Hotel Info</label>
-                <input
-                  type="text"
-                  className="form-control hotel_input"
-                  id="exampleInputEmail1"
-                  name="hotel_info"
-                  value={hotel_info}
-                  onChange={handleChangeInput}
-                />
-              </div>
-              <div className="hotel_label">
-                <label className="form-label">Hotel Facilities</label>
-                <input
-                  type="text"
-                  className="form-control hotel_input"
-                  id="exampleInputEmail1"
-                  name="hotel_facilities"
-                  value={hotel_facilities}
-                  onChange={handleChangeInput}
-                />
-              </div>
+                <div className="hotel_label">
+                  <label className="form-label">Hotel Info</label>
+                  <input
+                    type="text"
+                    className="form-control hotel_input"
+                    id="exampleInputEmail1"
+                    name="hotel_info"
+                    value={hotel_info}
+                    onChange={handleChangeInput}
+                  />
+                </div>
+                <div className="hotel_label">
+                  <label className="form-label">Hotel Facilities</label>
+                  <input
+                    type="text"
+                    className="form-control hotel_input"
+                    id="exampleInputEmail1"
+                    name="hotel_facilities"
+                    value={hotel_facilities}
+                    onChange={handleChangeInput}
+                  />
+                </div>
 
-              {/* <div className="hotel_facilities row align-items-start">
+                {/* <div className="hotel_facilities row align-items-start">
               <div className="col">
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="checkbox" id="inlineCheckbox1" name="hotel_facilities" value={hotel_facilities} onChange={handleChangeInput} />
@@ -239,7 +249,7 @@ const Hotel = () => {
                   <label className="form-check-label" htmlFor="inlineCheckbox1">24hr Checkin</label>
                 </div>
               </div> */}
-              {/* <div className="col">
+                {/* <div className="col">
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value={hotel_facilities} onChange={handleChangeInput} />
                   <label className="form-check-label" htmlFor="inlineCheckbox1">Lockers</label>
@@ -259,18 +269,18 @@ const Hotel = () => {
                   <label className="form-check-label" htmlFor="inlineCheckbox1">Free WiFi</label>
                 </div>
               </div> */}
-              {/* </div> */}
-              <div className="hotel_policies">
-                <label className="form-label">Hotel Policies</label>
-                <input
-                  type="text"
-                  className="form-control hotel_input"
-                  id="exampleInputEmail1"
-                  name="hotel_policies"
-                  value={hotel_policies}
-                  onChange={handleChangeInput}
-                />
-                {/* <div className="col-6">
+                {/* </div> */}
+                <div className="hotel_policies">
+                  <label className="form-label">Hotel Policies</label>
+                  <input
+                    type="text"
+                    className="form-control hotel_input"
+                    id="exampleInputEmail1"
+                    name="hotel_policies"
+                    value={hotel_policies}
+                    onChange={handleChangeInput}
+                  />
+                  {/* <div className="col-6">
                 <div className="form-check form-check-inline flex-fill">
                   <input className="form-check-input" type="checkbox" id="inlineCheckbox1" name="hotel_policies" value={hotel_policies}  />
                   <label className="form-check-label" htmlFor="inlineCheckbox1">Child Policy</label>
@@ -288,28 +298,22 @@ const Hotel = () => {
                   <label className="form-check-label" htmlFor="inlineCheckbox1">More Policies</label>
                 </div>
               </div> */}
-              </div>
-              <div className="d-flex justify-content-center">
-                <button
-                  type="submit"
-                  className="btn btn-warning w-25 mb-4 mt-4"
-                >
-                  Save
-                </button>
+                </div>
+                <div className="d-flex justify-content-center">
+                  <button
+                    type="submit"
+                    className="btn btn-warning w-25 mb-4 mt-4"
+                  >
+                    Save
+                  </button>
+                </div>
               </div>
             </div>
 
             <div className="d-flex align-items-center justify-content-center">
-
-
-              <div className="col-6">
-
-
-              </div>
+              <div className="col-6"></div>
             </div>
           </div>
-
-        </div>
       </form>
     </div>
   );

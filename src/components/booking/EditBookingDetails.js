@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { updateBooking } from "../../redux/actions/bookingAction"
-
 const EditBookingDetails = ({ booking,token }) => {
   const dispatch = useDispatch()
-
   const initialState = {
     firstName: "",
     lastName: "",
@@ -14,19 +12,15 @@ const EditBookingDetails = ({ booking,token }) => {
   }
   const [userData, setUserData] = useState(initialState);
   const { firstName, lastName, email, phone, address } = userData;
-
   const [userrequests, setUserRequests] = useState({
     requests: [],
     response: [],
   });
   const [ownRequest, setOwnRequest] = useState("");
-
-
   const handleInput = e => {
     const { name, value } = e.target
     setUserData({ ...userData, [name]: value })
   }
-
   const handleChange = (e) => {
     const { value, checked } = e.target;
     const { requests } = userrequests;
@@ -43,11 +37,8 @@ const EditBookingDetails = ({ booking,token }) => {
       });
     }
   };
-
   const allRequest=booking.request
   const lastRequest=allRequest[allRequest.length-1]?allRequest[allRequest.length-1]:"Need a large room with wifi"
-
-
   useEffect(() => {
     const {name, email, phone, address } = booking
     setUserData({
@@ -58,9 +49,7 @@ const EditBookingDetails = ({ booking,token }) => {
       address
     })
     setOwnRequest(lastRequest)
-
   }, [booking, lastRequest])
-
   const newBooking={
     id:booking._id,
     name: userData.firstName + " " + userData.lastName,
@@ -69,13 +58,11 @@ const EditBookingDetails = ({ booking,token }) => {
     address: userData.address,
     request: ownRequest ? [...userrequests.requests, ownRequest] : userrequests.requests,
   }
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateBooking({booking:newBooking,token}))
     window.location.reload()
   }
- 
   return (<>
     <div className='row'>
       <div className='col-lg-12'>
@@ -90,7 +77,6 @@ const EditBookingDetails = ({ booking,token }) => {
             name="firstName" value={firstName} onChange={handleInput}
           />
         </div>
-
         <div className="hotel_label">
           <label className="form-label">Last Name</label>
           <input
@@ -100,7 +86,6 @@ const EditBookingDetails = ({ booking,token }) => {
             name="lastName" value={lastName} onChange={handleInput}
           />
         </div>
-
         <div className="hotel_label">
           <label className="form-label">Email Address</label>
           <input
@@ -110,7 +95,6 @@ const EditBookingDetails = ({ booking,token }) => {
             name="email" value={email} onChange={handleInput}
           />
         </div>
-
         <div className="hotel_label">
           <label className="form-label">Mobile Number</label>
           <input
@@ -118,10 +102,8 @@ const EditBookingDetails = ({ booking,token }) => {
             className="form-control hotel_input"
             id="exampleInputEmail1"
             name="phone" value={phone} onChange={handleInput}
-
           />
         </div>
-
         <div className="hotel_label">
           <label className="form-label">Address</label>
           <input
@@ -129,11 +111,9 @@ const EditBookingDetails = ({ booking,token }) => {
             className="form-control hotel_input"
             id="exampleInputEmail1"
             name="address" value={address} onChange={handleInput}
-
           />
         </div>
         </div>
-
         <div className='card-box mt-2'>
           <h5> Special Requests </h5>
           <p>Special requests are subject to availability and can't be guaranteed. Early check in and transfer may required an addition payment. Please contact the hotel to confirm.</p>
@@ -144,14 +124,12 @@ const EditBookingDetails = ({ booking,token }) => {
                   <input className="form-check-input" type="checkbox" name="requests" id="inlineCheckbox1" value="Early Check In" onChange={handleChange} />
                   <label className="form-check-label" htmlFor="inlineCheckbox1">Early Check-In</label>
                 </div>
-
               </div>
               <div className='field bb pb-1 '>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="checkbox" id="inlineCheckbox2" name="requests" value="Late Check-In" onChange={handleChange} />
                   <label className="form-check-label" htmlFor="inlineCheckbox2">Late Check-In</label>
                 </div>
-
               </div>
             </div>
             <div className='equal width fields'>
@@ -160,14 +138,12 @@ const EditBookingDetails = ({ booking,token }) => {
                   <input className="form-check-input" type="checkbox" id="inlineCheckbox3" name="requests" value="Large Bed" onChange={handleChange} />
                   <label className="form-check-label" htmlFor="inlineCheckbox3">Large Bed</label>
                 </div>
-
               </div>
               <div className='field bb pb-1 '>
                 <div className="form-check form-check-inline">
                   <input className="form-check-input" type="checkbox" id="inlineCheckbox4" name="requests" value="Twin Bed" onChange={handleChange} />
                   <label className="form-check-label" htmlFor="inlineCheckbox4">Twin Bed</label>
                 </div>
-
               </div>
             </div>
             <div className='equal width fields'>
@@ -176,7 +152,6 @@ const EditBookingDetails = ({ booking,token }) => {
                   <input className="form-check-input" type="checkbox" id="inlineCheckbox5" name="requests" value="Smoking Room" onChange={handleChange} />
                   <label className="form-check-label" htmlFor="inlineCheckbox5">Smoking Room</label>
                 </div>
-
               </div>
               <div className='field bb pb-1 '>
                 <div className="form-check form-check-inline">
@@ -193,16 +168,12 @@ const EditBookingDetails = ({ booking,token }) => {
             </div>
           </div>
         </div>
-
         <div className='align-center'>
           <button className='btn btn-primary w-100' onClick={handleSubmit}>Save</button>
-
         </div>
       </div>
-
     </div>
   </>
   )
 }
-
 export default EditBookingDetails

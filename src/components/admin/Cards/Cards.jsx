@@ -7,7 +7,7 @@ import Card from "../Card/Card";
 
 const Cards = () => {
   return (
-    <div className="Cards">
+    <div className="Admin_Cards">
       {cardsData.map((card, id) => {
         return (
           <div className="parentContainer" key={id}>

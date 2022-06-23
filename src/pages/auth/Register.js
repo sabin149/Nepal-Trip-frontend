@@ -5,13 +5,14 @@ import { register } from "../../redux/actions/authAction"
 import "./auth.css"
 const Register = () => {
     const { auth, alert } = useSelector(state => state)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const initialState = {
-        fullname: '', username: '', email: '', phone: '', password: '', password_confirmation: '', gender: 'Male'
+        fullname: '', username: '', email: '', phone: '', password: '', password_confirmation: '', gender: 'Male', role: "",
     }
     const [userData, setUserData] = useState(initialState)
-    const { fullname, username, email, phone, password, password_confirmation } = userData
+    const { fullname, username, email, phone, password, role, password_confirmation } = userData
     const [typePass, setTypePass] = useState(false)
     const [typeCfPass, setTypeCfPass] = useState(false)
     useEffect(() => {
@@ -26,9 +27,9 @@ const Register = () => {
         dispatch(register(userData))
     }
     return (
-        <div className='auth_page' style={{ minHeight: "90vh" }}>
+        <div className='auth_page' style={{ minHeight: "100vh", borderRadius:"20%" }}>
             <form onSubmit={handleSubmit}>
-                <h3 className='text-uppercase text-center mb-4 text-warning'>REGISTER
+                <h3 className='text-uppercase text-center text-warning'>REGISTER
                     <span className='text-dark'>FORM</span>
                 </h3>
                 <div className="form-group">
@@ -79,8 +80,8 @@ const Register = () => {
                         <small onClick={() => setTypePass(!typePass)}>
                             {typePass ?
 
-                                <i className='fas fa-eye'></i> :
-                                <i className='fas fa-eye-slash'></i>
+                                <i className='fas fa-eye mt-1'></i> :
+                                <i className='fas fa-eye-slash mt-1'></i>
                             }
                         </small>
                     </div>
@@ -96,16 +97,16 @@ const Register = () => {
                             onChange={handleChangeInput} value={password_confirmation} name="password_confirmation"
                             style={{ background: `${alert.password_confirmation ? '#fd2d6a14' : ''}` }} />
                         <small onClick={() => setTypeCfPass(!typeCfPass)}>
-                            {typeCfPass ? 
-                                <i className='fas fa-eye'></i> :
-                <i className='fas fa-eye-slash'></i>}
+                            {typeCfPass ?
+                                <i className='fas fa-eye mt-1'></i> :
+                                <i className='fas fa-eye-slash mt-1'></i>}
                         </small>
                     </div>
                     <small className="form-text text-danger">
                         {alert.password_confirmation ? alert.password_confirmation : ''}
                     </small>
                 </div>
-                <div className=" d-flex justify-content-between mx-0 mb-1">
+                <div className=" d-flex justify-content-between mx-0 mt-1">
                     <label htmlFor="male">
                         Male: <input type="radio" id="male" name="gender"
                             value="male" defaultChecked onChange={handleChangeInput} />
@@ -119,7 +120,19 @@ const Register = () => {
                             value="other" onChange={handleChangeInput} />
                     </label>
                 </div>
-                <button type="submit" className="btn btn-warning w-100">
+                <div className="form-group mt-1">
+                    <select className="form-control" id="role" name="role" value={role} onChange={handleChangeInput} style={{ background: `${alert.role ? '#fd2d6a14' : ''}` }}>
+                        <option value="">Select Role</option>
+                        <option value="user">User</option>
+                        <option value="vendor">Vendor</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <small className="form-text text-danger">
+                        {alert.role ? alert.role : ''}
+                    </small>
+                </div>
+
+                <button type="submit" className="btn btn-warning w-100 mt-3">
                     Register
                 </button>
                 <p className='my-2'>

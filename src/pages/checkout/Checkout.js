@@ -11,6 +11,16 @@ const Checkout = () => {
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
   const { hotel, room, searchInfo } = location.state
+
+//calculate tax of the room price
+  const tax = (room.room_price * 13) / 100
+
+  //calulate total price of the room
+  const totalPrice = room.room_price + tax
+
+  //calculate total price of the room in dollor
+  const totalPriceDollar = (totalPrice / 126).toFixed(2)
+  
   const [userrequests, setUserRequests] = useState({
     requests: [],
     response: [],
@@ -174,7 +184,7 @@ const Checkout = () => {
           </div>
           <div className="col-lg-4 detailroom">
             <div className='card-box'>
-                <h4 class="pd-top-sm">Hotel Orchid</h4>
+                <h4 class="pd-top-sm">{hotel?.hotel_name}</h4>
                     <div className='stars-group'>
                     <i class="fa-solid fa-star"></i>  
                     <i class="fa-solid fa-star"></i>
@@ -184,24 +194,24 @@ const Checkout = () => {
                   <div className='flex flex-box'>
                       <div className='box'>
                       <p><span>Check-in</span></p>
-                      <h5>Jun 20</h5>
+                      <h5>{searchInfo.date[0].startDate}</h5>
                       </div>
                       <div className='box'>
                       <p><span>Check-Out</span></p>
-                      <h5>Jun 20</h5>
+                      <h5>{searchInfo.date[0].endDate}</h5>
                       </div>
                       <div className='box b-lDuration'>
                       <p><span>Duration</span></p>
                       <h5>1 Night</h5>
                       </div>
                     </div>
-                    <h3 className='mt'> 1 X Deluxe Room</h3>
+                    <h3 className='mt'> 1 X {room.room_type}</h3>
                   <div className='flex'>
                       <div className='roomimg'>
-                      <img class="image-medium" src="https://assets.xceltrip.com/gallery-1581047283451-70e02.jpg" alt="roomimage"></img>
+                      <img class="image-medium" src={room.room_images[0].url} alt="roomimage"></img>
                       </div>
                       <div className='suite'>
-                              <p> 2 Adults</p>
+                              <p> 1 Adults</p>
                               <p> Non-refundable</p>
                       </div>
                   </div>
@@ -230,19 +240,19 @@ const Checkout = () => {
                       <span className='text-muted'>1 Night</span>
                       </div>
                       <div className='ml-auto blue'>
-                      2,510.94 NPR
+                     {room.room_price} NPR
                       </div>
                   </div>
                   <div className='flex bb'>
                     <p><b>Price Before Taxes</b></p>
                     <p className='ml-auto'>
-                    <b>2,510.94 NPR</b>
+                    <b>{room.room_price} NPR</b>
                     </p>
                   </div>
                   <div className='flex bb'>
                     <p>Taxes & Surcharge</p>
                     <p className='ml-auto'>
-                    <b>610.16 NPR</b>
+                    <b>{tax} NPR</b>
                     </p>
                   </div>
                   <div className='flex bb'>
@@ -259,10 +269,10 @@ const Checkout = () => {
                     </div>
                     <div className='ml-auto align-right'>
                         <span className='color-green text-md'>
-                        3121 NPR
+                        {totalPrice} NPR
                         </span><br/>
                         <p className='dollar-price'> 
-                        $ 25.00
+                        $ {totalPriceDollar}
                         </p>
                     </div>
                   </div>
