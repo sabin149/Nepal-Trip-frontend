@@ -244,6 +244,85 @@ const Hotelinfo = () => {
               </div>
             </div>
           </div>
+          {/* review section */}
+          <div className="segment">
+          <h3 className="bold">
+              <span>Reviews</span>
+              <hr />
+            </h3>
+          <div class="container">
+<div class="be-comment-block">
+	<div class="be-comment">
+		<div class="be-img-comment">	
+			
+				<img src="https://agewiki.org/uploads/27263/rabi-267x300.png" alt="" class="be-ava-comment"></img>
+			
+		</div>
+		<div class="be-comment-content">
+			
+				<span class="be-comment-name">
+					Ravi Lamechhane
+					</span>
+				<span class="be-comment-time">
+					<i class="fa fa-clock-o"></i>
+					Jun 21 , 2022 at 3:14am
+				</span>
+
+			<p class="be-comment-text">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+			</p>
+		</div>
+	</div>
+	<div class="be-comment">
+		<div class="be-img-comment">
+				<img src="https://pbs.twimg.com/profile_images/1246407813959577600/Jw2DmY38_400x400.jpg" alt="" class="be-ava-comment"></img>
+		</div>
+		<div class="be-comment-content">
+			<span class="be-comment-name">
+				Hari Bahadur
+			</span>
+			<span class="be-comment-time">
+				<i class="fa fa-clock-o"></i>
+				Jun 21 , 2022 at 3:14am
+			</span>
+			<p class="be-comment-text">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+			</p>
+		</div>
+	</div>
+	<div class="be-comment">
+		<div class="be-img-comment">
+				<img src="https://3.bp.blogspot.com/-uUE9Um9KnfA/VmomXEPuQ-I/AAAAAAAACKI/83VNZxN6bGA/s640/Rajesh-Hamal-Icon.png" alt="" class="be-ava-comment"></img>
+		</div>
+		<div class="be-comment-content">
+			<span class="be-comment-name">
+			Rajesh Hamal
+			</span>
+			<span class="be-comment-time">
+				<i class="fa fa-clock-o"></i>
+				Jun 21 , 2022 at 3:14am
+			</span>
+			<p class="be-comment-text">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+
+			</p>
+		</div>
+	</div>
+	<form class="form-block">
+		<div class="row">
+			<div class="col-xs-12">									
+				<div class="form-group">
+					<textarea class="form-input" required="" placeholder="Type Your Review Here"></textarea>
+				</div>
+			</div>
+      <div class="float-end mt-2 pt-1">
+              <button type="button" class="btn btn-primary btn-sm">Post comment</button>
+            </div>
+		</div>
+	</form>
+</div>
+</div>
+          </div>
         </div>
       </div>
 
