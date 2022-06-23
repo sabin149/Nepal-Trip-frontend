@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 
 const RoomTable = ({ hotel }) => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [selectedRoom, setSelectedRoom] = useState()
+
+  const userID=localStorage.getItem('userID')
 
   const searchInfo = {
     date: [{
@@ -20,6 +25,25 @@ const RoomTable = ({ hotel }) => {
 
   // console.log(hotel);
 
+  const handleCheckout = () => {
+    if(userID){
+      navigate("/checkout", {
+        state: {
+          hotel,
+          room: selectedRoom,
+          searchInfo
+        }
+      })
+    }else{
+      dispatch({ 
+        type: GLOBALTYPES.ALERT, 
+        payload: {
+            error: "Please login to continue"
+        } 
+    })
+
+    }
+  }
 
   return (
     <>
@@ -132,15 +156,9 @@ const RoomTable = ({ hotel }) => {
                   width: "160px",
                   height: "40px",
                   margin: "0 auto"
-                }} onClick={() => {
-                  navigate("/checkout", {
-                    state: {
-                      hotel,
-                      room: selectedRoom,
-                      searchInfo
-                    }
-                  })
-                }}>
+                }} onClick={
+                  handleCheckout
+                }>
                   Reserve Now
                 </button>
               </div>

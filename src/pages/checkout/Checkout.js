@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createBooking } from '../../redux/actions/bookingAction'
 import Khalti from '../../components/khalti/Khati'
+
 const Checkout = () => {
   const dispatch = useDispatch()
   const location = useLocation()
@@ -12,7 +13,7 @@ const Checkout = () => {
   const token = localStorage.getItem('token')
   const { hotel, room, searchInfo } = location.state
 
-//calculate tax of the room price
+  //calculate tax of the room price
   const tax = (room.room_price * 13) / 100
 
   //calulate total price of the room
@@ -20,7 +21,7 @@ const Checkout = () => {
 
   //calculate total price of the room in dollor
   const totalPriceDollar = (totalPrice / 126).toFixed(2)
-  
+
   const [userrequests, setUserRequests] = useState({
     requests: [],
     response: [],
@@ -75,6 +76,7 @@ const Checkout = () => {
     e.preventDefault();
     dispatch(createBooking(booking, navigate, token))
   }
+
   return (
     <>
       <div className="container pd-top-md detailpage">
@@ -184,98 +186,126 @@ const Checkout = () => {
           </div>
           <div className="col-lg-4 detailroom">
             <div className='card-box'>
-                <h4 class="pd-top-sm">{hotel?.hotel_name}</h4>
-                    <div className='stars-group'>
-                    <i class="fa-solid fa-star"></i>  
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>                 
-                    </div>
-                  <div className='flex flex-box'>
-                      <div className='box'>
-                      <p><span>Check-in</span></p>
-                      <h5>{searchInfo.date[0].startDate}</h5>
-                      </div>
-                      <div className='box'>
-                      <p><span>Check-Out</span></p>
-                      <h5>{searchInfo.date[0].endDate}</h5>
-                      </div>
-                      <div className='box b-lDuration'>
-                      <p><span>Duration</span></p>
-                      <h5>1 Night</h5>
-                      </div>
-                    </div>
-                    <h3 className='mt'> 1 X {room.room_type}</h3>
-                  <div className='flex'>
-                      <div className='roomimg'>
-                      <img class="image-medium" src={room.room_images[0].url} alt="roomimage"></img>
-                      </div>
-                      <div className='suite'>
-                              <p> 1 Adults</p>
-                              <p> Non-refundable</p>
-                      </div>
-                  </div>
-                  <div className='inclu'>
-                  <b>
-                  <span>Inclusions</span>
-                  </b>
-                  <div class="color-green text-sm">Breakfast</div>
-                  <br/>
-                  <b>
-                  <span>Cancellation policy:</span>
-                  </b>
-                  <p className='text-muted text-sm'>
-                  <span>0 to 3 day's prior from Check-in 100% charges will apply<br/></span>
-                  <span>In case of no show 100% charges will apply<br/></span>
+              <h4 class="pd-top-sm">{hotel?.hotel_name}</h4>
+              <div className='stars-group'>
+                {
+                  hotel.rating === 5 ? <>
+                    <i className="fa-solid fa-star text-warning"></i>
+                    <i className="fa-solid fa-star text-warning"></i>
+                    <i className="fa-solid fa-star text-warning"></i>
+                    <i className="fa-solid fa-star text-warning"></i>
+                    <i className="fa-solid fa-star text-warning"></i>
+                  </>
+                    :
+                  hotel.rating === 4 ? <>
+                    <i className="fa-solid fa-star text-warning"></i>
+                    <i className="fa-solid fa-star text-warning"></i>
+                    <i className="fa-solid fa-star text-warning"></i>
+                    <i className="fa-solid fa-star text-warning"></i>
+                    <i className="fa-solid fa-star text-warning"></i>
+                  </>
+                    :
+                    hotel.rating === 3 ? <>
+                      <i className="fa-solid fa-star text-warning"></i>
+                      <i className="fa-solid fa-star text-warning"></i>
+                      <i className="fa-solid fa-star text-warning"></i>
+                    </>
+                      : hotel.rating === 2 ? <>
+                        <i className="fa-solid fa-star text-warning"></i>
+                        <i className="fa-solid fa-star text-warning"></i>
+                      </>
+                        : hotel.rating === 1 ? <>
+                          <i className="fa-solid fa-star text-warning"></i>
+                        </>
+                          : null
+                }
 
-                  </p>
-                  </div>
-                  
+              </div>
+              <div className='flex flex-box'>
+                <div className='box'>
+                  <p><span>Check-in</span></p>
+                  <h5>{searchInfo.date[0].startDate}</h5>
+                </div>
+                <div className='box'>
+                  <p><span>Check-Out</span></p>
+                  <h5>{searchInfo.date[0].endDate}</h5>
+                </div>
+                <div className='box b-lDuration'>
+                  <p><span>Duration</span></p>
+                  <h5>1 Night</h5>
+                </div>
+              </div>
+              <h3 className='mt'> 1 X {room.room_type}</h3>
+              <div className='flex'>
+                <div className='roomimg'>
+                  <img class="image-medium" src={room.room_images[0].url} alt="roomimage"></img>
+                </div>
+                <div className='suite'>
+                  <p> 1 Adults</p>
+                  <p> Non-refundable</p>
+                </div>
+              </div>
+              <div className='inclu'>
+                <b>
+                  <span>Inclusions</span>
+                </b>
+                <div class="color-green text-sm">Breakfast</div>
+                <br />
+                <b>
+                  <span>Cancellation policy:</span>
+                </b>
+                <p className='text-muted text-sm'>
+                  <span>0 to 3 day's prior from Check-in 100% charges will apply<br /></span>
+                  <span>In case of no show 100% charges will apply<br /></span>
+
+                </p>
+              </div>
+
             </div>
             <div className='card-box'>
-                  <div className='flex'>
-                      <div>
-                      <span className=''>Total Room Price</span>
-                      <br/>
-                      <span className='text-muted'>1 Night</span>
-                      </div>
-                      <div className='ml-auto blue'>
-                     {room.room_price} NPR
-                      </div>
-                  </div>
-                  <div className='flex bb'>
-                    <p><b>Price Before Taxes</b></p>
-                    <p className='ml-auto'>
-                    <b>{room.room_price} NPR</b>
-                    </p>
-                  </div>
-                  <div className='flex bb'>
-                    <p>Taxes & Surcharge</p>
-                    <p className='ml-auto'>
-                    <b>{tax} NPR</b>
-                    </p>
-                  </div>
-                  <div className='flex bb'>
-                    <p>Service Fees</p>
-                    <p className='ml-auto'>
-                    <b>0.00 NPR</b>
-                    </p>
-                  </div>
-                  <div className='flex py-1'>
-                  <div>
-                      <span className=''>Total Amount</span>
-                      <br/>
-                      <span className='text-muted'>With Taxes & Fees</span>
-                    </div>
-                    <div className='ml-auto align-right'>
-                        <span className='color-green text-md'>
-                        {totalPrice} NPR
-                        </span><br/>
-                        <p className='dollar-price'> 
-                        $ {totalPriceDollar}
-                        </p>
-                    </div>
-                  </div>
+              <div className='flex'>
+                <div>
+                  <span className=''>Total Room Price</span>
+                  <br />
+                  <span className='text-muted'>1 Night</span>
+                </div>
+                <div className='ml-auto blue'>
+                  {room.room_price} NPR
+                </div>
+              </div>
+              <div className='flex bb'>
+                <p><b>Price Before Taxes</b></p>
+                <p className='ml-auto'>
+                  <b>{room.room_price} NPR</b>
+                </p>
+              </div>
+              <div className='flex bb'>
+                <p>Taxes & Surcharge</p>
+                <p className='ml-auto'>
+                  <b>{tax} NPR</b>
+                </p>
+              </div>
+              <div className='flex bb'>
+                <p>Service Fees</p>
+                <p className='ml-auto'>
+                  <b>0.00 NPR</b>
+                </p>
+              </div>
+              <div className='flex py-1'>
+                <div>
+                  <span className=''>Total Amount</span>
+                  <br />
+                  <span className='text-muted'>With Taxes & Fees</span>
+                </div>
+                <div className='ml-auto align-right'>
+                  <span className='color-green text-md'>
+                    {totalPrice} NPR
+                  </span><br />
+                  <p className='dollar-price'>
+                    $ {totalPriceDollar}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

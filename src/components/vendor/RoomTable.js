@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Carousel from '../Carousel';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
@@ -20,12 +20,16 @@ const RoomTable = ({ hotel }) => {
         }
     }
 
-    const [open, setOpen] = React.useState(false);
-    const [scroll, setScroll] = React.useState('paper');
+    const [open, setOpen] = useState(false);
+    const [scroll, setScroll] = useState('paper');
+    const [selectedRoom, setSelectedRoom] = useState(null);
 
-    const handleClickOpen = (scrollType) => () => {
+    const handleClickOpen = ({ scrollType, room }) => () => {
         setOpen(true);
         setScroll(scrollType);
+        setSelectedRoom(room);
+
+        console.log(room);
     };
 
     const handleClose = () => {
@@ -41,6 +45,8 @@ const RoomTable = ({ hotel }) => {
             }
         }
     }, [open]);
+
+
     return (
         <>
             <div className="row pricetable">
@@ -61,32 +67,98 @@ const RoomTable = ({ hotel }) => {
                                 hotel.rooms.map(room => (
                                     <tr key={room._id}  >
                                         <td className="" rowSpan="1">
-                                            <h3 className="color-dark-blue bold pointer" onClick={handleClickOpen('body')}> {room.room_type}</h3>
+                                            <h3 className="color-dark-blue bold pointer" onClick={handleClickOpen({ scrollType: 'body', room })}> {room.room_type}</h3>
+                                            <Dialog sx={{
+                                                zIndex: "1",
+                                                backgroundBlendMode: "darken",
+                                                backgroundColor: "rgba(0,0,0,0.1)",
+                                                borderTop: "1px solid rgba(0,0,0,0.1)",
+                                            }}
+                                                open={open}
+                                                onClose={handleClose}
+                                                scroll={scroll}
+                                                aria-labelledby="scroll-dialog-title"
+                                                aria-describedby="scroll-dialog-description"
+                                            >
+                                               <div className="room_header">
+                                               <h4 className='mt-3 align-left' style={{
+                                                    color:"black",
+                                                    lineHeight:"1.2em",
+                                                    fontSize: "1.28em",
                                                 
+                                                }}>Room Details</h4>
+                                               </div>
+                                          
+                                                <h3 className='color-dark-blue' style={{
+                                                    marginLeft: "20px",
+                                                    fontWeight:"500",
+                                                    fontSize: "2.8rem",
+                                                }}>{selectedRoom?.room_type}</h3>
+                                                <DialogContent dividers={scroll === 'paper'}>
 
+                                                    <Carousel images={selectedRoom?.room_images} />
+                                                </DialogContent>
+                                                <div className="amenities m-0">
+                                                    <hr></hr>
 
-                                                <Dialog sx={{
-                                                    zIndex:"1",
-                                                    backgroundBlendMode:"darken",
-                                                    backgroundColor:"rgba(0,0,0,0.1)",
-                                                }}
-                                                    open={open}
-                                                    onClose={handleClose}
-                                                    scroll={scroll}
-                                                    aria-labelledby="scroll-dialog-title"
-                                                    aria-describedby="scroll-dialog-description"
-                                                >
-                                                    <h3 className='mt-3' style={{
-                                                        marginLeft:"23px",
-                                                    }}>Room Details</h3>
-                                                    <hr />
-                                                    <DialogContent dividers={scroll === 'paper'}>
-                                                       
-                                                       <Carousel images={room.room_images} />
-                                                    </DialogContent>
+                                                    <div className="row row-cols-2">
+                                                        <div className="col">
+                                                            <li>
+                                                                <i className="fa-solid fa-wifi"></i>
 
-                                                </Dialog>
-                                           
+                                                                <span className="amen">
+                                                                    24hrs Free Wi-Fi
+                                                                </span>
+                                                            </li>
+                                                        </div>
+                                                        <div className="col">
+                                                            <li>
+                                                                <i className="fa-solid fa-shirt"></i>
+
+                                                                <span className="amen">Restaurant</span>
+                                                            </li>
+                                                        </div>
+                                                        <div className="col">
+                                                            <li>
+                                                                <i className="fa-solid fa-smoking"></i>
+                                                                <span className="amen">
+                                                                    Smoking Area Available
+                                                                </span>
+                                                            </li>
+                                                        </div>
+                                                        <div className="col">
+                                                            <li>
+                                                                <i className="fa-solid fa-car"></i>
+
+                                                                <span className="amen">
+                                                                    Transportation Facility
+                                                                </span>
+                                                            </li>
+                                                        </div>
+                                                        <div className="col">
+                                                            <li>
+                                                                <i className="fa-solid fa-bed"></i>
+
+                                                                <span className="amen">
+                                                                    Twin Bed
+                                                                </span>
+                                                            </li>
+                                                        </div>
+                                                        <div className="col">
+                                                            <li>
+                                                                <i className="fa-solid fa-bath"></i>
+
+                                                                <span className="amen">
+                                                                    Bath
+                                                                </span>
+                                                            </li>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </Dialog>
+
                                             <div className="image-holder bg-light-gray height160">
                                                 <img className="room-image" src={room.room_images[0].url} alt="roomimage" />
                                             </div>
