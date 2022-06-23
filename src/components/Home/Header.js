@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 
 const Header = ({ isUser }) => {
   const dispatch = useDispatch();
-  const userID=localStorage.getItem("userID")
+  const userID = localStorage.getItem("userID")
   return (
     <div className="navbar">
       <div className="navContainer">
@@ -25,11 +25,21 @@ const Header = ({ isUser }) => {
           </div>
 
           <div className="favourite">
-          <i className="fa-solid fa-heart"></i>
+            <i className="fa-solid fa-heart"></i>
             <span> My Favourite </span>
           </div>
 
-
+          {isUser&&
+            <div className="hotel">
+              <span> <Link to={`/user/profile/${userID}`} className="text-decoration-none text-dark">Sabin Dangal</Link> </span>
+              <div className="profileav">
+                <li>
+                  <img src={'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL6v8PoUM6TMzXaF21-DPnyoIYxiR7uLSjtlHaZfcS44fhSmi46q9cKn1nIrp8KG6EJPY&usqp=CAU'}
+                    alt="user's_profile" />
+                </li>
+              </div>
+            </div>}
+            
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
             <button className="navButton" onClick={() => {
               if (window.confirm('Are you sure you want to logout?')) {
@@ -40,11 +50,7 @@ const Header = ({ isUser }) => {
               <span> <i className="fa-solid fa-right-from-bracket text-light" ></i></span>
             </button>}
 
-            {isUser&&
-            <div className="hotel">
-            <i className="fa-solid fa-user"> </i>
-            <span> <Link to={`/user/profile/${userID}`} className="text-decoration-none text-dark">Profile</Link> </span>
-          </div>}
+           
 
 
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true" >

@@ -50,8 +50,8 @@ const Footer = () => {
              <h6>Payment Method</h6>
              <ul className="flex footer_payment">
                  <li className="mr-2">
-                    <img src='https://www.xceltrip.com.np/1d10d595525eff1ba9a6994a8e61fede.png' alt="projectimages"/>
-                    <img src='https://www.xceltrip.com.np/360850cdcfd7acf0c2e2b362284634a1.png' alt="projectimages"/>                               
+                    <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Khalti_Digital_Wallet_Logo.jpg/800px-Khalti_Digital_Wallet_Logo.jpg' alt="projectimages"/>
+                    <img src='https://asianalp.org/wp-content/uploads/2021/06/fonepayhr-9-5-2014-17-05-53eSewa-1.jpg' alt="projectimages"/>                               
                     </li>
              </ul>
           </div>
