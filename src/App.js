@@ -21,6 +21,7 @@ import EditHotelDetails from "./components/vendor/EditHotelDetails";
 import EditRoomDetails from "./components/vendor/EditRoomDetails";
 import Bookings from "./pages/bookings/bookingDetails";
 import ReviewTable from "./components/admin/Table/review/ReviewTable";
+import Login from "./pages/auth/Login";
 
 function App() {
   const token = localStorage.getItem('token')
@@ -38,7 +39,7 @@ function App() {
           <Route path="/" element={isAdmin ? <AdminDashboard token={token} /> : isVendor ? <VendorDashboard token={token} /> :
             <Home />
           } />
-
+          <Route path="/login" element={<Login />} />
           <Route path="/hotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
           <Route path="/room" element={isVendor ? <Room /> : <Navigate to="/" />} />
           <Route path="/hotellist" element={<HotelList />} />

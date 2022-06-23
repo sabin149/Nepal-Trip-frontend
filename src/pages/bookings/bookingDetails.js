@@ -44,7 +44,6 @@ const BookingDetails = () => {
       {
         userBooking && userBooking.length > 0 ?
           <div className="main_content">
-
             <div className="container pd-top-md">
               <div className="edit-booking-details">
                 <button className="btn btn-primary btn-sm float-lg-end" onClick={handleEditBookingClickOpen("body")}>Edit booking Details</button>
@@ -121,25 +120,25 @@ const BookingDetails = () => {
                       <tr >
                         <td className="" rowSpan="1">
                           <h3 className="color-black bold pointer">
-                            {" "}
+                            
                             1 No.of Room(s)
                           </h3>
                         </td>
                         <td className="" rowSpan="2">
                           <h3 className="color-black bold pointer">
-                            {" "}
+                            
                             1 No.of Night(s)
                           </h3>
                         </td>
                         <td className="" rowSpan="3">
                           <h3 className="color-lack bold pointer">
-                            {" "}
+                            
                             15th Jun, 2022 12::0:0 check-in
                           </h3>
                         </td>
                         <td className="" rowSpan="4">
                           <h3 className="color-black bold pointer">
-                            {" "}
+                            
                             16th Jun, 2022 12::0:0 check-out
                           </h3>
                         </td>
@@ -170,8 +169,8 @@ const BookingDetails = () => {
                       <thead>
                         <tr>
                           <th scope="col">
-                            {" "}
-                            <span className=""> Guest</span>{" "}
+                            
+                            <span className=""> Guest</span>
                           </th>
                           <th scope="col">Room Type</th>
                           <th scope="col">Room Size </th>
@@ -268,13 +267,13 @@ const BookingDetails = () => {
                         </td>
                         <td className="" rowSpan="3">
                           <h3 className="color-lack bold pointer">
-                            {" "}
+                            
                             240 sq.ft
                           </h3>
                         </td>
                         <td className="" rowSpan="4">
                           <h3 className="color-black bold pointer">
-                            {" "}
+                            
                             King Bed
                           </h3>
                         </td>
@@ -289,8 +288,8 @@ const BookingDetails = () => {
                     <thead>
                       <tr>
                         <th scope="col">
-                          {" "}
-                          <span className=""> Room No</span>{" "}
+                          
+                          <span className=""> Room No</span>
                         </th>
                         <th scope="col">No. of Adults</th>
                         <th scope="col">No. of Children</th>
@@ -310,7 +309,7 @@ const BookingDetails = () => {
                         </td>
                         <td className="" rowSpan="4">
                           <h3 className="color-black bold pointer">
-                            {" "}
+                            
                             Breakfast
                           </h3>
                         </td>
@@ -325,8 +324,8 @@ const BookingDetails = () => {
                       <thead>
                         <tr>
                           <th scope="col">
-                            {" "}
-                            <span className=""> Room No</span>{" "}
+                            
+                            <span className=""> Room No</span>
                           </th>
                           <th scope="col">No. of Adults</th>
                           <th scope="col">No. of Children</th>
@@ -337,25 +336,25 @@ const BookingDetails = () => {
                         <tr className="">
                           <td className="" rowSpan="1">
                             <h3 className="color-black bold pointer">
-                              {" "}
+                              
                               1
                             </h3>
                           </td>
                           <td className="" rowSpan="2">
                             <h3 className="color-black bold pointer">
-                              {" "}
+                              
                               1
                             </h3>
                           </td>
                           <td className="" rowSpan="3">
                             <h3 className="color-lack bold pointer">
-                              {" "}
+                              
                               0
                             </h3>
                           </td>
                           <td className="" rowSpan="4">
                             <h3 className="color-black bold pointer">
-                              {" "}
+                              
                               Breakfast
                             </h3>
                           </td>
@@ -381,7 +380,7 @@ const BookingDetails = () => {
                 <h3 className="">Hotel Policies:</h3>
                 <hr></hr>
                 <div className="allpolicy">
-                  <h3 className="checkin">Check in and Check out Policy:</h3>{" "}
+                  <h3 className="checkin">Check in and Check out Policy:</h3>
                   <br></br>
                   Check in time: 12::0<br></br>
                   Check out time: 12::0

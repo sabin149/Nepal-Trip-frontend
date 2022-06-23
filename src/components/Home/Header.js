@@ -20,7 +20,7 @@ const Header = ({ isUser }) => {
         <div className="navItems">
           <div className="hotel">
             <i className="fa-solid fa-suitcase"> </i>
-            <span> <Link to="/bookings" className="text-decoration-none text-dark">Hotel Booking</Link> </span>
+            <span> <Link to="/bookings" className="text-decoration-none text-dark">My Hotel Booking</Link> </span>
           </div>
 
           <div className="favourite">
