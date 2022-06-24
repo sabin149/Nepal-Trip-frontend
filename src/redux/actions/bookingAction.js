@@ -6,7 +6,9 @@ export const BOOKING_TYPES = {
     LOADING_BOOKING: "LOADING_BOOKING",
     GET_BOOKINGS: "GET_BOOKINGS",
     GET_BOOKING: "GET_BOOKING",
-    UPDATE_BOOKING: "UPDATE_BOOKING"
+    GET_HOTEL_BOOKINGS: "GET_HOTEL_BOOKINGS",
+    UPDATE_BOOKING: "UPDATE_BOOKING",
+
 }
 
 export const createBooking = (booking,navigate,token) => async (dispatch) => {
@@ -78,6 +80,24 @@ export const updateBooking = ({ booking,navigate, token }) => async (dispatch) =
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: { error: error.response.data.msg }
+        })
+    }
+}
+
+
+export const getBookingsByHotel = ({ hotelId, token }) => async (dispatch) => {
+    try {
+        dispatch({ type: BOOKING_TYPES.LOADING_BOOKING, payload: true })
+        const res = await getDataAPI(`hotelbooking/${hotelId}`, token)
+        dispatch({
+            type: BOOKING_TYPES.GET_HOTEL_BOOKINGS,
+            payload: { ...res.data, page: 1, count: res.data.count }
+        })
+        dispatch({ type: BOOKING_TYPES.LOADING_BOOKING, payload: false })
+    } catch (err) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { error: err.response.data.msg }
         })
     }
 }

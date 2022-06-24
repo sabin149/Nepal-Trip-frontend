@@ -24,7 +24,7 @@ const Header = ({ isUser }) => {
           </div>
 
           <div className="favourite">
-          <i class="fa-solid fa-heart"></i>
+          <i className="fa-solid fa-heart"></i>
             <span > My Favourite </span>
           </div>
 

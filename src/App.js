@@ -20,8 +20,10 @@ import ViewHotelDetails from "./components/vendor/ViewHotelDetails";
 import EditHotelDetails from "./components/vendor/EditHotelDetails";
 import EditRoomDetails from "./components/vendor/EditRoomDetails";
 import Bookings from "./pages/bookings/bookingDetails";
-import ReviewTable from "./components/admin/Table/review/ReviewTable";
-import Login from "./pages/auth/Login";
+
+import AllReviewsTable from "./components/admin/Table/review/ReviewTable";
+import AllBookingsTable from "./components/admin/Table/bookings/AllBookingsTable";
+import ReviewTable from "./components/vendor/components/VendorTable/review/ReviewTable";
 
 function App() {
   const token = localStorage.getItem('token')
@@ -39,7 +41,7 @@ function App() {
           <Route path="/" element={isAdmin ? <AdminDashboard token={token} /> : isVendor ? <VendorDashboard token={token} /> :
             <Home />
           } />
-          <Route path="/login" element={<Login />} />
+
           <Route path="/hotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
           <Route path="/room" element={isVendor ? <Room /> : <Navigate to="/" />} />
           <Route path="/hotellist" element={<HotelList />} />
@@ -53,6 +55,8 @@ function App() {
           <Route path="/editRoomDetails/:id" element={isVendor ? <EditRoomDetails /> : <Navigate to="/" />} />
           <Route path="/bookings" element={isUser ? <Bookings /> : <Navigate to="/" />} />
           <Route path="/vendor/reviews" element={isVendor ? <ReviewTable /> : <Navigate to="/" />} />
+          <Route path="/admin/reviews" element={isAdmin ? <AllReviewsTable /> : <Navigate to="/" />} />
+          <Route path="/admin/bookings" element={isAdmin ? <AllBookingsTable /> : <Navigate to="/" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdmin ? <EHeader /> : isVendor ? <EFooter /> : <Footer />}

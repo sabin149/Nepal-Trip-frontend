@@ -1,73 +1,108 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
+import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getBookings, getBookingsByHotel } from '../../../../redux/actions/bookingAction';
+import { getHotels } from '../../../../redux/actions/hotelAction';
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
   {
-    field: 'hotelname',
-    headerName: 'Hotel Name',
-    width: 150,
-    editable: true,
+      field: 'room',
+      headerName: 'Room Type',
+      sortable: true,
+      width: 180,
   },
   {
-    field: 'bookedat',
-    headerName: 'Booked At',
-    type:'number',
-    width: 150,
-    editable: true,
+      field: 'name',
+      headerName: 'Full Name',
+      sortable: true,
+      width: 180,
   },
+  {
+      field: "startdate",
+      headerName: 'Checkin Date',
+      width: 180,
+      sortable: true,
+      renderCell: (bookingData) => {
+          return moment(bookingData?.value ? bookingData?.value : "").format("MMM Do YYYY")
+      }
+  },
+  {
+      field: "enddate",
+      headerName: 'Checkout Date',
+      width: 175,
+      sortable: true,
+      renderCell: (bookingData) => {
+          return moment(bookingData?.value ? bookingData?.value : "").format("MMM Do YYYY")
+      }
+  }, {
+      field: "totalamount",
+      headerName: 'Total Amount',
+      width: 140,
+      sortable: false,
+  }, {
+      field: "paymenttype",
+      headerName: 'Payment Type',
+      width: 175,
+      sortable: true,
+  }
+];
+
+export default function VendorBookingsTable() {
+  const dispatch = useDispatch();
+  const token=localStorage.getItem('token');
+  const userID=localStorage.getItem('userID');
+
+  const hotels = useSelector(state => state?.hotel?.hotels);
+  const {bookings}=useSelector(state=>state.booking);
+
+
+  const hotelId=hotels && hotels.filter (hotel=>hotel?.user?._id===userID)[0]?._id;
   
-  {
-    field: 'bookedby',
-    headerName: 'Booked By',
-    description: 'This column has a value getter and is not sortable.',
-    sortable: false,
-    width: 140,
-    valueGetter: (params) =>
-      `${params.row.firstName || ''} ${params.row.lastName || ''}`,
-  },
-  {
-    field: 'totalrooms',
-    headerName: 'TotalRooms',
-    type: 'number',
-    width: 100,
-    editable: true,
-  },
-  {
-    field: 'email',
-    headerName: 'Email',
-    width: 190,
-    editable: true,
-  },
-  {
-    field: 'status',
-    headerName: 'Status',
-    width: 150,
-    editable: true,
-  },
-];
+  useEffect(()=>{
+    dispatch(getHotels());
+  },[dispatch,token])
 
-const rows = [
-  { id: 1, hotelname: 'Snow',bookedat:"2020/12/2" ,firstName: 'Jon', totalrooms: 35, email:'sp554540@gmail.com' },
-  { id: 2, hotelname: 'Lannister', bookedat:"2020/12/2" ,firstName: 'Cersei', totalrooms: 42, email:'sp554540@gmail.com' },
-  { id: 3, hotelname: 'Lannister', bookedat:"2020/12/2" ,firstName: 'Jaime', totalrooms: 45, email:'sp554540@gmail.com' },
-  { id: 4, hotelname: 'Stark', bookedat:"2020/12/2" ,firstName: 'Arya', totalrooms: 16, email:'sp554540@gmail.com' },
-  { id: 5, hotelname: 'Targaryen', bookedat:"2020/12/2" ,firstName: 'Daenerys', totalrooms: 55, email:'sp554540@gmail.com' },
-  { id: 6, hotelname: 'Melisandre', bookedat:"2020/12/2" ,firstName: null, totalrooms: 150, email:'sp554540@gmail.com' },
-  { id: 7, hotelname: 'Clifford', bookedat:"2020/12/2" ,firstName: 'Ferrara', totalrooms: 44, email:'sp554540@gmail.com' },
-  { id: 8, hotelname: 'Frances', bookedat:"2020/12/2" ,firstName: 'Rossini', totalrooms: 36, email:'sp554540@gmail.com' },
-  { id: 9, hotelname: 'Roxie', bookedat:"2020/12/2" ,firstName: 'Harvey', totalrooms: 65, email:'sp554540@gmail.com' },
-];
+ useEffect(()=>{
+    dispatch(getBookingsByHotel({hotelId,token}));
+  },[dispatch, hotelId, token])
 
-export default function DataGridDemo() {
+ const bookingsData=bookings&& bookings.map((booking,index) => {
+    return {
+        id: index+1,
+        room: booking.room.room_type,
+        name: booking.name,
+        startdate: booking.start_date,
+        enddate: booking.end_date,
+        totalamount: booking.total_amount,
+        paymenttype: booking.payment_type,
+    }
+
+ })
+
+
+
   return (
     <Box sx={{ height: 500, width: '100%' }}>
       <DataGrid
-        rows={rows}
+        sx={{
+          boxShadow: 2,
+          '& .MuiDataGrid-cell:hover': {
+            color: 'primary.main',
+
+          },
+          "& .MuiDataGrid-columnHeaderTitle": {
+            fontWeight: '500',
+          },
+        }}
+
+        rows={bookingsData}
         columns={columns}
-        pageSize={7}
-        rowsPerPageOptions={[7]}
+        pageSize={10}
+        rowsPerPageOptions={[10, 20, 50, 100]}
         checkboxSelection
         disableSelectionOnClick
       />
