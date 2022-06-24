@@ -11,6 +11,7 @@ export const HOTEL_TYPES = {
     APPROVE_HOTEL: "APPROVE_HOTEL",
     GET_HOTEL_ROOMS: "GET_HOTEL_ROOMS",
     DELETE_HOTEL: "DELETE_HOTEL",
+    GET_HOTEL_REVIEWS: "GET_HOTEL_REVIEWS",
 }
 
 export const createHotel = ({ hotel_name, rating, address, phone, hotel_email, pan_no, price, hotel_images, hotel_info, hotel_facilities, hotel_policies, navigate, token }) => async (dispatch) => {

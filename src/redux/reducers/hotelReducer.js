@@ -46,6 +46,11 @@ const hotelReducer = (state = initialState, action) => {
                 ...state,
                 hotels: DeleteData(state.hotels, action.payload._id)
             };
+        case HOTEL_TYPES.GET_HOTEL_REVIEWS:
+            return {
+                ...state,
+                hotels: EditData(state.hotels, action.payload._id, action.payload)
+            };
         default:
             return state;
     }

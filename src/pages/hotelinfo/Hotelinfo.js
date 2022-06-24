@@ -5,23 +5,51 @@ import { useSelector, useDispatch } from "react-redux";
 import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
 import RoomTable from "../../components/room/RoomTable";
+import Rating from '@mui/material/Rating'
+import { createReview } from "../../redux/actions/reviewAction";
+import {getUsers} from "../../redux/actions/userAction"
 
 const Hotelinfo = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+
+  const token=localStorage.getItem('token')
+  const userID=localStorage.getItem('userID')
+
+  const [value, setValue] = React.useState(0);
+  const [review, setReview] = React.useState("");
 
 
   useEffect(() => {
     dispatch(getHotel({ id }))
   }, [dispatch, id])
 
+
+  useEffect(() => {
+    dispatch(getUsers(token))
+  },[dispatch, token])
+
+
   const hotel = useSelector(state => state?.hotel?.hotels);
+  const users = useSelector(state => state?.user?.users);
+
   const [readMore, setReadMore] = useState(false)
 
+  const oneUser=users&& users.filter(user=>user._id===userID)[0]
+ 
+
+  const handlePostReview = (e) => {
+    e.preventDefault();
+  const newReview = {
+    review,
+    hotel_rating: value,
+    user: userID,
+    createdAt: new Date().toISOString(),
+  }
+    dispatch(createReview({hotel,newReview,user:oneUser,token}))
+  }
 
   const [replyInput, setReplyInput] = useState(false)
-
-  // console.log(hotel);
 
   return (
 
@@ -235,17 +263,17 @@ const Hotelinfo = () => {
               <div className="content">
                 <p>Rating (select a star Amount):</p>
               </div>
-              <div className="wrapper">
-                <input name="ratingRadio" type="radio" id="st1" value="1" />
-                <label for="st1"></label>
-                <input name="ratingRadio" type="radio" id="st2" value="2" />
-                <label for="st2"></label>
-                <input name="ratingRadio" type="radio" id="st3" value="3" />
-                <label for="st3"></label>
-                <input name="ratingRadio" type="radio" id="st4" value="4" />
-                <label for="st4"></label>
-                <input name="ratingRadio" type="radio" id="st5" value="5" />
-                <label for="st5"></label>
+              <div className="user_hotel_rating text-center">
+                <Rating sx={{
+                  fontSize: "2.5rem",
+                  color: "orange !important",
+                }}
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                />
               </div>
             </div>
           </div>
@@ -255,111 +283,111 @@ const Hotelinfo = () => {
               <span>Reviews</span>
               <hr />
             </h3>
-            <div class="container">
-              <div class="be-comment-block">
+            <div className="container">
+              <div className="be-comment-block">
                 {/* list of reviews */}
-                <div class="be-comment">
-                  <div class="be-img-comment">
+                <div className="be-comment">
+                  <div className="be-img-comment">
 
-                    <img src="http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" class="be-ava-comment"></img>
+                    <img src="http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" className="be-ava-comment"></img>
 
                   </div>
-                  <div class="be-comment-content">
+                  <div className="be-comment-content">
 
-                    <span class="be-comment-name">
+                    <span className="be-comment-name">
                       User Name
                     </span><br />
-                    <span class="be-comment-time">
-                      <i class="fa fa-clock-o"></i>
+                    <span className="be-comment-time">
+                      <i className="fa fa-clock-o"></i>
                       Jun 23 , 2022 at 7:14am
                     </span>
 
-                    <p class="be-comment-text">
+                    <p className="be-comment-text">
                       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                     </p>
                   </div>
                   <div className="replysec">
-                    <span class="be-comment-name repsec">
+                    <span className="be-comment-name repsec">
                       Reply
                     </span>
-                    {/* <span class="be-comment-name">
+                    {/* <span className="be-comment-name">
 					Edit
 					</span> */}
                   </div>
                 </div>
-                <div class="be-comment">
-                  <div class="be-img-comment">
+                <div className="be-comment">
+                  <div className="be-img-comment">
 
-                    <img src="https://agewiki.org/uploads/27263/rabi-267x300.png" alt="" class="be-ava-comment"></img>
+                    <img src="https://agewiki.org/uploads/27263/rabi-267x300.png" alt="" className="be-ava-comment"></img>
 
                   </div>
-                  <div class="be-comment-content">
+                  <div className="be-comment-content">
 
-                    <span class="be-comment-name">
+                    <span className="be-comment-name">
                       Ravi Lamechhane
                     </span><br />
-                    <span class="be-comment-time">
-                      <i class="fa fa-clock-o"></i>
+                    <span className="be-comment-time">
+                      <i className="fa fa-clock-o"></i>
                       Jun 21 , 2022 at 3:14am
                     </span>
 
-                    <p class="be-comment-text">
+                    <p className="be-comment-text">
                       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                     </p>
                   </div>
                   <div className="replysec">
-                    <span class="be-comment-name repsec">
+                    <span className="be-comment-name repsec">
                       Reply
                     </span>
-                    {/* <span class="be-comment-name">
+                    {/* <span className="be-comment-name">
 					Edit
 					</span> */}
                   </div>
                 </div>
-                <div class="be-comment">
-                  <div class="be-img-comment">
-                    <img src="https://pbs.twimg.com/profile_images/1246407813959577600/Jw2DmY38_400x400.jpg" alt="" class="be-ava-comment"></img>
+                <div className="be-comment">
+                  <div className="be-img-comment">
+                    <img src="https://pbs.twimg.com/profile_images/1246407813959577600/Jw2DmY38_400x400.jpg" alt="" className="be-ava-comment"></img>
                   </div>
-                  <div class="be-comment-content">
-                    <span class="be-comment-name">
+                  <div className="be-comment-content">
+                    <span className="be-comment-name">
                       Hari Bahadur
                     </span><br />
-                    <span class="be-comment-time">
-                      <i class="fa fa-clock-o"></i>
+                    <span className="be-comment-time">
+                      <i className="fa fa-clock-o"></i>
                       Jun 21 , 2022 at 3:14am
                     </span>
-                    <p class="be-comment-text">
+                    <p className="be-comment-text">
                       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
                     </p>
                   </div>
                   <div className="replysec">
-                    <span class="be-comment-name repsec">
+                    <span className="be-comment-name repsec">
                       Reply
                     </span>
-                    {/* <span class="be-comment-name">
+                    {/* <span className="be-comment-name">
 					Edit
 					</span> */}
                   </div>
                 </div>
-                <div class="be-comment">
-                  <div class="be-img-comment">
-                    <img src="https://3.bp.blogspot.com/-uUE9Um9KnfA/VmomXEPuQ-I/AAAAAAAACKI/83VNZxN6bGA/s640/Rajesh-Hamal-Icon.png" alt="" class="be-ava-comment"></img>
+                <div className="be-comment">
+                  <div className="be-img-comment">
+                    <img src="https://3.bp.blogspot.com/-uUE9Um9KnfA/VmomXEPuQ-I/AAAAAAAACKI/83VNZxN6bGA/s640/Rajesh-Hamal-Icon.png" alt="" className="be-ava-comment"></img>
                   </div>
-                  <div class="be-comment-content">
-                    <span class="be-comment-name">
+                  <div className="be-comment-content">
+                    <span className="be-comment-name">
                       Rajesh Hamal
                     </span><br />
-                    <span class="be-comment-time">
-                      <i class="fa fa-clock-o"></i>
+                    <span className="be-comment-time">
+                      <i className="fa fa-clock-o"></i>
                       Jun 21 , 2022 at 3:14am
                     </span>
-                    <p class="be-comment-text">
+                    <p className="be-comment-text">
                       Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. this is this
 
                     </p>
                   </div>
                   <div className="replysec">
-                    <span class="be-comment-name repsec" onClick={() => { setReplyInput(true) }} >
+                    <span className="be-comment-name repsec" onClick={() => { setReplyInput(true) }} >
                       Reply
                     </span>
                     {
@@ -368,54 +396,54 @@ const Hotelinfo = () => {
                         <button className="replybtn" onClick={() => { setReplyInput(false) }}>Reply</button>
                       </div> : null
                     }
-                    {/* <span class="be-comment-name">
+                    {/* <span className="be-comment-name">
 					Edit
 					</span> */}
                   </div>
 
                   {/* after replying */}
 
-                  <div class="be-comment afterreply">
-                    <div class="be-img-comment">
+                  <div className="be-comment afterreply">
+                    <div className="be-img-comment">
 
-                      <img src="http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" class="be-ava-comment"></img>
+                      <img src="http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" className="be-ava-comment"></img>
 
                     </div>
-                    <div class="be-comment-content">
+                    <div className="be-comment-content">
 
-                      <span class="be-comment-name">
+                      <span className="be-comment-name">
                         User Name
                       </span><br />
-                      <span class="be-comment-time">
-                        <i class="fa fa-clock-o"></i>
+                      <span className="be-comment-time">
+                        <i className="fa fa-clock-o"></i>
                         Jun 23 , 2022 at 7:14am
                       </span>
 
-                      <p class="be-comment-text">
+                      <p className="be-comment-text">
                         Hello Rajesh Hamal sir big fan			</p>
                     </div>
                     <div className="replysec">
-                      <span class="be-comment-name repsec">
+                      <span className="be-comment-name repsec">
                         Reply
                       </span>
-                      <span class="be-comment-name editsec">
+                      <span className="be-comment-name editsec">
                         Edit
                       </span>
-                      <span class="be-comment-name">
+                      <span className="be-comment-name">
                         Remove
                       </span>
                     </div>
                   </div>
                 </div>
-                <form class="form-block">
-                  <div class="row reviewtype">
-                    <div class="col-xs-12">
-                      <div class="form-group">
-                        <textarea class="form-input" required="" placeholder="Type Your Review Here"></textarea>
+                <form className="form-block">
+                  <div className="row reviewtype">
+                    <div className="col-xs-12">
+                      <div className="form-group">
+                        <textarea className="form-input" value={review} onChange={(e) => setReview(e.target.value)} placeholder="Type Your Review Here"></textarea>
                       </div>
                     </div>
-                    <div class="float-end mt-2 pt-1">
-                      <button type="button" class="btn btn-primary btn-sm">Post comment</button>
+                    <div className="float-end mt-2 pt-1">
+                      <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm">Post Review</button>
                     </div>
                   </div>
                 </form>

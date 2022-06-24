@@ -5,7 +5,6 @@ import { HOTEL_TYPES } from './hotelAction'
 
 export const createHotelRoom = ({ hotel, newRoom, room_images,navigate, token }) => async (dispatch) => {
     const rooms = hotel.map(hotel => hotel.rooms)
-
     const hotelId = hotel.map(hotel => hotel._id)
 
     const hotelUserId = hotel.map(hotel => hotel.user._id)
@@ -21,7 +20,10 @@ export const createHotelRoom = ({ hotel, newRoom, room_images,navigate, token })
             { room_images: media, newRoom }]
     }
 
+  
     dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: newHotel })
+
+
     try {
         const data = { ...newRoom, room_images: media, hotelUserId, hotelId }
         const res = await postDataAPI('room', data, token)

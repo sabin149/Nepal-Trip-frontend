@@ -28,12 +28,17 @@ export const SidebarData = [
   {
     icon: UilHome,
     heading: 'Hotels',
-    path: '/hotels',
+    path: '/vendors',
   },
   {
     icon: UilChart,
     heading: 'Vendors',
     path: '/vendors',
+  },
+  {
+    icon: UilChart,
+    heading: 'Reviews',
+    path: '/admin/reviews',
   }
   
 ];

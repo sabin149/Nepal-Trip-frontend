@@ -25,6 +25,13 @@ const bookingReducer = (state = initialState, action) => {
         count: action.payload.count,
         page: action.payload.page,
       };
+    case BOOKING_TYPES.GET_HOTEL_BOOKINGS:
+      return {
+        ...state,
+        bookings: action.payload.bookings,
+        count: action.payload.count,
+        page: action.payload.page,
+      };
     case BOOKING_TYPES.GET_BOOKING:
       return {
         ...state,

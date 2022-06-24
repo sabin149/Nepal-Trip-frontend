@@ -1,35 +1,19 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
-import { getHotels } from '../../../../redux/actions/hotelAction';
+import { getHotels } from '../../../../../redux/actions/hotelAction';
+import { getUsers } from '../../../../../redux/actions/userAction';
 import moment from 'moment';
 import { TextareaAutosize } from '@mui/material';
-import { getReviews } from '../../../../redux/actions/reviewAction';
-
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
     {
-        field: 'hotel',
-        headerName: 'Hotel Name',
-        sortable: true,
-        width: 180,     
-    },
-    {
-        field: 'hotelimage',
-        headerName: 'Hotel Image',
-        sortable: false,
-        width: 120,
-        filter: false,
-        renderCell: (reviewData) => {
-            return <img src={reviewData?.value ? reviewData?.value : ""} alt="avatar" style={{ width: '80px', height: "80px", backgroundColor: "white", }} />
-        }
-    },
-    {
         field: 'user',
-        headerName: 'User Name',
+        headerName: 'User',
         sortable: true,
         width: 180,
+
     },
     {
         field: "avatar",
@@ -60,48 +44,63 @@ const columns = [
         headerName: 'Rating',
         width: 120,
     },
+
     {
         field: 'createdAt',
         headerName: 'Created At',
-        sortable: true,
-        width: 170,
+        sortable: false,
+        width: 120,
     },
+
+
 ];
 
-export default function AllReviewsTable() {
+const rows = [];
+
+
+export default function ReviewTable() {
 
     const dispatch = useDispatch();
+    const userID = localStorage.getItem('userID');
     const token = localStorage.getItem('token');
 
     const hotels = useSelector(state => state?.hotel?.hotels)
+
+    const { users } = useSelector(state => state.user)
+    // console.log(users,"users");
+
+
 
     React.useEffect(() => {
         dispatch(getHotels())
     }, [dispatch])
 
-
     React.useEffect(() => {
-        dispatch(getReviews({token}))
-    },[dispatch,token])
-
-    const reviews = useSelector(state => state?.review?.reviews)
+        dispatch(getUsers(token))
+    }, [dispatch, token])
 
 
-const hotelReviews = reviews && reviews.map((item, index) => {
-    return {
-        id: index + 1,
-        hotel: (hotels && hotels?.filter(hotel => hotel?._id === item?.hotelId)[0]?.hotel_name),
-        hotelimage:(hotels && hotels?.filter(hotel => hotel?._id === item?.hotelId)[0]?.hotel_images[0]?.url),
-        review: item.review,
-        rating: item.hotel_rating,
-        user: item.user.fullname,
-        createdAt: moment(item.createdAt).format('YYYY-MM-DD'),
-        avatar: item.user.avatar
-    }
-})
+    const oneHotel = hotels && hotels?.filter(hotel => hotel?.user?._id === userID)
+
+
+    const hotelReviews = oneHotel && oneHotel[0]?.hotel_reviews?.map((item, index) => {
+        return {
+            id: index + 1,
+            review: item.review,
+            rating: item.hotel_rating,
+            user: (users && users?.filter(user => user?._id === item?.user))[0]?.fullname,
+            createdAt: moment(item.createdAt).format('YYYY-MM-DD'),
+            avatar: (users && users?.filter(user => user?._id === item?.user))[0]?.avatar
+        }
+    })
+
+   
+
+    // console.log(hotelReviews,"reviews");
+
 
     return (
-        <div className="container-fluid-lg mt-1 mx-5" sx={{
+        <div className="container mt-1" sx={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -116,7 +115,7 @@ const hotelReviews = reviews && reviews.map((item, index) => {
             overflowScrolling: "touch",
             WebkitOverflowScrolling: "touch",
         }}>
-            <h2 className='h3 text-center text-capitalize'>All reviews</h2>
+            <h2 className='h3 text-center text-capitalize text-primary'>All {oneHotel[0]?.hotel_name} reviews</h2>
             <hr />
             <div className="review-card">
                 <div style={{ height: "86vh", width: '100%' }}>
@@ -138,7 +137,7 @@ const hotelReviews = reviews && reviews.map((item, index) => {
 
 
                         rowHeight={100}
-                        rows={hotelReviews}
+                        rows={hotelReviews ? hotelReviews : rows}
                         columns={columns}
                         pageSize={5}
                         rowsPerPageOptions={[5]}
