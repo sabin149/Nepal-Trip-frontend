@@ -4,7 +4,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getBookings, getBookingsByHotel } from '../../../../redux/actions/bookingAction';
+import { getBookingsByHotel } from '../../../../redux/actions/bookingAction';
 import { getHotels } from '../../../../redux/actions/hotelAction';
 
 const columns = [

@@ -7,6 +7,7 @@ export const REVIEW_TYPES = {
     LOADING_REVIEW: "LOADING_REVIEW",
     GET_REVIEWS: "GET_REVIEWS",
     GET_REVIEW: "GET_REVIEW",
+    GET_HOTEL_REVIEWS: "GET_HOTEL_REVIEWS",
 }
 
 export const createRating = ({ hotel, user, newRating, token }) => async (dispatch) => {
@@ -61,12 +62,13 @@ export const getReviews = ({ token }) => async (dispatch) => {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
     }
 }
-export const getHotelReviews = ({ hotel, token }) => async (dispatch) => {
+export const getHotelReviews = ({ hotel }) => async (dispatch) => {
     try {
-        const res = await getDataAPI(`review/${hotel._id}`, token)
-        const newHotel = { ...hotel, reviews: res.data.reviews }
-        dispatch({ type: HOTEL_TYPES.GET_HOTEL_REVIEWS, payload: newHotel })
+        const res = await getDataAPI(`review/${hotel._id}`)
+        const newHotel = {...hotel,  reviews: res.data.reviews }
+        dispatch({ type: REVIEW_TYPES.GET_HOTEL_REVIEWS, payload: newHotel })
     } catch (err) {
+        console.log(err)
         dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
     }
 }

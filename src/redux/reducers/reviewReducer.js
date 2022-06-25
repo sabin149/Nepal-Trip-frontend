@@ -25,6 +25,13 @@ const reviewReducer = (state = initialState, action) => {
                 count: action.payload.count,
                 page: action.payload.page
             };
+        case REVIEW_TYPES.GET_HOTEL_REVIEWS:
+            return {
+                ...state,
+                reviews: action.payload.reviews,
+                count: action.payload.count,
+                page: action.payload.page
+            };
         case REVIEW_TYPES.GET_REVIEW:
             return {
                 ...state,
