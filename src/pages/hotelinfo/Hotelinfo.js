@@ -6,50 +6,61 @@ import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
 import RoomTable from "../../components/room/RoomTable";
 import Rating from '@mui/material/Rating'
-import { createReview } from "../../redux/actions/reviewAction";
-import {getUsers} from "../../redux/actions/userAction"
+import { createReview, getHotelReviews } from "../../redux/actions/reviewAction";
+import { getUsers } from "../../redux/actions/userAction"
+import { GLOBALTYPES } from "../../redux/actions/globalTypes";
+import moment from "moment";
 
 const Hotelinfo = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
 
-  const token=localStorage.getItem('token')
-  const userID=localStorage.getItem('userID')
+  const token = localStorage.getItem('token')
+  const userID = localStorage.getItem('userID')
 
   const [value, setValue] = React.useState(0);
   const [review, setReview] = React.useState("");
 
+  const hotel = useSelector(state => state?.hotel?.hotels);
+  const users = useSelector(state => state?.user?.users);
+  const { reviews } = useSelector(state => state?.review);
 
   useEffect(() => {
     dispatch(getHotel({ id }))
   }, [dispatch, id])
 
+  useEffect(() => {
+    dispatch(getUsers())
+  }, [dispatch])
 
   useEffect(() => {
-    dispatch(getUsers(token))
-  },[dispatch, token])
-
-
-  const hotel = useSelector(state => state?.hotel?.hotels);
-  const users = useSelector(state => state?.user?.users);
+    dispatch(getHotelReviews({ hotel }))
+  }, [dispatch, hotel])
 
   const [readMore, setReadMore] = useState(false)
 
-  const oneUser=users&& users.filter(user=>user._id===userID)[0]
- 
+  const oneUser = users && users.filter(user => user._id === userID)[0]
 
   const handlePostReview = (e) => {
     e.preventDefault();
-  const newReview = {
-    review,
-    hotel_rating: value,
-    user: userID,
-    createdAt: new Date().toISOString(),
-  }
-    dispatch(createReview({hotel,newReview,user:oneUser,token}))
-  }
+    if (token && userID) {
+      const newReview = {
+        review,
+        hotel_rating: value,
+        user: userID,
+        createdAt: new Date().toISOString(),
+      }
+      dispatch(createReview({ hotel, newReview, user: oneUser, token }))
+    }
 
-  const [replyInput, setReplyInput] = useState(false)
+    if (!token || !userID) {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "You must be logged in to post a review" }
+      })
+
+    }
+  }
 
   return (
 
@@ -286,141 +297,34 @@ const Hotelinfo = () => {
             <div className="container">
               <div className="be-comment-block">
                 {/* list of reviews */}
-                <div className="be-comment">
-                  <div className="be-img-comment">
 
-                    <img src="http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" className="be-ava-comment"></img>
-
-                  </div>
-                  <div className="be-comment-content">
-
-                    <span className="be-comment-name">
-                      User Name
-                    </span><br />
-                    <span className="be-comment-time">
-                      <i className="fa fa-clock-o"></i>
-                      Jun 23 , 2022 at 7:14am
-                    </span>
-
-                    <p className="be-comment-text">
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    </p>
-                  </div>
-                  <div className="replysec">
-                    <span className="be-comment-name repsec">
-                      Reply
-                    </span>
-                    {/* <span className="be-comment-name">
-					Edit
-					</span> */}
-                  </div>
-                </div>
-                <div className="be-comment">
-                  <div className="be-img-comment">
-
-                    <img src="https://agewiki.org/uploads/27263/rabi-267x300.png" alt="" className="be-ava-comment"></img>
-
-                  </div>
-                  <div className="be-comment-content">
-
-                    <span className="be-comment-name">
-                      Ravi Lamechhane
-                    </span><br />
-                    <span className="be-comment-time">
-                      <i className="fa fa-clock-o"></i>
-                      Jun 21 , 2022 at 3:14am
-                    </span>
-
-                    <p className="be-comment-text">
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    </p>
-                  </div>
-                  <div className="replysec">
-                    <span className="be-comment-name repsec">
-                      Reply
-                    </span>
-                    {/* <span className="be-comment-name">
-					Edit
-					</span> */}
-                  </div>
-                </div>
-                <div className="be-comment">
-                  <div className="be-img-comment">
-                    <img src="https://pbs.twimg.com/profile_images/1246407813959577600/Jw2DmY38_400x400.jpg" alt="" className="be-ava-comment"></img>
-                  </div>
-                  <div className="be-comment-content">
-                    <span className="be-comment-name">
-                      Hari Bahadur
-                    </span><br />
-                    <span className="be-comment-time">
-                      <i className="fa fa-clock-o"></i>
-                      Jun 21 , 2022 at 3:14am
-                    </span>
-                    <p className="be-comment-text">
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    </p>
-                  </div>
-                  <div className="replysec">
-                    <span className="be-comment-name repsec">
-                      Reply
-                    </span>
-                    {/* <span className="be-comment-name">
-					Edit
-					</span> */}
-                  </div>
-                </div>
-                <div className="be-comment">
-                  <div className="be-img-comment">
-                    <img src="https://3.bp.blogspot.com/-uUE9Um9KnfA/VmomXEPuQ-I/AAAAAAAACKI/83VNZxN6bGA/s640/Rajesh-Hamal-Icon.png" alt="" className="be-ava-comment"></img>
-                  </div>
-                  <div className="be-comment-content">
-                    <span className="be-comment-name">
-                      Rajesh Hamal
-                    </span><br />
-                    <span className="be-comment-time">
-                      <i className="fa fa-clock-o"></i>
-                      Jun 21 , 2022 at 3:14am
-                    </span>
-                    <p className="be-comment-text">
-                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. this is this
-
-                    </p>
-                  </div>
-                  <div className="replysec">
-                    <span className="be-comment-name repsec" onClick={() => { setReplyInput(true) }} >
-                      Reply
-                    </span>
-                    {
-                      replyInput ? <div className="replyinput">
-                        <input type="text" placeholder="Write a reply" className="replyinput" />
-                        <button className="replybtn" onClick={() => { setReplyInput(false) }}>Reply</button>
-                      </div> : null
-                    }
-                    {/* <span className="be-comment-name">
-					Edit
-					</span> */}
-                  </div>
-
-                  {/* after replying */}
-
-                  <div className="be-comment afterreply">
+                {
+                  reviews && reviews?.map((review) => <div className="be-comment" key={review._id}>
                     <div className="be-img-comment">
 
-                      <img src="http://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" className="be-ava-comment"></img>
+                      <img src={review?.user?.avatar} alt="reviewimage" className="be-ava-comment" />
 
                     </div>
                     <div className="be-comment-content">
 
+
                       <span className="be-comment-name">
-                        User Name
-                      </span><br />
+                        {review?.user?.fullname}
+                      </span>
+                      {/* rating */}
+
+                      <br />
                       <span className="be-comment-time">
                         <i className="fa fa-clock-o"></i>
-                        Jun 23 , 2022 at 7:14am
+                        {/* Jun 23 , 2022 at 7:14am */}
+                        {
+                          moment(review.createdAt).format('MMM DD , YYYY h:mm a')
+                        }
                       </span>
 
                       <p className="be-comment-text">
-                        Hello Rajesh Hamal sir big fan			</p>
+                        {review?.review}
+                      </p>
                     </div>
                     <div className="replysec">
                       <span className="be-comment-name repsec">
@@ -433,8 +337,10 @@ const Hotelinfo = () => {
                         Remove
                       </span>
                     </div>
-                  </div>
-                </div>
+                  </div>)
+                }
+
+
                 <form className="form-block">
                   <div className="row reviewtype">
                     <div className="col-xs-12">
@@ -443,7 +349,7 @@ const Hotelinfo = () => {
                       </div>
                     </div>
                     <div className="float-end mt-2 pt-1">
-                      <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm">Post Review</button>
+                      <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm" disabled={review.length > 8 ? false : true} >Post Review</button>
                     </div>
                   </div>
                 </form>

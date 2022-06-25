@@ -1,5 +1,5 @@
 import { GLOBALTYPES } from "./globalTypes";
-import { postDataAPI, getDataAPI, patchDataAPI } from "../../utils/fetchData";
+import { postDataAPI, getDataAPI, patchDataAPI, deleteDataAPI } from "../../utils/fetchData";
 
 export const BOOKING_TYPES = {
     CREATE_BOOKING: "CREATE_BOOKING",
@@ -8,6 +8,7 @@ export const BOOKING_TYPES = {
     GET_BOOKING: "GET_BOOKING",
     GET_HOTEL_BOOKINGS: "GET_HOTEL_BOOKINGS",
     UPDATE_BOOKING: "UPDATE_BOOKING",
+    DELETE_BOOKING: "DELETE_BOOKING",
 
 }
 
@@ -83,8 +84,6 @@ export const updateBooking = ({ booking,navigate, token }) => async (dispatch) =
         })
     }
 }
-
-
 export const getBookingsByHotel = ({ hotelId, token }) => async (dispatch) => {
     try {
         dispatch({ type: BOOKING_TYPES.LOADING_BOOKING, payload: true })
@@ -98,6 +97,23 @@ export const getBookingsByHotel = ({ hotelId, token }) => async (dispatch) => {
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: { error: err.response.data.msg }
+        })
+    }
+}
+export const cancelBooking = ({ id, token }) => async (dispatch) => {
+    try {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
+        const res = await deleteDataAPI(`booking/${id}`,  token)
+        dispatch({
+            type: BOOKING_TYPES.DELETE_BOOKING,
+            payload: { ...res.data.booking }
+        })
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
+    } catch (error) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { error: error.response.data.msg }
         })
     }
 }
