@@ -1,3 +1,4 @@
+import { EditData } from "../actions/globalTypes";
 import { REVIEW_TYPES } from "../actions/reviewAction";
 const initialState = {
     loading: false,
@@ -37,7 +38,16 @@ const reviewReducer = (state = initialState, action) => {
                 ...state,
                 reviews: action.payload
             };
-    
+        case REVIEW_TYPES.UPDATE_REVIEW:
+            return {
+                ...state,
+                reviews: state.reviews.map((review) => {
+                    if (review._id === action.payload._id) {
+                        return action.payload;
+                    }
+                    return review;
+                }),
+            };
         default:
             return state;
     }

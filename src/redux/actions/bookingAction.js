@@ -103,7 +103,7 @@ export const getBookingsByHotel = ({ hotelId, token }) => async (dispatch) => {
 export const cancelBooking = ({ id, token }) => async (dispatch) => {
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
-        const res = await deleteDataAPI(`booking/${id}`,  token)
+        const res = await deleteDataAPI(`booking/${id}`, token)
         dispatch({
             type: BOOKING_TYPES.DELETE_BOOKING,
             payload: { ...res.data.booking }

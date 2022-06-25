@@ -1,13 +1,9 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
-import { getHotels } from '../../../../redux/actions/hotelAction';
 import moment from 'moment';
-import { TextareaAutosize } from '@mui/material';
 import { getBookings } from '../../../../redux/actions/bookingAction';
 
-
-const rows = []
 const columns = [
     { field: 'id', headerName: 'ID', width: 90 },
     {

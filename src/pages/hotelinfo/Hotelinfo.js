@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./hotelinfo.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
@@ -13,6 +13,7 @@ import moment from "moment";
 
 const Hotelinfo = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const token = localStorage.getItem('token')
@@ -43,29 +44,45 @@ const Hotelinfo = () => {
 
   const handlePostReview = (e) => {
     e.preventDefault();
-    if (token && userID) {
-      const newReview = {
-        review,
-        hotel_rating: value,
-        user: userID,
-        createdAt: new Date().toISOString(),
-      }
-      dispatch(createReview({ hotel, newReview, user: oneUser, token }))
-    }
 
     if (!token || !userID) {
       dispatch({
         type: GLOBALTYPES.ALERT,
         payload: { error: "You must be logged in to post a review" }
       })
+      return
+    }
 
+    if (!value) {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "Please enter a rating" }
+      })
+      return
+    }
+
+    if (!review) {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "Please enter a review" }
+      })
+      return
+    }
+
+    if (token && userID) {
+      const newReview = {
+        review,
+        hotel_rating: value,
+        user: oneUser,
+        createdAt: new Date().toISOString(),
+      }
+      dispatch(createReview({ hotel, newReview, user: oneUser, token }))
+      dispatch(getHotelReviews({ hotel }))
     }
   }
 
   return (
-
     <div className="main_content">
-
       <div className="second-nav d-flex">
         <div className="Item">
           <Link to="">
@@ -93,7 +110,7 @@ const Hotelinfo = () => {
         <div>
           <h2 className="text-capitalize">{hotel.hotel_name}</h2>
           <p className="locationhotel text-capitalize">
-            {hotel.address === "ktm" ? "Kathmandu, Nepal" : hotel.address + ",Nepal"}
+            {hotel?.address === "ktm" ? "Kathmandu, Nepal" : hotel?.address + ",Nepal"}
             <Link to="" className="block-in-mobile">
               <i className="fa-solid fa-location-dot"></i>
 
@@ -110,7 +127,7 @@ const Hotelinfo = () => {
                 <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                   <div>
                     <h4 className="color-dark-blue bold">
-                      About {hotel.hotel_name}
+                      About {hotel?.hotel_name}
                     </h4>
                     <div className="caption">
                       <span>
@@ -287,7 +304,20 @@ const Hotelinfo = () => {
                 />
               </div>
             </div>
+            <form className="form-block">
+                  <div className="row reviewtype">
+                    <div className="col-xs-12">
+                      <div className="form-group">
+                        <textarea className="form-input" value={review} onChange={(e) => setReview(e.target.value)} placeholder="Type Your Review Here"></textarea>
+                      </div>
+                    </div>
+                    <div className="float-end mt-2 pt-1">
+                      <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm">Post Review</button>
+                    </div>
+                  </div>
+                </form>
           </div>
+          
           {/* review section */}
           <div className="segment">
             <h3 className="bold">
@@ -341,18 +371,7 @@ const Hotelinfo = () => {
                 }
 
 
-                <form className="form-block">
-                  <div className="row reviewtype">
-                    <div className="col-xs-12">
-                      <div className="form-group">
-                        <textarea className="form-input" value={review} onChange={(e) => setReview(e.target.value)} placeholder="Type Your Review Here"></textarea>
-                      </div>
-                    </div>
-                    <div className="float-end mt-2 pt-1">
-                      <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm" disabled={review.length > 8 ? false : true} >Post Review</button>
-                    </div>
-                  </div>
-                </form>
+             
               </div>
             </div>
           </div>

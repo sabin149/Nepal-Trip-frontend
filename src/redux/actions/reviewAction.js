@@ -8,7 +8,9 @@ export const REVIEW_TYPES = {
     GET_REVIEWS: "GET_REVIEWS",
     GET_REVIEW: "GET_REVIEW",
     GET_HOTEL_REVIEWS: "GET_HOTEL_REVIEWS",
+    UPDATE_REVIEW: "UPDATE_REVIEW",
 }
+
 
 export const createRating = ({ hotel, user, newRating, token }) => async (dispatch) => {
     const newHotel = { ...hotel, reviews: [...hotel.hotel_reviews,] }
@@ -32,22 +34,23 @@ export const createRating = ({ hotel, user, newRating, token }) => async (dispat
 export const createReview = ({ hotel, user, newReview, token }) => async (dispatch) => {
     try {
         const data = { ...newReview, hotelId: hotel._id, hotelUserId: hotel.user._id }
-
         const res = await postDataAPI('review', data, token)
+        const newReviews = { ...hotel, hotel_reviews: [...hotel.hotel_reviews, res.data.newReview] }
+
+        dispatch({ type: REVIEW_TYPES.UPDATE_REVIEW, payload: newReviews })
         dispatch({
             type: GLOBALTYPES.ALERT,
-            payload: {
-                success: res.data.msg
-            }
+            payload: { success: res.data.msg }
         })
 
     } catch (err) {
-        console.log(err)
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: { error: err.response.data.msg }
         })
     }
+
+
 }
 
 export const getReviews = ({ token }) => async (dispatch) => {
@@ -65,7 +68,7 @@ export const getReviews = ({ token }) => async (dispatch) => {
 export const getHotelReviews = ({ hotel }) => async (dispatch) => {
     try {
         const res = await getDataAPI(`review/${hotel._id}`)
-        const newHotel = {...hotel,  reviews: res.data.reviews }
+        const newHotel = { ...hotel, reviews: res.data.reviews }
         dispatch({ type: REVIEW_TYPES.GET_HOTEL_REVIEWS, payload: newHotel })
     } catch (err) {
         console.log(err)
