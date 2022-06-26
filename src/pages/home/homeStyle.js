@@ -9,6 +9,10 @@ export default makeStyles((theme) => ({
         color:'#fff',
         // fontWeight:'bold',
 
+        '@media (max-width:992px)': {
+            fontSize:'90px',
+            textAlign:'center',
+          },
         '@media (max-width:600px)': {
             fontSize:'50px',
             textAlign:'left',

@@ -91,7 +91,8 @@ const Home = () => {
             <h1 className={classNamees.makeStyle} > Make Memories</h1>
             <div className={classNamees.headerSearch}>
               <div className={classNamees.headerSearchItem}>
-                <i className="fa-solid fa-location-dot m-1"></i>
+              <span className="me-2"></span>
+                <i className="fa-solid fa-location-dot "></i>
                 <input value={search} onChange={(e) => setSearch(e.target.value)}
                   type="text"
                   placeholder="Where are you going?"
@@ -101,7 +102,7 @@ const Home = () => {
               <div className={classNamees.headerSearchItem}>
                 <i className="fa-solid fa-calendar-days"></i>
 
-                <span onClick={() => setOpenDate(!openDate)} className="headerSearchText">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+                <span onClick={() => setOpenDate(!openDate)} className="headerSearchText me-2">{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
                   date[0].endDate,
                   "MM/dd/yyyy"
                 )}`}</span>
@@ -112,7 +113,8 @@ const Home = () => {
                     moveRangeOnFirstSelection={false}
                     ranges={date}
                     className="date"
-                    minDate={new Date()}
+                    minDate={new Date()
+                    }
                   />
                 )}
 
@@ -172,13 +174,13 @@ const Home = () => {
           <Grid item xs={12} sm={6} md={4} lg={3}>
             <figure className="secbanner">
               <img
-                src="https://cdn.pixabay.com/photo/2019/09/15/07/31/everest-base-camp-4477525__340.jpg"
+                src="https://media.istockphoto.com/photos/machhapuchhre-and-terraced-fields-nepal-picture-id584237980?b=1&k=20&m=584237980&s=170667a&w=0&h=F554qiNYh2mcW2IcAmw-CYzModnLvcxxafofEeIcvgo="
                 alt="sample89"
               />
             </figure>
             <figure className="secbanner">
               <img
-                src="https://cdn1.matadornetwork.com/blogs/1/2019/08/Nepalese-village-in-the-Himalaya-mountains-near-Pokhara-in-Nepal-1200x854.jpg"
+                src="https://media.istockphoto.com/photos/the-kathmandu-durbar-square-in-early-morning-nepal-picture-id1386796296?k=20&m=1386796296&s=612x612&w=0&h=ThhEJI-Hee3edi3R6Hgs-xfWW2qQ_-BN9Na799D1MH0="
                 alt="sample94"
               />
 
@@ -198,13 +200,13 @@ const Home = () => {
         {/* Nepal's Top Destination */}
         <div className="destination_nepal">
           <div className="ui container top">
-            <h3>Nepal's Top Destination</h3>
+            <h3 className="topdestination">Nepal's Top Destination</h3>
           </div>
           <div>
             <Grid item xs={12} sm={6} md={4} lg={3}>
               <figure className="destination">
                 <img
-                  src="https://assets.xceltrip.com/destination-1619006759329-5961c.WEBP"
+                  src="https://media.istockphoto.com/photos/swayambhunath-temple-in-kathmandu-nepal-picture-id1225985960?k=20&m=1225985960&s=612x612&w=0&h=b26bZe5yFrxW37vN_6PyBUxl1AUroQV-sbI3JD6FjUg="
                   alt="sample89"
                 />
 

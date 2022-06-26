@@ -11,10 +11,10 @@ export const USER_TYPES={
     DELETE_USER: "DELETE_USER",
 }
 
-export const getUsers = (token) => async (dispatch) => {
+export const getUsers = () => async (dispatch) => {
     try {
         dispatch({ type: USER_TYPES.LOADING_USER, payload: true })
-        const res = await getDataAPI('user', token)
+        const res = await getDataAPI('user')
         dispatch({
             type: USER_TYPES.GET_USERS,
             payload: { ...res.data, page: 1 }

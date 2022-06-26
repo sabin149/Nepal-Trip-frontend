@@ -23,14 +23,14 @@ function VendorInfoTable() {
 }
 
   const columns = [
-    { field: 'id', headerName: 'SN', width: 90 },
-    { field: 'companyName', headerName: 'Company Name', width: 220},
+    { field: 'id', headerName: 'SN', width: 65 },
+    { field: 'companyName', headerName: 'Company Name', width: 240},
     {
-      field: 'email', headerName: 'Email', type: 'string', width: 280,
+      field: 'email', headerName: 'Email', type: 'string', width: 320,
     },
-    { field: 'registerdAt', headerName: 'Registered At', width: 160 },
+    { field: 'registerdAt', headerName: 'Registered At', width: 150 },
     {
-      field: 'status', headerName: 'Status', width: 130,
+      field: 'status', headerName: 'Status', width: 110,
       renderCell:(hotelData)=>
       <span className='text-success' onClick={()=>{
         changeStatus({hotel:hotelData.value})

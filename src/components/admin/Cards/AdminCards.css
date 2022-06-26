@@ -1,4 +1,4 @@
-.Cards {
+.Admin_Cards {
   display: flex;
   gap: 10px;
 }
@@ -7,17 +7,28 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .Cards{
+  .Admin_Cards{
     flex-direction: column;
   }
   .parentContainer{
     height: 9rem;
   }
 }
+@media screen and (min-width: 1200px) {
+  .Admin_Cards{
+    position:relative;
+    top:-2%;
+    bottom:0;
+    right:0;
+    left:0;
+    /* background-color: red; */
+  }
+  
+}
 
 @media screen and (max-width: 768px)
 {
-  .Cards{
+  .Admin_Cards{
     width: 90%;
   }
 }

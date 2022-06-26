@@ -1,6 +1,6 @@
 import React from "react";
 import Bookingrevenue from "../BookingRevenue/BookingRevenue";
-import "./RightSide.css";
+import "./AdminRightSide.css";
 import ApexChart from "../BookingRevenue/TotalBookings";
 
 const RightSide = () => {

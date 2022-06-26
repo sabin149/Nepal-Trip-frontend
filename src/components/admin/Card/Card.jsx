@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./Card.css";
+import "./AdminCard.css";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { UilTimes } from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "../../../redux/actions/userAction";
+import { getBookings } from "../../../redux/actions/bookingAction";
+import { getReviews } from "../../../redux/actions/reviewAction";
 
-// parent Card
 
 const Card = (props) => {
   const [expanded, setExpanded] = useState(false);
@@ -24,11 +25,16 @@ const Card = (props) => {
 // Compact Card
 function CompactCard({ param, setExpanded }) {
   const dispatch = useDispatch();
-  const { user,hotel } = useSelector(state => state)
+  const { user, hotel,review,booking } = useSelector(state => state)
   const token = localStorage.getItem('token')
 
+  // const bookings = useSelector(state => state.booking)
+  // console.log(bookings);
+
   useEffect(() => {
-    dispatch(getUsers(token))
+    dispatch(getUsers(token));
+    dispatch(getBookings({ token }))
+    dispatch(getReviews({ token }))
   }, [token, dispatch])
 
   const Png = param.png;
@@ -53,9 +59,9 @@ function CompactCard({ param, setExpanded }) {
             param.title === 'HOTELS' ?
               hotel.count :
               param.title === 'BOOKINGS' ?
-                "100" :
+                booking.count :
                 param.title === 'REVIEWS' ?
-                  "200" :
+                  review.count :
                   "0"
         }</span>
         <span>Total</span>

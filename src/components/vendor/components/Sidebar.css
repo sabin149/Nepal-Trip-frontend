@@ -76,9 +76,6 @@
   .menuItem>span{
     display: none;
   }
-  .logo{
-    display: none;
-  }
 }
 
 @media screen and (max-width: 768px) {
@@ -114,4 +111,3 @@
     left: -60%;
   }
 }
-

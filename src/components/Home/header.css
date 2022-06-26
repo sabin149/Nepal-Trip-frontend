@@ -50,3 +50,15 @@
     font-family: "Poppins", sans-serif;
    font-size: 13px;
   }
+
+  
+@media screen and (max-width: 1200px) {
+  .navContainer {
+    
+  }
+  .logo{
+    display: f;
+  }
+  
+}
+

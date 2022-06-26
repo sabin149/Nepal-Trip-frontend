@@ -13,7 +13,6 @@ import VendorDashboard from "./pages/VendorDashboard"
 import Room from "./pages/room/[id]";
 import HotelList from "./components/Home/HotelList";
 import VendorTable from "./components/admin/Table/VendorTable";
-import EditHotel from "./pages/hotel/editHotel";
 import Checkout from "./pages/checkout/Checkout";
 import UserListTable from "./components/admin/Table/user/UserListTable";
 import EditUser from "./components/admin/Table/user/EditUser";
@@ -21,7 +20,10 @@ import ViewHotelDetails from "./components/vendor/ViewHotelDetails";
 import EditHotelDetails from "./components/vendor/EditHotelDetails";
 import EditRoomDetails from "./components/vendor/EditRoomDetails";
 import Bookings from "./pages/bookings/bookingDetails";
-import ReviewTable from "./components/admin/Table/review/ReviewTable";
+
+import AllReviewsTable from "./components/admin/Table/review/ReviewTable";
+import AllBookingsTable from "./components/admin/Table/bookings/AllBookingsTable";
+import ReviewTable from "./components/vendor/components/VendorTable/review/ReviewTable";
 
 function App() {
   const token = localStorage.getItem('token')
@@ -45,7 +47,6 @@ function App() {
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo/:id" element={<Hotelinfo />} />
           <Route path="/vendors" element={isAdmin ? <VendorTable /> : <Navigate to="/" />} />
-          <Route path="/edithotel" element={isVendor ? <EditHotel /> : <Navigate to="/" />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/users" element={isAdmin ? <UserListTable /> : <Navigate to="/" />} />
           <Route path="/admin/edituser" element={isAdmin ? <EditUser /> : <Navigate to="/" />} />
@@ -54,6 +55,8 @@ function App() {
           <Route path="/editRoomDetails/:id" element={isVendor ? <EditRoomDetails /> : <Navigate to="/" />} />
           <Route path="/bookings" element={isUser ? <Bookings /> : <Navigate to="/" />} />
           <Route path="/vendor/reviews" element={isVendor ? <ReviewTable /> : <Navigate to="/" />} />
+          <Route path="/admin/reviews" element={isAdmin ? <AllReviewsTable /> : <Navigate to="/" />} />
+          <Route path="/admin/bookings" element={isAdmin ? <AllBookingsTable /> : <Navigate to="/" />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdmin ? <EHeader /> : isVendor ? <EFooter /> : <Footer />}

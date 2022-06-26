@@ -20,13 +20,14 @@ const Header = ({ isUser }) => {
         <div className="navItems">
           <div className="hotel">
             <i className="fa-solid fa-suitcase"> </i>
-            <span> <Link to="/bookings" className="text-decoration-none text-dark">Hotel Booking</Link> </span>
+            <span> <Link to="/bookings" className="text-decoration-none text-dark">My Hotel Booking</Link> </span>
           </div>
-          <div className="flight">
-            <i className="fa-solid fa-plane"> </i>
 
-            <span > Flight Booking </span>
+          <div className="favourite">
+          <i className="fa-solid fa-heart"></i>
+            <span > My Favourite </span>
           </div>
+
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
             <button className="navButton" onClick={() => {
               if (window.confirm('Are you sure you want to logout?')) {

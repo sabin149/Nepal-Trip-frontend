@@ -1,27 +1,88 @@
 import React, { useEffect, useState } from "react";
 import "./hotelinfo.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
 import RoomTable from "../../components/room/RoomTable";
+import Rating from '@mui/material/Rating'
+import { createReview, getHotelReviews } from "../../redux/actions/reviewAction";
+import { getUsers } from "../../redux/actions/userAction"
+import { GLOBALTYPES } from "../../redux/actions/globalTypes";
+import moment from "moment";
 
 const Hotelinfo = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { id } = useParams();
 
+  const token = localStorage.getItem('token')
+  const userID = localStorage.getItem('userID')
+
+  const [value, setValue] = React.useState(0);
+  const [review, setReview] = React.useState("");
+
+  const hotel = useSelector(state => state?.hotel?.hotels);
+  const users = useSelector(state => state?.user?.users);
+  const { reviews } = useSelector(state => state?.review);
 
   useEffect(() => {
     dispatch(getHotel({ id }))
   }, [dispatch, id])
 
-  const hotel = useSelector(state => state?.hotel?.hotels);
+  useEffect(() => {
+    dispatch(getUsers())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getHotelReviews({ hotel }))
+  }, [dispatch, hotel])
+
   const [readMore, setReadMore] = useState(false)
 
+  const oneUser = users && users.filter(user => user._id === userID)[0]
+
+  const handlePostReview = (e) => {
+    e.preventDefault();
+
+    if (!token || !userID) {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "You must be logged in to post a review" }
+      })
+      return
+    }
+
+    if (!value) {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "Please enter a rating" }
+      })
+      return
+    }
+
+    if (!review) {
+      dispatch({
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "Please enter a review" }
+      })
+      return
+    }
+
+    if (token && userID) {
+      const newReview = {
+        review,
+        hotel_rating: value,
+        user: oneUser,
+        createdAt: new Date().toISOString(),
+      }
+      dispatch(createReview({ hotel, newReview, user: oneUser, token }))
+      dispatch(getHotelReviews({ hotel }))
+    }
+  }
+
   return (
-    
     <div className="main_content">
-      
       <div className="second-nav d-flex">
         <div className="Item">
           <Link to="">
@@ -49,7 +110,7 @@ const Hotelinfo = () => {
         <div>
           <h2 className="text-capitalize">{hotel.hotel_name}</h2>
           <p className="locationhotel text-capitalize">
-            {hotel.address === "ktm" ? "Kathmandu, Nepal" : hotel.address + ",Nepal"}
+            {hotel?.address === "ktm" ? "Kathmandu, Nepal" : hotel?.address + ",Nepal"}
             <Link to="" className="block-in-mobile">
               <i className="fa-solid fa-location-dot"></i>
 
@@ -66,26 +127,26 @@ const Hotelinfo = () => {
                 <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                   <div>
                     <h4 className="color-dark-blue bold">
-                      About {hotel.hotel_name}
+                      About {hotel?.hotel_name}
                     </h4>
                     <div className="caption">
-                    <span>
-                    {
-                   hotel&&   hotel?.hotel_info?.length < 200
+                      <span>
+                        {
+                          hotel && hotel?.hotel_info?.length < 200
                             ? hotel?.hotel_info
-                            : readMore ?hotel?.hotel_info + ' ' : hotel?.hotel_info?.slice(0, 200) + '.....'
-                    }
-                </span>
+                            : readMore ? hotel?.hotel_info + ' ' : hotel?.hotel_info?.slice(0, 200) + '.....'
+                        }
+                      </span>
                     </div>
                     <span className="blue pointer">
                       <span className="readMore" onClick={() => setReadMore(!readMore)}>
                         {readMore ? 'Read Less' : <span>
                           Read More <i className="fa-solid fa-angle-right"></i>
-                        </span> }
+                        </span>}
                       </span>
-                      
+
                     </span>
-                    
+
                     <hr></hr>
                   </div>
                   <h4 className="color-dark-blue bold">
@@ -121,9 +182,9 @@ const Hotelinfo = () => {
             </span>
           </h3>
           {/* Price Table of Room */}
-          <RoomTable hotel={hotel}/>
-          
-         
+          <RoomTable hotel={hotel} />
+
+
           <div className="segment">
             <h3 className="bold">
               Hotel Amenities
@@ -230,17 +291,87 @@ const Hotelinfo = () => {
               <div className="content">
                 <p>Rating (select a star Amount):</p>
               </div>
-              <div className="wrapper">
-                <input name="ratingRadio" type="radio" id="st1" value="1" />
-                <label for="st1"></label>
-                <input name="ratingRadio" type="radio" id="st2" value="2" />
-                <label for="st2"></label>
-                <input name="ratingRadio" type="radio" id="st3" value="3" />
-                <label for="st3"></label>
-                <input name="ratingRadio" type="radio" id="st4" value="4" />
-                <label for="st4"></label>
-                <input name="ratingRadio" type="radio" id="st5" value="5" />
-                <label for="st5"></label>
+              <div className="user_hotel_rating text-center">
+                <Rating sx={{
+                  fontSize: "2.5rem",
+                  color: "orange !important",
+                }}
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                />
+              </div>
+            </div>
+            <form className="form-block">
+                  <div className="row reviewtype">
+                    <div className="col-xs-12">
+                      <div className="form-group">
+                        <textarea className="form-input" value={review} onChange={(e) => setReview(e.target.value)} placeholder="Type Your Review Here"></textarea>
+                      </div>
+                    </div>
+                    <div className="float-end mt-2 pt-1">
+                      <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm">Post Review</button>
+                    </div>
+                  </div>
+                </form>
+          </div>
+          
+          {/* review section */}
+          <div className="segment">
+            <h3 className="bold">
+              <span>Reviews</span>
+              <hr />
+            </h3>
+            <div className="container">
+              <div className="be-comment-block">
+                {/* list of reviews */}
+
+                {
+                  reviews && reviews?.map((review) => <div className="be-comment" key={review._id}>
+                    <div className="be-img-comment">
+
+                      <img src={review?.user?.avatar} alt="reviewimage" className="be-ava-comment" />
+
+                    </div>
+                    <div className="be-comment-content">
+
+
+                      <span className="be-comment-name">
+                        {review?.user?.fullname}
+                      </span>
+                      {/* rating */}
+
+                      <br />
+                      <span className="be-comment-time">
+                        <i className="fa fa-clock-o"></i>
+                        {/* Jun 23 , 2022 at 7:14am */}
+                        {
+                          moment(review.createdAt).format('MMM DD , YYYY h:mm a')
+                        }
+                      </span>
+
+                      <p className="be-comment-text">
+                        {review?.review}
+                      </p>
+                    </div>
+                    <div className="replysec">
+                      <span className="be-comment-name repsec">
+                        Reply
+                      </span>
+                      <span className="be-comment-name editsec">
+                        Edit
+                      </span>
+                      <span className="be-comment-name">
+                        Remove
+                      </span>
+                    </div>
+                  </div>)
+                }
+
+
+             
               </div>
             </div>
           </div>
