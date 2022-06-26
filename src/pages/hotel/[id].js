@@ -1,20 +1,18 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { GLOBALTYPES } from "../../redux/actions/globalTypes";
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import uploadImage from "../../images/No_image.png";
 import { imageShow, videoShow } from "../../utils/mediaShow";
 import { createHotel } from "../../redux/actions/hotelAction";
 import "./hotel.css";
-
 const Hotel = () => {
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-
   const initialState = {
     hotel_name: "",
+    rating:"",
     address: "",
     phone: "",
     hotel_email: "",
@@ -27,6 +25,7 @@ const Hotel = () => {
   const [hotelData, setHotelData] = useState(initialState);
   const {
     hotel_name,
+    rating,
     address,
     phone,
     hotel_email,
@@ -36,29 +35,22 @@ const Hotel = () => {
     hotel_facilities,
     hotel_policies,
   } = hotelData;
-
   const [hotel_images, setHotel_Images] = useState([]);
-
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setHotelData({ ...hotelData, [name]: value });
   };
-
   const handleChangeImages = (e) => {
     const files = [...e.target.files];
     let err = "";
     let newImages = [];
-
     files.forEach((file) => {
       if (!file) return (err = "File does not exist.");
-
       if (file.size > 1024 * 1024 * 5) {
         return (err = "The image/video largest is 5mb.");
       }
-
       return newImages.push(file);
     });
-
     if (err) dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err } });
     setHotel_Images([...hotel_images, ...newImages]);
   };
@@ -67,18 +59,14 @@ const Hotel = () => {
     newArr.splice(index, 1);
     setHotel_Images(newArr);
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (hotel_images.length === 0)
       return dispatch({
-        type: GLOBALTYPES.ALERT,
-        payload: { error: "Please add hotel images." },
-      });
-    
-    dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images,navigate, token }))
+        type: GLOBALTYPES.ALERT, payload: { error: "Please add hotel images." }
+      })
+    dispatch(createHotel({ hotel_name,rating, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images,navigate, token }))
   }
-
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
@@ -132,31 +120,39 @@ const Hotel = () => {
                   </>
                 }
               </div>
-
-              <div className="container" id="hh">
-                <div className="hotel_label">
-                  <label className="form-label">Hotel Name</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="hotel_name"
-                    value={hotel_name}
-                    onChange={handleChangeInput}
-                  />
-                </div>
-                <div className="hotel_label">
-                  <label className="form-label">Hotel Email</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="hotel_email"
-                    value={hotel_email}
-                    onChange={handleChangeInput}
-                  />
-                </div>
-
+              <div className="hotel_label">
+                <label className="form-label">Hotel Name</label>
+                <input
+                  type="text"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="hotel_name"
+                  value={hotel_name}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className="hotel_label">
+                <label className="form-label">Hotel Rating</label>
+                <input
+                  type="number"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="rating"
+                  value={rating}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className="hotel_label">
+                <label className="form-label">Hotel Email</label>
+                <input
+                  type="email"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="hotel_email"
+                  value={hotel_email}
+                  onChange={handleChangeInput}
+                />
+              </div>
                 <div className="hotel_label">
                   <label className="form-label">Address</label>
                   <input
@@ -168,43 +164,39 @@ const Hotel = () => {
                     onChange={handleChangeInput}
                   />
                 </div>
-
-                <div className="hotel_label">
-                  <label className="form-label">Phone Number</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input "
-                    id="exampleInputEmail1"
-                    name="phone"
-                    value={phone}
-                    onChange={handleChangeInput}
-                  />
-                </div>
-
-                <div className="hotel_label">
-                  <label className="form-label">PAN.No</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="pan_no"
-                    value={pan_no}
-                    onChange={handleChangeInput}
-                  />
-                </div>
-
-                <div className="hotel_label">
-                  <label className="form-label">Price</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="price"
-                    value={price}
-                    onChange={handleChangeInput}
-                  />
-                </div>
-
+              <div className="hotel_label">
+                <label className="form-label">Phone Number</label>
+                <input
+                  type="number"
+                  className="form-control hotel_input "
+                  id="exampleInputEmail1"
+                  name="phone"
+                  value={phone}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className="hotel_label">
+                <label className="form-label">PAN.No</label>
+                <input
+                  type="number"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="pan_no"
+                  value={pan_no}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className="hotel_label">
+                <label className="form-label">Price</label>
+                <input
+                  type="number"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="price"
+                  value={price}
+                  onChange={handleChangeInput}
+                />
+              </div>
                 <div className="hotel_label">
                   <label className="form-label">Hotel Info</label>
                   <input
@@ -227,7 +219,6 @@ const Hotel = () => {
                     onChange={handleChangeInput}
                   />
                 </div>
-
                 {/* <div className="hotel_facilities row align-items-start">
               <div className="col">
                 <div className="form-check form-check-inline">
@@ -299,16 +290,12 @@ const Hotel = () => {
                 </div>
               </div>
             </div>
-
             <div className="d-flex align-items-center justify-content-center">
               <div className="col-6"></div>
             </div>
           </div>
-        </div>
       </form>
     </div>
-    
   );
 };
-
 export default Hotel;

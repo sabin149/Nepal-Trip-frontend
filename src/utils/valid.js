@@ -1,4 +1,4 @@
-const valid = ({fullname, username, email,phone, password, password_confirmation}) => {
+const valid = ({fullname, username, email,phone, password, password_confirmation, role}) => {
     const err = {}
     if(!fullname) {
         err.fullname = "Please add your full name."
@@ -25,8 +25,12 @@ const valid = ({fullname, username, email,phone, password, password_confirmation
     }else if(password.length < 6){
         err.password = "Password must be at least 6 characters."
     }
+
     if(password !== password_confirmation) {
-        err.cf_password = "Confirm password did not match."
+        err.password_confirmation = "Password and Confirm password did not match."
+    }
+    if(!role){
+        err.role = "Select the role."
     }
     return {
         errMsg: err,

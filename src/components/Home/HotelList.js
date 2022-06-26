@@ -1,108 +1,71 @@
 import "./hotel_list.css";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from 'react-router-dom';
+import {useState, useEffect} from "react";
 import axios from "axios";
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
-import { useSelector } from "react-redux";
-
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+// import { useSelector } from "react-redux";
 function useQuery() {
-  return new URLSearchParams(useLocation().search);
+    return new URLSearchParams(useLocation().search);
 }
-
 const HotelList = () => {
-  const query = useQuery();
-  const title = query.get("address");
-  const sort = query.get("sort");
-  const hotelSearch = query.get("search");
-  const page = query.get("page");
-
-  let hotelQuery = {
-    address: title ? title : "Pokhara",
-    sort: sort ? sort : "-createdAt",
-    hotelSearch: hotelSearch ? hotelSearch : "",
-    page: page ? page : 1,
-  };
-
-  const address = title ? title : "Pokhara";
-
-  const navigate = useNavigate();
-
-  const { searchInfo } = useSelector((state) => state.searchInfo);
-  console.log(searchInfo);
-
-  const [hotelData, setHotelData] = useState("");
-  const [sortData, setSortData] = useState("-createdAt");
-  const [filterData, setFilterData] = useState("gt");
-  const [price, setPrice] = useState("");
-  const [hotelNameSearch, setHotelNameSearch] = useState("");
-
-  useEffect(
-    () => async () => {
-      const res = await axios.get(
-        `api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}`
-      );
-      setHotelData(res.data);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    },
-    []
-  );
-
-  const handleSort = async (e) => {
-    e.preventDefault();
-    setSortData(e.target.value);
-    hotelQuery = {
-      address,
-      sort: e.target.value,
-      hotelSearch,
+    const query = useQuery();
+    const title = query.get("address");
+    const sort = query.get("sort");
+    const hotelSearch = query.get("search")
+    const page = query.get("page")
+    let hotelQuery = {
+        address: title ? title : "Pokhara",
+        sort: sort ? sort : "-createdAt",
+        hotelSearch: hotelSearch ? hotelSearch : "",
+        page: page ? page : 1
+    }
+    const address = title ? title : "Pokhara";
+    const navigate = useNavigate()
+    // const {searchInfo} = useSelector(state => state.searchInfo)
+    const [hotelData, setHotelData] = useState("");
+    const [sortData, setSortData] = useState("-createdAt")
+    const [filterData, setFilterData] = useState('gt');
+    const [price, setPrice] = useState("");
+    const [hotelNameSearch, setHotelNameSearch] = useState("");
+    useEffect(() => async () => {
+        const res = await axios.get(`api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}`)
+        setHotelData(res.data)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    const handleSort = async (e) => {
+        e.preventDefault();
+        setSortData(e.target.value);
+        hotelQuery = {
+            address,
+            sort: e.target.value,
+            hotelSearch,
+        }
+        const hotelprice = price ? price : 0
+        const res = await axios.get(`api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}&&price[${filterData}]=${hotelprice}`);
+        setHotelData(res.data)
+        navigate(`/hotellist?address=${address}&&sort=${e.target.value}&&price[${filterData}]=${hotelprice}`)
     };
-    const hotelprice = price ? price : 0;
-    const res = await axios.get(
-      `api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}&&price[${filterData}]=${hotelprice}`
-    );
-    setHotelData(res.data);
-    navigate(
-      `/hotellist?address=${address}&&sort=${e.target.value}&&price[${filterData}]=${hotelprice}`
-    );
-  };
-
-  const handleFilter = async (e) => {
-    e.preventDefault();
-    if (!price.trim()) return;
-    const res = await axios.get(
-      `api/search?address=${address}&&sort=${sortData}&&price[${filterData}]=${price}`
-    );
-    setHotelData(res.data);
-    navigate(
-      `/hotellist?search=${address}&&sort=${sortData}&&price[${filterData}]=${price}`
-    );
-  };
-  const handleSearch = async (e) => {
-    e.preventDefault();
-
-    setHotelNameSearch(e.target.value);
-    if (!hotelNameSearch.trim()) return;
-    hotelQuery = {
-      address,
-      sort,
-      hotelSearch: e.target.value,
+    const handleFilter = async (e) => {
+        e.preventDefault();
+        if (!price.trim()) return
+        const res = await axios.get(`api/search?address=${address}&&sort=${sortData}&&price[${filterData}]=${price}`);
+        setHotelData(res.data)
+        navigate(`/hotellist?search=${address}&&sort=${sortData}&&price[${filterData}]=${price}`)
     };
-
-    const hotelprice = price ? price : 0;
-    const res = await axios.get(
-      `api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}&&price[${filterData}]=${hotelprice}&&search=${hotelQuery.hotelSearch}`
-    );
-    setHotelData(res.data);
-    navigate(
-      `/hotellist?address=${address}&&sort=${sortData}&&price[${filterData}]=${hotelprice}&&search=${hotelQuery.hotelSearch}`
-    );
-  };
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        setHotelNameSearch(e.target.value)
+        if (!hotelNameSearch.trim()) return
+        hotelQuery = {
+            address,
+            sort,
+            hotelSearch: e.target.value
+        }
+        const hotelprice = price ? price : 0
+        const res = await axios.get(`api/search?address=${hotelQuery.address}&&sort=${hotelQuery.sort}&&price[${filterData}]=${hotelprice}&&search=${hotelQuery.hotelSearch}`);
+        setHotelData(res.data)
+        navigate(`/hotellist?address=${address}&&sort=${sortData}&&price[${filterData}]=${hotelprice}&&search=${hotelQuery.hotelSearch}`)
+    }
   return (
     <>
       {/* <div className="sub-header d-flex flex-row mb-3 justify-content-center align-item-center" style={{ height: "80px" }}>
