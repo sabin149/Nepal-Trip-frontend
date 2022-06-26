@@ -5,9 +5,6 @@ const RoomTable = ({ hotel }) => {
   const navigate = useNavigate()
   const [selectedRoom, setSelectedRoom] = useState()
 
-
- 
-
   const searchInfo = {
     date: [{
       startDate: "06/18/2022",
@@ -20,6 +17,8 @@ const RoomTable = ({ hotel }) => {
     },
     search:"Pokhara",
   }
+
+  // console.log(hotel);
 
 
   return (

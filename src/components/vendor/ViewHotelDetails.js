@@ -112,7 +112,6 @@ const ViewHotelDetails = () => {
                                                 <i className="fa-solid fa-car"></i>
                                                 <i className="fa-solid fa-user-shield"></i>
                                                 <i className="fa-solid fa-swimmer"></i>
-
                                             </div>
                                             <hr></hr>
                                             <div className="hotelmap">

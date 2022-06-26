@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {useLocation, Link } from 'react-router-dom'
+import {useLocation,useNavigate, Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import No_image from "../../images/No_image.png"
@@ -10,6 +10,7 @@ import { updateHotelRoom } from '../../redux/actions/roomAction'
 const EditRoomDetails = () => {
 
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const token = localStorage.getItem('token')
 
@@ -71,8 +72,7 @@ const EditRoomDetails = () => {
             room_type, room_price, room_options, room_facilities
 
         }
-        dispatch(updateHotelRoom({ roomData, room_images, roomDetails: room, token }))
-
+        dispatch(updateHotelRoom({ roomData, room_images, roomDetails: room,navigate, token }))
     }
 
     return (

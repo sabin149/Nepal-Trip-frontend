@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import uploadImage from "../../images/No_image.png";
 import { imageShow, videoShow } from "../../utils/mediaShow";
@@ -75,23 +75,9 @@ const Hotel = () => {
         type: GLOBALTYPES.ALERT,
         payload: { error: "Please add hotel images." },
       });
-    dispatch(
-      createHotel({
-        hotel_name,
-        address,
-        phone,
-        hotel_email,
-        pan_no,
-        price,
-        hotel_info,
-        hotel_facilities,
-        hotel_policies,
-        hotel_images,
-        token,
-      })
-    );
-    navigate("/");
-  };
+    
+    dispatch(createHotel({ hotel_name, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images,navigate, token }))
+  }
 
   return (
     <div className="container">
@@ -321,6 +307,7 @@ const Hotel = () => {
         </div>
       </form>
     </div>
+    
   );
 };
 

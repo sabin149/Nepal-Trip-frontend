@@ -62,7 +62,8 @@ const RoomTable = ({ hotel }) => {
                                     <tr key={room._id}  >
                                         <td className="" rowSpan="1">
                                             <h3 className="color-dark-blue bold pointer" onClick={handleClickOpen('body')}> {room.room_type}</h3>
-                                            <div>
+                                                
+
 
                                                 <Dialog sx={{
                                                     zIndex:"1",
@@ -85,7 +86,7 @@ const RoomTable = ({ hotel }) => {
                                                     </DialogContent>
 
                                                 </Dialog>
-                                            </div>
+                                           
                                             <div className="image-holder bg-light-gray height160">
                                                 <img className="room-image" src={room.room_images[0].url} alt="roomimage" />
                                             </div>
