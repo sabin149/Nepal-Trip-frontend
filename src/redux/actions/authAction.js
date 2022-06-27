@@ -1,5 +1,5 @@
 import { GLOBALTYPES } from "./globalTypes"
-import {postDataAPI} from "../../utils/fetchData"
+import {getDataAPI, postDataAPI} from "../../utils/fetchData"
 import valid from "../../utils/valid"
 
 export const login = (data) => async (dispatch) => {
@@ -19,12 +19,14 @@ export const login = (data) => async (dispatch) => {
         localStorage.setItem("token",token )
         localStorage.setItem("role",role )
         localStorage.setItem("userID",userID )
+        localStorage.setItem("firstLogin",true)
         dispatch({ 
             type: GLOBALTYPES.ALERT, 
             payload: {
                 success: res.data.msg
             } 
         })
+        window.location.href = "/"
     } catch (err) {
         dispatch({ 
             type: GLOBALTYPES.ALERT, 
@@ -36,13 +38,11 @@ export const login = (data) => async (dispatch) => {
 }
 
 export const refreshToken = () => async (dispatch) => {
-  const token=  localStorage.getItem("token" )
- const role=   localStorage.getItem("role")
-  const userID=  localStorage.getItem("userID" )
-    if( token && role && userID ){
+  const firstLogin=  localStorage.getItem("firstLogin")
+    if( firstLogin){
         dispatch({ type: GLOBALTYPES.ALERT, payload: {loading: true} })
         try {
-            const res = await postDataAPI('refresh_token')
+            const res = await getDataAPI('refresh_token')
             dispatch({ 
                 type: GLOBALTYPES.AUTH, 
                 payload: {
@@ -84,6 +84,7 @@ export const register = (data) => async (dispatch) => {
         localStorage.setItem("token",token )
         localStorage.setItem("role",role )
         localStorage.setItem("userID",userID )
+        localStorage.setItem("firstLogin",true)
         dispatch({ 
             type: GLOBALTYPES.ALERT, 
             payload: {
@@ -106,7 +107,15 @@ export const logout = () => async (dispatch) => {
         localStorage.removeItem("role" )
         localStorage.removeItem("userID" )
         await postDataAPI('logout')
-        window.location.href = "/"
+    
+        dispatch({ 
+            type: GLOBALTYPES.ALERT, 
+            payload: {
+                success: "Logged Out Successfully"
+            } 
+        }) 
+           window.location.href = "/"
+        
     } catch (err) {
         dispatch({ 
             type: GLOBALTYPES.ALERT, 

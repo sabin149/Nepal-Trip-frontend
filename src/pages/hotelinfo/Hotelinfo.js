@@ -78,6 +78,8 @@ const Hotelinfo = () => {
       }
       dispatch(createReview({ hotel, newReview, user: oneUser, token }))
       dispatch(getHotelReviews({ hotel }))
+      setReview("");
+      setValue(0);
     }
   }
 
@@ -287,7 +289,7 @@ const Hotelinfo = () => {
               <span>Review & Rating </span>
               <hr />
             </h3>
-            <div>
+            {token && userID ? <><div>
               <div className="content">
                 <p>Rating (select a star Amount):</p>
               </div>
@@ -304,20 +306,22 @@ const Hotelinfo = () => {
                 />
               </div>
             </div>
-            <form className="form-block">
-                  <div className="row reviewtype">
-                    <div className="col-xs-12">
-                      <div className="form-group">
-                        <textarea className="form-input" value={review} onChange={(e) => setReview(e.target.value)} placeholder="Type Your Review Here"></textarea>
-                      </div>
-                    </div>
-                    <div className="float-end mt-2 pt-1">
-                      <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm">Post Review</button>
+              <form className="form-block">
+                <div className="row reviewtype">
+                  <div className="col-xs-12">
+                    <div className="form-group">
+                      <textarea className="form-input" value={review} onChange={(e) => setReview(e.target.value)} placeholder="Type Your Review Here"></textarea>
                     </div>
                   </div>
-                </form>
+                  <div className="float-end mt-2 pt-1">
+                    <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm">Post Review</button>
+                  </div>
+                </div>
+              </form></> :
+              <h2>Please login  to give the review</h2>
+            }
           </div>
-          
+
           {/* review section */}
           <div className="segment">
             <h3 className="bold">
@@ -357,7 +361,7 @@ const Hotelinfo = () => {
                       </p>
                     </div>
                     <div className="replysec">
-                      <span className="be-comment-name repsec">
+                    { token&& userID===review?.user?._id?<> <span className="be-comment-name repsec">
                         Reply
                       </span>
                       <span className="be-comment-name editsec">
@@ -365,13 +369,12 @@ const Hotelinfo = () => {
                       </span>
                       <span className="be-comment-name">
                         Remove
-                      </span>
+                      </span></>:
+                      ""
+                      }
                     </div>
                   </div>)
                 }
-
-
-             
               </div>
             </div>
           </div>

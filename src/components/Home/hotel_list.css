@@ -1,11 +1,6 @@
-body{
-    background-color: #f7f7f7;
-    font-family: Poppins,sans-serif;
-}
 .sub-header{
     background: linear-gradient(#1081c0,#003c75);
 }
-
 .app{
     margin-left: 50px;
     font-size: 14px;
@@ -21,7 +16,6 @@ h4{
     margin-bottom: 20px;
     padding: 14px;
 }
-
 .hotel_list{
     margin-top: 10px;
     background-color:white;
@@ -32,7 +26,6 @@ h4{
 .card-box{
     padding-top: 10px;
 }
-
 /* .img-holder{
     background-color: fffff;
     border-radius: 2px;
@@ -47,7 +40,6 @@ h4{
     overflow-x: hidden;
     padding: 10px 10px 10px 10px;
 } */
-
  .img{
     max-width: none;
     height: 100%;
@@ -55,14 +47,10 @@ h4{
     left: 50%;
     overflow-x: hidden;
 }
-
-
 .icn-holder{
     padding: 0px 10px 14px 0;
     min-height: 50px;
 }
-
-
 .hotel-price{
     margin-top: 20px;
     font-size: 22px;
@@ -77,9 +65,7 @@ h4{
     text-align: center;
     padding: 3px;
     border: 1px solid gray;
-
 }
-
 .bt {
     background-color: #3b72c4;
     border: none;
@@ -93,17 +79,9 @@ h4{
     border-radius: 5px;
     margin-top: 10px;
   }
-  
-
-
-
-
-
 .twelve{
     width: 75%;
 }
-
-
 .content-holder{
     box-sizing :border-box;
 color :rgb(74, 74, 74);
@@ -141,18 +119,14 @@ text-size-adjust: 100%;
 width :220px;
 -webkit-box-direction: normal;
 }
-
 .imgee>img{
-    
         max-width: none;
         height: 100%;
         position: absolute;
         left: 50%;
         z-index: 1;
         transform: translateX(-50%);
-    
 }
-
 .flex-full {
     box-sizing :border-box;
 color :rgb(74, 74, 74);
@@ -167,10 +141,6 @@ width :366.688px;
 -webkit-box-direction :normal;
 -webkit-box-flex :1;
 }
-
-
-
-
 .box-card{
     padding: 10px;
     box-shadow: 0 0 2px #d4d4d4;
@@ -197,8 +167,6 @@ width :366.688px;
     text-size-adjust: 100%;
     vertical-align: top;
     width: 634.688px;
-
-
 }
 .box-card .img-holder{
     min-width: 220px;
@@ -210,11 +178,9 @@ width :366.688px;
     margin-right: 20px;
     background-color: red;
 }
-
 .content-holder{
     display: flex;
 }
-
 .box-card .img-holder .img{
     max-width: none;
     height: 100%;
@@ -223,24 +189,18 @@ width :366.688px;
     z-index: 1;
     transform: translateX(-50%);
     border-style: none;
-    
 }
-
-
 .mh95 {
     min-height: 95px;
 }
-
 h3 {
     margin: 0;
     color: #003c75;
     font-weight: 500;
 }
-
 .search-result .h3{
     font-size: 18px;
 }
-
 .hotel-name{
     color: rgb(0, 60, 117);
     font-family: Poppins, sans-serif;
@@ -251,5 +211,4 @@ h3 {
     color: rgb(74, 74, 74);
     font-family: Poppins, sans-serif;
     font-size: 14px;
-
 }
