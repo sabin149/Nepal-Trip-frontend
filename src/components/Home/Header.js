@@ -32,7 +32,7 @@ const Header = ({ isUser }) => {
             <button className="navButton" onClick={() => {
               if (window.confirm('Are you sure you want to logout?')) {
                 dispatch(logout())
-                window.href = "/"
+
               }
             }}> Logout
               <span> <i className="fa-solid fa-right-from-bracket text-light" ></i></span>
