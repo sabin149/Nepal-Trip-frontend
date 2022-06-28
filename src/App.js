@@ -21,6 +21,8 @@ import ReviewTable from "./components/vendor/components/VendorTable/review/Revie
 import AdminDashboard from "./pages/AdminDashboard";
 import VendorDashboard from "./pages/VendorDashboard";
 import Home from "./pages/home/Home";
+// import {useEffect} from "react"
+// import axios from "axios";
 
 const App = () => {
   const token = localStorage.getItem('token')
@@ -28,6 +30,18 @@ const App = () => {
   const isAdmin = token && role === "admin"
   const isVendor = token && role === "vendor"
   const isUser = token && role === "user"
+
+  // const refreshJwtToken = async () => {
+  //   const res = await axios.get(
+  //     "/api/refresh_token"
+  //   );
+  //   // setToken(res.data.accessToken);
+  //   // console.log(res.data)
+  // };
+
+  // useEffect(() => {
+  //   refreshJwtToken();
+  // }, []);
 
   return (
     <>

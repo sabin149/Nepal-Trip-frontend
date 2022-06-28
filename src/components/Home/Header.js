@@ -18,13 +18,16 @@ const Header = ({ isUser }) => {
           </Link>
         </div>
         <div className="navItems">
-          <div className="hotel">
+          {isUser && <div className="hotel">
             <i className="fa-solid fa-suitcase"> </i>
             <span> <Link to="/bookings" className="text-decoration-none text-dark">My Hotel Booking</Link> </span>
+
           </div>
+          }
+
 
           <div className="favourite">
-          <i className="fa-solid fa-heart"></i>
+            <i className="fa-solid fa-heart"></i>
             <span > My Favourite </span>
           </div>
 

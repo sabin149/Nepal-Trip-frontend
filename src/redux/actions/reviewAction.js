@@ -1,4 +1,4 @@
-import { getDataAPI, patchDataAPI, postDataAPI } from '../../utils/fetchData'
+import { deleteDataAPI, getDataAPI, patchDataAPI, postDataAPI } from '../../utils/fetchData'
 import { GLOBALTYPES } from './globalTypes'
 import { HOTEL_TYPES } from './hotelAction'
 
@@ -9,6 +9,8 @@ export const REVIEW_TYPES = {
     GET_REVIEW: "GET_REVIEW",
     GET_HOTEL_REVIEWS: "GET_HOTEL_REVIEWS",
     UPDATE_REVIEW: "UPDATE_REVIEW",
+    DELETE_REVIEW: "DELETE_REVIEW",
+
 }
 
 
@@ -71,7 +73,39 @@ export const getHotelReviews = ({ hotel }) => async (dispatch) => {
         const newHotel = { ...hotel, reviews: res.data.reviews }
         dispatch({ type: REVIEW_TYPES.GET_HOTEL_REVIEWS, payload: newHotel })
     } catch (err) {
-        console.log(err)
         dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
     }
 }
+
+export const getReview = ({ review }) => async (dispatch) => {
+    try {
+        const res = await getDataAPI(`review/${review._id}`)
+        dispatch({ type: REVIEW_TYPES.GET_REVIEW, payload: res.data.review })
+    } catch (err) {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
+    }
+}
+
+export const updateReview = ({ review, token }) => async (dispatch) => {
+    try {
+        const res = await patchDataAPI(`review/${review._id}`, review, token)
+        dispatch({ type: REVIEW_TYPES.UPDATE_REVIEW, payload: res.data.review })
+    } catch (err) {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
+    }
+}
+
+export const deleteReview = ({review, token} ) => async (dispatch) => {
+    console.log(review,"review")
+    console.log(token,"token")
+    try {
+        const res = await deleteDataAPI(`review/${review._id}`, review, token)
+        console.log(res.data)
+        dispatch({ type: REVIEW_TYPES.DELETE_REVIEW, payload: res.data.review })
+    } catch (err) {
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
+    }
+}
+
+
+   
