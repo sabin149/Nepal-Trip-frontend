@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 const Header = ({ isUser }) => {
   const dispatch = useDispatch();
+  const userID=localStorage.getItem("userID")
   return (
     <div className="navbar">
       <div className="navContainer">
@@ -21,6 +22,10 @@ const Header = ({ isUser }) => {
           <div className="hotel">
             <i className="fa-solid fa-suitcase"> </i>
             <span> <Link to="/bookings" className="text-decoration-none text-dark">My Hotel Booking</Link> </span>
+          </div>
+          <div className="hotel">
+            <i className="fa-solid fa-suitcase"> </i>
+            <span> <Link to={`/user/profile/${userID}`} className="text-decoration-none text-dark">Profile</Link> </span>
           </div>
 
           <div className="favourite">
@@ -37,6 +42,7 @@ const Header = ({ isUser }) => {
             }}> Logout
               <span> <i className="fa-solid fa-right-from-bracket text-light" ></i></span>
 
+
             </button>}
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div className="modal-dialog">
@@ -51,6 +57,10 @@ const Header = ({ isUser }) => {
                 <Register />
               </div>
             </div>
+          </div>
+          <div className="favourite">
+          <i className="fa-solid fa-heart"></i>
+         
           </div>
         </div>
       </div>

@@ -24,6 +24,7 @@ import Bookings from "./pages/bookings/bookingDetails";
 import AllReviewsTable from "./components/admin/Table/review/ReviewTable";
 import AllBookingsTable from "./components/admin/Table/bookings/AllBookingsTable";
 import ReviewTable from "./components/vendor/components/VendorTable/review/ReviewTable";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   const token = localStorage.getItem('token')
@@ -57,6 +58,7 @@ function App() {
           <Route path="/vendor/reviews" element={isVendor ? <ReviewTable /> : <Navigate to="/" />} />
           <Route path="/admin/reviews" element={isAdmin ? <AllReviewsTable /> : <Navigate to="/" />} />
           <Route path="/admin/bookings" element={isAdmin ? <AllBookingsTable /> : <Navigate to="/" />} />
+          <Route path="/user/profile/:id" element={isUser?<Profile/>:<Navigate to="/"/>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdmin ? <EHeader /> : isVendor ? <EFooter /> : <Footer />}
