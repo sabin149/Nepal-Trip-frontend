@@ -48,6 +48,11 @@ const reviewReducer = (state = initialState, action) => {
                     return review;
                 }),
             };
+        case REVIEW_TYPES.DELETE_REVIEW:
+            return {
+                ...state,
+                reviews: state.reviews.filter((review) => review._id !== action.payload._id)
+            };
         default:
             return state;
     }
