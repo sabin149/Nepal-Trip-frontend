@@ -52,10 +52,10 @@ h4{
     min-height: 50px;
 }
 .hotel-price{
-    margin-top: 20px;
-    font-size: 22px;
+    font-size: 24px;
     color: #009b59;
     font-weight: 600;
+    letter-spacing:3px
 }
 .icn{
     border-radius: 50%;
@@ -212,3 +212,4 @@ h3 {
     font-family: Poppins, sans-serif;
     font-size: 14px;
 }
+

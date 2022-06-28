@@ -309,8 +309,6 @@ const HotelList = () => {
           </div>
         </div>
       </>
-
     )
 }
-
 export default HotelList

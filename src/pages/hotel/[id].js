@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { GLOBALTYPES } from '../../redux/actions/globalTypes'
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import uploadImage from "../../images/No_image.png";
 import { imageShow, videoShow } from "../../utils/mediaShow";
 import { createHotel } from "../../redux/actions/hotelAction";
@@ -12,7 +12,7 @@ const Hotel = () => {
   const token = localStorage.getItem("token");
   const initialState = {
     hotel_name: "",
-    rating:"",
+    rating: "",
     address: "",
     phone: "",
     hotel_email: "",
@@ -63,17 +63,34 @@ const Hotel = () => {
     e.preventDefault();
     if (hotel_images.length === 0)
       return dispatch({
-        type: GLOBALTYPES.ALERT, payload: { error: "Please add hotel images." }
+        type: GLOBALTYPES.ALERT,
+        payload: { error: "Please add hotel images." },
+      });
+    dispatch(
+      createHotel({
+        hotel_name,
+        rating,
+        address,
+        phone,
+        hotel_email,
+        pan_no,
+        price,
+        hotel_info,
+        hotel_facilities,
+        hotel_policies,
+        hotel_images,
+        navigate,
+        token,
       })
-    dispatch(createHotel({ hotel_name,rating, address, phone, hotel_email, pan_no, price, hotel_info, hotel_facilities, hotel_policies, hotel_images,navigate, token }))
-  }
+    );
+  };
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
         <h2 className="text-danger text-center mt-3">Add hotel</h2>
         <div className="row">
-          <div className="d-flex justify-content-around mx-0 mb-1">
-            <div className="col-2"></div>
+          <div className="d-flex  mx-0 mb-1">
+            <div className="col-3"></div>
             <div className="col-6 add_hotel ">
               <div className="show_images">
                 {hotel_images.length > 0 ? (
@@ -153,17 +170,17 @@ const Hotel = () => {
                   onChange={handleChangeInput}
                 />
               </div>
-                <div className="hotel_label">
-                  <label className="form-label">Address</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="address"
-                    value={address}
-                    onChange={handleChangeInput}
-                  />
-                </div>
+              <div className="hotel_label">
+                <label className="form-label">Address</label>
+                <input
+                  type="text"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="address"
+                  value={address}
+                  onChange={handleChangeInput}
+                />
+              </div>
               <div className="hotel_label">
                 <label className="form-label">Phone Number</label>
                 <input
@@ -197,103 +214,424 @@ const Hotel = () => {
                   onChange={handleChangeInput}
                 />
               </div>
-                <div className="hotel_label">
-                  <label className="form-label">Hotel Info</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="hotel_info"
-                    value={hotel_info}
-                    onChange={handleChangeInput}
-                  />
-                </div>
-                <div className="hotel_label">
-                  <label className="form-label">Hotel Facilities</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="hotel_facilities"
-                    value={hotel_facilities}
-                    onChange={handleChangeInput}
-                  />
-                </div>
-                {/* <div className="hotel_facilities row align-items-start">
-              <div className="col">
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" name="hotel_facilities" value={hotel_facilities} onChange={handleChangeInput} />
-                  <label className="form-check-label" htmlFor="inlineCheckbox1">Airport Transfer</label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value={hotel_facilities} onChange={handleChangeInput} />
-                  <label className="form-check-label" htmlFor="inlineCheckbox1">24hr Checkin</label>
-                </div>
-              </div> */}
-                {/* <div className="col">
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value={hotel_facilities} onChange={handleChangeInput} />
-                  <label className="form-check-label" htmlFor="inlineCheckbox1">Lockers</label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value={hotel_facilities} onChange={handleChangeInput} />
-                  <label className="form-check-label" htmlFor="inlineCheckbox1">Early Checkin</label>
+              <div className="hotel_label">
+                <label className="form-label">Hotel Info</label>
+                <input
+                  type="text"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="hotel_info"
+                  value={hotel_info}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              <div className="hotel_label">
+                <label className="form-label">Hotel Facilities</label>
+                <input
+                  type="text"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="hotel_facilities"
+                  value={hotel_facilities}
+                  onChange={handleChangeInput}
+                />
+              </div>
+              
+              <div className="hotel_policies">
+                <label className="form-label">Hotel Policies</label>
+                <input
+                  type="text"
+                  className="form-control hotel_input"
+                  id="exampleInputEmail1"
+                  name="hotel_policies"
+                  value={hotel_policies}
+                  onChange={handleChangeInput}
+                />
+                <div className="row">
+                  <div className="col-6">
+                    <ul>
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            name="hotel_policies"
+                            value={hotel_policies}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Bar
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Free Breakfast
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Resturant
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Free wi-Fi all room
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Airport transfer
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            24-Hr Security
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Tours
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Cap Service
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            More Policies
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            More Policies
+                          </label>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* ********************************************************************** */}
+                  <div className="col-6">
+                    <ul>
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            name="hotel_policies"
+                            value={hotel_policies}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Child Bed
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            AC Room
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Flat Screen
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Concierge
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Laundry Service
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            24Hr Room Service
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Ticket Service
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Medical Service
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Security
+                          </label>
+                        </div>
+                      </li>
+
+                      <li>
+                        <div className="form-check form-check-inline flex-fill">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="inlineCheckbox1"
+                            value={hotel_policies}
+                            onChange={handleChangeInput}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="inlineCheckbox1"
+                          >
+                            Coffee Shop
+                          </label>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-              <div className="col">
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value={hotel_facilities} onChange={handleChangeInput} />
-                  <label className="form-check-label" htmlFor="inlineCheckbox1">Laundry Service</label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value={hotel_facilities} onChange={handleChangeInput} />
-                  <label className="form-check-label" htmlFor="inlineCheckbox1">Free WiFi</label>
-                </div>
-              </div> */}
-                {/* </div> */}
-                <div className="hotel_policies">
-                  <label className="form-label">Hotel Policies</label>
-                  <input
-                    type="text"
-                    className="form-control hotel_input"
-                    id="exampleInputEmail1"
-                    name="hotel_policies"
-                    value={hotel_policies}
-                    onChange={handleChangeInput}
-                  />
-                  {/* <div className="col-6">
-                <div className="form-check form-check-inline flex-fill">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" name="hotel_policies" value={hotel_policies}  />
-                  <label className="form-check-label" htmlFor="inlineCheckbox1">Child Policy</label>
-                </div>
-                <div className="form-check form-check-inline flex-fill">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value={hotel_policies} onChange={handleChangeInput} />
-                  <label className="form-check-label" htmlFor="inlineCheckbox1">Check in and Check out policies</label>
-                </div>
-                <div className="form-check form-check-inline flex-fill">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value={hotel_policies} onChange={handleChangeInput} />
-                  <label className="form-check-label" htmlFor="inlineCheckbox1">Payment Method Accepted</label>
-                </div>
-                <div className="form-check form-check-inline flex-fill">
-                  <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value={hotel_policies} onChange={handleChangeInput} />
-                  <label className="form-check-label" htmlFor="inlineCheckbox1">More Policies</label>
-                </div>
-              </div> */}
-                </div>
-                <div className="d-flex justify-content-center">
-                  <button
-                    type="submit"
-                    className="btn btn-warning w-25 mb-4 mt-4"
-                  >
-                    Save
-                  </button>
-                </div>
+              <div className="d-flex justify-content-center">
+                <button
+                  type="submit"
+                  className="btn btn-warning w-25 mb-4 mt-4"
+                >
+                  Save
+                </button>
               </div>
-            </div>
-            <div className="d-flex align-items-center justify-content-center">
-              <div className="col-6"></div>
             </div>
           </div>
+          <div className="d-flex align-items-center justify-content-center">
+            <div className="col-6"></div>
+          </div>
+        </div>
       </form>
     </div>
   );
