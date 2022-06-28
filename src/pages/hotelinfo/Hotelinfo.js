@@ -6,7 +6,7 @@ import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
 import RoomTable from "../../components/room/RoomTable";
 import Rating from '@mui/material/Rating'
-import { createReview, getHotelReviews } from "../../redux/actions/reviewAction";
+import { createReview, deleteReview, getHotelReviews } from "../../redux/actions/reviewAction";
 import { getUsers } from "../../redux/actions/userAction"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import moment from "moment";
@@ -82,6 +82,14 @@ const Hotelinfo = () => {
       setValue(0);
     }
   }
+
+  const handleDeleteReview = ({hotelReview}) => {
+    
+    dispatch(deleteReview({ review:hotelReview, token:token }))
+
+  }
+   
+
 
   return (
     <div className="main_content">
@@ -361,13 +369,13 @@ const Hotelinfo = () => {
                       </p>
                     </div>
                     <div className="replysec">
-                    { token&& userID===review?.user?._id?<> <span className="be-comment-name repsec">
-                        Reply
-                      </span>
+                    { token&& userID===review?.user?._id?<>
                       <span className="be-comment-name editsec">
                         Edit
                       </span>
-                      <span className="be-comment-name">
+                      <span className="be-comment-name" onClick={()=>{
+                        handleDeleteReview({hotelReview:review})
+                      }}>
                         Remove
                       </span></>:
                       ""
