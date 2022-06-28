@@ -1,6 +1,5 @@
 import { GLOBALTYPES } from "./globalTypes";
 import { postDataAPI, getDataAPI, patchDataAPI, deleteDataAPI } from "../../utils/fetchData";
-
 export const BOOKING_TYPES = {
     CREATE_BOOKING: "CREATE_BOOKING",
     LOADING_BOOKING: "LOADING_BOOKING",
@@ -9,11 +8,8 @@ export const BOOKING_TYPES = {
     GET_HOTEL_BOOKINGS: "GET_HOTEL_BOOKINGS",
     UPDATE_BOOKING: "UPDATE_BOOKING",
     DELETE_BOOKING: "DELETE_BOOKING",
-
 }
-
 export const createBooking = (booking,navigate,token) => async (dispatch) => {
-
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         const res = await postDataAPI('booking', booking, token)
@@ -27,7 +23,6 @@ export const createBooking = (booking,navigate,token) => async (dispatch) => {
             }
         })
         navigate('/bookings')
-        
     } catch (error) {
         dispatch({
             type: GLOBALTYPES.ALERT,
@@ -76,7 +71,6 @@ export const updateBooking = ({ booking,navigate, token }) => async (dispatch) =
             payload: { ...res.data.booking }
         })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
-
     } catch (error) {
         dispatch({
             type: GLOBALTYPES.ALERT,

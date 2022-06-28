@@ -16,7 +16,7 @@ const Register = () => {
     const [typePass, setTypePass] = useState(false)
     const [typeCfPass, setTypeCfPass] = useState(false)
     useEffect(() => {
-        if (auth.token) window.location.href = "/"
+        if (auth.token)  navigate('/')
     }, [auth.token, navigate])
     const handleChangeInput = e => {
         const { name, value } = e.target
