@@ -125,7 +125,7 @@ const Register = () => {
                         <option value="">Select Role</option>
                         <option value="user">User</option>
                         <option value="vendor">Vendor</option>
-                        <option value="admin">Admin</option>
+                        {/* <option value="admin">Admin</option> */}
                     </select>
                     <small className="form-text text-danger">
                         {alert.role ? alert.role : ''}

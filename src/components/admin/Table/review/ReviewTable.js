@@ -76,11 +76,6 @@ export default function AllReviewsTable() {
     const hotels = useSelector(state => state?.hotel?.hotels)
 
     React.useEffect(() => {
-        dispatch(getHotels())
-    }, [dispatch])
-
-
-    React.useEffect(() => {
         dispatch(getReviews({token}))
     },[dispatch,token])
 

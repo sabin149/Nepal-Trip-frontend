@@ -2,10 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { getBookingsByHotel } from '../../../../redux/actions/bookingAction';
-import { getHotels } from '../../../../redux/actions/hotelAction';
+
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 90 },
@@ -51,24 +48,8 @@ const columns = [
   }
 ];
 
-export default function VendorBookingsTable() {
-  const dispatch = useDispatch();
-  const token=localStorage.getItem('token');
-  const userID=localStorage.getItem('userID');
-
-  const hotels = useSelector(state => state?.hotel?.hotels);
-  const {bookings}=useSelector(state=>state.booking);
-
-
-  const hotelId=hotels && hotels.filter (hotel=>hotel?.user?._id===userID)[0]?._id;
-  
-  useEffect(()=>{
-    dispatch(getHotels());
-  },[dispatch,token])
-
- useEffect(()=>{
-    dispatch(getBookingsByHotel({hotelId,token}));
-  },[dispatch, hotelId, token])
+export default function VendorBookingsTable({booking}) {
+  const {bookings}=booking
 
  const bookingsData=bookings&& bookings.map((booking,index) => {
     return {
@@ -80,10 +61,7 @@ export default function VendorBookingsTable() {
         totalamount: booking.total_amount,
         paymenttype: booking.payment_type,
     }
-
  })
-
-
 
   return (
     <Box sx={{ height: 500, width: '100%' }}>

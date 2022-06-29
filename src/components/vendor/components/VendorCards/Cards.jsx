@@ -4,7 +4,7 @@ import { cardsData } from "../../VendorData/Data";
 
 import Card from "../VendorCard/Card";
 
-const Cards = () => {
+const Cards = ({hotel,token,booking}) => {
   return (
     <div className="Cards">
       {cardsData.map((card, id) => {
@@ -17,6 +17,7 @@ const Cards = () => {
               value={card.value}
               png={card.png}
               series={card.series}
+              hotel={hotel} token={token} booking={booking}
             />
           </div>
         );

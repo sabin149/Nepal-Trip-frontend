@@ -6,7 +6,6 @@ import { deleteHotelRoom } from '../../redux/actions/roomAction';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 
-
 const RoomTable = ({ hotel }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -28,8 +27,6 @@ const RoomTable = ({ hotel }) => {
         setOpen(true);
         setScroll(scrollType);
         setSelectedRoom(room);
-
-        console.log(room);
     };
 
     const handleClose = () => {
@@ -45,7 +42,6 @@ const RoomTable = ({ hotel }) => {
             }
         }
     }, [open]);
-
 
     return (
         <>
@@ -67,9 +63,12 @@ const RoomTable = ({ hotel }) => {
                                 hotel.rooms.map(room => (
                                     <tr key={room._id}  >
                                         <td className="" rowSpan="1">
-                                            <h3 className="color-dark-blue bold pointer" onClick={handleClickOpen({ scrollType: 'body', room })}> {room.room_type}</h3>
+                                            <h3 className="color-dark-blue bold pointer" onClick={handleClickOpen({ scrollType: 'body', room })} style={{
+                                                display:"inline-table"
+                                                
+                                            }}> {room.room_type}</h3>
                                             <Dialog sx={{
-                                                zIndex: "1",
+                                             
                                                 backgroundBlendMode: "darken",
                                                 backgroundColor: "rgba(0,0,0,0.1)",
                                                 borderTop: "1px solid rgba(0,0,0,0.1)",
@@ -92,7 +91,7 @@ const RoomTable = ({ hotel }) => {
                                                 <h3 className='color-dark-blue' style={{
                                                     marginLeft: "20px",
                                                     fontWeight:"500",
-                                                    fontSize: "2.8rem",
+                                                    fontSize: "2.2rem",
                                                 }}>{selectedRoom?.room_type}</h3>
                                                 <DialogContent dividers={scroll === 'paper'}>
 

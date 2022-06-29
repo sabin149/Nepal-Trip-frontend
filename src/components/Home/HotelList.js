@@ -274,10 +274,6 @@ const HotelList = () => {
                                 {facility !== "good" && (
                                   <i className="fa-solid fa-bed"></i>
                                 )}
-                                {/* {       
-                                                                          facility==="noice" &&
-                                                                          <i className="fa-solid fa-pen"></i>
-                                                                  } */}
                                 {facility}
                               </span>
                             ))}

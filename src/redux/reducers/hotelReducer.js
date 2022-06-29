@@ -3,6 +3,7 @@ import { HOTEL_TYPES } from "../actions/hotelAction";
 const initialState = {
     loading: false,
     hotels: [],
+    hotel:{},
     count: 0,
     page: 1
 }
@@ -28,7 +29,7 @@ const hotelReducer = (state = initialState, action) => {
         case HOTEL_TYPES.GET_HOTEL:
             return {
                 ...state,
-                hotels: action.payload
+                hotel: action.payload
             };
 
         case HOTEL_TYPES.APPROVE_HOTEL:

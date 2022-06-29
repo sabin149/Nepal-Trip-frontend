@@ -9,10 +9,6 @@ const VendorTable = () => {
 
     const token = localStorage.getItem('token')
 
-    useEffect(() => {
-        dispatch(getHotels())
-    }, [token, dispatch])
-
     const changeStatus = ({ hotel }) => {
         if (window.confirm('Are you sure you want to change this hotel status? ')) {
             dispatch(approveHotel({ hotel, token }))

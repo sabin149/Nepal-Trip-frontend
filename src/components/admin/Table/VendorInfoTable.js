@@ -1,49 +1,98 @@
-import React, { useEffect } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useState } from 'react';
+import { DataGrid, GridCloseIcon } from '@mui/x-data-grid';
+import { useDispatch } from 'react-redux'
 import moment from "moment"
-import {approveHotel, getHotels } from '../../../redux/actions/hotelAction';
+import { approveHotel } from '../../../redux/actions/hotelAction';
+import ViewHotelDetails from '../../vendor/ViewHotelDetails';
+import { AppBar, Dialog, IconButton, Slide, Toolbar, Typography } from '@mui/material';
 
-function VendorInfoTable() {
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+function VendorInfoTable({ hotel, token }) {
 
   const dispatch = useDispatch()
-  const { hotel } = useSelector(state => state)
+  const [open, setOpen] = useState(false);
+  const [selectedHotel, setSelectedHotel] = useState(null);
 
-  const token = localStorage.getItem('token')
 
-  useEffect(() => {
-    dispatch(getHotels())
-  }, [token, dispatch])
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-        
   const changeStatus = ({ hotel }) => {
     if (window.confirm('Are you sure you want to change this hotel status? ')) {
-        dispatch(approveHotel({ hotel, token }))
+      dispatch(approveHotel({ hotel, token }))
     }
-}
+  }
+  const handleViewHotelDetails = ({ hotel }) => {
+    setOpen(true);
+    setSelectedHotel(hotel)
+  }
 
   const columns = [
     { field: 'id', headerName: 'SN', width: 65 },
-    { field: 'companyName', headerName: 'Company Name', width: 240},
+    {
+      field: 'companyName', headerName: 'Company Name', width: 240,
+      // get cell value
+      renderCell: ({ value }) =>
+        <>
+          <span onClick={() => {
+            handleViewHotelDetails({ scrollType: 'body', hotel: value })
+          }}>
+            <span className=''>{value?.hotel_name}</span>
+          </span>
+
+          <Dialog
+            fullScreen
+            open={open}
+            onClose={handleClose}
+            TransitionComponent={Transition}
+          >
+            <AppBar sx={{ position: 'relative' }}>
+              <Toolbar>
+
+                <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                  Hotel Details
+                </Typography>
+                <IconButton
+                  edge="start"
+                  color="inherit"
+                  onClick={handleClose}
+                  aria-label="close"
+                >
+                  <GridCloseIcon />
+                </IconButton>
+              </Toolbar>
+            </AppBar> <ViewHotelDetails hotelDetails={selectedHotel} />
+          </Dialog>
+        </>
+
+
+    },
     {
       field: 'email', headerName: 'Email', type: 'string', width: 320,
     },
     { field: 'registerdAt', headerName: 'Registered At', width: 150 },
     {
       field: 'status', headerName: 'Status', width: 110,
-      renderCell:(hotelData)=>
-      <span className='text-success' onClick={()=>{
-        changeStatus({hotel:hotelData.value})
-      }}>
-     {hotelData.value.hotel_validity ?  <span className='btn btn-success btn-sm'>Active</span> :  <span className='btn btn-danger btn-sm'>Inactive</span>}
-      </span>
+      renderCell: (hotelData) =>
+        <span className='text-success' onClick={() => {
+
+          changeStatus({ hotel: hotelData.value })
+        }}>
+          {hotelData.value.hotel_validity ? <span className='btn btn-success btn-sm'>Active</span> : <span className='btn btn-danger btn-sm'>Inactive</span>}
+        </span>
+
+
     }
   ];
 
   const hotelList = hotel.hotels.map((item, index) => {
     return {
       id: index + 1,
-      companyName: item.hotel_name,
+      companyName: item,
       email: item.hotel_email,
       registerdAt: moment(item.createdAt).format('YYYY-MM-DD'),
       status: item
@@ -53,9 +102,15 @@ function VendorInfoTable() {
   return (
     <div style={{ minHeight: 534, width: '100%' }}>
       <DataGrid
+
+      sx={{
+        cursor: 'pointer',
+
+      }}
         rows={hotelList}
         columns={columns}
         pageSize={10}
+        rowsPerPageOptions={[10]}
         checkboxSelection
         disableSelectionOnClick
       />

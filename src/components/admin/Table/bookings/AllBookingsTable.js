@@ -30,7 +30,7 @@ const columns = [
         width: 200,
         sortable: true,
         renderCell: (bookingData) => {
-            return moment(bookingData?.value ? bookingData?.value : "").format("MMM Do YYYY")
+            return moment(bookingData?.formattedValue ? bookingData?.value : "").format('YYYY-MM-DD')
         }
     },
     {
@@ -39,7 +39,7 @@ const columns = [
         width: 200,
         sortable: true,
         renderCell: (bookingData) => {
-            return moment(bookingData?.value ? bookingData?.value : "").format("MMM Do YYYY")
+            return moment(bookingData?.value ? bookingData?.value : "").format('YYYY-MM-DD')
         }
     }, {
         field: "totalamount",
@@ -91,7 +91,6 @@ export default function AllBookingsTable() {
             overflowX: "hidden",
             overflowY: "auto",
             position: "relative",
-            zIndex: "1",
             overflowScrolling: "touch",
             WebkitOverflowScrolling: "touch",
         }}>
