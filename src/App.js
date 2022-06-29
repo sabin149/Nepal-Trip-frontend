@@ -22,6 +22,7 @@ import Profile from "./pages/profile/Profile";
 import AdminDashboard from "./pages/AdminDashboard";
 import VendorDashboard from "./pages/VendorDashboard";
 import Home from "./pages/home/Home";
+import ChangePassword from "./pages/auth/Changepassword";
 // import {useEffect} from "react"
 // import axios from "axios";
 
@@ -69,6 +70,7 @@ const App = () => {
           <Route path="/admin/reviews" element={isAdmin ? <AllReviewsTable /> : <Navigate to="/" />} />
           <Route path="/admin/bookings" element={isAdmin ? <AllBookingsTable /> : <Navigate to="/" />} />
           <Route path="/user/profile/:id" element={isUser?<Profile/>:<Navigate to="/"/>}/>
+          <Route path="/changepassword" element={<ChangePassword />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdmin ? <></> : isVendor ? <></> : <Footer />}
