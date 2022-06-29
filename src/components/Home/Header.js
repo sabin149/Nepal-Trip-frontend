@@ -23,14 +23,15 @@ const Header = ({ isUser }) => {
             <i className="fa-solid fa-suitcase"> </i>
             <span> <Link to="/bookings" className="text-decoration-none text-dark">My Hotel Booking</Link> </span>
           </div>
-          <div className="hotel">
-            <i className="fa-solid fa-suitcase"> </i>
+          {isUser&&
+            <div className="hotel">
+            <i className="fa-solid fa-user"> </i>
             <span> <Link to={`/user/profile/${userID}`} className="text-decoration-none text-dark">Profile</Link> </span>
-          </div>
+          </div>}
 
           <div className="favourite">
           <i className="fa-solid fa-heart"></i>
-            <span > My Favourite </span>
+            <span> My Favourite </span>
           </div>
 
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
@@ -57,10 +58,6 @@ const Header = ({ isUser }) => {
                 <Register />
               </div>
             </div>
-          </div>
-          <div className="favourite">
-          <i className="fa-solid fa-heart"></i>
-         
           </div>
         </div>
       </div>

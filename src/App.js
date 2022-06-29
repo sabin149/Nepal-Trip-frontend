@@ -22,7 +22,9 @@ import Profile from "./pages/profile/Profile";
 import AdminDashboard from "./pages/AdminDashboard";
 import VendorDashboard from "./pages/VendorDashboard";
 import Home from "./pages/home/Home";
-// import {useEffect} from "react"
+import {useEffect} from "react"
+import { useDispatch } from "react-redux";
+import { getHotels } from "./redux/actions/hotelAction";
 // import axios from "axios";
 
 const App = () => {
@@ -44,6 +46,12 @@ const App = () => {
   //   refreshJwtToken();
   // }, []);
 
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getHotels())
+}, [dispatch])
+// 
   return (
     <>
       <Router>

@@ -65,7 +65,7 @@ const BookingDetails = () => {
                 <div className="booking_dialog">
 
                   <Dialog sx={{
-                    zIndex: "1",
+            
                     backgroundBlendMode: "darken",
                     backgroundColor: "rgba(0,0,0,0.1)",
                   }}
@@ -199,7 +199,7 @@ const BookingDetails = () => {
                               <div>
                                 <Dialog
                                   sx={{
-                                    zIndex: "1",
+                             
                                     backgroundBlendMode: "darken",
                                     backgroundColor: "rgba(0,0,0,0.1)",
                                   }}

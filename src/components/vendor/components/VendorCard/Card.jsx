@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Card.css";
 // import { CircularProgressbar } from "react-circular-progressbar";
 // import "react-circular-progressbar/dist/styles.css";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { UilTimes } from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
-import { useDispatch, useSelector } from "react-redux";
-import { getHotels } from "../../../../redux/actions/hotelAction";
-import { getBookingsByHotel } from "../../../../redux/actions/bookingAction";
-import { getHotelReviews } from "../../../../redux/actions/reviewAction";
+
 
 // parent Card
 
@@ -27,28 +24,18 @@ const Card = (props) => {
 
 // Compact Card
 function CompactCard({ param, setExpanded }) {
+  // console.log(param)
   const Png = param.png;
 
-  const dispatch = useDispatch();
   const userID = localStorage.getItem('userID');
-  const token = localStorage.getItem('token');
-
-  const hotels = useSelector(state => state?.hotel?.hotels);
-  const bookings = useSelector(state => state.booking);
 
 
+  const hotels = param?.hotel?.hotels
+  const bookings = param?.booking
 
-  // const hotelId=hotels && hotels.filter (hotel=>hotel?.user?._id===userID)[0]?._id;
 
   const hotel = hotels && hotels.filter(hotel => hotel?.user?._id === userID)[0];
 
-  useEffect(() => {
-    dispatch(getHotels());
-  }, [dispatch])
-
-  useEffect(() => {
-    dispatch(getBookingsByHotel({ hotelId: hotel?._id, token }));
-  }, [dispatch, hotel, token])
   return (
     <motion.div
       className="CompactCard"

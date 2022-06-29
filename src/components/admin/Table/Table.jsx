@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import "./Table.css";
 import { useDispatch, useSelector } from 'react-redux'
 import moment from "moment"
-import { approveHotel, getHotels } from '../../../redux/actions/hotelAction'
+import { approveHotel } from '../../../redux/actions/hotelAction'
 
 const makeStyle = (status) => {
 
@@ -39,10 +39,6 @@ function BasicTable() {
   const { hotel } = useSelector(state => state)
 
   const token = localStorage.getItem('token')
-
-  React.useEffect(() => {
-    dispatch(getHotels())
-  }, [token, dispatch])
 
   const changeStatus =  ({ item }) => {
     dispatch(approveHotel({hotel: item, token}))

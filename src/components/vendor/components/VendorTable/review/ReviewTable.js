@@ -67,13 +67,7 @@ export default function ReviewTable() {
     const hotels = useSelector(state => state?.hotel?.hotels)
 
     const { users } = useSelector(state => state.user)
-    // console.log(users,"users");
 
-
-
-    React.useEffect(() => {
-        dispatch(getHotels())
-    }, [dispatch])
 
     React.useEffect(() => {
         dispatch(getUsers(token))
@@ -111,7 +105,6 @@ export default function ReviewTable() {
             overflowX: "hidden",
             overflowY: "auto",
             position: "relative",
-            zIndex: "1",
             overflowScrolling: "touch",
             WebkitOverflowScrolling: "touch",
         }}>

@@ -34,12 +34,18 @@ export const createRating = ({ hotel, user, newRating, token }) => async (dispat
 }
 
 export const createReview = ({ hotel, user, newReview, token }) => async (dispatch) => {
-    try {
-        const data = { ...newReview, hotelId: hotel._id, hotelUserId: hotel.user._id }
-        const res = await postDataAPI('review', data, token)
-        const newReviews = { ...hotel, hotel_reviews: [...hotel.hotel_reviews, res.data.newReview] }
+    const newHotel = { ...hotel, hotel_reviews: [...hotel?.hotel_reviews, newReview] }
 
-        dispatch({ type: REVIEW_TYPES.UPDATE_REVIEW, payload: newReviews })
+    dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: newHotel })
+    try {
+        const data = { ...newReview, hotelId: hotel._id, hotelUserId: hotel?.user?._id }
+
+        const res = await postDataAPI('review', data, token)
+        const newData = { ...res.data.newReview, user }
+
+        const newHotel = { ...hotel, hotel_reviews: [...hotel?.hotel_reviews, newData] }
+
+        dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: newHotel })
         dispatch({
             type: GLOBALTYPES.ALERT,
             payload: { success: res.data.msg }
@@ -95,9 +101,9 @@ export const updateReview = ({ review, token }) => async (dispatch) => {
     }
 }
 
-export const deleteReview = ({review, token} ) => async (dispatch) => {
-    console.log(review,"review")
-    console.log(token,"token")
+export const deleteReview = ({ review, token }) => async (dispatch) => {
+    console.log(review, "review")
+    console.log(token, "token")
     try {
         const res = await deleteDataAPI(`review/${review._id}`, review, token)
         console.log(res.data)
@@ -108,4 +114,4 @@ export const deleteReview = ({review, token} ) => async (dispatch) => {
 }
 
 
-   
+

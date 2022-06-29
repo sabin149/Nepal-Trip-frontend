@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./hotelinfo.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
@@ -13,7 +13,7 @@ import moment from "moment";
 
 const Hotelinfo = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   const { id } = useParams();
 
   const token = localStorage.getItem('token')
@@ -22,7 +22,7 @@ const Hotelinfo = () => {
   const [value, setValue] = React.useState(0);
   const [review, setReview] = React.useState("");
 
-  const hotel = useSelector(state => state?.hotel?.hotels);
+  const { hotel } = useSelector(state => state?.hotel);
   const users = useSelector(state => state?.user?.users);
   const { reviews } = useSelector(state => state?.review);
 
@@ -32,6 +32,7 @@ const Hotelinfo = () => {
 
   useEffect(() => {
     dispatch(getUsers())
+
   }, [dispatch])
 
   useEffect(() => {
@@ -79,17 +80,14 @@ const Hotelinfo = () => {
       dispatch(createReview({ hotel, newReview, user: oneUser, token }))
       dispatch(getHotelReviews({ hotel }))
       setReview("");
-      setValue(0);
     }
   }
 
-  const handleDeleteReview = ({hotelReview}) => {
-    
-    dispatch(deleteReview({ review:hotelReview, token:token }))
+  const handleDeleteReview = ({ hotelReview }) => {
+
+    dispatch(deleteReview({ review: hotelReview, token: token }))
 
   }
-   
-
 
   return (
     <div className="main_content">
@@ -369,16 +367,16 @@ const Hotelinfo = () => {
                       </p>
                     </div>
                     <div className="replysec">
-                    { token&& userID===review?.user?._id?<>
-                      <span className="be-comment-name editsec">
-                        Edit
-                      </span>
-                      <span className="be-comment-name" onClick={()=>{
-                        handleDeleteReview({hotelReview:review})
-                      }}>
-                        Remove
-                      </span></>:
-                      ""
+                      {token && userID === review?.user?._id ? <>
+                        <span className="be-comment-name editsec">
+                          Edit
+                        </span>
+                        <span className="be-comment-name" onClick={() => {
+                          handleDeleteReview({ hotelReview: review })
+                        }}>
+                          Remove
+                        </span></> :
+                        ""
                       }
                     </div>
                   </div>)
@@ -390,6 +388,7 @@ const Hotelinfo = () => {
       </div>
 
     </div>
+
   );
 };
 export default Hotelinfo;

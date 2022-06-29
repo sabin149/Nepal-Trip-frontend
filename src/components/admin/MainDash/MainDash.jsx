@@ -3,11 +3,11 @@ import Cards from "../Cards/Cards";
 import VendorInfoTable from "../Table/VendorInfoTable";
 import "./MainDash.css";
 
-const MainDash = () => {
+const MainDash = ({hotel,token}) => {
   return (
     <div className="MainDash">
-      <Cards />
-      <VendorInfoTable/>
+      <Cards hotel={hotel} token={token} />
+      <VendorInfoTable hotel={hotel} token={token}/>
     </div>
   );
 };
