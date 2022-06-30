@@ -48,10 +48,10 @@ const ViewHotelDetails = ({ hotelDetails }) => {
 
                         <div>
 
-                            <span> <h2 className="text-capitalize">{oneHotel.hotel_name}</h2>
+                           {role==="vendor" && <span> <h2 className="text-capitalize">{oneHotel.hotel_name}</h2>
                                 <button className="btn btn-primary btn-sm float-end" onClick={() => {
                                     navigate(`/editHotelDetails/${oneHotel._id}`, { state: { hotelData: oneHotel } })
-                                }}>Edit Hotel</button></span>
+                                }}>Edit Hotel</button></span>}
 
                             <p className="locationhotel text-capitalize">
                                 {oneHotel.hotel_address}
@@ -124,7 +124,7 @@ const ViewHotelDetails = ({ hotelDetails }) => {
                                 </span>
                             </h3>
                             {/* Price Table of Room */}
-                            <RoomTable hotel={oneHotel} />
+                            <RoomTable hotel={oneHotel} role={role} />
 
                             <div className="my-4">
                             </div>

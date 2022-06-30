@@ -6,7 +6,7 @@ import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
 import RoomTable from "../../components/room/RoomTable";
 import Rating from '@mui/material/Rating'
-import { createReview, deleteReview, getHotelReviews } from "../../redux/actions/reviewAction";
+import { createReview, deleteReview, updateReview } from "../../redux/actions/reviewAction";
 import { getUsers } from "../../redux/actions/userAction"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import moment from "moment";
@@ -22,9 +22,16 @@ const Hotelinfo = () => {
   const [value, setValue] = React.useState(0);
   const [review, setReview] = React.useState("");
 
+  const [isCreating, setIsCreating] = React.useState(false);
+  const [isEdit, setIsEdit] = React.useState(false);
+  const [reviewData, setReviewData] = React.useState({});
+
   const { hotel } = useSelector(state => state?.hotel);
   const users = useSelector(state => state?.user?.users);
-  const { reviews } = useSelector(state => state?.review);
+
+  const reviews = (hotel?.hotel_reviews)
+
+  const newReviews = reviews?.slice()?.reverse();
 
   useEffect(() => {
     dispatch(getHotel({ id }))
@@ -32,16 +39,12 @@ const Hotelinfo = () => {
 
   useEffect(() => {
     dispatch(getUsers())
-
   }, [dispatch])
-
-  useEffect(() => {
-    dispatch(getHotelReviews({ hotel }))
-  }, [dispatch, hotel])
 
   const [readMore, setReadMore] = useState(false)
 
   const oneUser = users && users.filter(user => user._id === userID)[0]
+
 
   const handlePostReview = (e) => {
     e.preventDefault();
@@ -70,23 +73,41 @@ const Hotelinfo = () => {
       return
     }
 
-    if (token && userID) {
-      const newReview = {
-        review,
-        hotel_rating: value,
-        user: oneUser,
-        createdAt: new Date().toISOString(),
+    if(!isEdit)
+      if (token && userID) {
+        const newReview = {
+          review,
+          hotel_rating: value,
+          user: oneUser,
+          createdAt: new Date().toISOString(),
+        }
+        dispatch(createReview({ hotel, newReview, user: oneUser, token }))
+        setReview("");
+        setValue(0);
       }
-      dispatch(createReview({ hotel, newReview, user: oneUser, token }))
-      dispatch(getHotelReviews({ hotel }))
+
+
+    if(isEdit) {
+      const newReview = {
+        review
+        // hotel_rating: value,
+        // user: oneUser,
+        // createdAt: new Date().toISOString(),
+      }
+      dispatch(updateReview({ hotel,review:reviewData, newReview, user: oneUser, token }))
       setReview("");
-    }
+      setValue(0);
+    }  
   }
 
   const handleDeleteReview = ({ hotelReview }) => {
-
-    dispatch(deleteReview({ review: hotelReview, token: token }))
-
+    dispatch(deleteReview({ review: hotelReview, hotel, token: token }))
+  }
+  const handleEditReview = ({hotelReview}) => {
+    setIsEdit(true)
+    setReviewData(hotelReview)
+    setReview(hotelReview.review)
+    setValue(hotelReview.hotel_rating)
   }
 
   return (
@@ -191,8 +212,6 @@ const Hotelinfo = () => {
           </h3>
           {/* Price Table of Room */}
           <RoomTable hotel={hotel} />
-
-
           <div className="segment">
             <h3 className="bold">
               Hotel Amenities
@@ -202,33 +221,26 @@ const Hotelinfo = () => {
               <div className="col"><li>
                 <i className="fa-solid fa-hot-tub-person">
                 </i>
-
                 <span className="amen">24hrs Hot Shower</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-wifi"></i>
-
                 <span className="amen">24hrs Free Wi-Fi</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-smoking">
-
                 </i>
                 <span className="amen">Smoking Area Available</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-car"></i>
-
                 <span className="amen">Transportation Facility</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-money-bill-simple">
                 </i>
-
                 <span className="amen">ATM/cash machine on site</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-broom"></i>
-
                 <span className="amen">Daily housekeeping</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-shirt"></i>
-
                 <span className="amen">Restaurant</span></li></div>
               <div className="col"><li>
                 <i className="fa-solid fa-elevator"></i>
@@ -320,7 +332,7 @@ const Hotelinfo = () => {
                     </div>
                   </div>
                   <div className="float-end mt-2 pt-1">
-                    <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm">Post Review</button>
+                    <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm"> {isEdit?"Update Review":"Post Review"}</button>
                   </div>
                 </div>
               </form></> :
@@ -339,7 +351,7 @@ const Hotelinfo = () => {
                 {/* list of reviews */}
 
                 {
-                  reviews && reviews?.map((review) => <div className="be-comment" key={review._id}>
+                  newReviews && newReviews?.map((review) => <div className="be-comment" key={review._id}>
                     <div className="be-img-comment">
 
                       <img src={review?.user?.avatar} alt="reviewimage" className="be-ava-comment" />
@@ -369,12 +381,12 @@ const Hotelinfo = () => {
                     <div className="replysec">
                       {token && userID === review?.user?._id ? <>
                         <span className="be-comment-name editsec">
-                          Edit
+                          <i className="fa-solid fa-pen-to-square me-1"  onClick={()=>handleEditReview({ hotelReview: review })}/> Edit
                         </span>
                         <span className="be-comment-name" onClick={() => {
                           handleDeleteReview({ hotelReview: review })
                         }}>
-                          Remove
+                          <i className="fa-solid fa-trash me-1 " style={{ cursor: "pointer" }} />  Remove
                         </span></> :
                         ""
                       }

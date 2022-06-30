@@ -6,7 +6,7 @@ import { deleteHotelRoom } from '../../redux/actions/roomAction';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 
-const RoomTable = ({ hotel }) => {
+const RoomTable = ({ hotel, role }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -53,7 +53,7 @@ const RoomTable = ({ hotel }) => {
                                 <th scope="col"> <span className=""> Room Type</span> </th>
                                 <th scope="col">Options</th>
                                 <th scope="col">Price Per Night </th>
-                                <th scope="col">Actions</th>
+                                {role === "vendor" && <th scope="col">Actions</th>}
 
                             </tr>
                         </thead>
@@ -64,11 +64,11 @@ const RoomTable = ({ hotel }) => {
                                     <tr key={room._id}  >
                                         <td className="" rowSpan="1">
                                             <h3 className="color-dark-blue bold pointer" onClick={handleClickOpen({ scrollType: 'body', room })} style={{
-                                                display:"inline-table"
-                                                
+                                                display: "inline-table"
+
                                             }}> {room.room_type}</h3>
                                             <Dialog sx={{
-                                             
+
                                                 backgroundBlendMode: "darken",
                                                 backgroundColor: "rgba(0,0,0,0.1)",
                                                 borderTop: "1px solid rgba(0,0,0,0.1)",
@@ -79,18 +79,18 @@ const RoomTable = ({ hotel }) => {
                                                 aria-labelledby="scroll-dialog-title"
                                                 aria-describedby="scroll-dialog-description"
                                             >
-                                               <div className="room_header">
-                                               <h4 className='mt-3 align-left' style={{
-                                                    color:"black",
-                                                    lineHeight:"1.2em",
-                                                    fontSize: "1.28em",
-                                                
-                                                }}>Room Details</h4>
-                                               </div>
-                                          
+                                                <div className="room_header">
+                                                    <h4 className='mt-3 align-left' style={{
+                                                        color: "black",
+                                                        lineHeight: "1.2em",
+                                                        fontSize: "1.28em",
+
+                                                    }}>Room Details</h4>
+                                                </div>
+
                                                 <h3 className='color-dark-blue' style={{
                                                     marginLeft: "20px",
-                                                    fontWeight:"500",
+                                                    fontWeight: "500",
                                                     fontSize: "2.2rem",
                                                 }}>{selectedRoom?.room_type}</h3>
                                                 <DialogContent dividers={scroll === 'paper'}>
@@ -217,25 +217,25 @@ const RoomTable = ({ hotel }) => {
                                                 <div className="text-center"> <span className="color-green bold text-center">{room.room_price} NPR</span></div>
                                             </div>
                                         </td>
+                                        {role === "vendor" &&
+                                            <td className="d-flex justify-content-around align-content-between mt-5">
+                                                <span onClick={() => {
+                                                    navigate(`/editRoomDetails/${room._id}`, {
+                                                        state: {
+                                                            room
+                                                        }
+                                                    })
+                                                }}>
+                                                    <i className="fa-solid fa-pen-to-square text-success h5" style={{ cursor: "pointer" }}></i>
 
-                                        <td className="d-flex justify-content-around align-content-between mt-5">
-                                            <span onClick={() => {
-                                                navigate(`/editRoomDetails/${room._id}`, {
-                                                    state: {
-                                                        room
-                                                    }
-                                                })
-                                            }}>
-                                                <i className="fa-solid fa-pen-to-square text-success h5" style={{ cursor: "pointer" }}></i>
+                                                </span>
+                                                <span onClick={() => {
+                                                    handleDeleteRoom({ room })
+                                                }}>
+                                                    <i className="fa-solid fa-trash-can text-danger h5" style={{ cursor: "pointer" }}></i>
 
-                                            </span>
-                                            <span onClick={() => {
-                                                handleDeleteRoom({ room })
-                                            }}>
-                                                <i className="fa-solid fa-trash-can text-danger h5" style={{ cursor: "pointer" }}></i>
-
-                                            </span>
-                                        </td>
+                                                </span>
+                                            </td>}
 
                                     </tr>
                                 ))
