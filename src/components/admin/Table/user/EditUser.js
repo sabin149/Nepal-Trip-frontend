@@ -98,18 +98,20 @@ const EditUser = () => {
                         className="form-control" onChange={handleInput} />
                 </div>
 
-                <label htmlFor="gender">Gender</label>
+               <div className="form-group">
+                 <label htmlFor="gender">Gender</label>
                 <div className="input-group px-0 mb-4">
                     <select name="gender" id="gender" value={gender}
-                        className="custom-select text-capitalize"
+                        className="custom-select text-capitalize form-control"
                         onChange={handleInput}>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
+               </div>
 
-                <button className="btn btn-info w-100" type="submit">Save</button>
+                <button className="btn btn-info w-100 text-light" type="submit">Save</button>
             </form>
         </div>
     )

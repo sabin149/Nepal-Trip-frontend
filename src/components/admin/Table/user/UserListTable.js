@@ -6,16 +6,12 @@ import { deleteUser, getUsers } from "../../../../redux/actions/userAction"
 import "../Table.css"
 import { Link, useNavigate } from 'react-router-dom'
 
-
-
-
 const UserListTable = () => {
     const dispatch = useDispatch()
     const { user } = useSelector(state => state)
     const navigate = useNavigate()
 
     const token = localStorage.getItem('token')
-
 
     useEffect(() => {
         dispatch(getUsers(token))
@@ -45,16 +41,14 @@ const UserListTable = () => {
             renderCell: (userData) =>
 
                 <span>
-
-
                     <span className='me-2 btn btn-warning btn-sm' onClick={() => {
-                        console.log(userData.value, "edit")
+                        // console.log(userData.value, "edit")
                         handleChangeRole(userData.value)
                     }}>Change</span>
 
                     <span className='me-2 btn btn-success btn-sm' onClick={() => {
                         // console.log(userData.value, "edit")
-                        navigate("/admin/edituser", { state: { userData: userData.value } })
+                        navigate(`/admin/edituser/${userData.value._id}`, { state: { userData: userData.value } })
 
                     }}>Edit</span>
                     <span className='btn btn-danger btn-sm' onClick={() => {
@@ -86,12 +80,12 @@ const UserListTable = () => {
     }
     const handleChangeRole = ({ user }) => {
         if (window.confirm("Are you sure you want to change this user role?")) {
-            
+
         }
     }
     return (
         <>
-            <span> <Link to="/" className="btn btn-primary btn-sm">Back</Link>  <h2 className='text-center mt-3 '>List of Users</h2></span>
+            <span> <Link to="/" className="btn btn-primary btn-sm">Back</Link>  <h3 className='text-center mt-3 '>List of Users</h3></span>
             <div className="container-md " style={{
             }} >
                 <DataGrid style={{ height: "90vh", width: "100%" }}

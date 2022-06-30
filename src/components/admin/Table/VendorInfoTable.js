@@ -34,7 +34,7 @@ function VendorInfoTable({ hotel, token }) {
   const columns = [
     { field: 'id', headerName: 'SN', width: 65 },
     {
-      field: 'companyName', headerName: 'Company Name', width: 240,
+      field: 'companyName', headerName: 'Hotel Name', width: 240,
       // get cell value
       renderCell: ({ value }) =>
         <>
@@ -53,7 +53,8 @@ function VendorInfoTable({ hotel, token }) {
             <AppBar sx={{ position: 'relative' }}>
               <Toolbar>
 
-                <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                <Typography sx={{ ml: 2, flex: 1, cursor:'pointer' }} variant="h6" component="div" onClick={handleClose}
+                  aria-label="close">
                   Hotel Details
                 </Typography>
                 <IconButton
@@ -94,7 +95,7 @@ function VendorInfoTable({ hotel, token }) {
       id: index + 1,
       companyName: item,
       email: item.hotel_email,
-      registerdAt: moment(item.createdAt).format('YYYY-MM-DD'),
+      registerdAt: moment(item.createdAt).format('MMMM Do YYYY'),
       status: item
     }
   })

@@ -114,8 +114,7 @@ const HotelList = () => {
                   value={sortData}
                   onChange={handleSort}
                 >
-                  <MenuItem value={"-createdAt"}>Newest Hotel </MenuItem>
-                  <MenuItem value={"createdAt"}>Oldest Hotel </MenuItem>
+                  <MenuItem value={"-createdAt"}>Sorting Hotel </MenuItem>
                   <MenuItem value={"-price"}>Price: High to Low</MenuItem>
                   <MenuItem value={"price"}>Price: Low to High</MenuItem>
                 </Select>
@@ -204,7 +203,9 @@ const HotelList = () => {
                             cursor: "pointer",
                           }}
                         >
+                          <span>
                           Price
+                          </span>
                         </span>
                       </div>
                       <div className="col-6">
