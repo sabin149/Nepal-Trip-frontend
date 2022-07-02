@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
-import { getHotels } from '../../../../redux/actions/hotelAction';
 import moment from 'moment';
 import { TextareaAutosize } from '@mui/material';
 import { getReviews } from '../../../../redux/actions/reviewAction';
+import { Link } from 'react-router-dom';
 
 
 const columns = [
@@ -13,7 +13,7 @@ const columns = [
         field: 'hotel',
         headerName: 'Hotel Name',
         sortable: true,
-        width: 180,     
+        width: 180,
     },
     {
         field: 'hotelimage',
@@ -22,7 +22,7 @@ const columns = [
         width: 120,
         filter: false,
         renderCell: (reviewData) => {
-            return <img src={reviewData?.value ? reviewData?.value : ""} alt="avatar" style={{ width: '80px', height: "80px", backgroundColor: "white", }} />
+            return <img src={reviewData?.value ? reviewData?.value : ""} alt="avatar" style={{ width: '100px', height: "80px", backgroundColor: "white", }} />
         }
     },
     {
@@ -46,25 +46,30 @@ const columns = [
         headerName: 'Review',
         width: 400,
         renderCell: (reviewData) => {
-            return  <TextareaAutosize
-            readOnly
-            maxRows={4}
-            aria-label="maximum height"
-            value={reviewData?.value ? reviewData?.value : ""}
-            style={{ width: "400px" , border: "1px solid #ccc", borderRadius: "5px", padding: "10px" }}
-          />
+            return <TextareaAutosize
+                readOnly
+                maxRows={4}
+                aria-label="maximum height"
+                value={reviewData?.value ? reviewData?.value : ""}
+                style={{ width: "400px", border: "1px solid #ccc", borderRadius: "5px", padding: "10px" }}
+            />
         }
     },
     {
         field: 'rating',
         headerName: 'Rating',
         width: 120,
+        renderCell: ({ value }) =>
+            <div>
+                <span style={{ color: '#ffb400', fontSize: '20px' }}>{value}</span>
+                <span style={{ color: '#ffb400', fontSize: '20px' }}>&#9733;</span>
+            </div>
     },
     {
         field: 'createdAt',
         headerName: 'Created At',
         sortable: true,
-        width: 170,
+        width: 220,
     },
 ];
 
@@ -76,24 +81,24 @@ export default function AllReviewsTable() {
     const hotels = useSelector(state => state?.hotel?.hotels)
 
     React.useEffect(() => {
-        dispatch(getReviews({token}))
-    },[dispatch,token])
+        dispatch(getReviews({ token }))
+    }, [dispatch, token])
 
     const reviews = useSelector(state => state?.review?.reviews)
 
 
-const hotelReviews = reviews && reviews.map((item, index) => {
-    return {
-        id: index + 1,
-        hotel: (hotels && hotels?.filter(hotel => hotel?._id === item?.hotelId)[0]?.hotel_name),
-        hotelimage:(hotels && hotels?.filter(hotel => hotel?._id === item?.hotelId)[0]?.hotel_images[0]?.url),
-        review: item.review,
-        rating: item.hotel_rating,
-        user: item.user.fullname,
-        createdAt: moment(item.createdAt).format('YYYY-MM-DD'),
-        avatar: item.user.avatar
-    }
-})
+    const hotelReviews = reviews && reviews.map((item, index) => {
+        return {
+            id: index + 1,
+            hotel: (hotels && hotels?.filter(hotel => hotel?._id === item?.hotelId)[0]?.hotel_name),
+            hotelimage: (hotels && hotels?.filter(hotel => hotel?._id === item?.hotelId)[0]?.hotel_images[0]?.url),
+            review: item.review,
+            rating: item.hotel_rating,
+            user: item.user.fullname,
+            createdAt: moment(item.createdAt).format('MMMM Do YYYY, h:mm:ss a'),
+            avatar: item.user.avatar
+        }
+    })
 
     return (
         <div className="container-fluid-lg mt-1 mx-5" sx={{
@@ -103,14 +108,12 @@ const hotelReviews = reviews && reviews.map((item, index) => {
             alignItems: "center",
             boxShadow: "0px 13px 20px 0px #80808029",
             padding: "20px",
-            overflow: "auto",
-            overflowX: "hidden",
-            overflowY: "auto",
             position: "relative",
             zIndex: "1",
             overflowScrolling: "touch",
             WebkitOverflowScrolling: "touch",
         }}>
+          <Link to="/" style={{ textDecoration: "none" }} className="btn btn-outline-primary btn-sm">Back</Link>
             <h2 className='h3 text-center text-capitalize'>All reviews</h2>
             <hr />
             <div className="review-card">
@@ -118,20 +121,16 @@ const hotelReviews = reviews && reviews.map((item, index) => {
                     <DataGrid
                         sx={{
                             boxShadow: 2,
-                            border: 2,
                             '& .MuiDataGrid-cell:hover': {
                                 color: 'primary.main',
-                                
+
                             },
                             "& .MuiDataGrid-columnHeaderTitle": {
-                                    fontSize: 16,
-                                    letterSpacing: '1px',
-                                    fontWeight: '600',
-                                },
+                                fontSize: 15,
+                                letterSpacing: '1px',
+                                fontWeight: '500',
+                            },
                         }}
-
-
-
                         rowHeight={100}
                         rows={hotelReviews}
                         columns={columns}

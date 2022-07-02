@@ -11,9 +11,8 @@ import { useDispatch } from "react-redux"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes"
 import { Grid } from '@mui/material';
 import useStyles from './homeStyle';
-import { createSearchInfo } from "../../redux/actions/searchInfoAction";
 
-const Home = () => {
+const Home = ({ searchData }) => {
   const classNamees = useStyles();
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -45,7 +44,7 @@ const Home = () => {
     });
   };
 
-  
+
   const searchInfo = {
     search,
     date,
@@ -69,17 +68,12 @@ const Home = () => {
     }
 
     if (res.status === 200) {
-      navigate(`/hotellist?address=${search}&& startDate=${format(date[0].startDate, "yyyy-MM-dd")}&& endDate=${format(date[0].endDate, "yyyy-MM-dd")}&& adult=${options.adult}&& children=${options.children}&& room=${options.room}`
+      navigate(`/hotellist?address=${search}&&startDate=${format(date[0].startDate, "yyyy-MM-dd")}&&endDate=${format(date[0].endDate, "yyyy-MM-dd")}&&adult=${options.adult}&&children=${options.children}&&room=${options.room}`
       )
-
-      dispatch(createSearchInfo({ searchInfo }))
+      searchData(searchInfo)
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
     }
-
-
   }
-
-
   return (
     <>
 
@@ -91,7 +85,7 @@ const Home = () => {
             <h1 className={classNamees.makeStyle} > Make Memories</h1>
             <div className={classNamees.headerSearch}>
               <div className={classNamees.headerSearchItem}>
-              <span className="me-2"></span>
+                <span className="me-2"></span>
                 <i className="fa-solid fa-location-dot "></i>
                 <input value={search} onChange={(e) => setSearch(e.target.value)}
                   type="text"

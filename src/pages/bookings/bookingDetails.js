@@ -6,6 +6,8 @@ import { cancelBooking, getBookings } from "../../redux/actions/bookingAction";
 import Carousel from "../../components/Carousel"
 import { Dialog, DialogContent } from "@mui/material";
 import EditBookingDetails from "../../components/booking/EditBookingDetails";
+import React,{useRef} from 'react';
+import { useReactToPrint } from "react-to-print";
 
 const BookingDetails = () => {
   const dispatch = useDispatch()
@@ -16,6 +18,11 @@ const BookingDetails = () => {
   const [open, setOpen] = useState(false);
   const [editBookingOpen, setEditBookingOpen] = useState(false);
   const [scroll, setScroll] = useState('body');
+
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   const handleRoomClickOpen = (scrollType) => () => {
     setOpen(true);
@@ -45,9 +52,7 @@ const BookingDetails = () => {
    if(window.confirm("Are you sure you want to cancel this booking?")){
       dispatch(cancelBooking({token,id: userBooking[0]._id }))
       navigate("/")
-    
     }
-  
   }
 
   return (
@@ -57,11 +62,9 @@ const BookingDetails = () => {
           <div className="main_content">
             <div className="container pd-top-md">
               <div className="edit-booking-details">
-                <button className="btn btn-primary btn-sm float-lg-end" onClick={handleCancelBooking}>Cancel Booking</button>
+                <button className="btn btn-primary btn-sm float-lg-end me-2" onClick={handleCancelBooking}>Cancel Booking</button>
+                <button className="btn btn-primary btn-sm float-lg-end me-2" onClick={handlePrint} >Print Booking Details</button>
                 <button className="btn btn-primary btn-sm float-lg-end me-2" onClick={handleEditBookingClickOpen("body")}>Edit Booking Details</button>
-
-
-
                 <div className="booking_dialog">
 
                   <Dialog sx={{
@@ -88,7 +91,7 @@ const BookingDetails = () => {
                   </Dialog>
                 </div>
               </div>
-              <div>
+              <div ref={componentRef}>
                 <h2>Booking Date: Wed Jun 15 00:00:00 GMT 2022</h2>
                 <hr></hr>
                 <div className="row">

@@ -32,13 +32,13 @@ export const SidebarData = [
   },
   {
     icon: UilChart,
-    heading: 'Vendors',
-    path: '/vendors',
+    heading: 'Reviews',
+    path: '/admin/reviews',
   },
   {
     icon: UilChart,
-    heading: 'Reviews',
-    path: '/admin/reviews',
+    heading: 'Profile',
+    path: `/user/profile/${localStorage.getItem('userID')}`,
   }
   
 ];

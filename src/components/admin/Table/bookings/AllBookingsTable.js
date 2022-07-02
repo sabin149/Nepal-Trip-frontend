@@ -3,26 +3,54 @@ import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { getBookings } from '../../../../redux/actions/bookingAction';
+import { Link } from 'react-router-dom';
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'id', headerName: 'ID', width: 65 },
     {
         field: 'hotel',
         headerName: 'Hotel Name',
         sortable: true,
-        width: 180,
+        width: 220,
+    },
+    {
+        field: 'hotelimage',
+        headerName: 'Hotel Image',
+        sortable: false,
+        width: 120,
+        filter: false,
+        renderCell: ({ value }) => {
+            return <img src={value ? value : ""} alt="avatar" style={{ width: '100px', height: "80px", backgroundColor: "white", }} />
+        }
     },
     {
         field: 'room',
         headerName: 'Room Type',
         sortable: true,
-        width: 180,
+        width: 120,
+    },
+    {
+        field: 'roomimage',
+        headerName: 'Room Image',
+        sortable: false,
+        width: 120,
+        filter: false,
+        renderCell: ({ value }) => {
+            return <img src={value ? value : ""} alt="avatar" style={{ width: '100px', height: "80px", backgroundColor: "white", }} />
+        }
     },
     {
         field: 'username',
-        headerName: 'User Name',
+        headerName: 'FullName',
         sortable: true,
-        width: 180,
+        width: 200,
+    },
+    {
+        field: 'avatar', headerName: 'Vendor Avatar', width: 140, sortable: false,
+        renderCell: ({ value }) => {
+            return <img src={value ? value : ""} alt="avatar" style={{ width: '80px', height: "80px", backgroundColor: "white", borderRadius: "50%" }} />
+        }
+
     },
     {
         field: "startdate",
@@ -44,12 +72,12 @@ const columns = [
     }, {
         field: "totalamount",
         headerName: 'Total Amount',
-        width: 180,
+        width: 150,
         sortable: true,
     }, {
         field: "paymenttype",
         headerName: 'Payment Type',
-        width: 220,
+        width: 150,
         sortable: true,
     }
 ];
@@ -70,8 +98,11 @@ export default function AllBookingsTable() {
         return {
             id: index+1,
             hotel: booking.hotel.hotel_name,
+            hotelimage: booking.hotel.hotel_images[0].url,
             room: booking.room.room_type,
+            roomimage: booking.room.room_images[0].url,
             username: booking.name,
+            avatar: booking.user.avatar,
             startdate: booking.start_date,
             enddate: booking.end_date,
             totalamount: "Rs "+booking.total_amount,
@@ -94,26 +125,25 @@ export default function AllBookingsTable() {
             overflowScrolling: "touch",
             WebkitOverflowScrolling: "touch",
         }}>
-            <h2 className='h3 text-center text-capitalize'>All Bookings</h2>
+            <span> <Link to="/" className="btn btn-primary btn-sm">Back</Link>  <h3 className='text-center m-auto '>All Bookings</h3></span>
             <hr />
             <div className="review-card">
                 <div style={{ height: "86vh", width: '100%' }}>
                     <DataGrid
                         sx={{
                             boxShadow: 2,
-                            border: 2,
                             '& .MuiDataGrid-cell:hover': {
                                 color: 'primary.main',
 
                             },
                             "& .MuiDataGrid-columnHeaderTitle": {
-                                fontSize: 16,
+                                fontSize: 15,
                                 letterSpacing: '1px',
-                                fontWeight: '600',
+                                fontWeight: '500',
                             },
                         }}
 
-                        rowHeight={50}
+                        rowHeight={100}
                         rows={bookingsData}
                         columns={columns}
                         pageSize={10}

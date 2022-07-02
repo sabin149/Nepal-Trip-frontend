@@ -1,90 +1,129 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { checkImage } from '../../utils/imageUpload'
+import { useDispatch, useSelector } from 'react-redux'
+import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import "./profile.css"
+import { getUser, updateUserProfile } from '../../redux/actions/userAction';
+import { useParams } from 'react-router-dom'
 
-const Profile = () => {
-  return (
-    <>
-    <div className='col-4 bg-dark'>
-        <h3>hello 1</h3>
-    </div>
+const Profile = ({ token }) => {
+    const dispatch = useDispatch()
+    const { id } = useParams()
+    const initialState = ({
+        fullname: "",
+        username: "",
+        address: "",
+        phone: "",
+        gender: ""
+    })
+    const [userData, setUserData] = useState(initialState)
+    const { fullname, username, address, phone, gender } = userData
 
-     <div className="card user-profile m-auto">
-        <div className="card-body">
-          <div className="mt-2 text-center profile">
-            <h3 style={{ textDecoration:"underline" }}>Profile</h3>
+    const [avatar, setAvatar] = useState("");
 
-            <div className="col-md-4 d-block m-auto mt-4 mb-4 img-holder">
-              <img
-              className="rounded-circle"
-                src="https://celebmezzo.com/wp-content/uploads/2020/05/Rajesh-Hamal.jpg"
-                alt="Profile_Image"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  
-                }}
-              />
-            </div>
+    const { user } = useSelector(state => state?.user)
 
-            <div className="profile-input">
-              <div>
-                <input className="name mb-4" placeholder="FullName"></input>
-              </div>
+    useEffect(() => {
+        dispatch(getUser({ id, token }))
+    }, [dispatch, token, id])
 
-              <div>
-                <input className="name mb-4" placeholder="UserName"></input>
-              </div>
+    useEffect(() => {
+        setUserData(user)
+    }, [user])
 
-              <div>
-                <input className="name mb-4" placeholder="Email"></input>
-              </div>
+    const handleInput = e => {
+        const { name, value } = e.target
+        setUserData({ ...userData, [name]: value })
+    }
+    const changeAvatar = (e) => {
+        const file = e.target.files[0]
 
-              <div>
-                <input className="name mb-4" placeholder="Contact"></input>
-              </div>
-            </div>
+        const err = checkImage(file)
+        if (err) return dispatch({
+            type: GLOBALTYPES.ALERT, payload: { error: err }
+        })
+        setAvatar(file)
+    }
+    const handleSubmit = e => {
+        e.preventDefault();
+        dispatch(updateUserProfile({ userData, id, avatar, token, defaultAvatar: user.avatar }))
+    }
+    return (
+        <>
+            <div className="edit_user_profile"> <form onSubmit={handleSubmit}>
+                <div className="card user-profile m-auto mt-3">
+                    <div className="card-body">
+                        <div className="profile">
 
-            <div className=" d-flex m-auto col-md-4">
-              <label htmlFor="male" className="radio-label">
-                Male:{" "}
-                <input
-                  className="radio"
-                  type="radio"
-                  id="male"
-                  name="gender"
-                  value="male"
-                  defaultChecked
-                />
-              </label>
-              <label htmlFor="female" className="radio-label">
-                Female:{" "}
-                <input
-                  className="radio"
-                  type="radio"
-                  id="female"
-                  name="gender"
-                  value="female"
-                />
-              </label>
-              <label htmlFor="other" className="radio-label">
-                Other:{" "}
-                <input
-                  className="radio"
-                  type="radio"
-                  id="other"
-                  name="gender"
-                  value="other"
-                />
-              </label>
-            </div>
-            <button type="submit" className="btn btn-warning mt-3 mb-3">
-              Register
-            </button>
-          </div>
-        </div>
-      </div></>
-  )
+                            <div className="info_avatar">
+                                <img src={avatar ? URL?.createObjectURL(avatar) : user?.avatar}
+                                    alt="avatar" />
+                                <span>
+                                    <i className="fas fa-camera" />
+                                    <p>Change</p>
+                                    <input type="file" name="file" id="file_up"
+                                        accept="image/*" onChange={changeAvatar} />
+                                </span>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="fullname2">FullName</label>
+                                <div className="position-relative">
+                                    <input type="text" className="form-control"
+                                        name="fullname" value={fullname} onChange={handleInput} />
+                                    <small className="text-danger position-absolute"
+                                        style={{ top: '50%', right: '5px', transform: 'translateY(-50%)' }}>
+                                        {fullname?.length}/25
+                                    </small>
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="username2">UserName</label>
+                                <div className="position-relative">
+                                    <input type="text" className="form-control"
+                                        name="username" value={username} onChange={handleInput} />
+                                    <small className="text-danger position-absolute"
+                                        style={{ top: '50%', right: '5px', transform: 'translateY(-50%)' }}>
+                                        {username?.length}/25
+                                    </small>
+                                </div>
+                            </div>
+
+
+                            <div className="form-group">
+                                <label htmlFor="phone">Phone</label>
+                                <input type="text" name="phone" value={phone}
+                                    className="form-control" onChange={handleInput} />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="address">Address</label>
+                                <input type="text" name="address" value={address}
+                                    className="form-control" onChange={handleInput} />
+                            </div>
+
+                            <div className="form-group">
+                                <label htmlFor="gender">Gender</label>
+                                <div className="input-group px-0 mb-4">
+                                    <select name="gender" id="gender" value={gender}
+                                        className="custom-select text-capitalize form-control"
+                                        onChange={handleInput}>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <button className="btn btn-info w-100 text-light" type="submit">Save</button>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div></>
+    )
 }
 
 export default Profile
