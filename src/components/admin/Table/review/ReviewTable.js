@@ -5,6 +5,7 @@ import moment from 'moment';
 import { TextareaAutosize } from '@mui/material';
 import { getReviews } from '../../../../redux/actions/reviewAction';
 import { Link } from 'react-router-dom';
+import {CustomToolbar,CustomPagination} from '../../../CustomFunction'
 
 
 const columns = [
@@ -138,6 +139,12 @@ export default function AllReviewsTable() {
                         rowsPerPageOptions={[5]}
                         checkboxSelection
                         disableSelectionOnClick
+                        pagination
+                        components={{
+                        Toolbar: CustomToolbar,
+                        Pagination: CustomPagination,
+                    }}
+
                     />
                 </div>
             </div>

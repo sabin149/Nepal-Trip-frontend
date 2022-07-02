@@ -22,7 +22,7 @@ export const createBooking = (booking,navigate,token) => async (dispatch) => {
                 success: res.data.msg
             }
         })
-        navigate('/bookings')
+        navigate('/user/bookings')
     } catch (error) {
         dispatch({
             type: GLOBALTYPES.ALERT,

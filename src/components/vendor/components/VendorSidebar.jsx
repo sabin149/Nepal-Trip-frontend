@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { logout } from "../../../redux/actions/authAction";
 import { useDispatch } from "react-redux";
 
-const Sidebar = () => {
+const Sidebar = ({hotel, token,booking}) => {
 
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(0);

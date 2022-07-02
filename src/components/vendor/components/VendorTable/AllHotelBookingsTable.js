@@ -2,28 +2,12 @@ import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
-import { getBookings } from '../../../../redux/actions/bookingAction';
+import { getBookingsByHotel } from '../../../../redux/actions/bookingAction';
 import { Link } from 'react-router-dom';
-import {CustomToolbar,CustomPagination} from "../../../CustomFunction"
+import { CustomToolbar, CustomPagination } from "../../../CustomFunction"
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 65 },
-    {
-        field: 'hotel',
-        headerName: 'Hotel Name',
-        sortable: true,
-        width: 220,
-    },
-    {
-        field: 'hotelimage',
-        headerName: 'Hotel Image',
-        sortable: false,
-        width: 120,
-        filter: false,
-        renderCell: ({ value }) => {
-            return <img src={value ? value : ""} alt="avatar" style={{ width: '100px', height: "80px", backgroundColor: "white", }} />
-        }
-    },
     {
         field: 'room',
         headerName: 'Room Type',
@@ -47,11 +31,16 @@ const columns = [
         width: 200,
     },
     {
+        field: 'email',
+        headerName: 'Email',
+        sortable: true,
+        width: 280,
+    },
+    {
         field: 'avatar', headerName: 'Vendor Avatar', width: 140, sortable: false,
         renderCell: ({ value }) => {
             return <img src={value ? value : ""} alt="avatar" style={{ width: '80px', height: "80px", backgroundColor: "white", borderRadius: "50%" }} />
         }
-
     },
     {
         field: "startdate",
@@ -83,31 +72,31 @@ const columns = [
     }
 ];
 
-
-export default function AllBookingsTable() {
-
+export default function AllHotelBookingsTable() {
     const dispatch = useDispatch();
-    const token = localStorage.getItem('token');
 
-    const bookings = useSelector(state => state?.booking?.bookings)
+    const { hotel, booking } = useSelector(state => state)
+    const token = localStorage.getItem('token')
+    const userID = localStorage.getItem('userID')
+
+    const hotelId = hotel && hotel?.hotels && hotel?.hotels.filter(hotel => hotel?.user?._id === userID)[0]?._id;
 
     React.useEffect(() => {
-        dispatch(getBookings({ token }))
-    }, [dispatch, token])
+        dispatch(getBookingsByHotel({ hotelId, token }));
+    }, [dispatch, hotelId, token])
 
-    const bookingsData= bookings.map((booking,index) => {
+    const bookingsData = booking?.bookings && booking?.bookings?.map((data, index) => {
         return {
-            id: index+1,
-            hotel: booking.hotel.hotel_name,
-            hotelimage: booking.hotel.hotel_images[0].url,
-            room: booking.room.room_type,
-            roomimage: booking.room.room_images[0].url,
-            username: booking.name,
-            avatar: booking.user.avatar,
-            startdate: booking.start_date,
-            enddate: booking.end_date,
-            totalamount: "Rs "+booking.total_amount,
-            paymenttype: booking.payment_type
+            id: index + 1,
+            room: data.room.room_type,
+            roomimage: data.room.room_images[0].url,
+            username: data.name,
+            email: data.email,
+            avatar: data.user.avatar,
+            startdate: data.start_date,
+            enddate: data.end_date,
+            totalamount: "Rs " + data.total_amount,
+            paymenttype: data.payment_type
         }
     })
 
@@ -126,7 +115,9 @@ export default function AllBookingsTable() {
             overflowScrolling: "touch",
             WebkitOverflowScrolling: "touch",
         }}>
-            <span> <Link to="/" className="btn btn-primary btn-sm">Back</Link>  <h3 className='text-center m-auto '>All Bookings</h3></span>
+            <Link to="/" className="btn btn-outline-primary btn-sm">Back to Home
+            </Link>
+            <h3 className='text-center m-auto text-capitalize'>All {booking?.bookings[0]?.hotel?.hotel_name} Bookings</h3>
             <hr />
             <div className="review-card">
                 <div style={{ height: "86vh", width: '100%' }}>
@@ -153,9 +144,9 @@ export default function AllBookingsTable() {
                         disableSelectionOnClick
                         pagination
                         components={{
-                        Toolbar: CustomToolbar,
-                        Pagination: CustomPagination,
-                    }}
+                            Toolbar: CustomToolbar,
+                            Pagination: CustomPagination,
+                        }}
                     />
                 </div>
             </div>
