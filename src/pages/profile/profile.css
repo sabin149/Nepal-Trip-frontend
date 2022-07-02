@@ -1,12 +1,11 @@
 .user-profile{
     background-color: #fff;
     width: 30%;
-    /* border-radius: 15px; */
     box-shadow: 0 2px 4px 0 rgb(0 0 0 / 50%);
     
 }
 
-.profile-input .name{
+/* .profile-input .name{
     margin: 0;
     width: 50%;
     -webkit-box-flex: 1;
@@ -23,8 +22,8 @@
     -webkit-transition: box-shadow .1s ease,border-color .1s ease;
     transition: box-shadow .1s ease,border-color .1s ease;
     box-shadow:0 2px 4px 0 rgb(0 0 0 / 50%);;
-}
-
+} */
+/* 
 .radio{
     margin-right: 15px;
     height: 40%;
@@ -34,4 +33,47 @@
 
 .radio-label{
     font-size: 18px;
+} */
+.edit_user_profile .info_avatar{
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+    margin: 15px auto;
+    border: 1px solid #ddd;
+    cursor: pointer;
 }
+.edit_user_profile .info_avatar img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+.edit_user_profile .info_avatar span{
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    text-align: center;
+    color: orange;
+    transition: 0.3s ease-in-out;
+    background: #fff5;
+}
+.edit_user_profile .info_avatar:hover span{
+    bottom: -15%;
+}
+.edit_user_profile .info_avatar #file_up{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    opacity: 0;
+}
+::-webkit-file-upload-button{
+    cursor: pointer;
+}
+ 

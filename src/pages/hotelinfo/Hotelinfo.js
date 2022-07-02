@@ -10,6 +10,9 @@ import { createReview, deleteReview, updateReview } from "../../redux/actions/re
 import { getUsers } from "../../redux/actions/userAction"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import moment from "moment";
+import ShareModal from "../../components/ShareModal";
+import { Paper } from "@mui/material";
+import { Grid } from "@material-ui/core";
 
 const Hotelinfo = () => {
   const dispatch = useDispatch();
@@ -21,8 +24,8 @@ const Hotelinfo = () => {
 
   const [value, setValue] = React.useState(0);
   const [review, setReview] = React.useState("");
+  const [isShare, setIsShare] = useState(false)
 
-  const [isCreating, setIsCreating] = React.useState(false);
   const [isEdit, setIsEdit] = React.useState(false);
   const [reviewData, setReviewData] = React.useState({});
 
@@ -44,7 +47,6 @@ const Hotelinfo = () => {
   const [readMore, setReadMore] = useState(false)
 
   const oneUser = users && users.filter(user => user._id === userID)[0]
-
 
   const handlePostReview = (e) => {
     e.preventDefault();
@@ -73,7 +75,7 @@ const Hotelinfo = () => {
       return
     }
 
-    if(!isEdit)
+    if (!isEdit)
       if (token && userID) {
         const newReview = {
           review,
@@ -87,29 +89,27 @@ const Hotelinfo = () => {
       }
 
 
-    if(isEdit) {
+    if (isEdit) {
       const newReview = {
         review
         // hotel_rating: value,
         // user: oneUser,
         // createdAt: new Date().toISOString(),
       }
-      dispatch(updateReview({ hotel,review:reviewData, newReview, user: oneUser, token }))
+      dispatch(updateReview({ hotel, review: reviewData, newReview, user: oneUser, token }))
       setReview("");
       setValue(0);
-    }  
+    }
   }
-
   const handleDeleteReview = ({ hotelReview }) => {
     dispatch(deleteReview({ review: hotelReview, hotel, token: token }))
   }
-  const handleEditReview = ({hotelReview}) => {
+  const handleEditReview = ({ hotelReview }) => {
     setIsEdit(true)
     setReviewData(hotelReview)
     setReview(hotelReview.review)
     setValue(hotelReview.hotel_rating)
   }
-
   return (
     <div className="main_content">
       <div className="second-nav d-flex">
@@ -132,6 +132,22 @@ const Hotelinfo = () => {
           <Link to="">
             <span>Hotel Policies</span>
           </Link>
+        </div>
+        <div className="Item">
+          <button onClick={() => setIsShare(!isShare)} className="btn btn-outline-primary btn-sm " style={{
+            marginBlock:"initial"
+          }}>
+            Share
+          </button>
+          {
+            isShare && <Paper>
+              <Grid container spacing={3}>
+                <Grid item xs={2} md={2} sm={2}>
+                <ShareModal url={"https://nepaltrip.herokuapp.com"} />
+                </Grid>
+              </Grid>
+            </Paper>
+          }
         </div>
       </div>
       <span> </span>
@@ -332,7 +348,7 @@ const Hotelinfo = () => {
                     </div>
                   </div>
                   <div className="float-end mt-2 pt-1">
-                    <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm"> {isEdit?"Update Review":"Post Review"}</button>
+                    <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm"> {isEdit ? "Update Review" : "Post Review"}</button>
                   </div>
                 </div>
               </form></> :
@@ -381,7 +397,7 @@ const Hotelinfo = () => {
                     <div className="replysec">
                       {token && userID === review?.user?._id ? <>
                         <span className="be-comment-name editsec">
-                          <i className="fa-solid fa-pen-to-square me-1"  onClick={()=>handleEditReview({ hotelReview: review })}/> Edit
+                          <i className="fa-solid fa-pen-to-square me-1" onClick={() => handleEditReview({ hotelReview: review })} /> Edit
                         </span>
                         <span className="be-comment-name" onClick={() => {
                           handleDeleteReview({ hotelReview: review })

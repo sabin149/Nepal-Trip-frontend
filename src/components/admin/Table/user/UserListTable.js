@@ -17,31 +17,43 @@ const UserListTable = () => {
         dispatch(getUsers(token))
     }, [token, dispatch])
 
-
-
     const columns = [
-        { field: 'id', headerName: 'SN', width: 90 },
-        { field: 'fullname', headerName: 'FullName', width: 190 },
+        { field: 'id', headerName: 'SN', width: 65 },
+        { field: 'fullname', headerName: 'FullName', width: 250 },
         {
-            field: 'username', headerName: 'UserName', type: 'string', width: 160,
+            field: 'username', headerName: 'UserName', type: 'string', width: 250,
         },
         {
-            field: 'address', headerName: 'Address', type: 'string', width: 170, align: 'center',
+            field: "avatar",
+            headerName: 'Avatar',
+            width: 120,
+            sortable: false,
+            filter: false,
+            renderCell: ({ value }) => {
+                return <img src={value ? value : ""} alt="avatar" style={{ width: '80px', height: "80px", backgroundColor: "white", borderRadius: "50%" }} />
+            }
+        },
+
+        {
+            field: 'email', headerName: 'Email', type: 'string', width: 300,
+        },
+        {
+            field: 'address', headerName: 'Address', type: 'string', width: 180, align: 'center',
         },
         {
             field: 'phone', headerName: 'Phone', type: 'string', width: 120, align: 'center',
         },
 
-        { field: 'registerdAt', headerName: 'Registered At', width: 160, align: 'center' },
+        { field: 'registerdAt', headerName: 'Registered At', width: 220, align: 'center' },
         {
-            field: 'role', headerName: 'Role', width: 100
+            field: 'role', headerName: 'Role', width: 80
         },
         {
-            field: "action", headerName: "Action", width: 240, sortable: false, align: "center",
+            field: "action", headerName: "Action", width: 220, sortable: false, align: "center",
             renderCell: (userData) =>
 
                 <span>
-                    <span className='me-2 btn btn-warning btn-sm' onClick={() => {
+                    <span className='me-2 btn btn-warning btn-sm text-light' onClick={() => {
                         // console.log(userData.value, "edit")
                         handleChangeRole(userData.value)
                     }}>Change</span>
@@ -64,9 +76,11 @@ const UserListTable = () => {
             id: index + 1,
             fullname: item.fullname,
             username: item.username,
-            address: item.address ? item.address : 'N/A',
+            avatar: item.avatar,
+            email: item.email,
+            address: item.address ? item.address + ", Nepal" : 'N/A',
             phone: item.phone,
-            registerdAt: moment(item.createdAt).format('YYYY-MM-DD'),
+            registerdAt: moment(item.createdAt).format('MMMM Do YYYY, h:mm:ss a'),
             role: item.role,
             action: item
 
@@ -85,15 +99,29 @@ const UserListTable = () => {
     }
     return (
         <>
-            <span> <Link to="/" className="btn btn-primary btn-sm">Back</Link>  <h3 className='text-center mt-3 '>List of Users</h3></span>
-            <div className="container-md " style={{
+            <span> <Link to="/" className="btn btn-primary btn-sm">Back</Link>  <h3 className='text-center mt-1 '>List of Users</h3></span>
+            <div className="container-fluid" style={{
             }} >
                 <DataGrid style={{ height: "90vh", width: "100%" }}
+                    sx={{
+                        boxShadow: 2,
+                        '& .MuiDataGrid-cell:hover': {
+                            color: 'primary.main',
+                            cursor: 'pointer',
+
+                        },
+                        "& .MuiDataGrid-columnHeaderTitle": {
+                            fontSize: 15,
+                            letterSpacing: '0.5px',
+                            fontWeight: '500',
+                        },
+                    }}
                     rows={userList}
                     columns={columns}
                     pageSize={10}
                     rowsPerPageOptions={[10]}
                     checkboxSelection
+                    rowHeight={100}
                 />
             </div>
         </>
