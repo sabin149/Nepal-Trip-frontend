@@ -65,9 +65,7 @@ h5{
 .pd-top-md{
   padding-top: 80px;
 }
-.container{
-  /* width: 1127px; */
-}
+
 h2{
  color:#003c75 ; 
  font-size: 18px;
@@ -82,13 +80,13 @@ p.locationhotel{
 h3.bold{
   font-family: "Poppins",sans-serif;
   color:#003c75 ;
-  font-size: 16px;
-  font-weight: 550;
+  font-size: 14px;
+  font-weight: 500;
   padding-top: 30px;
 }
 h4{
   color:#003c75 ; 
-  font-size: 14px;
+  font-size: 13px;
   font-family: "Poppins",sans-serif;
   font-weight: 599;
 }
