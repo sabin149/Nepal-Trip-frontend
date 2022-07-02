@@ -70,7 +70,7 @@ const HotelList = () => {
 
   return (
     <>
-      <SearchHeader/>
+      <SearchHeader />
       <div className="container">
         <div className="row mt-4 mx-auto">
           <div className="col-lg-3">
@@ -244,17 +244,103 @@ const HotelList = () => {
                           className="icn-holder"
                           style={{ cursor: "pointer" }}
                         >
-                          {hotel.hotel_facilities.map((facility, index) => (
-                            <span key={index}>
-                              {facility === "good" && (
-                                <i className="fa-solid fa-wifi"></i>
+                          {hotel.hotel_facilities.slice(0,7).map((facility, index) => (
+                            <span key={index} className="mx-1" style={{
+                              borderRadius: "50%",
+                              padding: "10px",
+                              fontSize: "12px",
+                              border: "1px solid grey",
+                            }}>
+                              {(facility === "freewifi")&& (
+                                <i className="h3 fa-solid fa-wifi" />
                               )}
-                              {facility !== "good" && (
-                                <i className="fa-solid fa-bed"></i>
+                              {facility === "tours" && (
+                                <i className="h3 fa-solid fa-camera" />
                               )}
-                              {facility}
+                              {facility === "bar" && (
+                                <i className="h3 fa-solid fa-cocktail" />
+                              )}
+                              {facility === "restaurant" && (
+                                <i className="h3 fa-solid fa-utensils" />
+                              )}
+                              {facility === "pool" && (
+                                <i className="h3 fa-solid fa-swimmer" />
+                              )}
+                              {facility === "gym" && (
+                                <i className="h3 fa-solid fa-dumbbell" />
+                              )}
+                              {facility === "parking" && (
+                                <i className="h3 fa-solid fa-car-park" />
+                              )}
+                              {facility === "airporttransfer" && (
+                                <i className="h3 fa-solid fa-plane-departure" />
+                              )}
+                              {facility === "breakfast" && (
+                                <i className="h3 fa-solid fa-bowl-spoon" />
+                              )}
+                              {facility === "lunch" && (
+                                <i className="h3 fa-solid fa-plate-utensils" />
+                              )}
+                              {facility === "dinner" && (
+                                <i className="h3 fa-solid fa-fork-knife" />
+                              )}
+                              {facility === "capservice" && (
+                                <i className="h3 fa-solid fa-headset" />
+                              )}
+                              {facility === "34hrroomservice" && (
+                                <i className="h3 fa-solid fa-clock" />
+                              )}
+                              {facility === "childbed" && (
+                                <i className="h3 fa-solid fa-child" />
+                              )}
+                              {facility === "laundary" && (
+                                <i className="h3 fa-solid fa-laundry" />
+                              )}
+                              {facility === "ticketservice" && (
+                                <i className="h3 fa-solid fa-ticket-alt" />
+                              )}
+                              {facility === "medical" && (
+                                <i className="h3 fa-solid fa-hospital" />
+                              )}
+                              {facility === "coffee" && (
+                                <i className="h3 fa-solid fa-coffee" />
+                              )}
+                              {facility === "security" && (
+                                <i className="h3 fa-solid fa-shield-alt" />
+                              )}
+                              {facility === "taxiservice" && (
+                                <i className="h3 fa-solid fa-taxi" />
+                              )}
+                              {facility === "luggage" && (
+                                <i className=" fa-solid fa-suitcase" />
+                              )}
+                              {facility === "wheelchair" && (
+                            <i className=" fa-solid fa-wheelchair" />
+                          )}
+                          {facility === "airconditioning" && (
+                            <i className=" fa-solid fa-snowflake" />
+                          )}
+                          {facility === "smoking" && (
+                            <i className=" fa-solid fa-smoking" />
+                          )}
+                          {facility === "pets" && (
+                            <i className=" fa-solid fa-dog" />
+                          )}                            
+                          {facility === "atm" && (
+                            <i className=" fa-solid fa-atm" />
+                          )}
+                          {facility === "bank" && (
+                            <i className=" fa-solid fa-bank" />
+                          )}
+                          {facility === "housekeeping" && (
+                            <i className=" fa-solid fa-bed" />
+                          )}
+                          {facility === "elevator" && (
+                            <i className=" fa-solid fa-elevator" />
+                          )}
                             </span>
-                          ))}
+                          )
+                          )}
                         </div>
                       </div>
                       <div className="col">

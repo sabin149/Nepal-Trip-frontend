@@ -5,10 +5,12 @@ import moment from "moment"
 import { approveHotel } from '../../../redux/actions/hotelAction';
 import ViewHotelDetails from '../../vendor/ViewHotelDetails';
 import { AppBar, Dialog, IconButton, Slide, Toolbar, Typography } from '@mui/material';
+import { CustomPagination,QuickSearchToolbar } from '../../CustomFunction';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+
 
 function VendorInfoTable({ hotel, token }) {
 
@@ -53,7 +55,7 @@ function VendorInfoTable({ hotel, token }) {
             <AppBar sx={{ position: 'relative' }}>
               <Toolbar>
 
-                <Typography sx={{ ml: 2, flex: 1, cursor:'pointer' }} variant="h6" component="div" onClick={handleClose}
+                <Typography sx={{ ml: 2, flex: 1, cursor: 'pointer' }} variant="h6" component="div" onClick={handleClose}
                   aria-label="close">
                   Hotel Details
                 </Typography>
@@ -104,16 +106,21 @@ function VendorInfoTable({ hotel, token }) {
     <div style={{ minHeight: 534, width: '100%' }}>
       <DataGrid
 
-      sx={{
-        cursor: 'pointer',
+        sx={{
+          cursor: 'pointer',
 
-      }}
+        }}
         rows={hotelList}
         columns={columns}
         pageSize={10}
-        rowsPerPageOptions={[10]}
         checkboxSelection
         disableSelectionOnClick
+        components={
+          {
+            Pagination: CustomPagination,
+            Toolbar: QuickSearchToolbar,
+          }
+        }  
       />
     </div>
   );
