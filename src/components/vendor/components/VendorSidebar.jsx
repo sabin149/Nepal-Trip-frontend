@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Sidebar.css";
 import Logo from "../imgs/Logo.svg";
-import { SidebarData } from "../VendorData/Data";
+import { SidebarData } from "../VendorData/VendorData";
 import { UilBars } from "@iconscout/react-unicons";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -9,28 +9,32 @@ import { logout } from "../../../redux/actions/authAction";
 import { useDispatch } from "react-redux";
 
 const Sidebar = () => {
-
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(0);
 
-  const [expanded, setExpaned] = useState(true)
+  const [expanded, setExpaned] = useState(true);
 
   const sidebarVariants = {
     true: {
-      left: '0'
+      left: "0",
     },
     false: {
-      left: '-60%'
-    }
-  }
+      left: "-60%",
+    },
+  };
   return (
     <>
-      <div className="bars" style={expanded ? { left: '60%' } : { left: '5%' }} onClick={() => setExpaned(!expanded)}>
+      <div
+        className="bars"
+        style={expanded ? { left: "60%" } : { left: "5%" }}
+        onClick={() => setExpaned(!expanded)}
+      >
         <UilBars />
       </div>
-      <motion.div className='sidebar'
+      <motion.div
+        className="sidebar"
         variants={sidebarVariants}
-        animate={window.innerWidth <= 768 ? `${expanded}` : ''}
+        animate={window.innerWidth <= 768 ? `${expanded}` : ""}
       >
         {/* logo */}
         <div className="logo">
@@ -40,7 +44,6 @@ const Sidebar = () => {
         <div className="menu">
           {SidebarData.map((item, index) => {
             return (
-
               <div
                 className={selected === index ? "menuItem active" : "menuItem"}
                 key={index}
@@ -50,23 +53,23 @@ const Sidebar = () => {
                   <item.icon />
                   <span>{item.heading}</span>
                 </Link>
-
               </div>
             );
           })}
           {/* signoutIcon */}
           <div className="menuItem">
-            <Link to="/"
+            <Link
+              to="/"
               onClick={() => {
-                if (window.confirm('Are you sure you want to logout?')) {
-                  dispatch(logout())
+                if (window.confirm("Are you sure you want to logout?")) {
+                  dispatch(logout());
                 }
-
               }}
-
             >
-              <i className="fa-solid fa-right-from-bracket" style={{ fontSize: "1.5rem" }}></i>
-       
+              <i
+                className="fa-solid fa-right-from-bracket"
+                style={{ fontSize: "1.5rem" }}
+              ></i>
             </Link>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import "./Cards.css";
-import { cardsData } from "../../VendorData/Data";
+import { cardsData } from "../../VendorData/VendorData";
 
 import Card from "../VendorCard/Card";
 
