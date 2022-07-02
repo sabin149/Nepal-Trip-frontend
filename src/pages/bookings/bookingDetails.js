@@ -171,10 +171,14 @@ const BookingDetails = () => {
                       Your payment will be handled by Hotel: {hotelDetails[0]?.hotel_name}
                     </h3>
                     <hr />
-                    <br />
-                    Total amount to be paid is:<br></br>
+                    
+                    <h3 className="policy">
+                    Total amount to be paid is:
+                    <br></br>
                     {userBooking[0]?.total_amount} NPR
                     <hr></hr>
+                    </h3>
+                    
                   </div>
                   <div className="col-sm-9 abouthotel">
                     <div className="pd-all-sm "></div>
@@ -380,7 +384,7 @@ const BookingDetails = () => {
                     </table>
                   </div>
                 </div>
-                <div className="row">
+                {/* <div className="row">
                   <div className="col-sm-6 ">
                     <h4>Total Price:</h4>
                   </div>
@@ -391,7 +395,7 @@ const BookingDetails = () => {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div className="my-4"></div>
                 <div className="segment">
                   <h3 className="">Hotel Policies:</h3>

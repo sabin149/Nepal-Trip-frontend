@@ -4,8 +4,11 @@ import {
   UilClipboardAlt,
   UilUsersAlt,
   UilHome,
+  UilBuilding,
   UilChart,
   UilComment,
+  UilUserCircle,
+  // UilProfile
 } from "@iconscout/react-unicons";
 
 // Sidebar Data
@@ -26,7 +29,7 @@ export const SidebarData = [
     path: "/users",
   },
   {
-    icon: UilHome,
+    icon: UilBuilding,
     heading: 'Hotels',
     path: '/vendors',
   },
@@ -36,7 +39,9 @@ export const SidebarData = [
     path: '/admin/reviews',
   },
   {
-    icon: UilChart,
+    icon: UilUserCircle,
+    //  icon: UilProfile,
+    
     heading: 'Profile',
     path: `/user/profile/${localStorage.getItem('userID')}`,
   }

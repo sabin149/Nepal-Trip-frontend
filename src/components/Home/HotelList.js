@@ -118,7 +118,7 @@ const HotelList = () => {
               </Select>
               <Button
                 variant="contained"
-                color="primary"
+                color="warning"
                 className="mt-3"
                 onClick={handleFilter}
               >
@@ -353,7 +353,7 @@ const HotelList = () => {
                           </span>
                         </div>
                         <button
-                          className="button btn btn-primary"
+                          className="button btn btn-warning"
                           onClick={() => {
                             navigate(`/hotelinfo/${hotel._id}`);
                           }}
