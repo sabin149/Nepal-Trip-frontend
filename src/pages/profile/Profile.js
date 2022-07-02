@@ -114,7 +114,7 @@ const Profile = ({ token }) => {
                                 </div>
                             </div>
 
-                            <button className="btn btn-info w-100 text-light" type="submit">Save</button>
+                            <button className="btn btn-warning w-100 text-light" type="submit">Save</button>
 
 
 
