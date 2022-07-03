@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./hotelinfo.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams,useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
@@ -13,9 +13,14 @@ import moment from "moment";
 import ShareModal from "../../components/ShareModal";
 import { Paper } from "@mui/material";
 import { Grid } from "@material-ui/core";
+import SearchHeader from "../../components/Home/SearchHeader";
 
 const Hotelinfo = () => {
   const dispatch = useDispatch();
+  const {state} = useLocation();
+
+  const checkData=state?.searchInfoData? 
+  state.searchInfoData: window.href="/";
 
   const { id } = useParams();
 
@@ -35,6 +40,8 @@ const Hotelinfo = () => {
   const reviews = (hotel?.hotel_reviews)
 
   const newReviews = reviews?.slice()?.reverse();
+
+
 
   useEffect(() => {
     dispatch(getHotel({ id }))
@@ -112,6 +119,7 @@ const Hotelinfo = () => {
   }
   return (
     <div className="main_content">
+    <SearchHeader searchInfoData={checkData}/>
       <div className="second-nav d-flex">
         <div className="Item">
           <Link to="">
