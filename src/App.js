@@ -58,7 +58,7 @@ const App = () => {
   }, [dispatch])
 
   const getSearchData = (searchData) => {
-    console.log(searchData,"from app.js")
+    // console.log(searchData,"from app.js")
     dispatch(createSearchInfo({ searchInfo:searchData }))
   }
 

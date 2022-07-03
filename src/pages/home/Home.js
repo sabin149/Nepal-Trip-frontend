@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes"
 import { Grid } from '@mui/material';
 import useStyles from './homeStyle';
+import moment from "moment";
 
 const Home = ({ searchData }) => {
   const classNamees = useStyles();
@@ -51,6 +52,12 @@ const Home = ({ searchData }) => {
     options
   }
 
+  // console.log(searchInfo);
+
+  // const startDate= moment(date[0].startDate).format()
+  // console.log(startDate);
+
+
   const handleSearch = async (e) => {
     e.preventDefault()
     if (search.length === 0) {
@@ -68,7 +75,7 @@ const Home = ({ searchData }) => {
     }
 
     if (res.status === 200) {
-      navigate(`/hotellist?address=${search}&&startDate=${format(date[0].startDate, "yyyy-MM-dd")}&&endDate=${format(date[0].endDate, "yyyy-MM-dd")}&&adult=${options.adult}&&children=${options.children}&&room=${options.room}`
+      navigate(`/hotellist?address=${search}&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`
       )
       searchData(searchInfo)
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
