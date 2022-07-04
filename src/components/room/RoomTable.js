@@ -555,9 +555,18 @@ const RoomTable = ({ hotel, searchInfoData }) => {
                 <p >Non-refundable</p>
                 <button className="ui fluid primary button " style={{
                   fontSize: '16px',
-                  width: "160px",
+                  width: "140px",
                   height: "40px",
+<<<<<<< HEAD
+<<<<<<< HEAD
+                  // margin: "auto"
+=======
                   margin: "auto"
+>>>>>>> 457a2fbbd016dc8a6abe267f05c40084e0a0b63f
+=======
+                  margin: "auto"
+
+>>>>>>> ca10f47b82c635638162aa686ccaea5652756a71
                 }} onClick={
                   handleCheckout
                 }>

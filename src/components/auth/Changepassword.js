@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { changePassword } from '../../redux/actions/userAction';
+import { Link } from 'react-router-dom';
 
 const ChangePassword = ({ token }) => {
   const dispatch = useDispatch();
@@ -22,8 +23,14 @@ const ChangePassword = ({ token }) => {
     e.preventDefault()
     dispatch(changePassword({ old_password:opassword, password:npassword, password_confirmation:cpassword, token }))
   }
+  
   return (
+    
+    
+    
+    
     <div className="auth_page mt-5">
+      
       <form onSubmit={handlePasswordSubmit} className="mt-5">
         <h3 className="text-uppercase text-center text-warning">
           Change
@@ -99,6 +106,7 @@ const ChangePassword = ({ token }) => {
         </button>
       </form>
     </div>
+    
   );
 };
 export default ChangePassword;
