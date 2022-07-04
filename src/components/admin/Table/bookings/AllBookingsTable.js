@@ -96,6 +96,7 @@ export default function AllBookingsTable() {
     }, [dispatch, token])
 
     const bookingsData= bookings.map((booking,index) => {
+        console.log(booking.start_date)
         return {
             id: index+1,
             hotel: booking.hotel.hotel_name,

@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createBooking } from '../../redux/actions/bookingAction'
 import Khalti from '../../components/khalti/Khati'
+import moment from 'moment'
+import { Rating } from '@mui/material'
 
 const Checkout = () => {
   const dispatch = useDispatch()
@@ -13,11 +15,21 @@ const Checkout = () => {
   const token = localStorage.getItem('token')
   const { hotel, room, searchInfo } = location.state
 
+  const { options, date } = searchInfo
+
+
+  //get days in number from startDate to endDate
+  const days = (moment(date[0].endDate).format('D')) - (moment(date[0].startDate).format('D'))
+  
+
+  //get total price with options
+  const totalAmount = ((days * room.room_price)*options.room) + (options.adult * 500 + options.children * 200)
+
   //calculate tax of the room price
-  const tax = (room.room_price * 13) / 100
+  const tax = (totalAmount * 13) / 100
 
   //calulate total price of the room
-  const totalPrice = room.room_price + tax
+  const totalPrice =totalAmount + tax
 
   //calculate total price of the room in dollor
   const totalPriceDollar = (totalPrice / 126).toFixed(2)
@@ -60,9 +72,9 @@ const Checkout = () => {
   const booking = {
     room: room._id,
     hotel: hotel._id,
-    start_date: searchInfo?.date[0].startDate,
-    end_date: searchInfo?.date[0].endDate,
-    total_amount: room.room_price,
+    start_date: date[0].startDate,
+    end_date: date[0].endDate,
+    total_amount: totalPrice,
     name: firstName + " " + lastName,
     email,
     phone,
@@ -71,12 +83,16 @@ const Checkout = () => {
     tc: tcChecked,
     payment_id: Math.floor(Math.random() * 1000000000),
     payment_type: "Cash",
+    children: options.children,
+    adults: options.adult,
+    rooms: options.room,
   }
+
+  // console.log(booking,"booking")
   const handlePayAtHotel = (e) => {
     e.preventDefault();
     dispatch(createBooking(booking, navigate, token))
   }
-
   return (
     <>
       <div className="container pd-top-md detailpage">
@@ -186,62 +202,32 @@ const Checkout = () => {
           </div>
           <div className="col-lg-4 detailroom">
             <div className='card-box'>
-              <h4 class="pd-top-sm">{hotel?.hotel_name}</h4>
+              <h4 className="pd-top-sm">{hotel?.hotel_name}</h4>
               <div className='stars-group'>
-                {
-                  hotel.rating === 5 ? <>
-                    <i className="fa-solid fa-star text-warning"></i>
-                    <i className="fa-solid fa-star text-warning"></i>
-                    <i className="fa-solid fa-star text-warning"></i>
-                    <i className="fa-solid fa-star text-warning"></i>
-                    <i className="fa-solid fa-star text-warning"></i>
-                  </>
-                    :
-                  hotel.rating === 4 ? <>
-                    <i className="fa-solid fa-star text-warning"></i>
-                    <i className="fa-solid fa-star text-warning"></i>
-                    <i className="fa-solid fa-star text-warning"></i>
-                    <i className="fa-solid fa-star text-warning"></i>
-                    <i className="fa-solid fa-star text-warning"></i>
-                  </>
-                    :
-                    hotel.rating === 3 ? <>
-                      <i className="fa-solid fa-star text-warning"></i>
-                      <i className="fa-solid fa-star text-warning"></i>
-                      <i className="fa-solid fa-star text-warning"></i>
-                    </>
-                      : hotel.rating === 2 ? <>
-                        <i className="fa-solid fa-star text-warning"></i>
-                        <i className="fa-solid fa-star text-warning"></i>
-                      </>
-                        : hotel.rating === 1 ? <>
-                          <i className="fa-solid fa-star text-warning"></i>
-                        </>
-                          : null
-                }
+                <Rating name="read-only" size='medium' value={hotel?.rating} readOnly />
 
               </div>
               <div className='flex flex-box'>
                 <div className='box'>
                   <p><span>Check-in</span></p>
-                  <h5>{searchInfo.date[0].startDate}</h5>
+                  <h5>{moment(date[0].startDate).format("DD MMMM YYYY")}</h5>
                 </div>
                 <div className='box'>
                   <p><span>Check-Out</span></p>
-                  <h5>{searchInfo.date[0].endDate}</h5>
+                  <h5>{moment(date[0].endDate).format("DD MMMM YYYY")}</h5>
                 </div>
                 <div className='box b-lDuration'>
                   <p><span>Duration</span></p>
-                  <h5>1 Night</h5>
+                  <h5>{days-1} Nights</h5>
                 </div>
               </div>
-              <h3 className='mt'> 1 X {room.room_type}</h3>
+              <h3 className='mt'> {options.room} X {room.room_type}</h3>
               <div className='flex'>
                 <div className='roomimg'>
-                  <img class="image-medium" src={room.room_images[0].url} alt="roomimage"></img>
+                  <img className="image-medium" src={room.room_images[0].url} alt="roomimage"></img>
                 </div>
                 <div className='suite'>
-                  <p> 1 Adults</p>
+                  <p> {options.adult} Adults</p>
                   <p> Non-refundable</p>
                 </div>
               </div>
@@ -249,7 +235,7 @@ const Checkout = () => {
                 <b>
                   <span>Inclusions</span>
                 </b>
-                <div class="color-green text-sm">Breakfast</div>
+                <div className="color-green text-sm">Breakfast</div>
                 <br />
                 <b>
                   <span>Cancellation policy:</span>
@@ -267,16 +253,16 @@ const Checkout = () => {
                 <div>
                   <span className=''>Total Room Price</span>
                   <br />
-                  <span className='text-muted'>1 Night</span>
+                  <span className='text-muted'>{days-1} Nights</span>
                 </div>
                 <div className='ml-auto blue'>
-                  {room.room_price} NPR
+                  {totalAmount} NPR
                 </div>
               </div>
               <div className='flex bb'>
                 <p><b>Price Before Taxes</b></p>
                 <p className='ml-auto'>
-                  <b>{room.room_price} NPR</b>
+                  <b>{totalAmount} NPR</b>
                 </p>
               </div>
               <div className='flex bb'>

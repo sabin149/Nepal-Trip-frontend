@@ -9,6 +9,7 @@ import {
     LinkedinShareButton, LinkedinIcon,
     ViberShareButton, ViberIcon,
     FacebookMessengerShareButton, FacebookMessengerIcon,
+    InstapaperShareButton, InstapaperIcon,
 } from 'react-share'
 
 const ShareModal = ({ url }) => {
@@ -49,6 +50,10 @@ const ShareModal = ({ url }) => {
             <ViberShareButton url={url} >
                 <ViberIcon round={true} size={32} />
             </ViberShareButton>
+
+            <InstapaperShareButton url={url} >
+                <InstapaperIcon round={true} size={32} />
+            </InstapaperShareButton>
 
         </div>
     )
