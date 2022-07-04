@@ -2898,9 +2898,7 @@
       "other_names": [],
       "superseded_by": null,
       "keywords": [
-        "discouraged",
-        "non-reusable",
-        "osi-approved"
+        
       ],
       "text": [
         {
