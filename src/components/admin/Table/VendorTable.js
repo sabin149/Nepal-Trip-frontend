@@ -73,7 +73,7 @@ const VendorTable = () => {
             email: hotel?.hotel_email,
             panno: hotel?.pan_no,
             rating: hotel,
-            createdAt: moment(hotel?.createdAt).format('MMMM Do YYYY, h:mm:ss a'),
+            createdAt: moment(hotel?.createdAt).format('Do MMMM YYYY, h:mm:ss a'),
             rooms: hotel?.rooms?.length,
             reviews: hotel?.hotel_reviews?.length,
             ahotelrating: hotel?.hotel_reviews?.map(review => review?.hotel_rating)?.reduce((a, b) => a + b, 0) / hotel?.hotel_reviews?.length,

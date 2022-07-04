@@ -78,7 +78,7 @@ function BasicTable() {
                     {item.hotel_name}
                   </TableCell>
                   <TableCell align="left">{item.hotel_email}</TableCell>
-                  <TableCell align="left">{moment(item.createdAt).format('YYYY-MM-DD')}</TableCell>
+                  <TableCell align="left">{moment(item.createdAt).format('Do MMMM YYYY')}</TableCell>
                   <TableCell align="left">
                     <span type="button" onClick={() => {
                       changeStatus({ item })

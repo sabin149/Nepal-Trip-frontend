@@ -97,7 +97,7 @@ function VendorInfoTable({ hotel, token }) {
       id: index + 1,
       companyName: item,
       email: item.hotel_email,
-      registerdAt: moment(item.createdAt).format('MMMM Do YYYY'),
+      registerdAt: moment(item.createdAt).format('Do MMMM YYYY'),
       status: item
     }
   })

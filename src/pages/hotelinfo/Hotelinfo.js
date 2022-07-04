@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./hotelinfo.css";
-import { Link, useParams,useLocation } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
@@ -17,10 +17,10 @@ import SearchHeader from "../../components/Home/SearchHeader";
 
 const Hotelinfo = () => {
   const dispatch = useDispatch();
-  const {state} = useLocation();
+  const { state } = useLocation();
 
-  const checkData=state?.searchInfoData? 
-  state.searchInfoData: window.href="/";
+  const checkData = state?.searchInfoData ?
+    state.searchInfoData : window.href = "/";
 
   const { id } = useParams();
 
@@ -53,9 +53,11 @@ const Hotelinfo = () => {
 
   const oneUser = users && users.filter(user => user._id === userID)[0]
 
+  // check user has review or not
+  const checkUserReview = newReviews && newReviews.filter(review => review.user._id === userID)[0]
+
   const handlePostReview = (e) => {
     e.preventDefault();
-
     if (!token || !userID) {
       dispatch({
         type: GLOBALTYPES.ALERT,
@@ -63,7 +65,6 @@ const Hotelinfo = () => {
       })
       return
     }
-
     if (!value) {
       dispatch({
         type: GLOBALTYPES.ALERT,
@@ -71,7 +72,6 @@ const Hotelinfo = () => {
       })
       return
     }
-
     if (!review) {
       dispatch({
         type: GLOBALTYPES.ALERT,
@@ -79,7 +79,12 @@ const Hotelinfo = () => {
       })
       return
     }
-
+    if(checkUserReview){
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "You have already wrote the review!!!" } })
+      setReview("");
+      setValue(0);
+      return
+    }
     if (!isEdit)
       if (token && userID) {
         const newReview = {
@@ -92,8 +97,6 @@ const Hotelinfo = () => {
         setReview("");
         setValue(0);
       }
-
-
     if (isEdit) {
       const newReview = {
         review
@@ -107,7 +110,9 @@ const Hotelinfo = () => {
     }
   }
   const handleDeleteReview = ({ hotelReview }) => {
-    dispatch(deleteReview({ review: hotelReview, hotel, token: token }))
+    if (window.confirm("Are you sure you want to delete this review?")) {
+      dispatch(deleteReview({ review: hotelReview, hotel, token: token }))
+    }
   }
   const handleEditReview = ({ hotelReview }) => {
     setIsEdit(true)
@@ -117,7 +122,7 @@ const Hotelinfo = () => {
   }
   return (
     <div className="main_content">
-    <SearchHeader searchInfoData={checkData}/>
+      <SearchHeader searchInfoData={checkData} />
       <div className="second-nav d-flex">
         <div className="Item">
           <Link to="">
@@ -279,7 +284,7 @@ const Hotelinfo = () => {
                           )}
                           {facility === "pets" && (
                             <i className=" fa-solid fa-dog" />
-                          )}                            
+                          )}
                           {facility === "atm" && (
                             <i className=" fa-solid fa-atm" />
                           )}
@@ -472,34 +477,34 @@ const Hotelinfo = () => {
                           <span className="amen">Air Conditioning</span>
                         </>
                       )}
-                        {/* atm */}
-                        {facility === "atm" && (
-                          <>
-                            <i className=" fa-solid fa-atm" />
-                            <span className="amen">ATM</span>
-                          </>
-                        )}
-                        {/* bank */}
-                        {facility === "bank" && (
-                          <>
-                            <i className=" fa-solid fa-bank" />
-                            <span className="amen">Bank</span>
-                          </>
-                        )}
+                      {/* atm */}
+                      {facility === "atm" && (
+                        <>
+                          <i className=" fa-solid fa-atm" />
+                          <span className="amen">ATM</span>
+                        </>
+                      )}
+                      {/* bank */}
+                      {facility === "bank" && (
+                        <>
+                          <i className=" fa-solid fa-bank" />
+                          <span className="amen">Bank</span>
+                        </>
+                      )}
 
-                        {/* house keeping */}
-                        {facility === "housekeeping" && (
-                          <>
-                            <i className=" fa-solid fa-broom" />
-                            <span className="amen">Housekeeping</span>
-                          </>
-                        )}
+                      {/* house keeping */}
+                      {facility === "housekeeping" && (
+                        <>
+                          <i className=" fa-solid fa-broom" />
+                          <span className="amen">Housekeeping</span>
+                        </>
+                      )}
                     </li>
                   </div>
 
                 })
               }
-              
+
             </div>
           </div>
           <div className="segment" id="hotelpolicies">
@@ -629,13 +634,13 @@ const Hotelinfo = () => {
                     </div>
                     <div className="replysec">
                       {token && userID === review?.user?._id ? <>
-                        <span className="be-comment-name editsec">
+                        <span className="be-comment-name editsec" style={{ cursor: "pointer" }} >
                           <i className="fa-solid fa-pen-to-square me-1" onClick={() => handleEditReview({ hotelReview: review })} /> Edit
                         </span>
                         <span className="be-comment-name" onClick={() => {
                           handleDeleteReview({ hotelReview: review })
-                        }}>
-                          <i className="fa-solid fa-trash me-1 " style={{ cursor: "pointer" }} />  Remove
+                        }} style={{ cursor: "pointer" }} >
+                          <i className="fa-solid fa-trash me-1 " />  Remove
                         </span></> :
                         ""
                       }

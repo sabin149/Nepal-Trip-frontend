@@ -2,27 +2,43 @@ import { DataGrid } from '@mui/x-data-grid'
 import moment from 'moment'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteUser, getUsers } from "../../../../redux/actions/userAction"
-import "../Table.css"
-import { Link, useNavigate } from 'react-router-dom'
-import {CustomToolbar,CustomPagination} from "../../../CustomFunction";
+import { Link } from 'react-router-dom'
+import { CustomToolbar, CustomPagination } from "../../../CustomFunction";
+import { getBookingsByHotel } from '../../../../redux/actions/bookingAction'
 
-const UserListTable = () => {
+const AllHotelUsers = () => {
     const dispatch = useDispatch()
-    const { user } = useSelector(state => state)
-    const navigate = useNavigate()
+    const { hotel, booking } = useSelector(state => state)
 
     const token = localStorage.getItem('token')
+    const userID = localStorage.getItem('userID')
+
+    const oneHotel = hotel && hotel?.hotels && hotel?.hotels?.filter(hotel => hotel?.user?._id === userID)[0]
+
+    const hotelReviewsUsers = oneHotel && oneHotel?.hotel_reviews && oneHotel?.hotel_reviews?.map(review => review?.user)
 
     useEffect(() => {
-        dispatch(getUsers(token))
-    }, [token, dispatch])
+        dispatch(getBookingsByHotel({ hotelId: oneHotel?._id, token }));
+    }, [dispatch, oneHotel, token])
+
+    const bookingUsers = booking?.bookings && booking?.bookings && booking?.bookings?.map(booking => booking?.user)
+
+    let allUsers = []
+
+    if (bookingUsers !== undefined && hotelReviewsUsers !== undefined) {
+
+        allUsers = [...bookingUsers, ...hotelReviewsUsers].filter((user, index, self) =>
+            index === self.findIndex((t) => (
+                t?._id === user?._id
+            ))
+        )
+    }
 
     const columns = [
         { field: 'id', headerName: 'SN', width: 65 },
         { field: 'fullname', headerName: 'FullName', width: 250 },
         {
-            field: 'username', headerName: 'UserName', type: 'string', width: 250,
+            field: 'username', headerName: 'UserName', type: 'string', width: 205,
         },
         {
             field: "avatar",
@@ -45,34 +61,10 @@ const UserListTable = () => {
             field: 'phone', headerName: 'Phone', type: 'string', width: 120, align: 'center',
         },
 
-        { field: 'registerdAt', headerName: 'Registered At', width: 220, align: 'center' },
-        {
-            field: 'role', headerName: 'Role', width: 80
-        },
-        {
-            field: "action", headerName: "Action", width: 220, sortable: false, align: "center",
-            renderCell: (userData) =>
-
-                <span>
-                    <span className='me-2 btn btn-warning btn-sm text-light' onClick={() => {
-                        // console.log(userData.value, "edit")
-                        handleChangeRole(userData.value)
-                    }}>Change</span>
-
-                    <span className='me-2 btn btn-success btn-sm' onClick={() => {
-                        // console.log(userData.value, "edit")
-                        navigate(`/admin/edituser/${userData.value._id}`, { state: { userData: userData.value } })
-
-                    }}>Edit</span>
-                    <span className='btn btn-danger btn-sm' onClick={() => {
-                        handleDeleteUser({ user: userData.value })
-                    }}>Delete</span>
-                </span>
-        }
-
+        { field: 'registerdAt', headerName: 'Registered At', width: 220, align: 'center' }
     ]
 
-    const userList = user.users.map((item, index) => {
+    const userList = allUsers && allUsers?.map((item, index) => {
         return {
             id: index + 1,
             fullname: item.fullname,
@@ -82,25 +74,12 @@ const UserListTable = () => {
             address: item.address ? item.address + ", Nepal" : 'N/A',
             phone: item.phone,
             registerdAt: moment(item.createdAt).format('Do MMMM YYYY, h:mm:ss a'),
-            role: item.role,
-            action: item
-
         }
     })
 
-    const handleDeleteUser = ({ user }) => {
-        if (window.confirm("Are you sure you want to delete this user?")) {
-            dispatch(deleteUser({ user, token }))
-        }
-    }
-    const handleChangeRole = ({ user }) => {
-        if (window.confirm("Are you sure you want to change this user role?")) {
-
-        }
-    }
     return (
         <>
-            <span> <Link to="/" className="btn btn-primary btn-sm">Back</Link>  <h3 className='text-center mt-1 '>List of Users</h3></span>
+            <span> <Link to="/" className="btn btn-outline-primary btn-sm">Back</Link>  <h3 className='text-center mt-1 '>List of {oneHotel?.hotel_name} Users</h3></span>
             <div className="container-fluid" style={{
             }} >
                 <DataGrid style={{ height: "90vh", width: "100%" }}
@@ -134,4 +113,4 @@ const UserListTable = () => {
     )
 }
 
-export default UserListTable
+export default AllHotelUsers;

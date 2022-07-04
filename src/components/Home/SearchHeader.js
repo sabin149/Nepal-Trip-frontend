@@ -12,11 +12,11 @@ const SearchHeader = ({ searchInfoData }) => {
         </div>
         <div className=" flex-px-3 app" >
           <span style={{ fontSize: '14px' }}>Check In</span>
-          <h5 style={{ fontSize: '14px' }}>{moment(startDate).format("MMMM DD YYYY")}</h5>
+          <h5 style={{ fontSize: '14px' }}>{moment(startDate).format("Do MMMM YYYY")}</h5>
         </div>
         <div className="flex-px-3 app">
           <span style={{ fontSize: '14px' }}>Check Out</span>
-          <h5 style={{ fontSize: '14px' }}>{moment(endDate).format("MMMM DD YYYY")}</h5>
+          <h5 style={{ fontSize: '14px' }}>{moment(endDate).format("Do MMMM YYYY")}</h5>
         </div>
         <div className="flex-px-3 app">
           <span style={{ fontSize: '14px' }}>Rooms</span>

@@ -30,6 +30,7 @@ import SendPasswordResetEmail from "./components/auth/SendPasswordResetEmail";
 import ResetPassword from "./components/auth/ResetPassword";
 import { createSearchInfo } from "./redux/actions/searchInfoAction";
 import AllHotelBookingsTable from "./components/vendor/components/VendorTable/AllHotelBookingsTable";
+import AllHotelUsers from "./components/vendor/components/VendorTable/AllHotelUsers";
 // import axios from "axios";
 
 const App = () => {
@@ -78,7 +79,7 @@ const App = () => {
           <Route path="/hotelinfo/:id" element={<Hotelinfo />} />
           <Route path="/vendors" element={isAdmin ? <VendorTable /> : <Navigate to="/" />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/users" element={isAdmin ? <UserListTable /> : <Navigate to="/" />} />
+          <Route path="admin/users" element={isAdmin ? <UserListTable /> : <Navigate to="/" />} />
           <Route path="/admin/edituser/:id" element={isAdmin ? <EditUser /> : <Navigate to="/" />} />
           <Route path="/viewHotel" element={isVendor ? <ViewHotelDetails /> : <Navigate to="/" />} />
           <Route path="/editHotelDetails/:id" element={isVendor ? <EditHotelDetails /> : <Navigate to="/" />} />
@@ -92,6 +93,7 @@ const App = () => {
           <Route path="/changepassword" element={ isUser || isVendor || isAdmin ? <ChangePassword token={token} /> :<Navigate to="/"/> } />
           <Route path="/send-reset-password-email" element={<SendPasswordResetEmail />} />
           <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
+          <Route path="/vendor/users" element={<AllHotelUsers/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdmin ? <></> : isVendor ? <></> : <Footer />}
