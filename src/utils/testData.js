@@ -2901,7 +2901,13 @@
         "discouraged",
         "non-reusable",
         "osi-approved"
-      ]
+      ],
+      "text": [
+        {
+          "media_type": "text/html",
+          "title": "HTML",
+          "url": "https://opensource.org/licenses/ZPL-2.0"
+        }
       ]
     },
     {
