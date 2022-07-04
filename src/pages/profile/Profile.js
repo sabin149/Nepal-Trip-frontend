@@ -5,6 +5,7 @@ import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import "./profile.css"
 import { getUser, updateUserProfile } from '../../redux/actions/userAction';
 import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const Profile = ({ token }) => {
     const dispatch = useDispatch()
@@ -49,7 +50,16 @@ const Profile = ({ token }) => {
         dispatch(updateUserProfile({ userData, id, avatar, token, defaultAvatar: user.avatar }))
     }
     return (
+        
         <>
+        
+        <Link to="/" className="btn btn-outline-primary bbutton">
+            Back
+        </Link>
+        <Link to="/changepassword" className="btn btn-outline-warning cpass">
+            ChangePassword
+        </Link>
+        
             <div className="edit_user_profile"> <form onSubmit={handleSubmit}>
                 <div className="card user-profile m-auto mt-3">
                     <div className="card-body">

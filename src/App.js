@@ -64,6 +64,7 @@ const App = () => {
   // 
   return (
     <>
+     
       <Router>
         <Alert />
         {isAdmin ? <></> : isVendor ? <></> : <Header isUser={isUser} />}
