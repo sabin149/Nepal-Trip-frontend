@@ -24,7 +24,7 @@ const Home = ({ searchData }) => {
   const [date, setDate] = useState([
     {
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: new Date(new Date().setDate(new Date().getDate() + 1)),
       key: "selection",
     },
   ]);
@@ -52,7 +52,6 @@ const Home = ({ searchData }) => {
     options
   }
 
-  // console.log(searchInfo);
 
   // const startDate= moment(date[0].startDate).format()
   // console.log(startDate);
