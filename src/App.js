@@ -26,6 +26,7 @@ import {useEffect} from "react"
 import { useDispatch } from "react-redux";
 import { getHotels } from "./redux/actions/hotelAction";
 import ChangePassword from "./pages/auth/Changepassword";
+import Navbar from "./components/Navbar";
 // import axios from "axios";
 
 const App = () => {
@@ -79,6 +80,7 @@ const App = () => {
           <Route path="/admin/bookings" element={isAdmin ? <AllBookingsTable /> : <Navigate to="/" />} />
           <Route path="/user/profile/:id" element={isUser?<Profile/>:<Navigate to="/"/>}/>
           <Route path="/changepassword" element={<ChangePassword />} />
+          <Route path="/navbar" element={<Navbar />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdmin ? <></> : isVendor ? <></> : <Footer />}

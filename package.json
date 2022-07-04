@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@iconscout/react-unicons": "^1.1.6",
     "@material-ui/core": "^4.12.4",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.6.0",
     "@mui/x-data-grid": "^5.12.0",
     "@testing-library/jest-dom": "^5.16.4",

@@ -1,0 +1,77 @@
+.topnav{
+    
+  overflow: hidden;
+  background-color: rgb(31, 30, 30);
+  text-align: right;
+  
+  
+}
+
+@media screen and (min-width:900px) {
+  .css-1t6c9ts {
+    display: flex !important; 
+    justify-content: flex-end !important;
+  }
+  
+
+  
+}
+.left-cont{
+  position: relative;
+  color: white;
+  float: left;
+  font-size: 30px;
+  font-weight: bold;
+  top: 20px;
+  left: 20px;
+}
+.topnav a{
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+  padding: 27px;
+  font-size: 17px;
+  font-weight: bold;
+}
+.topnav a:hover{
+  background-color: white;
+  color: black;
+  transition: 0.5s ease;
+}
+.topnav .icon{
+  
+  display: none;
+  
+}
+@media screen and (max-width:600px) {
+  .topnav a{
+      display: none;
+  }
+  .topnav a.icon{
+      float: right;
+      display: block;
+  }
+  .left-cont{
+      position: fixed;
+  }
+}
+@media screen and (max-width:600px) {
+  
+
+  
+  .topnav.responsive{
+      padding: 60px;
+  }
+  .topnav.responsive .icon{
+      position: absolute;
+      right: 0;
+      top: 0;
+  }
+  .topnav.responsive a{
+      display: block;
+      text-align: center;
+  }
+  .left-cont{
+      text-align: center;
+  }
+}

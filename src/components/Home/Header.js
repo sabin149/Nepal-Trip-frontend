@@ -23,16 +23,12 @@ const Header = ({ isUser }) => {
             <i className="fa-solid fa-suitcase"> </i>
             <span> <Link to="/bookings" className="text-decoration-none text-dark">My Hotel Booking</Link> </span>
           </div>
-          {isUser&&
-            <div className="hotel">
-            <i className="fa-solid fa-user"> </i>
-            <span> <Link to={`/user/profile/${userID}`} className="text-decoration-none text-dark">Profile</Link> </span>
-          </div>}
 
           <div className="favourite">
           <i className="fa-solid fa-heart"></i>
             <span> My Favourite </span>
           </div>
+
 
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
             <button className="navButton" onClick={() => {
@@ -42,9 +38,15 @@ const Header = ({ isUser }) => {
               }
             }}> Logout
               <span> <i className="fa-solid fa-right-from-bracket text-light" ></i></span>
-
-
             </button>}
+
+            {isUser&&
+            <div className="hotel">
+            <i className="fa-solid fa-user"> </i>
+            <span> <Link to={`/user/profile/${userID}`} className="text-decoration-none text-dark">Profile</Link> </span>
+          </div>}
+
+
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div className="modal-dialog">
               <div className="modal-content" style={{ marginTop: "6rem" }}>
