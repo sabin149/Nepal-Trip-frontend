@@ -2901,16 +2901,73 @@
         "discouraged",
         "non-reusable",
         "osi-approved"
-      ],
-      "text": [
-        {
-          "media_type": "text/html",
-          "title": "HTML",
-          "url": "https://opensource.org/licenses/ZPL-2.0"
-        }
+      ]
       ]
     },
     {
-      
+        "id": "Zlib",
+        "identifiers": [
+          {
+            "identifier": "Zlib",
+            "scheme": "DEP5"
+          },
+          {
+            "identifier": "Zlib",
+            "scheme": "SPDX"
+          },
+          {
+            "identifier": "License :: OSI Approved :: zlib/libpng License",
+            "scheme": "Trove"
+          }
+        ],
+        "links": [
+          {
+            "note": "OSI Page",
+            "url": "https://opensource.org/licenses/Zlib"
+          }
+        ],
+        "name": "The zlib/libpng License (Zlib)",
+        "other_names": [],
+        "superseded_by": null,
+        "keywords": [
+          "osi-approved"
+        ],
+        "text": [
+          {
+            "media_type": "text/html",
+            "title": "HTML",
+            "url": "https://opensource.org/licenses/Zlib"
+          }
+        ]
+      },
+      {
+        "id": "jabberpl",
+        "identifiers": [
+          {
+            "identifier": "License :: OSI Approved :: Jabber Open Source License",
+            "scheme": "Trove"
+          }
+        ],
+        "links": [
+          {
+            "note": "OSI Page",
+            "url": "https://opensource.org/licenses/jabberpl"
+          }
+        ],
+        "name": "Jabber Open Source License",
+        "other_names": [],
+        "superseded_by": null,
+        "keywords": [
+          "discouraged",
+          "retired",
+          "osi-approved"
+        ],
+        "text": [
+          {
+            "media_type": "text/html",
+            "title": "HTML",
+            "url": "https://opensource.org/licenses/jabberpl"
+          }
+        ]
     }
   ]
