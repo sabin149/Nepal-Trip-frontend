@@ -3,17 +3,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, FormControlLabel, Grid, Paper, Radio, RadioGroup, Slider, TextField, Typography } from "@mui/material";
-
-
 import SearchHeader from "./SearchHeader";
+
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 const HotelList = () => {
-
+  const { search } = useLocation();
   const query = useQuery();
-  // console.log(query,"query");
+
   const title = query.get("address");
   const sort = query.get("sort");
   const hotelSearch = query.get("search")
@@ -29,13 +28,9 @@ const HotelList = () => {
 
   const [hotelData, setHotelData] = useState("");
   const [sortData, setSortData] = useState("-createdAt")// prcie order wala
-  // const [filterData, setFilterData] = useState('gt');
-  // const [price, setPrice] = useState("");
   const [hotelNameSearch, setHotelNameSearch] = useState("");
-
   const [sliderMax, setSliderMax] = useState(10000);
   const [sliderMin, setSliderMin] = useState(500);
-
   const [priceRange, setPriceRange] = useState([sliderMin, sliderMax]);
 
   useEffect(() => async () => {
@@ -54,8 +49,6 @@ const HotelList = () => {
     setSliderMin(minPrice);
   }, [hotelQuery.address, hotelQuery.sort])
 
-
-
   const handleSort = async (e) => {
     e.preventDefault();
     setSortData(e.target.value);
@@ -66,7 +59,6 @@ const HotelList = () => {
     }
     const res = await axios.get(`api/search?address=${hotelQuery.address}&sort=${hotelQuery.sort}&price[gte]=${sliderMin}&price[lte]=${sliderMax}`);
     setHotelData(res.data)
-
   };
 
   const handleSearch = async (e) => {
@@ -112,16 +104,14 @@ const HotelList = () => {
   };
 
   const clearAllFilters = async () => {
-    setPriceRange([500, 10000]);
+    setPriceRange([sliderMin, sliderMax]);
     setHotelNameSearch("");
     const res = await axios.get(`api/search?address=${hotelQuery.address}&sort=${hotelQuery.sort}`)
     setHotelData(res.data);
   };
 
-  const { search } = useLocation();
-
   const searchInfoData = {
-    address: search.split("address=")[1].split("&")[0] + ", Nepal",
+    address: search.split("address=")[1].split("&")[0],
     startDate: search.split("startDate=")[1].split("&")[0],
     endDate: search.split("endDate=")[1].split("&")[0],
     adult: search.split("adult=")[1].split("&")[0],

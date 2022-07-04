@@ -1,13 +1,14 @@
 import "./bookingDetails.css";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { cancelBooking, getBookings } from "../../redux/actions/bookingAction";
 import Carousel from "../../components/Carousel"
 import { Dialog, DialogContent } from "@mui/material";
 import EditBookingDetails from "../../components/booking/EditBookingDetails";
-import React,{useRef} from 'react';
+import React, { useRef } from 'react';
 import { useReactToPrint } from "react-to-print";
+import moment from "moment";
 
 const BookingDetails = () => {
   const dispatch = useDispatch()
@@ -18,6 +19,30 @@ const BookingDetails = () => {
   const [open, setOpen] = useState(false);
   const [editBookingOpen, setEditBookingOpen] = useState(false);
   const [scroll, setScroll] = useState('body');
+
+  const [bedType, setBedType] = useState("Double Bed")
+  const [roomSize, setRoomSize] = useState("250")
+
+
+  function handleSetBedType({ roomType }) {
+    if (roomType === "Deluxe Room") {
+      setBedType("King Bed")
+      setRoomSize("240")
+    } else if (roomType === "Family Room") {
+      setBedType("Double Bed")
+      setRoomSize("250")
+    } else if (roomType === "Superior Room") {
+      setBedType("Triple Bed")
+      setRoomSize("280")
+    } else if (roomType === "Single Room") {
+      setBedType("Single Bed")
+      setRoomSize("200")
+    } else {
+      setBedType("Double Bed")
+      setRoomSize("250")
+    }
+
+  }
 
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -43,22 +68,31 @@ const BookingDetails = () => {
   }, [dispatch, token])
 
   const booking = useSelector(state => state.booking.bookings)
-  const userBooking = booking.filter(booking => booking?.user?._id === userID)
-  const hotelDetails = userBooking && userBooking?.map(booking => booking.hotel)
-  const roomDetails = userBooking && userBooking?.map(booking => booking.room)
+  const userBooking = booking.filter(booking => booking?.user?._id === userID)[0]
+
+  const hotelDetails = userBooking && userBooking.hotel
+  const roomDetails = userBooking && userBooking.room
+
+     //get nights in number from startDate to endDate
+     const nights = (moment(userBooking?.end_date).format('D')) - (moment(userBooking?.start_date).format('D'))-1
 
   const handleCancelBooking = () => {
- 
-   if(window.confirm("Are you sure you want to cancel this booking?")){
-      dispatch(cancelBooking({token,id: userBooking[0]._id }))
+
+    if (window.confirm("Are you sure you want to cancel this booking?")) {
+      dispatch(cancelBooking({ token, id: userBooking._id }))
       navigate("/")
     }
   }
 
+  useEffect(() => {
+    handleSetBedType({ roomType: roomDetails?.room_type })
+  }, [roomDetails])
+
   return (
+
     <>
       {
-        userBooking && userBooking.length > 0 ?
+        userBooking ?
           <div className="main_content">
             <div className="container pd-top-md">
               <div className="edit-booking-details">
@@ -68,7 +102,7 @@ const BookingDetails = () => {
                 <div className="booking_dialog">
 
                   <Dialog sx={{
-            
+
                     backgroundBlendMode: "darken",
                     backgroundColor: "rgba(0,0,0,0.1)",
                   }}
@@ -84,7 +118,7 @@ const BookingDetails = () => {
 
                     <hr />
                     <DialogContent dividers={scroll === 'paper'} >
-                      <EditBookingDetails booking={booking[0]} token={token} />
+                      <EditBookingDetails booking={userBooking} token={token} />
 
                     </DialogContent>
 
@@ -92,11 +126,11 @@ const BookingDetails = () => {
                 </div>
               </div>
               <div ref={componentRef}>
-                <h2>Booking Date: Wed Jun 15 00:00:00 GMT 2022</h2>
+                <h2>Booking Date: {moment(userBooking?.start_date).format("LLLL")}</h2>
                 <hr></hr>
                 <div className="row">
                   <div className="col-sm-8 BookingImage">
-                    <Carousel images={hotelDetails[0]?.hotel_images} />
+                    <Carousel images={hotelDetails?.hotel_images} />
                   </div>
                   <div className="col-sm abouthotel">
                     <div className="pd-all-sm ">
@@ -114,13 +148,13 @@ const BookingDetails = () => {
                         <div className="caption">
                           <Link to="" className="block-in-mobile">
                             <i className="fa-solid fa-phone"></i>
-                            <span> {hotelDetails[0]?.phone} </span>
+                            <span> {hotelDetails?.phone} </span>
                           </Link>
                         </div>
                         <div className="caption">
                           <Link to="" className="block-in-mobile">
                             <i className="fa-solid fa-envelope"></i>
-                            <span> {hotelDetails[0]?.hotel_email} </span>
+                            <span> {hotelDetails?.hotel_email} </span>
                           </Link>
                         </div>
                       </div>
@@ -137,26 +171,25 @@ const BookingDetails = () => {
                       <tr >
                         <td className="" rowSpan="1">
                           <h3 className="color-black bold pointer">
-
-                            1 No.of Room(s)
+                            {userBooking?.rooms} No.of Room(s)
                           </h3>
                         </td>
                         <td className="" rowSpan="2">
                           <h3 className="color-black bold pointer">
 
-                            1 No.of Night(s)
+                            {nights} No.of Night(s)
                           </h3>
                         </td>
                         <td className="" rowSpan="3">
                           <h3 className="color-lack bold pointer">
 
-                            15th Jun, 2022 12::0:0 check-in
+                            {moment(userBooking?.start_date).format("MMMM Do YYYY")} check-in
                           </h3>
                         </td>
                         <td className="" rowSpan="4">
                           <h3 className="color-black bold pointer">
 
-                            16th Jun, 2022 12::0:0 check-out
+                            {moment(userBooking?.end_date).format("MMMM Do YYYY")}  check-out
                           </h3>
                         </td>
                       </tr>
@@ -168,17 +201,17 @@ const BookingDetails = () => {
                 <div className="row">
                   <div className="col-sm-12">
                     <h3 className="policy">
-                      Your payment will be handled by Hotel: {hotelDetails[0]?.hotel_name}
+                      Your payment will be handled by Hotel: {hotelDetails?.hotel_name}
                     </h3>
                     <hr />
-                    
+
                     <h3 className="policy">
-                    Total amount to be paid is:
-                    <br></br>
-                    {userBooking[0]?.total_amount} NPR
-                    <hr></hr>
+                      Total amount to be paid is:
+                      <br></br>
+                      {userBooking?.total_amount} NPR
+                      <hr></hr>
                     </h3>
-                    
+
                   </div>
                   <div className="col-sm-9 abouthotel">
                     <div className="pd-all-sm "></div>
@@ -202,11 +235,11 @@ const BookingDetails = () => {
                         <tr className="">
                           <td className="imagebox" rowSpan="1">
                             <h3 className="color-black bold pointer">
-                              {userBooking[0]?.name}
+                              {userBooking?.name}
                               <div>
                                 <Dialog
                                   sx={{
-                             
+
                                     backgroundBlendMode: "darken",
                                     backgroundColor: "rgba(0,0,0,0.1)",
                                   }}
@@ -228,7 +261,7 @@ const BookingDetails = () => {
                                   <hr />
                                   <DialogContent dividers={scroll === "paper"}>
                                     <Carousel
-                                      images={roomDetails[0]?.room_images}
+                                      images={roomDetails?.room_images}
                                     />
                                   </DialogContent>
                                   <div className="amenities">
@@ -283,19 +316,20 @@ const BookingDetails = () => {
                               className="color-black bold pointer"
                               onClick={handleRoomClickOpen("body")}
                             >
-                              {roomDetails[0]?.room_type}
+                              {roomDetails?.room_type}
                             </h3>
                           </td>
                           <td className="" rowSpan="3">
                             <h3 className="color-lack bold pointer">
 
-                              240 sq.ft
+                              {roomSize} sq.ft
                             </h3>
                           </td>
                           <td className="" rowSpan="4">
                             <h3 className="color-black bold pointer">
-
-                              King Bed
+                              {
+                                bedType
+                              }
                             </h3>
                           </td>
                         </tr>
@@ -303,13 +337,12 @@ const BookingDetails = () => {
                     </table>
                   </div>
                 </div>
-                <div className="row pricetable">
+                {/* <div className="row pricetable">
                   <div className="col-lg-12 pricehotel">
                     <table className="table table-bordered">
                       <thead>
                         <tr>
                           <th scope="col">
-
                             <span className=""> Room No</span>
                           </th>
                           <th scope="col">No. of Adults</th>
@@ -330,7 +363,6 @@ const BookingDetails = () => {
                           </td>
                           <td className="" rowSpan="4">
                             <h3 className="color-black bold pointer">
-
                               Breakfast
                             </h3>
                           </td>
@@ -338,7 +370,7 @@ const BookingDetails = () => {
                       </tbody>
                     </table>
                   </div>
-                </div>
+                </div> */}
                 <div className="row pricetable">
                   <div className="col-lg-12 pricehotel">
                     <table className="table table-bordered">
@@ -357,20 +389,22 @@ const BookingDetails = () => {
                         <tr className="">
                           <td className="" rowSpan="1">
                             <h3 className="color-black bold pointer">
-
-                              1
+                              {
+                                //get random room number
+                                Math.floor(Math.random() * (10 - 1 + 1)) + 1
+                              }
                             </h3>
                           </td>
                           <td className="" rowSpan="2">
                             <h3 className="color-black bold pointer">
 
-                              1
+                              {userBooking?.adults}
                             </h3>
                           </td>
                           <td className="" rowSpan="3">
                             <h3 className="color-lack bold pointer">
 
-                              0
+                              {userBooking?.children}
                             </h3>
                           </td>
                           <td className="" rowSpan="4">

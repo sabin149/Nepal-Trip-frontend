@@ -41,8 +41,6 @@ const Hotelinfo = () => {
 
   const newReviews = reviews?.slice()?.reverse();
 
-
-
   useEffect(() => {
     dispatch(getHotel({ id }))
   }, [dispatch, id])
@@ -320,7 +318,7 @@ const Hotelinfo = () => {
             </span>
           </h3>
           {/* Price Table of Room */}
-          <RoomTable hotel={hotel} />
+          <RoomTable hotel={hotel} searchInfoData={checkData} />
           <div className="segment" id="hotelamenities">
             <h3 className="bold">
               Hotel Amenities

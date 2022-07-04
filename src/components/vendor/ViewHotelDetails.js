@@ -206,13 +206,13 @@ const ViewHotelDetails = ({ hotelDetails }) => {
                                 </div>
                             </div>
                             {/* Room and Info */}
-                            <h3 className="bold" id="roominfo">
+                            <h3 className="bold" >
                                 <span>
                                     Room Info & price
                                 </span>
                             </h3>
                             {/* Price Table of Room */}
-                            <RoomTable hotel={oneHotel} role={role} />
+                            <RoomTable hotel={oneHotel} role={role} id="roominfo" />
 
                             <div className="my-4">
                             </div>
