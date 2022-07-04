@@ -2866,7 +2866,6 @@
       ],
       "text": [
         {
-          "media_type": "text/html",
           "title": "HTML",
           "url": "https://opensource.org/licenses/Xnet"
         }
