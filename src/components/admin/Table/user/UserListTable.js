@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteUser, getUsers } from "../../../../redux/actions/userAction"
 import "../Table.css"
 import { Link, useNavigate } from 'react-router-dom'
+import {CustomToolbar,CustomPagination} from "../../../CustomFunction";
 
 const UserListTable = () => {
     const dispatch = useDispatch()
@@ -116,12 +117,17 @@ const UserListTable = () => {
                             fontWeight: '500',
                         },
                     }}
+                    pagination
                     rows={userList}
                     columns={columns}
                     pageSize={10}
-                    rowsPerPageOptions={[10]}
+                    rowsPerPageOptions={[5, 10, 20, 50, 100]}
                     checkboxSelection
                     rowHeight={100}
+                    components={{
+                        Toolbar: CustomToolbar,
+                        Pagination: CustomPagination,
+                    }}
                 />
             </div>
         </>

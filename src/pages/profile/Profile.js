@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import "./profile.css"
 import { getUser, updateUserProfile } from '../../redux/actions/userAction';
-import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom'
+import ChangePassword from '../../components/auth/Changepassword'
 
 const Profile = ({ token }) => {
     const dispatch = useDispatch()
@@ -52,15 +52,11 @@ const Profile = ({ token }) => {
     return (
         
         <>
-        
-        <Link to="/" className="btn btn-outline-primary bbutton">
-            Back
-        </Link>
-        <Link to="/changepassword" className="btn btn-outline-warning cpass">
-            ChangePassword
-        </Link>
-        
-            <div className="edit_user_profile"> <form onSubmit={handleSubmit}>
+            <div className="edit_user_profile"> 
+            <Link to="/" className="btn btn-outline-primary btn-sm">Back</Link>
+            <Link to="/changepassword" className="btn btn-outline-warning cpass">ChangePassword</Link>
+            
+            <form onSubmit={handleSubmit}>
                 <div className="card user-profile m-auto mt-3">
                     <div className="card-body">
                         <div className="profile">
@@ -132,7 +128,8 @@ const Profile = ({ token }) => {
                     </div>
                 </div>
                 </form>
-            </div></>
+            </div>
+            </>
     )
 }
 

@@ -3,6 +3,7 @@ import moment from 'moment'
 import React, { } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { CustomToolbar, CustomPagination } from '../../CustomFunction'
 
 
 const VendorTable = () => {
@@ -109,6 +110,11 @@ const VendorTable = () => {
                     rowHeight={100}
                     rowsPerPageOptions={[10]}
                     checkboxSelection
+                    pagination
+                    components={{
+                        Toolbar: CustomToolbar,
+                        Pagination: CustomPagination,
+                    }}
                 />
             </div>
         </>
