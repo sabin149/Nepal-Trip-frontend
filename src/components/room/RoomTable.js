@@ -5,29 +5,35 @@ import { GLOBALTYPES } from '../../redux/actions/globalTypes'
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import Carousel from '../Carousel';
+import moment from 'moment';
 
-const RoomTable = ({ hotel }) => {
+const RoomTable = ({ hotel, searchInfoData }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [selectedRoom, setSelectedRoom] = useState()
 
   const userID = localStorage.getItem('userID')
 
+  const { address, startDate, endDate, adult, children, room } = searchInfoData
+
   const searchInfo = {
     date: [{
-      startDate: "07/05/2022",
-      endDate: "07/06/2022"
+      startDate,
+      endDate
     }],
     options: {
-      adult: 1,
-      children: 0,
-      room: 1,
+      adult,
+      children,
+      room,
     },
-    search: "Pokhara",
+    search: address,
   }
 
   const [open, setOpen] = useState(false);
   const [scroll, setScroll] = useState('paper');
+
+  //get nights in number from startDate to endDate
+  const nights = (moment(endDate).format('D')) - (moment(startDate).format('D')) - 1
 
   const handleClickOpen = ({ scrollType, room }) => () => {
     setOpen(true);
@@ -65,7 +71,6 @@ const RoomTable = ({ hotel }) => {
           error: "Please login to continue"
         }
       })
-
     }
   }
 
@@ -91,120 +96,400 @@ const RoomTable = ({ hotel }) => {
                         display: "inline-table"
 
                       }}> {room.room_type}</h3>
-                       <Dialog sx={{
-                                             
-                                             backgroundBlendMode: "darken",
-                                             backgroundColor: "rgba(0,0,0,0.1)",
-                                             borderTop: "1px solid rgba(0,0,0,0.1)",
-                                         }}
-                                             open={open}
-                                             onClose={handleClose}
-                                             scroll={scroll}
-                                             aria-labelledby="scroll-dialog-title"
-                                             aria-describedby="scroll-dialog-description"
-                                         >
-                                            <div className="room_header">
-                                            <h4 className='mt-3 align-left' style={{
-                                                 color:"black",
-                                                 lineHeight:"1.2em",
-                                                 fontSize: "1.28em",
-                                             
-                                             }}>Room Details</h4>
-                                            </div>
-                                       
-                                             <h3 className='color-dark-blue' style={{
-                                                 marginLeft: "20px",
-                                                 fontWeight:"500",
-                                                 fontSize: "2.2rem",
-                                             }}>{selectedRoom?.room_type}</h3>
-                                             <DialogContent dividers={scroll === 'paper'}>
+                      <Dialog sx={{
 
-                                                 <Carousel images={selectedRoom?.room_images} />
-                                             </DialogContent>
-                                             <div className="amenities m-0">
-                                                 <hr></hr>
+                        backgroundBlendMode: "darken",
+                        backgroundColor: "rgba(0,0,0,0.1)",
+                        borderTop: "1px solid rgba(0,0,0,0.1)",
+                      }}
+                        open={open}
+                        onClose={handleClose}
+                        scroll={scroll}
+                        aria-labelledby="scroll-dialog-title"
+                        aria-describedby="scroll-dialog-description"
+                      >
+                        <div className="room_header">
+                          <h4 className='mt-3 align-left' style={{
+                            color: "black",
+                            lineHeight: "1.2em",
+                            fontSize: "1.28em",
 
-                                                 <div className="row row-cols-2">
-                                                     <div className="col">
-                                                         <li>
-                                                             <i className="fa-solid fa-wifi"></i>
+                          }}>Room Details</h4>
+                        </div>
 
-                                                             <span className="amen">
-                                                                 24hrs Free Wi-Fi
-                                                             </span>
-                                                         </li>
-                                                     </div>
-                                                     <div className="col">
-                                                         <li>
-                                                             <i className="fa-solid fa-shirt"></i>
+                        <h3 className='color-dark-blue' style={{
+                          marginLeft: "20px",
+                          fontWeight: "500",
+                          fontSize: "2.2rem",
+                        }}>{selectedRoom?.room_type}</h3>
+                        <DialogContent dividers={scroll === 'paper'}>
 
-                                                             <span className="amen">Restaurant</span>
-                                                         </li>
-                                                     </div>
-                                                     <div className="col">
-                                                         <li>
-                                                             <i className="fa-solid fa-smoking"></i>
-                                                             <span className="amen">
-                                                                 Smoking Area Available
-                                                             </span>
-                                                         </li>
-                                                     </div>
-                                                     <div className="col">
-                                                         <li>
-                                                             <i className="fa-solid fa-car"></i>
+                          <Carousel images={selectedRoom?.room_images} />
+                        </DialogContent>
+                        <div className="amenities m-0">
+                          <hr></hr>
 
-                                                             <span className="amen">
-                                                                 Transportation Facility
-                                                             </span>
-                                                         </li>
-                                                     </div>
-                                                     <div className="col">
-                                                         <li>
-                                                             <i className="fa-solid fa-bed"></i>
+                          <div className="row row-cols-2">
+                            {
+                              room?.room_facilities?.map((facility, index) => {
+                                return <div className="col" key={index}>
+                                  <li>
+                                    {(facility === "freewifi") && (
+                                      <>
+                                        <i className=" fa-solid fa-wifi" />
+                                        <span className="amen">Free Wifi</span>
+                                      </>
+                                    )}
+                                    {facility === "tours" && (
+                                      <>
+                                        <i className=" fa-solid fa-camera" />
+                                        <span className="amen">Tour</span>
+                                      </>
+                                    )}
 
-                                                             <span className="amen">
-                                                                 Twin Bed
-                                                             </span>
-                                                         </li>
-                                                     </div>
-                                                     <div className="col">
-                                                         <li>
-                                                             <i className="fa-solid fa-bath"></i>
+                                    {facility === "bar" && (
+                                      <>
+                                        <i className=" fa-solid fa-cocktail" />
+                                        <span className="amen">Bar</span>
+                                      </>
+                                    )}
+                                    {facility === "restaurant" && (
+                                      <>
+                                        <i className=" fa-solid fa-utensils" />
+                                        <span className="amen">Restaurant</span>
+                                      </>
+                                    )}
+                                    {facility === "pool" && (
+                                      <>
+                                        <i className=" fa-solid fa-swimmer" />
+                                        <span className="amen">Pool</span>
+                                      </>
+                                    )}
+                                    {facility === "gym" && (
+                                      <>
+                                        <i className=" fa-solid fa-dumbbell" />
+                                        <span className="amen">Gym</span>
+                                      </>
+                                    )}
+                                    {facility === "parking" && (
+                                      <>
+                                        <i className=" fa-solid fa-car-park" />
+                                        <span className="amen">Parking</span>
+                                      </>
+                                    )}
+                                    {facility === "airporttransfer" && (
+                                      <>
+                                        <i className=" fa-solid fa-plane-departure" />
+                                        <span className="amen">Airport Transfer</span>
+                                      </>
+                                    )}
+                                    {facility === "breakfast" && (
+                                      <>
+                                        <i className="fa-solid fa-burger" />
+                                        <span className="amen">Breakfast</span>
+                                      </>
+                                    )}
+                                    {facility === "lunch" && (
+                                      <>
+                                        <i className=" fa-solid fa-plate-wheat" />
+                                        <span className="amen">Lunch</span>
+                                      </>
+                                    )}
+                                    {facility === "dinner" && (
+                                      <>
+                                        <i className="fa-solid fa-utensils" />
+                                        <span className="amen">Dinner</span>
+                                      </>
+                                    )}
+                                    {facility === "capservice" && (
+                                      <>
+                                        <i className=" fa-solid fa-headset" />
+                                        <span className="amen">Cap Service</span>
+                                      </>
+                                    )}
+                                    {facility === "24hrroomservice" && (
+                                      <>
+                                        <i className=" fa-solid fa-clock" />
+                                        <span className="amen">24hr Room Service</span>
+                                      </>
+                                    )}
+                                    {facility === "childbed" && (
+                                      <>
+                                        <i className=" fa-solid fa-child" />
+                                        <span className="amen">Child Bed</span>
+                                      </>
+                                    )}
+                                    {facility === "laundary" && (
+                                      <>
+                                        <i className=" fa-solid fa-laundry" />
+                                        <span className="amen">Laundary</span>
+                                      </>
+                                    )}
+                                    {facility === "medical" && (
+                                      <>
+                                        <i className=" fa-solid fa-medkit" />
+                                        <span className="amen">Medical Services</span>
+                                      </>
+                                    )}
 
-                                                             <span className="amen">
-                                                                 Bath
-                                                             </span>
-                                                         </li>
-                                                     </div>
+                                    {facility === "ticketservice" && (
+                                      <>
+                                        <i className=" fa-solid fa-ticket-alt" />
+                                        <span className="amen">Ticket Service</span>
+                                      </>
+                                    )}
+                                    {facility === "coffee" && (
+                                      <>
+                                        <i className=" fa-solid fa-coffee" />
+                                        <span className="amen">Coffee</span>
+                                      </>
+                                    )}
+                                    {facility === "parking" && (
+                                      <>
+                                        <i className=" fa-solid fa-car-park" />
+                                        <span className="amen">Parking</span>
+                                      </>
+                                    )}
+                                    {facility === "security" && (
+                                      <>
+                                        <i className=" fa-solid fa-shield-alt" />
+                                        <span className="amen">Security</span>
+                                      </>
+                                    )}
+                                    {facility === "elevator" && (
+                                      <>
+                                        <i className=" fa-solid fa-building" />
+                                        <span className="amen">Elevator</span>
+                                      </>
+                                    )}
+                                    {facility === "wheelchair" && (
+                                      <>
+                                        <i className=" fa-solid fa-wheelchair" />
+                                        <span className="amen">Wheelchair
+                                          Access</span>
+                                      </>
+                                    )}
 
-                                                 </div>
-                                             </div>
 
-                                         </Dialog>
+                                    {facility === "airconditioning" && (
+                                      <>
+                                        <i className=" fa-solid fa-snowflake" />
+                                        <span className="amen">Air Conditioning</span>
+                                      </>
+                                    )}
+                                    {/* atm */}
+                                    {facility === "atm" && (
+                                      <>
+                                        <i className=" fa-solid fa-atm" />
+                                        <span className="amen">ATM</span>
+                                      </>
+                                    )}
+                                    {/* bank */}
+                                    {facility === "bank" && (
+                                      <>
+                                        <i className=" fa-solid fa-bank" />
+                                        <span className="amen">Bank</span>
+                                      </>
+                                    )}
+
+                                    {/* house keeping */}
+                                    {facility === "housekeeping" && (
+                                      <>
+                                        <i className=" fa-solid fa-broom" />
+                                        <span className="amen">Housekeeping</span>
+                                      </>
+                                    )}
+                                  </li>
+                                </div>
+
+                              })
+                            }
+
+                          </div>
+                        </div>
+
+                      </Dialog>
                       <div className="image-holder bg-light-gray height160">
                         <img className="room-image" src={room?.room_images[0]?.url} alt="roomimage"></img>
                       </div>
                       <div>
                         <ul className="mg-top-sm ">
-                          <li>
-                            <i className="fa-solid fa-hot-tub-person"></i>
+                            {
+                              room?.room_facilities?.map((facility, index) => {
+                                return <span key={index}>
+                                  <li>
+                                    {(facility === "freewifi") && (
+                                      <>
+                                        <i className=" fa-solid fa-wifi" />
+                                        <span className="amen">Free Wifi</span>
+                                      </>
+                                    )}
+                                    {facility === "tours" && (
+                                      <>
+                                        <i className=" fa-solid fa-camera" />
+                                        <span className="amen">Tour</span>
+                                      </>
+                                    )}
 
-                            <span className="amen">Hot Tub</span></li>
-                          <li>
-                            <i className="fa-solid fa-wifi"></i>
+                                    {facility === "bar" && (
+                                      <>
+                                        <i className=" fa-solid fa-cocktail" />
+                                        <span className="amen">Bar</span>
+                                      </>
+                                    )}
+                                    {facility === "restaurant" && (
+                                      <>
+                                        <i className=" fa-solid fa-utensils" />
+                                        <span className="amen">Restaurant</span>
+                                      </>
+                                    )}
+                                    {facility === "pool" && (
+                                      <>
+                                        <i className=" fa-solid fa-swimmer" />
+                                        <span className="amen">Pool</span>
+                                      </>
+                                    )}
+                                    {facility === "gym" && (
+                                      <>
+                                        <i className=" fa-solid fa-dumbbell" />
+                                        <span className="amen">Gym</span>
+                                      </>
+                                    )}
+                                    {facility === "parking" && (
+                                      <>
+                                        <i className=" fa-solid fa-car-park" />
+                                        <span className="amen">Parking</span>
+                                      </>
+                                    )}
+                                    {facility === "airporttransfer" && (
+                                      <>
+                                        <i className=" fa-solid fa-plane-departure" />
+                                        <span className="amen">Airport Transfer</span>
+                                      </>
+                                    )}
+                                    {facility === "breakfast" && (
+                                      <>
+                                        <i className="fa-solid fa-burger" />
+                                        <span className="amen">Breakfast</span>
+                                      </>
+                                    )}
+                                    {facility === "lunch" && (
+                                      <>
+                                        <i className=" fa-solid fa-plate-wheat" />
+                                        <span className="amen">Lunch</span>
+                                      </>
+                                    )}
+                                    {facility === "dinner" && (
+                                      <>
+                                        <i className="fa-solid fa-utensils" />
+                                        <span className="amen">Dinner</span>
+                                      </>
+                                    )}
+                                    {facility === "capservice" && (
+                                      <>
+                                        <i className=" fa-solid fa-headset" />
+                                        <span className="amen">Cap Service</span>
+                                      </>
+                                    )}
+                                    {facility === "24hrroomservice" && (
+                                      <>
+                                        <i className=" fa-solid fa-clock" />
+                                        <span className="amen">24hr Room Service</span>
+                                      </>
+                                    )}
+                                    {facility === "childbed" && (
+                                      <>
+                                        <i className=" fa-solid fa-child" />
+                                        <span className="amen">Child Bed</span>
+                                      </>
+                                    )}
+                                    {facility === "laundary" && (
+                                      <>
+                                        <i className=" fa-solid fa-laundry" />
+                                        <span className="amen">Laundary</span>
+                                      </>
+                                    )}
+                                    {facility === "medical" && (
+                                      <>
+                                        <i className=" fa-solid fa-medkit" />
+                                        <span className="amen">Medical Services</span>
+                                      </>
+                                    )}
 
-                            <span className="amen">Free Wi-Fi</span></li>
-                          <li>
-                            <i className="fa-solid fa-smoking"></i>
+                                    {facility === "ticketservice" && (
+                                      <>
+                                        <i className=" fa-solid fa-ticket-alt" />
+                                        <span className="amen">Ticket Service</span>
+                                      </>
+                                    )}
+                                    {facility === "coffee" && (
+                                      <>
+                                        <i className=" fa-solid fa-coffee" />
+                                        <span className="amen">Coffee</span>
+                                      </>
+                                    )}
+                                    {facility === "parking" && (
+                                      <>
+                                        <i className=" fa-solid fa-car-park" />
+                                        <span className="amen">Parking</span>
+                                      </>
+                                    )}
+                                    {facility === "security" && (
+                                      <>
+                                        <i className=" fa-solid fa-shield-alt" />
+                                        <span className="amen">Security</span>
+                                      </>
+                                    )}
+                                    {facility === "elevator" && (
+                                      <>
+                                        <i className=" fa-solid fa-building" />
+                                        <span className="amen">Elevator</span>
+                                      </>
+                                    )}
+                                    {facility === "wheelchair" && (
+                                      <>
+                                        <i className=" fa-solid fa-wheelchair" />
+                                        <span className="amen">Wheelchair
+                                          Access</span>
+                                      </>
+                                    )}
 
-                            <span className="amen">Smoking Area</span></li>
-                          <li>
-                            <i className="fa-solid fa-bowl-rice"></i>
 
-                            <span className="amen">Free Breakfast</span></li>
-                          <li>
-                            <i className="fa-solid fa-car"></i>
-                            <span className="amen">Transport</span></li>
+                                    {facility === "airconditioning" && (
+                                      <>
+                                        <i className=" fa-solid fa-snowflake" />
+                                        <span className="amen">Air Conditioning</span>
+                                      </>
+                                    )}
+                                    {/* atm */}
+                                    {facility === "atm" && (
+                                      <>
+                                        <i className=" fa-solid fa-atm" />
+                                        <span className="amen">ATM</span>
+                                      </>
+                                    )}
+                                    {/* bank */}
+                                    {facility === "bank" && (
+                                      <>
+                                        <i className=" fa-solid fa-bank" />
+                                        <span className="amen">Bank</span>
+                                      </>
+                                    )}
+
+                                    {/* house keeping */}
+                                    {facility === "housekeeping" && (
+                                      <>
+                                        <i className=" fa-solid fa-broom" />
+                                        <span className="amen">Housekeeping</span>
+                                      </>
+                                    )}
+                                  </li>
+                                </span>
+
+                              })
+                            }
+
+
                         </ul>
                       </div>
                     </td>
@@ -265,14 +550,15 @@ const RoomTable = ({ hotel }) => {
             </div> :
               <div>
                 <p className="h5">{selectedRoom.room_type}</p>
-                <h6> 1 room(s), 1 night(s):</h6>
+                <h6> {searchInfo.options.room} room(s), {nights} night(s):</h6>
                 <h6 className="text-success">{selectedRoom.room_price} NPR</h6>
                 <p >Non-refundable</p>
                 <button className="ui fluid primary button " style={{
                   fontSize: '16px',
                   width: "140px",
                   height: "40px",
-                  // margin: "auto"
+                  margin: "auto"
+
                 }} onClick={
                   handleCheckout
                 }>

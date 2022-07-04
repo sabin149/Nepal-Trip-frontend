@@ -29,6 +29,7 @@ import ChangePassword from "./components/auth/Changepassword";
 import SendPasswordResetEmail from "./components/auth/SendPasswordResetEmail";
 import ResetPassword from "./components/auth/ResetPassword";
 import { createSearchInfo } from "./redux/actions/searchInfoAction";
+import AllHotelBookingsTable from "./components/vendor/components/VendorTable/AllHotelBookingsTable";
 // import axios from "axios";
 
 const App = () => {
@@ -57,7 +58,7 @@ const App = () => {
   }, [dispatch])
 
   const getSearchData = (searchData) => {
-    console.log(searchData,"from app.js")
+    // console.log(searchData,"from app.js")
     dispatch(createSearchInfo({ searchInfo:searchData }))
   }
 
@@ -87,6 +88,7 @@ const App = () => {
           <Route path="/vendor/reviews" element={isVendor ? <ReviewTable /> : <Navigate to="/" />} />
           <Route path="/admin/reviews" element={isAdmin ? <AllReviewsTable /> : <Navigate to="/" />} />
           <Route path="/admin/bookings" element={isAdmin ? <AllBookingsTable /> : <Navigate to="/" />} />
+          <Route path="/vendor/bookings" element={ isVendor ? <AllHotelBookingsTable /> : <Navigate to="/" />} />
           <Route path="/user/profile/:id" element={isUser || isVendor || isAdmin? <Profile token={token} /> : <Navigate to="/" />} />
           <Route path="/changepassword" element={ isUser || isVendor || isAdmin ? <ChangePassword token={token} /> :<Navigate to="/"/> } />
           <Route path="/send-reset-password-email" element={<SendPasswordResetEmail />} />
