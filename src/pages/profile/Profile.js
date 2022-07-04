@@ -50,12 +50,9 @@ const Profile = ({ token }) => {
         dispatch(updateUserProfile({ userData, id, avatar, token, defaultAvatar: user.avatar }))
     }
     return (
-        
         <>
             <div className="edit_user_profile"> 
             <Link to="/" className="btn btn-outline-primary btn-sm">Back</Link>
-            <Link to="/changepassword" className="btn btn-outline-warning cpass">ChangePassword</Link>
-            
             <form onSubmit={handleSubmit}>
                 <div className="card user-profile m-auto mt-3">
                     <div className="card-body">
