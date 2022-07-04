@@ -2875,7 +2875,18 @@
     {
       "id": "ZPL-2.0",
       "identifiers": [
-        
+        {
+          "identifier": "Zope-2.0",
+          "scheme": "DEP5"
+        },
+        {
+          "identifier": "ZPL-2.0",
+          "scheme": "SPDX"
+        },
+        {
+          "identifier": "License :: OSI Approved :: Zope Public License",
+          "scheme": "Trove"
+        }
       ],
       "links": [
         {
