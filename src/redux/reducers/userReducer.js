@@ -4,6 +4,7 @@ import { USER_TYPES } from "../actions/userAction";
 const initialState = {
     loading: false,
     users: [],
+    user:{},
     count: 0,
     page: 1
 }
@@ -21,6 +22,11 @@ const userReducer = (state = initialState, action) => {
                 users: action.payload.users,
                 count: action.payload.count,
                 page: action.payload.page
+            };
+        case USER_TYPES.GET_USER:
+            return {
+                ...state,
+                user: action.payload
             };
         case USER_TYPES.UPDATE_USER:
             return {

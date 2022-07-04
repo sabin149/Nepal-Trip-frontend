@@ -65,9 +65,7 @@ h5{
 .pd-top-md{
   padding-top: 80px;
 }
-.container{
-  /* width: 1127px; */
-}
+
 h2{
  color:#003c75 ; 
  font-size: 18px;
@@ -82,13 +80,13 @@ p.locationhotel{
 h3.bold{
   font-family: "Poppins",sans-serif;
   color:#003c75 ;
-  font-size: 16px;
-  font-weight: 550;
+  font-size: 14px;
+  font-weight: 500;
   padding-top: 30px;
 }
 h4{
   color:#003c75 ; 
-  font-size: 14px;
+  font-size: 13px;
   font-family: "Poppins",sans-serif;
   font-weight: 599;
 }
@@ -525,4 +523,100 @@ ul.bulleted li {
     border-bottom: 1px solid rgba(34,36,38,.25);
     text-transform: uppercase;
     border-top: 5px solid #c48d3b;
+}
+
+.comment_input{
+  display: flex;
+  align-items: center;
+}
+.comment_input .user_hotel_rating{
+  background: #f7f7f7 !important;
+  padding: 1rem 1.25rem;
+}
+.comment_input input{
+  background: #f7f7f7;
+  border: none;
+  outline: none;
+  flex: 1;
+  overflow: auto;
+  padding: 1rem 1.25rem;
+}
+.comment_input .postBtn{
+  border: none;
+  outline: none;
+  background: #f7f7f7;
+  color: #00529B;
+  font-weight: 600;
+  padding: 1rem 1.25rem;
+}
+.comment_input .dropdown-menu{
+  transform: translate3d(-120px, -200px, 0px) !important;
+}
+
+/* ---------- Comments ---------- */
+.comment_display{
+  padding: 10px 25px;
+}
+.comment_card .comment_content{
+  background: #eee;
+  padding: 7px;
+  border-radius: 10px;
+  border-top-left-radius: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.comment_card .comment_content .readMore{
+  cursor: pointer;
+  color: crimson;
+}
+
+/* .comment_card .comment_content .nav-item{
+  cursor: pointer;
+  opacity: 0;
+}
+.comment_card .comment_content:hover .nav-item{
+  opacity: 1;
+} */
+.comment_card .comment_content .dropdown-menu{
+  position: absolute;
+  right: 0;
+  left: inherit;
+}
+.comment_card .comment_content .dropdown-item{
+  display: flex;
+  margin: 10px 0;
+}
+.comment_card .comment_content textarea{
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+/* avatar */
+
+
+
+.supper-avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.big-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.medium-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.small-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
 }

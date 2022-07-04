@@ -8,7 +8,7 @@ const Toast = ({ msg, handleShow, bgColor }) => {
         }}>
             <div className={`toast-header text-light ${bgColor}`}>
                 <strong className="me-auto text-light">{msg.title}</strong>
-                <button type="button" className="btn-close text-light" onClick={handleShow} data-bs-dismiss="toast" aria-label="Close" style={{ outline: "none" }}></button>
+                <button type="button" className="btn-close btn-close-white" onClick={handleShow} data-bs-dismiss="toast" aria-label="Close" style={{ outline: "none" }}></button>
             </div>
             <div className="toast-body">
                 {msg.body}
