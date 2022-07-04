@@ -26,7 +26,7 @@ export const SidebarData = [
   {
     icon: UilUsersAlt,
     heading: "Users",
-    path: "/users",
+    path: "admin/users",
   },
   {
     icon: UilBuilding,

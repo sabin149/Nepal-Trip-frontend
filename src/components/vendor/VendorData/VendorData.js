@@ -28,7 +28,7 @@ export const SidebarData = [
   {
     icon: UilUsersAlt,
     heading: "Customers",
-    path: "/customers",
+    path: "/vendor/users",
   },
   {
     icon: UilUser,
@@ -48,7 +48,6 @@ export const SidebarData = [
     path:"/hotel"
   },
   {
-    icon: UilPanelAdd,
     icon: UilFocusAdd,
     heading: 'Add Rooms',
     path:"/room"

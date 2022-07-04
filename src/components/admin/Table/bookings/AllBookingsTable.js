@@ -39,6 +39,19 @@ const columns = [
         renderCell: ({ value }) => {
             return <img src={value ? value : ""} alt="avatar" style={{ width: '100px', height: "80px", backgroundColor: "white", }} />
         }
+    },{
+        field: 'roomdetails',
+        headerName: 'Room Booking Details',
+        sortable: false,
+        width: 240,
+        filter: false,
+        renderCell: ({ value }) => {
+            return <span>
+                <span>Rooms: {value.rooms}</span>
+                <span> Adults: {value.adults}</span>
+                <span> Children: {value.children}</span>
+            </span>
+        }
     },
     {
         field: 'username',
@@ -59,7 +72,7 @@ const columns = [
         width: 200,
         sortable: true,
         renderCell: (bookingData) => {
-            return moment(bookingData?.formattedValue ? bookingData?.value : "").format('YYYY-MM-DD')
+            return moment(bookingData?.formattedValue ? bookingData?.value : "").format('Do MMMM YYYY')
         }
     },
     {
@@ -68,7 +81,7 @@ const columns = [
         width: 200,
         sortable: true,
         renderCell: (bookingData) => {
-            return moment(bookingData?.value ? bookingData?.value : "").format('YYYY-MM-DD')
+            return moment(bookingData?.value ? bookingData?.value : "").format('Do MMMM YYYY')
         }
     }, {
         field: "totalamount",
@@ -96,13 +109,14 @@ export default function AllBookingsTable() {
     }, [dispatch, token])
 
     const bookingsData= bookings.map((booking,index) => {
-        console.log(booking.start_date)
+        console.log(booking)
         return {
             id: index+1,
             hotel: booking.hotel.hotel_name,
             hotelimage: booking.hotel.hotel_images[0].url,
             room: booking.room.room_type,
             roomimage: booking.room.room_images[0].url,
+            roomdetails: booking,
             username: booking.name,
             avatar: booking.user.avatar,
             startdate: booking.start_date,

@@ -96,7 +96,7 @@ export default function AllReviewsTable() {
             review: item.review,
             rating: item.hotel_rating,
             user: item.user.fullname,
-            createdAt: moment(item.createdAt).format('MMMM Do YYYY, h:mm:ss a'),
+            createdAt: moment(item.createdAt).format('Do MMMM YYYY, h:mm:ss a'),
             avatar: item.user.avatar
         }
     })

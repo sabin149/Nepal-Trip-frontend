@@ -52,7 +52,7 @@ const Profile = ({ token }) => {
     return (
         <>
             <div className="edit_user_profile"> 
-            <Link to="/" className="btn btn-outline-primary btn-sm">Back</Link>
+            {(user.role==="admin" || user.role==="vendor")&&<Link to="/" className="btn btn-outline-primary btn-sm">Back</Link>}
             <form onSubmit={handleSubmit}>
                 <div className="card user-profile m-auto mt-3">
                     <div className="card-body">

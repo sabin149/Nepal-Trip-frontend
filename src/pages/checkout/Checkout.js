@@ -210,11 +210,11 @@ const Checkout = () => {
               <div className='flex flex-box'>
                 <div className='box'>
                   <p><span>Check-in</span></p>
-                  <h5>{moment(date[0].startDate).format("DD MMMM YYYY")}</h5>
+                  <h5>{moment(date[0].startDate).format("Do MMMM YYYY")}</h5>
                 </div>
                 <div className='box'>
                   <p><span>Check-Out</span></p>
-                  <h5>{moment(date[0].endDate).format("DD MMMM YYYY")}</h5>
+                  <h5>{moment(date[0].endDate).format("Do MMMM YYYY")}</h5>
                 </div>
                 <div className='box b-lDuration'>
                   <p><span>Duration</span></p>
