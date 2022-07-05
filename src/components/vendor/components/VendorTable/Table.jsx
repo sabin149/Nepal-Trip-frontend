@@ -24,7 +24,7 @@ const columns = [
     width: 180,
     sortable: true,
     renderCell: (bookingData) => {
-      return moment(bookingData?.value ? bookingData?.value : "").format("MMM Do YYYY")
+      return moment(bookingData?.value ? bookingData?.value : "").format("Do MMMM YYYY")
     }
   },
   {
@@ -33,7 +33,7 @@ const columns = [
     width: 175,
     sortable: true,
     renderCell: (bookingData) => {
-      return moment(bookingData?.value ? bookingData?.value : "").format("MMM Do YYYY")
+      return moment(bookingData?.value ? bookingData?.value : "").format("Do MMMM YYYY")
     }
   }, {
     field: "totalamount",
