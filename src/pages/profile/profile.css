@@ -4,6 +4,19 @@
     box-shadow: 0 2px 4px 0 rgba(196, 20, 20, 0.727);
     
 }
+.bbutton{
+    text-decoration: none;
+    margin-left: 1rem;
+    /* margin-top: 1rem; */
+}
+
+.cpass{
+    text-align: right;
+    text-decoration: none;
+    margin-left: 80rem;
+    margin-top: 1rem;
+   
+}
 
 /* .profile-input .name{
     margin: 0;

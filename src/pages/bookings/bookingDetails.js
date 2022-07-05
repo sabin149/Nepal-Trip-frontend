@@ -183,13 +183,13 @@ const BookingDetails = () => {
                         <td className="" rowSpan="3">
                           <h3 className="color-lack bold pointer">
 
-                            {moment(userBooking?.start_date).format("MMMM Do YYYY")} check-in
+                            {moment(userBooking?.start_date).format("Do MMMM YYYY")} check-in
                           </h3>
                         </td>
                         <td className="" rowSpan="4">
                           <h3 className="color-black bold pointer">
 
-                            {moment(userBooking?.end_date).format("MMMM Do YYYY")}  check-out
+                            {moment(userBooking?.end_date).format("Do MMMM YYYY")}  check-out
                           </h3>
                         </td>
                       </tr>

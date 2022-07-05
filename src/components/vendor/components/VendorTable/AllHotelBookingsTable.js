@@ -25,6 +25,20 @@ const columns = [
         }
     },
     {
+        field: 'roomdetails',
+        headerName: 'Room Booking Details',
+        sortable: false,
+        width: 240,
+        filter: false,
+        renderCell: ({ value }) => {
+            return <span>
+                <span>Rooms: {value.rooms}</span>
+                <span> Adults: {value.adults}</span>
+                <span> Children: {value.children}</span>
+            </span>
+        }
+    },
+    {
         field: 'username',
         headerName: 'FullName',
         sortable: true,
@@ -48,7 +62,7 @@ const columns = [
         width: 200,
         sortable: true,
         renderCell: (bookingData) => {
-            return moment(bookingData?.formattedValue ? bookingData?.value : "").format('YYYY-MM-DD')
+            return moment(bookingData?.formattedValue ? bookingData?.value : "").format('Do MMMM YYYY')
         }
     },
     {
@@ -57,7 +71,7 @@ const columns = [
         width: 200,
         sortable: true,
         renderCell: (bookingData) => {
-            return moment(bookingData?.value ? bookingData?.value : "").format('YYYY-MM-DD')
+            return moment(bookingData?.value ? bookingData?.value : "").format('Do MMMM YYYY')
         }
     }, {
         field: "totalamount",
@@ -90,6 +104,7 @@ export default function AllHotelBookingsTable() {
             id: index + 1,
             room: data.room.room_type,
             roomimage: data.room.room_images[0].url,
+            roomdetails: data,
             username: data.name,
             email: data.email,
             avatar: data.user.avatar,
