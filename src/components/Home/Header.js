@@ -43,7 +43,6 @@ const Header = ({ isUser }) => {
             }}> Logout
               <span> <i className="fa-solid fa-right-from-bracket text-light" ></i></span>
 
-
             </button>}
           <div className="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true" >
             <div className="modal-dialog">
