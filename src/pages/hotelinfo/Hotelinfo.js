@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./hotelinfo.css";
-import { Link, useParams, useLocation } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
@@ -14,6 +14,7 @@ import ShareModal from "../../components/ShareModal";
 import { Paper } from "@mui/material";
 import { Grid } from "@material-ui/core";
 import SearchHeader from "../../components/Home/SearchHeader";
+import GoogleMaps from "../../components/GoogleMaps";
 
 const Hotelinfo = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,24 @@ const Hotelinfo = () => {
 
   const checkData = state?.searchInfoData ?
     state.searchInfoData : window.href = "/";
+
+  const address = checkData.address
+  let lat, lng;
+  if (address === "Pokhara") {
+    lat = 28.2152602;
+    lng = 83.9623006;
+  }
+  if (address === "Kathmandu") {
+    lat = 27.7113869;
+    lng = 85.3151488;
+  } if (address === "Dhulikhel") {
+    lat = 27.6217981;
+    lng = 85.5527428;
+  } if (address === "Lumbini") {
+    lat = 27.5052594;
+    lng = 83.4065654;
+  }
+
 
   const { id } = useParams();
 
@@ -79,7 +98,7 @@ const Hotelinfo = () => {
       })
       return
     }
-    if(checkUserReview){
+    if (checkUserReview) {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "You have already wrote the review!!!" } })
       setReview("");
       setValue(0);
@@ -165,11 +184,12 @@ const Hotelinfo = () => {
           <h2 className="text-capitalize">{hotel.hotel_name}</h2>
           <p className="locationhotel text-capitalize">
             {hotel?.address === "ktm" ? "Kathmandu, Nepal" : hotel?.address + ",Nepal"}
-            <Link to="" className="block-in-mobile">
+            <a href="#map" className="block-in-mobile">
               <i className="fa-solid fa-location-dot"></i>
 
               <span> view in map </span>
-            </Link>
+
+            </a>
           </p>
           <div>
             <div className="row">
@@ -177,7 +197,7 @@ const Hotelinfo = () => {
                 <Carousel images={hotel?.hotel_images} />
               </div>
 
-              <div className="col abouthotel">
+              <div className="col abouthotel" id="info">
                 <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                   <div>
                     <h4 className="color-dark-blue bold">
@@ -304,13 +324,15 @@ const Hotelinfo = () => {
 
                   </div>
                   <hr></hr>
-                  <div className="hotelmap">
+                  <div className="hotelmap" >
                     <h4 className="color-dark-blue bold">
                       <span>Location</span>
                     </h4>
-                    <Link to="">
-                      <img className="maphotel" src="https://maps.google.com/maps/api/staticmap?markers=color:red|28,84&maptype=roadmap&zoom=12&size=500x160&key=AIzaSyDrMdzB3i4v3U62r4Xww5blaRIjg9dji14" alt="map" />
-                    </Link>
+                   <div style={{
+                      height: '100px !important',
+                   }}>
+                   <GoogleMaps lat={lat} lng={lng}/>
+                   </div>
                   </div>
                 </div>
               </div>
@@ -551,10 +573,11 @@ const Hotelinfo = () => {
             </div>
 
           </div>
-          <div className="segment">
-            <h3 className="bold">
+          <div className="segment" id="map">
+            <h3 className="bold p-0">
               <span>Map</span>
             </h3>
+            <GoogleMaps lat={lat} lng={lng} size="big" />
           </div>
           <div className="segment">
             <h3 className="bold">

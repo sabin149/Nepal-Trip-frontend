@@ -557,8 +557,7 @@ const RoomTable = ({ hotel, searchInfoData }) => {
                   fontSize: '16px',
                   width: "140px",
                   height: "40px",
-              
-
+                  margin: "auto"
                 }} onClick={
                   handleCheckout
                 }>
