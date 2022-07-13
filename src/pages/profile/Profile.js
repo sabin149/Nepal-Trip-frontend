@@ -1,28 +1,23 @@
-import React from 'react'
-import "./profile.css"
+import React from "react";
+import "./profile.css";
 
 const Profile = () => {
   return (
     <>
-    <div className='col-4 bg-dark'>
-        <h3>hello 1</h3>
-    </div>
-
-     <div className="card user-profile m-auto">
+      <div className="card user-profile m-auto">
         <div className="card-body">
           <div className="mt-2 text-center profile">
-            <h3 style={{ textDecoration:"underline" }}>Profile</h3>
+            <h3 style={{ textDecoration: "underline" }}>Profile</h3>
 
             <div className="col-md-4 d-block m-auto mt-4 mb-4 img-holder">
               <img
-              className="rounded-circle"
+                className="rounded-circle"
                 src="https://celebmezzo.com/wp-content/uploads/2020/05/Rajesh-Hamal.jpg"
                 alt="Profile_Image"
                 style={{
                   width: "100%",
                   height: "100%",
                   objectFit: "cover",
-                  
                 }}
               />
             </div>
@@ -83,8 +78,11 @@ const Profile = () => {
             </button>
           </div>
         </div>
-      </div></>
-  )
-}
+      </div>
 
-export default Profile
+    
+    </>
+  );
+};
+
+export default Profile;
