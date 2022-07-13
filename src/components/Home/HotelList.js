@@ -1,11 +1,9 @@
 import "./hotel_list.css";
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Button, FormControlLabel, Grid, Paper, Radio, RadioGroup, Slider, TextField, Typography } from "@mui/material";
 import SearchHeader from "./SearchHeader";
-import { getUser } from "../../redux/actions/userAction";
 import SearchedHotelList from "./HotelList/SearchedHotelList";
 
 function useQuery() {
