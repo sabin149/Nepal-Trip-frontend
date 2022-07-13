@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import "./Card.css";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { UilTimes } from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
-import { getBookingsByHotel } from "../../../../redux/actions/bookingAction";
-import { useDispatch,useSelector } from "react-redux";
 
 const Card = (props) => {
   const [expanded, setExpanded] = useState(false);
@@ -21,36 +19,7 @@ const Card = (props) => {
 
 
 function CompactCard({ param, setExpanded }) {
-  const dispatch = useDispatch();
-  const token=localStorage.getItem("token");
   const Png = param.png;
-
-  const userID = localStorage.getItem('userID');
-
-  const hotels = param?.hotel?.hotels
-
-  const {booking}=useSelector(state=>state);
-
-  const oneHotel = hotels && hotels.filter(hotel => hotel?.user?._id === userID)[0];
-
-  useEffect(() => {
-    dispatch(getBookingsByHotel({ hotelId: oneHotel?._id, token }));
-}, [dispatch, oneHotel, token])
-
-const hotelReviewsUsers = oneHotel && oneHotel?.hotel_reviews && oneHotel?.hotel_reviews?.map(review => review?.user)
-
-const bookingUsers = booking?.bookings && booking?.bookings && booking?.bookings?.map(booking => booking?.user)
-
-let allUsers = []
-
-if (bookingUsers !== undefined && hotelReviewsUsers !== undefined) {
-
-    allUsers = [...bookingUsers, ...hotelReviewsUsers].filter((user, index, self) =>
-        index === self.findIndex((t) => (
-            t?._id === user?._id
-        ))
-    )
-}
 
   return (
     <motion.div
@@ -68,13 +37,13 @@ if (bookingUsers !== undefined && hotelReviewsUsers !== undefined) {
       <div className="detail">
         <Png />
         {param.title === 'USERS' ?
-          allUsers.length:
+          param?.allUsers?.length :
           param.title === 'HOTELS' ?
             "1" :
             param.title === 'BOOKINGS' ?
-              booking.bookings.length :
+              param?.booking?.bookings.length :
               param.title === 'REVIEWS' ?
-                oneHotel?.hotel_reviews?.length :
+                param?.oneHotel?.hotel_reviews?.length :
                 "0"}
         <span>Total</span>
       </div>
@@ -120,15 +89,15 @@ function ExpandedCard({ param, setExpanded }) {
         show: true,
       },
       xaxis: {
-        type: "datetime",
+        type: "string",
         categories: [
-          "2019-10-14T06:30:00.000Z",
-          "2020-09-19T06:30:00.000Z",
-          "2021-09-19T06:30:00.000Z",
-          "2022-09-19T06:30:00.000Z",
-          "2023-09-19T06:30:00.000Z",
-          "2024-09-19T06:30:00.000Z",
-          "2025-09-19T06:30:00.000Z",
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat"
         ],
       },
     },
@@ -150,7 +119,7 @@ function ExpandedCard({ param, setExpanded }) {
       <div className="chartContainer">
         <Chart options={data.options} series={param.series} type="area" />
       </div>
-      <span>Last 24 hours</span>
+      <span>Last 7 Days</span>
     </motion.div>
   );
 }

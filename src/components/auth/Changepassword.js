@@ -25,12 +25,9 @@ const ChangePassword = ({ token }) => {
   }
   
   return (
-    
-    
-    
-    
-    <div className="auth_page mt-5">
-      
+    <>
+    <Link to="/" className='btn btn-outline-primary btn-sm'>Back</Link>
+    <div className="auth_page mt-5"> 
       <form onSubmit={handlePasswordSubmit} className="mt-5">
         <h3 className="text-uppercase text-center text-warning">
           Change
@@ -106,7 +103,7 @@ const ChangePassword = ({ token }) => {
         </button>
       </form>
     </div>
-    
+    </>
   );
 };
 export default ChangePassword;

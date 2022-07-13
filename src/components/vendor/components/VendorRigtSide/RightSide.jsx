@@ -2,12 +2,12 @@ import React from "react";
 import Bookingrevenue from "../VendorBookingRevenue/BookingRevenue";
 import "./RightSide.css";
 
-const RightSide = () => {
+const RightSide = ({booking}) => {
   return (
     <div className="RightSide">
       <div>
         <h3>Booking Revenue</h3>
-        <Bookingrevenue />
+        <Bookingrevenue booking={booking} />
       </div>
     </div>
   );
