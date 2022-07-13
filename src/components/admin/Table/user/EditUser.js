@@ -4,7 +4,7 @@ import { GLOBALTYPES } from '../../../../redux/actions/globalTypes'
 import { useDispatch } from 'react-redux'
 import { checkImage } from '../../../../utils/imageUpload'
 import "./profile.css"
-import { updateUser } from '../../../../redux/actions/userAction'
+import { updateAdminUser } from '../../../../redux/actions/userAction'
 
 const EditUser = () => {
     const dispatch = useDispatch()
@@ -20,10 +20,11 @@ const EditUser = () => {
         username: "",
         address: "",
         phone: "",
-        gender: ""
+        gender: "",
+        email:""
     })
     const [userData, setUserData] = useState(initialState)
-    const { fullname, username, address, phone, gender } = userData
+    const { fullname, username,email, address, phone, gender } = userData
 
     const [avatar, setAvatar] = useState("");
 
@@ -46,7 +47,7 @@ const EditUser = () => {
     }
     const handleSubmit = e => {
         e.preventDefault();
-        dispatch(updateUser({ userData, avatar, id: userDetails._id, token, defaultAvatar: userDetails.avatar }))
+        dispatch(updateAdminUser({ userData, avatar, id: userDetails._id, token, defaultAvatar: userDetails.avatar }))
         navigate("/users")
     }
     return (
@@ -74,14 +75,22 @@ const EditUser = () => {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="fullname">UserName</label>
+                    <label htmlFor="userName">UserName</label>
                     <div className="position-relative">
-                        <input type="text" className="form-control" id="fullname"
+                        <input type="text" className="form-control" id="userName"
                             name="username" value={username} onChange={handleInput} />
                         <small className="text-danger position-absolute"
                             style={{ top: '50%', right: '5px', transform: 'translateY(-50%)' }}>
                             {username.length}/25
                         </small>
+                    </div>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="email">Email</label>
+                    <div className="position-relative">
+                        <input type="text" className="form-control" id="fullname"
+                            name="email" value={email} onChange={handleInput} />
+                       
                     </div>
                 </div>
 
@@ -98,18 +107,20 @@ const EditUser = () => {
                         className="form-control" onChange={handleInput} />
                 </div>
 
-                <label htmlFor="gender">Gender</label>
+               <div className="form-group">
+                 <label htmlFor="gender">Gender</label>
                 <div className="input-group px-0 mb-4">
                     <select name="gender" id="gender" value={gender}
-                        className="custom-select text-capitalize"
+                        className="custom-select text-capitalize form-control"
                         onChange={handleInput}>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
+               </div>
 
-                <button className="btn btn-info w-100" type="submit">Save</button>
+                <button className="btn btn-info w-100 text-light" type="submit">Save</button>
             </form>
         </div>
     )

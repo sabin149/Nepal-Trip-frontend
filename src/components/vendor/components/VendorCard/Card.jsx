@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Card.css";
-// import { CircularProgressbar } from "react-circular-progressbar";
-// import "react-circular-progressbar/dist/styles.css";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { UilTimes } from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
-
-
-// parent Card
+import { getBookingsByHotel } from "../../../../redux/actions/bookingAction";
+import { useDispatch,useSelector } from "react-redux";
 
 const Card = (props) => {
   const [expanded, setExpanded] = useState(false);
@@ -22,19 +19,38 @@ const Card = (props) => {
   );
 };
 
-// Compact Card
+
 function CompactCard({ param, setExpanded }) {
-  // console.log(param)
+  const dispatch = useDispatch();
+  const token=localStorage.getItem("token");
   const Png = param.png;
 
   const userID = localStorage.getItem('userID');
 
-
   const hotels = param?.hotel?.hotels
-  const bookings = param?.booking
 
+  const {booking}=useSelector(state=>state);
 
-  const hotel = hotels && hotels.filter(hotel => hotel?.user?._id === userID)[0];
+  const oneHotel = hotels && hotels.filter(hotel => hotel?.user?._id === userID)[0];
+
+  useEffect(() => {
+    dispatch(getBookingsByHotel({ hotelId: oneHotel?._id, token }));
+}, [dispatch, oneHotel, token])
+
+const hotelReviewsUsers = oneHotel && oneHotel?.hotel_reviews && oneHotel?.hotel_reviews?.map(review => review?.user)
+
+const bookingUsers = booking?.bookings && booking?.bookings && booking?.bookings?.map(booking => booking?.user)
+
+let allUsers = []
+
+if (bookingUsers !== undefined && hotelReviewsUsers !== undefined) {
+
+    allUsers = [...bookingUsers, ...hotelReviewsUsers].filter((user, index, self) =>
+        index === self.findIndex((t) => (
+            t?._id === user?._id
+        ))
+    )
+}
 
   return (
     <motion.div
@@ -52,13 +68,13 @@ function CompactCard({ param, setExpanded }) {
       <div className="detail">
         <Png />
         {param.title === 'USERS' ?
-          bookings?.count :
+          allUsers.length:
           param.title === 'HOTELS' ?
             "1" :
             param.title === 'BOOKINGS' ?
-              bookings?.count :
+              booking.bookings.length :
               param.title === 'REVIEWS' ?
-                hotel?.hotel_reviews?.length :
+                oneHotel?.hotel_reviews?.length :
                 "0"}
         <span>Total</span>
       </div>
@@ -106,13 +122,13 @@ function ExpandedCard({ param, setExpanded }) {
       xaxis: {
         type: "datetime",
         categories: [
-          "2018-09-19T00:00:00.000Z",
-          "2018-09-19T01:30:00.000Z",
-          "2018-09-19T02:30:00.000Z",
-          "2018-09-19T03:30:00.000Z",
-          "2018-09-19T04:30:00.000Z",
-          "2018-09-19T05:30:00.000Z",
-          "2018-09-19T06:30:00.000Z",
+          "2019-10-14T06:30:00.000Z",
+          "2020-09-19T06:30:00.000Z",
+          "2021-09-19T06:30:00.000Z",
+          "2022-09-19T06:30:00.000Z",
+          "2023-09-19T06:30:00.000Z",
+          "2024-09-19T06:30:00.000Z",
+          "2025-09-19T06:30:00.000Z",
         ],
       },
     },

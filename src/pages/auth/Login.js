@@ -47,13 +47,11 @@ const Login = () => {
                 <i className='fas fa-eye'></i> :
                 <i className='fas fa-eye-slash'></i>
               }
-
-
             </small>
           </div>
         </div>
         <p className='my-2'>
-          <Link to="/register" style={{ color: "blue" }}>Forgot Password?</Link>
+          <Link to="/send-reset-password-email" style={{ color: "blue" }}>Forgot Password?</Link>
         </p>
         <button type="submit" className="btn btn-warning w-100 mt-2"
           disabled={email && password ? false : true}
