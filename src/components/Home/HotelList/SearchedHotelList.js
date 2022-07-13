@@ -9,17 +9,11 @@ const SearchedHotelList = ({ hotelData, searchInfoData }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
+    const userID = localStorage.getItem("userID")
+    const token = localStorage.getItem("token")
     const { user } = useSelector(state => state.user)
 
     const [saved, setSaved] = useState(false)
-    const [saveLoad, setSaveLoad] = useState(false)
-
-    const userID = localStorage.getItem("userID")
-    const token = localStorage.getItem("token")
-
-    // const hotelList= hotelData.hotels.map(hotel => hotel  )
-    // console.log(hotelList);
 
     const auth = {
         token,
@@ -27,20 +21,24 @@ const SearchedHotelList = ({ hotelData, searchInfoData }) => {
     }
 
     useEffect(() => {
-        dispatch(getUser({ id: userID, token }))
+        if(userID && token){
+        dispatch(getUser({ id: userID, token }))}
     }, [dispatch, token, userID])
 
     // const dynamicStyle = saved ? "fa-solid fa-heart h2" : "fa-solid fa-heart text-danger h2"
 
     const handleSaveHotel = ({ hotel }) => {
-        if (auth?.user?.favourites?.includes(hotel._id)) {
-            setSaved(false)
-            dispatch(UnSaveHotel({ hotel, auth }));
-        } else {
-            setSaved(true)
-            dispatch(saveHotel({ hotel, auth }));
+        if (userID && token) {
+            if (auth?.user?.favourites?.includes(hotel._id)) {
+                setSaved(false)
+                dispatch(UnSaveHotel({ hotel, auth }));
+            } else {
+                setSaved(true)
+                dispatch(saveHotel({ hotel, auth }));
 
+            }
         }
+        return
     }
 
     return (
@@ -140,33 +138,7 @@ const SearchedHotelList = ({ hotelData, searchInfoData }) => {
                                                 objectFit: "cover",
                                             }}
                                         />
-                                        <span style={{
-                                            position: "relative",
-                                            top: "-10rem",
-                                            left: "11rem",
-                                            right: "0",
-                                            bottom: "0",
-                                        }}>
-                                            {
-
-                                                auth.user.favourites.includes(hotel._id) ? <i className="fa-solid fa-heart text-danger h2"
-                                                    onClick={(e) => {
-                                                        e.preventDefault()
-                                                        handleSaveHotel({ hotel })
-                                                    }} style={{
-                                                        cursor: "pointer",
-                                                    }} /> :
-                                                    <i className="fa-solid fa-heart  h2"
-                                                        onClick={(e) => {
-                                                            e.preventDefault()
-                                                            handleSaveHotel({ hotel })
-                                                        }
-                                                        } style={{
-                                                            cursor: "pointer",
-                                                        }} />
-
-                                            }
-                                        </span>
+                                        
                                     </div>
                                     <div className="col-md-5 hotel_detail">
                                         <h3>
@@ -289,7 +261,34 @@ const SearchedHotelList = ({ hotelData, searchInfoData }) => {
                                             )}
                                         </div>
                                     </div>
+
                                     <div className="col">
+                                    {userID && token &&
+                                            <div style={{
+                                                display: "flex",
+                                                justifyContent:"justify-content-end",
+                                            }}>
+                                                {
+
+                                                    auth.user.favourites.includes(hotel._id) ?
+                                                        <i className="fa-solid fa-heart text-danger h2"
+                                                            onClick={(e) => {
+                                                                e.preventDefault()
+                                                                handleSaveHotel({ hotel })
+                                                            }} style={{
+                                                                cursor: "pointer",
+                                                            }} /> :
+                                                        <i className="fa-solid fa-heart  h2"
+                                                            onClick={(e) => {
+                                                                e.preventDefault()
+                                                                handleSaveHotel({ hotel })
+                                                            }
+                                                            } style={{
+                                                                cursor: "pointer",
+                                                            }} />
+
+                                                }
+                                            </div>}
                                         <div>
                                             <p className="hotel-price">NPR {hotel.price}</p>
                                             <span style={{ color: "gray", fontSize: "12px" }}>
@@ -298,6 +297,7 @@ const SearchedHotelList = ({ hotelData, searchInfoData }) => {
                                                 (excluding Taxes)
                                             </span>
                                         </div>
+
                                         <Button
                                             variant="contained"
                                             color="primary"
@@ -308,6 +308,7 @@ const SearchedHotelList = ({ hotelData, searchInfoData }) => {
                                         >
                                             CHOOSE
                                         </Button>
+
                                     </div>
                                 </div>
                             </Paper>
