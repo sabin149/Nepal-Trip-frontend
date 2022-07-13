@@ -1,24 +1,31 @@
 import * as React from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { useDispatch, useSelector } from 'react-redux';
-import { getHotels } from '../../../../../redux/actions/hotelAction';
-import { getUsers } from '../../../../../redux/actions/userAction';
+import { useSelector } from 'react-redux';
 import moment from 'moment';
 import { TextareaAutosize } from '@mui/material';
+import { Link } from 'react-router-dom';
+import {CustomToolbar,CustomPagination} from "../../../../CustomFunction"
 
 const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    { field: 'id', headerName: 'ID', width: 65 },
     {
         field: 'user',
-        headerName: 'User',
+        headerName: 'User Name',
         sortable: true,
-        width: 180,
+        width: 220,
+
+    },
+    {
+        field: 'email',
+        headerName: 'Email',
+        sortable: true,
+        width: 300,
 
     },
     {
         field: "avatar",
         headerName: 'Avatar',
-        width: 120,
+        width: 110,
         sortable: false,
         filter: false,
         renderCell: (reviewData) => {
@@ -28,7 +35,7 @@ const columns = [
     {
         field: 'review',
         headerName: 'Review',
-        width: 400,
+        width: 420,
         renderCell: (reviewData) => {
             return  <TextareaAutosize
             readOnly
@@ -42,56 +49,44 @@ const columns = [
     {
         field: 'rating',
         headerName: 'Rating',
-        width: 120,
+        width: 100,
+        sortable: false,
+        align: 'center',
+        renderCell: ({ value }) =>
+            <div>
+                <span style={{ color: '#ffb400', fontSize: '20px' }}>{value}</span>
+                <span style={{ color: '#ffb400', fontSize: '20px' }}>&#9733;</span>
+            </div>
     },
-
     {
         field: 'createdAt',
         headerName: 'Created At',
         sortable: false,
-        width: 120,
+        width: 220,
     },
-
-
 ];
 
 const rows = [];
 
 
 export default function ReviewTable() {
-
-    const dispatch = useDispatch();
     const userID = localStorage.getItem('userID');
-    const token = localStorage.getItem('token');
 
     const hotels = useSelector(state => state?.hotel?.hotels)
 
-    const { users } = useSelector(state => state.user)
-
-
-    React.useEffect(() => {
-        dispatch(getUsers(token))
-    }, [dispatch, token])
-
-
     const oneHotel = hotels && hotels?.filter(hotel => hotel?.user?._id === userID)
-
 
     const hotelReviews = oneHotel && oneHotel[0]?.hotel_reviews?.map((item, index) => {
         return {
             id: index + 1,
             review: item.review,
             rating: item.hotel_rating,
-            user: (users && users?.filter(user => user?._id === item?.user))[0]?.fullname,
-            createdAt: moment(item.createdAt).format('YYYY-MM-DD'),
-            avatar: (users && users?.filter(user => user?._id === item?.user))[0]?.avatar
+            user: item.user?.fullname,
+            email: item.user?.email,
+            createdAt: moment(item.createdAt).format('MMMM Do YYYY, h:mm:ss a'),
+            avatar: item.user.avatar
         }
     })
-
-   
-
-    // console.log(hotelReviews,"reviews");
-
 
     return (
         <div className="container mt-1" sx={{
@@ -101,33 +96,30 @@ export default function ReviewTable() {
             alignItems: "center",
             boxShadow: "0px 13px 20px 0px #80808029",
             padding: "20px",
-            overflow: "auto",
-            overflowX: "hidden",
-            overflowY: "auto",
             position: "relative",
             overflowScrolling: "touch",
             WebkitOverflowScrolling: "touch",
         }}>
+        <Link to="/" style={{ textDecoration: "none" }} className="btn btn-outline-primary btn-sm">
+            Back
+        </Link>
             <h2 className='h3 text-center text-capitalize text-primary'>All {oneHotel[0]?.hotel_name} reviews</h2>
             <hr />
-            <div className="review-card">
+            <div className="">
                 <div style={{ height: "86vh", width: '100%' }}>
                     <DataGrid
                         sx={{
                             boxShadow: 2,
-                            border: 2,
                             '& .MuiDataGrid-cell:hover': {
                                 color: 'primary.main',
                                 
                             },
                             "& .MuiDataGrid-columnHeaderTitle": {
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     letterSpacing: '1px',
-                                    fontWeight: '600',
+                                    fontWeight: '500',
                                 },
                         }}
-
-
 
                         rowHeight={100}
                         rows={hotelReviews ? hotelReviews : rows}
@@ -136,6 +128,11 @@ export default function ReviewTable() {
                         rowsPerPageOptions={[5]}
                         checkboxSelection
                         disableSelectionOnClick
+                        pagination
+                        components={{
+                        Toolbar: CustomToolbar,
+                        Pagination: CustomPagination,
+                    }}
                     />
                 </div>
             </div>

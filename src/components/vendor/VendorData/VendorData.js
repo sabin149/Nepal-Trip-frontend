@@ -4,9 +4,12 @@ import {
   UilClipboardAlt,
   UilUsersAlt,
   UilHome,
-  UilChart,
+  UilBuilding,
+  UilFocusAdd,
+  UilPanelAdd,
   UilComment,
-  UilUser, 
+  UilUser,
+  UilUserCircle 
 } from "@iconscout/react-unicons";
 
 
@@ -25,7 +28,7 @@ export const SidebarData = [
   {
     icon: UilUsersAlt,
     heading: "Customers",
-    path: "/customers",
+    path: "/vendor/users",
   },
   {
     icon: UilUser,
@@ -34,20 +37,27 @@ export const SidebarData = [
   },
   
   {
-    icon: UilHome,
+    icon: UilBuilding,
     heading: 'View Hotel',
     path:"/viewHotel"
   },
 
   {
-    icon: UilHome,
+    icon: UilPanelAdd,
     heading: 'Add Hotel',
     path:"/hotel"
   },
   {
-    icon: UilChart,
+    icon: UilFocusAdd,
     heading: 'Add Rooms',
     path:"/room"
+  },
+  {
+    icon: UilUserCircle,
+    //  icon: UilProfile,
+    
+    heading: 'Profile',
+    path: `/user/profile/${localStorage.getItem('userID')}`,
   }
   
 ];

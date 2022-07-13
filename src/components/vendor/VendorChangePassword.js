@@ -1,12 +1,12 @@
 import React, { useState} from 'react'
-const ChangePassword = () => {
+const VendorChangePassword = () => {
     const initialState = {
-        npassword: '', cpassword: '',
+        vnpassword: '', vcpassword: '',
     }
     const [userData,setUserData] = useState(initialState)
-    const [typePass, setTypePass] = useState(false)
-    const [typeCPass, setTypeCfPass] = useState(false)
-    const { npassword,cpassword } = userData
+    const [typeVPass, setTypeVPass] = useState(false)
+    const [typeVCPass, setTypeVCfPass] = useState(false)
+    const { vnpassword,vcpassword } = userData
 
     const handleChangeInput = e => {
         const { name, value } = e.target
@@ -35,17 +35,17 @@ const ChangePassword = () => {
           <label htmlFor="exampleInputPassword2">New Password</label>
           <div className="pass">
             <input
-              type={typePass ? "text" : "npassword"}
+              type={typeVPass ? "text" : "vnpassword"}
               className="form-control"
               id="exampleInputPassword2"
               onChange={handleChangeInput}
-              value={npassword}
+              value={vnpassword}
               
-              name="npassword"
+              name="vnpassword"
               
             />
-            <small onClick={() => setTypePass(!typePass)}>
-              {typePass ? (
+            <small onClick={() => setTypeVPass(!typeVPass)}>
+              {typeVPass ? (
                 <i className="fas fa-eye mt-1"></i>
               ) : (
                 <i className="fas fa-eye-slash mt-1"></i>
@@ -55,19 +55,19 @@ const ChangePassword = () => {
           
         </div>
         <div className="form-group">
-          <label htmlFor="cpassword">Confirm Password</label>
+          <label htmlFor="vcpassword">Confirm Password</label>
           <div className="pass">
             <input
-              type={typeCPass ? "text" : "npassword"}
+              type={typeVCPass ? "text" : "vnpassword"}
               className="form-control"
-              id="cpassword"
+              id="vcpassword"
               onChange={handleChangeInput}
-              value={cpassword}
-              name="cpassword"
+              value={vcpassword}
+              name="vcpassword"
               
             />
-            <small onClick={() => setTypeCfPass(!typeCPass)}>
-              {typeCPass ? (
+            <small onClick={() => setTypeVCfPass(!typeVCPass)}>
+              {typeVCPass ? (
                 <i className="fas fa-eye mt-1"></i>
               ) : (
                 <i className="fas fa-eye-slash mt-1"></i>
@@ -84,4 +84,4 @@ const ChangePassword = () => {
     </div>
   );
 };
-export default ChangePassword;
+export default VendorChangePassword;

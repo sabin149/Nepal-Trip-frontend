@@ -63,7 +63,7 @@
     color: #003c75;
   }
   .caption{
-    color: #4a4a4a;
+    color: #060606;
     font-size: 14px;
     padding-bottom: 3%;
     font-family: "Poppins",sans-serif;
@@ -78,8 +78,6 @@
     cursor: pointer;
   }
  
-
-
   hr{
     opacity: .6;
     box-sizing: content-box;
@@ -149,112 +147,18 @@
     color: #000000;
   }
   .checkin{
-    font-size: 20px;
-    color:black;
+    font-size: 16px;
+    color:rgb(51, 10, 187);
     font-weight: bold;
-    padding-top: 30px;
+    padding-top: 15px;
   }
-
-
-  h4.bold{
-    color:#003c75 ; 
-    font-size: 14px;
-    font-family: "Poppins",sans-serif;
-    font-weight: 599;
-    color: #1f1f1f;
-  }
-  .mg-top-0{
-    margin-top: 0px;
-    font-family: "Poppins",sans-serif;
-  }
-  .listoffer{
-  color: #4a4a4a;
-  font-family: Poppins,sans-serif;
-  padding-left: 5px;
-  }
-  .align-right
-  {text-align: right;
-  }
-  .color-green.bold{
-    color: #009b59;
-    font-weight: 500;
-    font-family: "Poppins",sans-serif;
-  }
-  .button.width150 {
-    width: 120px;
-    height: 30px;
-    margin: 0 auto;
-  }
-  .primary.button,.success.button{
-    color: white;
-    background-color: #c48a2b;
-    font-family: "Poppins",sans-serif;
-    font-size: 13px;
-    border-style: none;
-    border-radius: 5px;
-  }
-  .success.button{
-    color: white;
-    background-color:  #05b625;
-    font-family: "Poppins",sans-serif;
-    font-size: 13px;
-    border-style: none;
-    border-radius: 5px;
-  }
-  .fluid.button {
-    display: block;
-  }
-  .primary{
-    background-color: #c48a2b;
-  }
-  .success{
-    background-color: #05b625;
-  }
-
-  .colored-box {
-    background: #fff8ea;
-    padding: 10px;
-    border: 1px solid #f1e0bd;
-    border-radius: 4px;
-  }
-  .selection{
-    color:#4a4a4a ; 
-    font-size: 15px;
-    font-family: "Poppins",sans-serif;
-    font-weight: 500;
-  }
-  .red{
-    color: #fb6107;
-    font-size: 15px;
-    font-family: "Poppins",sans-serif;
-  }
-  .active{
-    background-color: #ffffff !important;
-  }
-  .my-4 {
-    margin: 40px 0 !important;
-  }
-.amenities {
-      position: relative;
-      background: #fff;
-      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-      margin: 1rem 0;
-      padding: 1em;
-      border-radius: .28571429rem;
-    }
-
-
-
   h3.policy{
         font-family: "Poppins",sans-serif;
-        color:#363636 ;
-        font-size: 16px;
+        color:#0c0c0c ;
+        font-size: 15px;
         font-weight: 550;
         padding-top: 30px;
-    }
-  h4.allpolicy{
-        font-family: "Poppins",sans-serif;
-        color:#4a4a4a ;
+        font-weight: bold;
     }
   ul.bulleted li {
         list-style-type: disc;
@@ -265,16 +169,6 @@
       /* Star Rating */
   .content {
     text-align: center;
-  }
-  .content h1 {
-    font-family: Poppins, sans-serif;
-    letter-spacing: 1px;
-    font-size: 50px;
-    color: #282828;
-    margin-bottom: 10px;
-  }
-  .content  i {
-    color: #FFC107;
   }
   .content span {
     position: relative;
@@ -316,29 +210,4 @@
     clip: rect(1px 1px 1px 1px);
     clip: rect(1px, 1px, 1px, 1px);
     opacity: 0;
-  }
-
-  .wrapper label {
-    position: relative;
-    float: right;
-    color: #C8C8C8;
-  }
-  .wrapper label:before {
-    margin: 5px;
-    content: "\f005";
-    display: inline-block;
-    font-size: 1.5em;
-    color: #ccc;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
-  .wrapper input:checked ~ label:before {
-    color: #FFC107;
-  }
-  .wrapper label:hover ~ label:before {
-    color: #ffdb70;
-  }
-  .wrapper label:hover:before {
-    color: #FFC107;
   }

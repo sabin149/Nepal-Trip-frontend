@@ -1,4 +1,3 @@
-import { EditData } from "../actions/globalTypes";
 import { REVIEW_TYPES } from "../actions/reviewAction";
 const initialState = {
     loading: false,

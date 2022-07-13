@@ -24,18 +24,9 @@ const Card = (props) => {
 
 // Compact Card
 function CompactCard({ param, setExpanded }) {
-  const dispatch = useDispatch();
-  const { user, hotel,review,booking } = useSelector(state => state)
-  const token = localStorage.getItem('token')
 
-  // const bookings = useSelector(state => state.booking)
-  // console.log(bookings);
-
-  useEffect(() => {
-    dispatch(getUsers(token));
-    dispatch(getBookings({ token }))
-    dispatch(getReviews({ token }))
-  }, [token, dispatch])
+  console.log(param)
+  
 
   const Png = param.png;
   return (
@@ -55,13 +46,13 @@ function CompactCard({ param, setExpanded }) {
         <Png />
         <span>{
           param.title === 'USERS' ?
-            user.count :
+            param.user.count :
             param.title === 'HOTELS' ?
-              hotel.count :
+              param.hotel.count :
               param.title === 'BOOKINGS' ?
-                booking.count :
+                param.booking.count :
                 param.title === 'REVIEWS' ?
-                  review.count :
+                  param.review.count :
                   "0"
         }</span>
         <span>Total</span>
@@ -109,15 +100,15 @@ function ExpandedCard({ param, setExpanded }) {
         show: true,
       },
       xaxis: {
-        type: "datetime",
+        type: "string",
         categories: [
-          "2022-05-19",
-          "2022-06-19",
-          "2022-07-19",
-          "2022-08-19",
-          "2022-09-19",
-          "2022-10-19",
-          "2022-11-19",
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat"
         ],
       },
     },
@@ -139,7 +130,7 @@ function ExpandedCard({ param, setExpanded }) {
       <div className="chartContainer">
         <Chart options={data.options} series={param.series} type="area" />
       </div>
-      <span>Last 30 Days</span>
+      <span>Last 7 Days</span>
     </motion.div>
   );
 }

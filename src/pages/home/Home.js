@@ -11,9 +11,9 @@ import { useDispatch } from "react-redux"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes"
 import { Grid } from '@mui/material';
 import useStyles from './homeStyle';
-import { createSearchInfo } from "../../redux/actions/searchInfoAction";
+import moment from "moment";
 
-const Home = () => {
+const Home = ({ searchData }) => {
   const classNamees = useStyles();
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -24,7 +24,7 @@ const Home = () => {
   const [date, setDate] = useState([
     {
       startDate: new Date(),
-      endDate: new Date(),
+      endDate: new Date(new Date().setDate(new Date().getDate() + 1)),
       key: "selection",
     },
   ]);
@@ -45,12 +45,17 @@ const Home = () => {
     });
   };
 
-  
+
   const searchInfo = {
     search,
     date,
     options
   }
+
+
+  // const startDate= moment(date[0].startDate).format()
+  // console.log(startDate);
+
 
   const handleSearch = async (e) => {
     e.preventDefault()
@@ -69,17 +74,12 @@ const Home = () => {
     }
 
     if (res.status === 200) {
-      navigate(`/hotellist?address=${search}&& startDate=${format(date[0].startDate, "yyyy-MM-dd")}&& endDate=${format(date[0].endDate, "yyyy-MM-dd")}&& adult=${options.adult}&& children=${options.children}&& room=${options.room}`
+      navigate(`/hotellist?address=${search}&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`
       )
-
-      dispatch(createSearchInfo({ searchInfo }))
+      searchData(searchInfo)
       dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: false } })
     }
-
-
   }
-
-
   return (
     <>
 
@@ -91,7 +91,7 @@ const Home = () => {
             <h1 className={classNamees.makeStyle} > Make Memories</h1>
             <div className={classNamees.headerSearch}>
               <div className={classNamees.headerSearchItem}>
-              <span className="me-2"></span>
+                <span className="me-2"></span>
                 <i className="fa-solid fa-location-dot "></i>
                 <input value={search} onChange={(e) => setSearch(e.target.value)}
                   type="text"
@@ -213,7 +213,7 @@ const Home = () => {
                 <figcaption>
                   <h2>Book Now</h2>
                 </figcaption>
-                <Link to="/"></Link>
+                <Link to={`/hotellist?address=Kathmandu&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
               </figure>
               <figure className="destination">
                 <img
@@ -223,7 +223,7 @@ const Home = () => {
                 <figcaption>
                   <h2>Book Now</h2>
                 </figcaption>
-                <Link to="/"></Link>
+                <Link to={`/hotellist?address=Pokhara&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
               </figure>
               <figure className="destination">
                 <img
@@ -234,7 +234,7 @@ const Home = () => {
 
                   <h2>Book Now</h2>
                 </figcaption>
-                <Link to="/"></Link>
+                <Link to={`/hotellist?address=Lumbini&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
               </figure>
             </Grid>
           </div>
@@ -248,7 +248,7 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <Link to="/"></Link>
+              <Link to={`/hotellist?address=Bhaktapur&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
             </figure>
             <figure className="destination">
               <img
@@ -258,7 +258,7 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <Link to="/"></Link>
+              <Link to={`/hotellist?address=Kathmandu&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
             </figure>
             <figure className="destination">
               <img
@@ -268,7 +268,7 @@ const Home = () => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <Link to="/"></Link>
+              <Link to={`/hotellist?address=Chitwan&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
             </figure>
           </div>
         </div>

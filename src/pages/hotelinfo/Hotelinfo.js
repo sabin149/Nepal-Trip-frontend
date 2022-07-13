@@ -1,18 +1,45 @@
 import React, { useEffect, useState } from "react";
 import "./hotelinfo.css";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useLocation, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHotel } from "../../redux/actions/hotelAction";
 import Carousel from "../../components/Carousel";
 import RoomTable from "../../components/room/RoomTable";
 import Rating from '@mui/material/Rating'
-import { createReview, deleteReview, getHotelReviews } from "../../redux/actions/reviewAction";
+import { createReview, deleteReview, updateReview } from "../../redux/actions/reviewAction";
 import { getUsers } from "../../redux/actions/userAction"
 import { GLOBALTYPES } from "../../redux/actions/globalTypes";
 import moment from "moment";
+import ShareModal from "../../components/ShareModal";
+import { Paper } from "@mui/material";
+import { Grid } from "@material-ui/core";
+import SearchHeader from "../../components/Home/SearchHeader";
+import GoogleMaps from "../../components/GoogleMaps";
 
 const Hotelinfo = () => {
   const dispatch = useDispatch();
+  const { state } = useLocation();
+
+  const checkData = state?.searchInfoData ?
+    state.searchInfoData : window.href = "/";
+
+  const address = checkData.address
+  let lat, lng;
+  if (address === "Pokhara") {
+    lat = 28.2152602;
+    lng = 83.9623006;
+  }
+  if (address === "Kathmandu") {
+    lat = 27.7113869;
+    lng = 85.3151488;
+  } if (address === "Dhulikhel") {
+    lat = 27.6217981;
+    lng = 85.5527428;
+  } if (address === "Lumbini") {
+    lat = 27.5052594;
+    lng = 83.4065654;
+  }
+
 
   const { id } = useParams();
 
@@ -21,10 +48,17 @@ const Hotelinfo = () => {
 
   const [value, setValue] = React.useState(0);
   const [review, setReview] = React.useState("");
+  const [isShare, setIsShare] = useState(false)
+
+  const [isEdit, setIsEdit] = React.useState(false);
+  const [reviewData, setReviewData] = React.useState({});
 
   const { hotel } = useSelector(state => state?.hotel);
   const users = useSelector(state => state?.user?.users);
-  const { reviews } = useSelector(state => state?.review);
+
+  const reviews = (hotel?.hotel_reviews)
+
+  const newReviews = reviews?.slice()?.reverse();
 
   useEffect(() => {
     dispatch(getHotel({ id }))
@@ -32,20 +66,17 @@ const Hotelinfo = () => {
 
   useEffect(() => {
     dispatch(getUsers())
-
   }, [dispatch])
-
-  useEffect(() => {
-    dispatch(getHotelReviews({ hotel }))
-  }, [dispatch, hotel])
 
   const [readMore, setReadMore] = useState(false)
 
   const oneUser = users && users.filter(user => user._id === userID)[0]
 
+  // check user has review or not
+  const checkUserReview = newReviews && newReviews.filter(review => review.user._id === userID)[0]
+
   const handlePostReview = (e) => {
     e.preventDefault();
-
     if (!token || !userID) {
       dispatch({
         type: GLOBALTYPES.ALERT,
@@ -53,7 +84,6 @@ const Hotelinfo = () => {
       })
       return
     }
-
     if (!value) {
       dispatch({
         type: GLOBALTYPES.ALERT,
@@ -61,7 +91,6 @@ const Hotelinfo = () => {
       })
       return
     }
-
     if (!review) {
       dispatch({
         type: GLOBALTYPES.ALERT,
@@ -69,28 +98,50 @@ const Hotelinfo = () => {
       })
       return
     }
-
-    if (token && userID) {
-      const newReview = {
-        review,
-        hotel_rating: value,
-        user: oneUser,
-        createdAt: new Date().toISOString(),
-      }
-      dispatch(createReview({ hotel, newReview, user: oneUser, token }))
-      dispatch(getHotelReviews({ hotel }))
+    if (checkUserReview) {
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "You have already wrote the review!!!" } })
       setReview("");
+      setValue(0);
+      return
+    }
+    if (!isEdit)
+      if (token && userID) {
+        const newReview = {
+          review,
+          hotel_rating: value,
+          user: oneUser,
+          createdAt: new Date().toISOString(),
+        }
+        dispatch(createReview({ hotel, newReview, user: oneUser, token }))
+        setReview("");
+        setValue(0);
+      }
+    if (isEdit) {
+      const newReview = {
+        review
+        // hotel_rating: value,
+        // user: oneUser,
+        // createdAt: new Date().toISOString(),
+      }
+      dispatch(updateReview({ hotel, review: reviewData, newReview, user: oneUser, token }))
+      setReview("");
+      setValue(0);
     }
   }
-
   const handleDeleteReview = ({ hotelReview }) => {
-
-    dispatch(deleteReview({ review: hotelReview, token: token }))
-
+    if (window.confirm("Are you sure you want to delete this review?")) {
+      dispatch(deleteReview({ review: hotelReview, hotel, token: token }))
+    }
   }
-
+  const handleEditReview = ({ hotelReview }) => {
+    setIsEdit(true)
+    setReviewData(hotelReview)
+    setReview(hotelReview.review)
+    setValue(hotelReview.hotel_rating)
+  }
   return (
     <div className="main_content">
+      <SearchHeader searchInfoData={checkData} />
       <div className="second-nav d-flex">
         <div className="Item">
           <Link to="">
@@ -98,19 +149,33 @@ const Hotelinfo = () => {
           </Link>
         </div>
         <div className="Item">
-          <Link to="">
+          <a href="#roominfoandprice">
             <span>Room Info & price</span>
-          </Link>
+          </a>
         </div>
         <div className="Item">
-          <Link to="">
+          <a href="#hotelamenities">
             <span> Hotel Amenities</span>
-          </Link>
-        </div>
+          </a>       </div>
         <div className="Item">
-          <Link to="">
+          <a href="#hotelpolicies">
             <span>Hotel Policies</span>
-          </Link>
+          </a>       </div>
+        <div className="Item">
+          <button onClick={() => setIsShare(!isShare)} className="btn btn-outline-primary btn-sm " style={{
+            marginBlock: "initial"
+          }}>
+            Share
+          </button>
+          {
+            isShare && <Paper>
+              <Grid container spacing={3}>
+                <Grid item xs={2} md={2} sm={2}>
+                  <ShareModal url={"https://nepaltrip.herokuapp.com"} />
+                </Grid>
+              </Grid>
+            </Paper>
+          }
         </div>
       </div>
       <span> </span>
@@ -119,11 +184,12 @@ const Hotelinfo = () => {
           <h2 className="text-capitalize">{hotel.hotel_name}</h2>
           <p className="locationhotel text-capitalize">
             {hotel?.address === "ktm" ? "Kathmandu, Nepal" : hotel?.address + ",Nepal"}
-            <Link to="" className="block-in-mobile">
+            <a href="#map" className="block-in-mobile">
               <i className="fa-solid fa-location-dot"></i>
 
               <span> view in map </span>
-            </Link>
+
+            </a>
           </p>
           <div>
             <div className="row">
@@ -131,7 +197,7 @@ const Hotelinfo = () => {
                 <Carousel images={hotel?.hotel_images} />
               </div>
 
-              <div className="col abouthotel">
+              <div className="col abouthotel" id="info">
                 <div className="bg-light-gray pd-all-sm mh-100 box-shadow">
                   <div>
                     <h4 className="color-dark-blue bold">
@@ -161,88 +227,310 @@ const Hotelinfo = () => {
                     <span>Amenities & Facilities</span>
                   </h4>
                   <div className="ameneties-list">
-                    <i className="fa-solid fa-hot-tub-person"></i>
-                    <i className="fa-solid fa-wifi"></i>
-                    <i className="fa-solid fa-smoking"></i>
-                    <i className="fa-solid fa-bowl-rice"></i>
-                    <i className="fa-solid fa-car"></i>
-                    <i className="fa-solid fa-user-shield"></i>
-                    <i className="fa-solid fa-swimmer"></i>
+                    {
+                      hotel?.hotel_facilities?.map((facility, index) => {
+                        return <span key={index}>
+                          {(facility === "freewifi") && (
+                            <i className=" fa-solid fa-wifi" />
+                          )}
+                          {facility === "tours" && (
+                            <i className=" fa-solid fa-camera" />
+                          )}
+                          {facility === "bar" && (
+                            <i className=" fa-solid fa-cocktail" />
+                          )}
+                          {facility === "restaurant" && (
+                            <i className=" fa-solid fa-utensils" />
+                          )}
+                          {facility === "pool" && (
+                            <i className=" fa-solid fa-swimmer" />
+                          )}
+                          {facility === "gym" && (
+                            <i className=" fa-solid fa-dumbbell" />
+                          )}
+                          {facility === "parking" && (
+                            <i className=" fa-solid fa-car-park" />
+                          )}
+                          {facility === "airporttransfer" && (
+                            <i className=" fa-solid fa-plane-departure" />
+                          )}
+                          {facility === "breakfast" && (
+                            <i className="fa-solid fa-burger" />
+                          )}
+                          {facility === "lunch" && (
+                            <i className=" fa-solid fa-plate-wheat" />
+                          )}
+                          {facility === "dinner" && (
+                            <i className="fa-solid fa-utensils" />
+                          )}
+                          {facility === "capservice" && (
+                            <i className=" fa-solid fa-headset" />
+                          )}
+                          {facility === "24hrroomservice" && (
+                            <i className=" fa-solid fa-clock" />
+                          )}
+                          {facility === "childbed" && (
+                            <i className=" fa-solid fa-child" />
+                          )}
+                          {facility === "laundary" && (
+                            <i className=" fa-solid fa-laundry" />
+                          )}
+                          {facility === "ticketservice" && (
+                            <i className=" fa-solid fa-ticket-alt" />
+                          )}
+                          {facility === "medical" && (
+                            <i className=" fa-solid fa-hospital" />
+                          )}
+                          {facility === "coffee" && (
+                            <i className=" fa-solid fa-coffee" />
+                          )}
+                          {facility === "security" && (
+                            <i className=" fa-solid fa-shield-alt" />
+                          )}
+                          {facility === "taxiservice" && (
+                            <i className=" fa-solid fa-taxi" />
+                          )}
+                          {facility === "luggage" && (
+                            <i className=" fa-solid fa-suitcase" />
+                          )}
+                          {facility === "wheelchair" && (
+                            <i className=" fa-solid fa-wheelchair" />
+                          )}
+                          {facility === "airconditioning" && (
+                            <i className=" fa-solid fa-snowflake" />
+                          )}
+                          {facility === "smoking" && (
+                            <i className=" fa-solid fa-smoking" />
+                          )}
+                          {facility === "pets" && (
+                            <i className=" fa-solid fa-dog" />
+                          )}
+                          {facility === "atm" && (
+                            <i className=" fa-solid fa-atm" />
+                          )}
+                          {facility === "bank" && (
+                            <i className=" fa-solid fa-bank" />
+                          )}
+                          {facility === "housekeeping" && (
+                            <i className=" fa-solid fa-bed" />
+                          )}
+                          {facility === "elevator" && (
+                            <i className=" fa-solid fa-elevator" />
+                          )}
+                        </span>
+
+                      })
+                    }
 
                   </div>
                   <hr></hr>
-                  <div className="hotelmap">
+                  <div className="hotelmap" >
                     <h4 className="color-dark-blue bold">
                       <span>Location</span>
                     </h4>
-                    <Link to="">
-                      <img className="maphotel" src="https://maps.google.com/maps/api/staticmap?markers=color:red|28,84&maptype=roadmap&zoom=12&size=500x160&key=AIzaSyDrMdzB3i4v3U62r4Xww5blaRIjg9dji14" alt="map" />
-                    </Link>
+                   <div style={{
+                      height: '100px !important',
+                   }}>
+                   <GoogleMaps lat={lat} lng={lng}/>
+                   </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
           {/* Room and Info */}
-          <h3 className="bold">
+          <h3 className="bold" id="roominfoandprice">
             <span>
               Room Info & price
             </span>
           </h3>
           {/* Price Table of Room */}
-          <RoomTable hotel={hotel} />
-
-
-          <div className="segment">
+          <RoomTable hotel={hotel} searchInfoData={checkData} />
+          <div className="segment" id="hotelamenities">
             <h3 className="bold">
               Hotel Amenities
             </h3>
             <hr></hr>
             <div className="row row-cols-4">
-              <div className="col"><li>
-                <i className="fa-solid fa-hot-tub-person">
-                </i>
+              {
+                hotel?.hotel_facilities?.map((facility, index) => {
+                  return <div className="col" key={index}>
+                    <li>
+                      {(facility === "freewifi") && (
+                        <>
+                          <i className=" fa-solid fa-wifi" />
+                          <span className="amen">Free Wifi</span>
+                        </>
+                      )}
+                      {facility === "tours" && (
+                        <>
+                          <i className=" fa-solid fa-camera" />
+                          <span className="amen">Tour</span>
+                        </>
+                      )}
 
-                <span className="amen">24hrs Hot Shower</span></li></div>
-              <div className="col"><li>
-                <i className="fa-solid fa-wifi"></i>
+                      {facility === "bar" && (
+                        <>
+                          <i className=" fa-solid fa-cocktail" />
+                          <span className="amen">Bar</span>
+                        </>
+                      )}
+                      {facility === "restaurant" && (
+                        <>
+                          <i className=" fa-solid fa-utensils" />
+                          <span className="amen">Restaurant</span>
+                        </>
+                      )}
+                      {facility === "pool" && (
+                        <>
+                          <i className=" fa-solid fa-swimmer" />
+                          <span className="amen">Pool</span>
+                        </>
+                      )}
+                      {facility === "gym" && (
+                        <>
+                          <i className=" fa-solid fa-dumbbell" />
+                          <span className="amen">Gym</span>
+                        </>
+                      )}
+                      {facility === "parking" && (
+                        <>
+                          <i className=" fa-solid fa-car-park" />
+                          <span className="amen">Parking</span>
+                        </>
+                      )}
+                      {facility === "airporttransfer" && (
+                        <>
+                          <i className=" fa-solid fa-plane-departure" />
+                          <span className="amen">Airport Transfer</span>
+                        </>
+                      )}
+                      {facility === "breakfast" && (
+                        <>
+                          <i className="fa-solid fa-burger" />
+                          <span className="amen">Breakfast</span>
+                        </>
+                      )}
+                      {facility === "lunch" && (
+                        <>
+                          <i className=" fa-solid fa-plate-wheat" />
+                          <span className="amen">Lunch</span>
+                        </>
+                      )}
+                      {facility === "dinner" && (
+                        <>
+                          <i className="fa-solid fa-utensils" />
+                          <span className="amen">Dinner</span>
+                        </>
+                      )}
+                      {facility === "capservice" && (
+                        <>
+                          <i className=" fa-solid fa-headset" />
+                          <span className="amen">Cap Service</span>
+                        </>
+                      )}
+                      {facility === "24hrroomservice" && (
+                        <>
+                          <i className=" fa-solid fa-clock" />
+                          <span className="amen">24hr Room Service</span>
+                        </>
+                      )}
+                      {facility === "childbed" && (
+                        <>
+                          <i className=" fa-solid fa-child" />
+                          <span className="amen">Child Bed</span>
+                        </>
+                      )}
+                      {facility === "laundary" && (
+                        <>
+                          <i className=" fa-solid fa-laundry" />
+                          <span className="amen">Laundary</span>
+                        </>
+                      )}
+                      {facility === "medical" && (
+                        <>
+                          <i className=" fa-solid fa-medkit" />
+                          <span className="amen">Medical Services</span>
+                        </>
+                      )}
 
-                <span className="amen">24hrs Free Wi-Fi</span></li></div>
-              <div className="col"><li>
-                <i className="fa-solid fa-smoking">
+                      {facility === "ticketservice" && (
+                        <>
+                          <i className=" fa-solid fa-ticket-alt" />
+                          <span className="amen">Ticket Service</span>
+                        </>
+                      )}
+                      {facility === "coffee" && (
+                        <>
+                          <i className=" fa-solid fa-coffee" />
+                          <span className="amen">Coffee</span>
+                        </>
+                      )}
+                      {facility === "parking" && (
+                        <>
+                          <i className=" fa-solid fa-car-park" />
+                          <span className="amen">Parking</span>
+                        </>
+                      )}
+                      {facility === "security" && (
+                        <>
+                          <i className=" fa-solid fa-shield-alt" />
+                          <span className="amen">Security</span>
+                        </>
+                      )}
+                      {facility === "elevator" && (
+                        <>
+                          <i className=" fa-solid fa-building" />
+                          <span className="amen">Elevator</span>
+                        </>
+                      )}
+                      {facility === "wheelchair" && (
+                        <>
+                          <i className=" fa-solid fa-wheelchair" />
+                          <span className="amen">Wheelchair
+                            Access</span>
+                        </>
+                      )}
 
-                </i>
-                <span className="amen">Smoking Area Available</span></li></div>
-              <div className="col"><li>
-                <i className="fa-solid fa-car"></i>
 
-                <span className="amen">Transportation Facility</span></li></div>
-              <div className="col"><li>
-                <i className="fa-solid fa-money-bill-simple">
-                </i>
+                      {facility === "airconditioning" && (
+                        <>
+                          <i className=" fa-solid fa-snowflake" />
+                          <span className="amen">Air Conditioning</span>
+                        </>
+                      )}
+                      {/* atm */}
+                      {facility === "atm" && (
+                        <>
+                          <i className=" fa-solid fa-atm" />
+                          <span className="amen">ATM</span>
+                        </>
+                      )}
+                      {/* bank */}
+                      {facility === "bank" && (
+                        <>
+                          <i className=" fa-solid fa-bank" />
+                          <span className="amen">Bank</span>
+                        </>
+                      )}
 
-                <span className="amen">ATM/cash machine on site</span></li></div>
-              <div className="col"><li>
-                <i className="fa-solid fa-broom"></i>
+                      {/* house keeping */}
+                      {facility === "housekeeping" && (
+                        <>
+                          <i className=" fa-solid fa-broom" />
+                          <span className="amen">Housekeeping</span>
+                        </>
+                      )}
+                    </li>
+                  </div>
 
-                <span className="amen">Daily housekeeping</span></li></div>
-              <div className="col"><li>
-                <i className="fa-solid fa-shirt"></i>
+                })
+              }
 
-                <span className="amen">Restaurant</span></li></div>
-              <div className="col"><li>
-                <i className="fa-solid fa-elevator"></i>
-                <span className="amen">Elevator</span></li></div>
-              <div className="col"><li>
-                <i className="fa-solid fa-mug-hot"></i>
-                <span className="amen">Coffee shop</span></li></div>
-              <div className="col"><li>
-                <i className="fa-solid fa-wheelchair"></i>
-                <span className="amen">Facilities for disabled guests</span></li></div>
             </div>
           </div>
-          <div className="segment">
-            <h3 className="bold">
+          <div className="segment" id="hotelpolicies">
+            <h3 className="bold" >
               Hotel Policies
             </h3>
             <hr></hr>
@@ -285,10 +573,11 @@ const Hotelinfo = () => {
             </div>
 
           </div>
-          <div className="segment">
-            <h3 className="bold">
+          <div className="segment" id="map">
+            <h3 className="bold p-0">
               <span>Map</span>
             </h3>
+            <GoogleMaps lat={lat} lng={lng} size="big" />
           </div>
           <div className="segment">
             <h3 className="bold">
@@ -320,7 +609,7 @@ const Hotelinfo = () => {
                     </div>
                   </div>
                   <div className="float-end mt-2 pt-1">
-                    <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm">Post Review</button>
+                    <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm"> {isEdit ? "Update Review" : "Post Review"}</button>
                   </div>
                 </div>
               </form></> :
@@ -339,7 +628,7 @@ const Hotelinfo = () => {
                 {/* list of reviews */}
 
                 {
-                  reviews && reviews?.map((review) => <div className="be-comment" key={review._id}>
+                  newReviews && newReviews?.map((review) => <div className="be-comment" key={review._id}>
                     <div className="be-img-comment">
 
                       <img src={review?.user?.avatar} alt="reviewimage" className="be-ava-comment" />
@@ -368,13 +657,13 @@ const Hotelinfo = () => {
                     </div>
                     <div className="replysec">
                       {token && userID === review?.user?._id ? <>
-                        <span className="be-comment-name editsec">
-                          Edit
+                        <span className="be-comment-name editsec" style={{ cursor: "pointer" }} >
+                          <i className="fa-solid fa-pen-to-square me-1" onClick={() => handleEditReview({ hotelReview: review })} /> Edit
                         </span>
                         <span className="be-comment-name" onClick={() => {
                           handleDeleteReview({ hotelReview: review })
-                        }}>
-                          Remove
+                        }} style={{ cursor: "pointer" }} >
+                          <i className="fa-solid fa-trash me-1 " />  Remove
                         </span></> :
                         ""
                       }
