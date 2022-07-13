@@ -62,7 +62,7 @@ export const cardsData = [
     series: [
       {
         name: "Growth",
-        data: [31, 40, 28, 51, 42, 109, 100],
+        data: [31, 40, 28, 51, 42, 109, 150],
       },
     ],
   },

@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./AdminCard.css";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { UilTimes } from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
-import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../../redux/actions/userAction";
-import { getBookings } from "../../../redux/actions/bookingAction";
-import { getReviews } from "../../../redux/actions/reviewAction";
-
 
 const Card = (props) => {
   const [expanded, setExpanded] = useState(false);
@@ -24,10 +19,6 @@ const Card = (props) => {
 
 // Compact Card
 function CompactCard({ param, setExpanded }) {
-
-  console.log(param)
-  
-
   const Png = param.png;
   return (
     <motion.div
@@ -46,13 +37,13 @@ function CompactCard({ param, setExpanded }) {
         <Png />
         <span>{
           param.title === 'USERS' ?
-            param.user.count :
+            param.value :
             param.title === 'HOTELS' ?
-              param.hotel.count :
+            param.value:
               param.title === 'BOOKINGS' ?
-                param.booking.count :
+              param.value :
                 param.title === 'REVIEWS' ?
-                  param.review.count :
+                param.value :
                   "0"
         }</span>
         <span>Total</span>
