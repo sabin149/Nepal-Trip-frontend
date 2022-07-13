@@ -1,6 +1,7 @@
 import { GLOBALTYPES } from './globalTypes'
 import { imageUpload } from '../../utils/imageUpload'
 import { deleteDataAPI, getDataAPI, patchDataAPI, postDataAPI } from '../../utils/fetchData'
+import { USER_TYPES } from './userAction'
 
 export const HOTEL_TYPES = {
     CREATE_HOTEL: "CREATE_HOTEL",
@@ -151,6 +152,44 @@ export const deleteHotel = ({ hotel, token }) => async (dispatch) => {
 
     }
 
+}
+
+
+export const saveHotel = ({ hotel, auth, }) => async (dispatch) => {
+    const newUser = { ...auth.user, favourites: [hotel._id] }
+
+    dispatch({
+        type: USER_TYPES.GET_USER,
+        payload: newUser
+    })
+    try {
+        const res = await patchDataAPI(`saveFavourite/${hotel._id}`, null, auth.token)
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
+    } catch (err) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { error: err.response.data.msg }
+        })
+    }
+}
+
+
+export const UnSaveHotel = ({ hotel, auth }) => async (dispatch) => {
+    const newUser = { ...auth.user, favourites: [] }
+
+    dispatch({
+        type: USER_TYPES.GET_USER,
+        payload: newUser
+    })
+    try {
+        const res = await patchDataAPI(`unSaveFavourite/${hotel._id}`, null, auth.token)
+        dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
+    } catch (err) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { error: err.response.data.msg }
+        })
+    }
 }
 
 
