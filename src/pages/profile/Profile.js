@@ -6,7 +6,6 @@ import "./profile.css"
 import { getUser, updateUserProfile } from '../../redux/actions/userAction';
 import { Link, useParams } from 'react-router-dom'
 import ChangePassword from '../../components/auth/Changepassword'
-
 const Profile = ({ token }) => {
     const dispatch = useDispatch()
     const { id } = useParams()
@@ -19,26 +18,20 @@ const Profile = ({ token }) => {
     })
     const [userData, setUserData] = useState(initialState)
     const { fullname, username, address, phone, gender } = userData
-
     const [avatar, setAvatar] = useState("");
-
     const { user } = useSelector(state => state?.user)
-
     useEffect(() => {
         dispatch(getUser({ id, token }))
     }, [dispatch, token, id])
-
     useEffect(() => {
         setUserData(user)
     }, [user])
-
     const handleInput = e => {
         const { name, value } = e.target
         setUserData({ ...userData, [name]: value })
     }
     const changeAvatar = (e) => {
         const file = e.target.files[0]
-
         const err = checkImage(file)
         if (err) return dispatch({
             type: GLOBALTYPES.ALERT, payload: { error: err }
@@ -58,7 +51,6 @@ const Profile = ({ token }) => {
                 <div className="card user-profile m-auto mt-3">
                     <div className="card-body">
                         <div className="profile">
-
                             <div className="info_avatar">
                                 <img src={avatar ? URL?.createObjectURL(avatar) : user?.avatar}
                                     alt="avatar" />
@@ -91,20 +83,16 @@ const Profile = ({ token }) => {
                                     </small>
                                 </div>
                             </div>
-
-
                             <div className="form-group">
                                 <label htmlFor="phone">Phone</label>
                                 <input type="text" name="phone" value={phone}
                                     className="form-control" onChange={handleInput} />
                             </div>
-
                             <div className="form-group">
                                 <label htmlFor="address">Address</label>
                                 <input type="text" name="address" value={address}
                                     className="form-control" onChange={handleInput} />
                             </div>
-
                             <div className="form-group">
                                 <label htmlFor="gender">Gender</label>
                                 <div className="input-group px-0 mb-4">
@@ -117,11 +105,7 @@ const Profile = ({ token }) => {
                                     </select>
                                 </div>
                             </div>
-
                             <button className="btn btn-warning w-100 text-light" type="submit">Save</button>
-
-
-
                         </div>
                     </div>
                 </div>
@@ -130,5 +114,4 @@ const Profile = ({ token }) => {
             </>
     )
 }
-
-export default Profile;
+export default Profile
