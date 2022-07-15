@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 
 const Header = ({ isUser }) => {
   const dispatch = useDispatch();
-  const userID=localStorage.getItem("userID")
+  const userID = localStorage.getItem("userID")
   return (
     <div className="navbar">
       <div className="navContainer">
@@ -18,21 +18,26 @@ const Header = ({ isUser }) => {
             <img src={logo} alt="logo" className="w-50" />
           </Link>
         </div>
-        <div className="navItems">
-          <div className="hotel">
+     
+         <div className="navItems">
+          {
+            isUser&&
+            <div className="hotel">
             <i className="fa-solid fa-suitcase"> </i>
             <span> <Link to="/user/bookings" className="text-decoration-none text-dark">My Hotel Booking</Link> </span>
           </div>
-          {isUser&&
+          }
+         
+          {isUser &&
             <div className="hotel">
-            <i className="fa-solid fa-user"> </i>
-            <span> <Link to={`/user/profile/${userID}`} className="text-decoration-none text-dark">Profile</Link> </span>
-          </div>}
+              <i className="fa-solid fa-user"> </i>
+              <span> <Link to={`/user/profile/${userID}`} className="text-decoration-none text-dark">Profile</Link> </span>
+            </div>}
 
-          <div className="favourite">
-          <i className="fa-solid fa-heart"></i>
-            <span> My Favourite </span>
-          </div>
+          {isUser && <div className="favourite">
+            <i className="fa-solid fa-heart"></i>
+            <span> <Link to="/myfavoritehotels" className="text-decoration-none text-dark">My Favourite</Link> </span>
+          </div>}
 
           {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
             <button className="navButton" onClick={() => {

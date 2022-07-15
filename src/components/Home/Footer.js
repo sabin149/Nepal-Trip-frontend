@@ -50,8 +50,8 @@ const Footer = () => {
              <h6>Payment Method</h6>
              <ul className="flex footer_payment">
                  <li className="mr-2">
-                    <img src='https://www.xceltrip.com.np/1d10d595525eff1ba9a6994a8e61fede.png' alt="projectimages"/>
-                    <img src='https://www.xceltrip.com.np/360850cdcfd7acf0c2e2b362284634a1.png' alt="projectimages"/>                               
+                    <img src='https://jaamna.com/4c6e42f5e743e89b9ab95c1f48dcbbf3.png' alt="projectimages"/>
+                    <img src='https://jaamna.com/2b936a093a3d1c7b4ffe768fba4ad74b.png' alt="projectimages"/>                               
                     </li>
              </ul>
           </div>

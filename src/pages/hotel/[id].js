@@ -6,9 +6,41 @@ import uploadImage from "../../images/No_image.png";
 import { imageShow, videoShow } from "../../utils/mediaShow";
 import { createHotel } from "../../redux/actions/hotelAction";
 import "./hotel.css";
-import { Paper } from "@material-ui/core";
-import ChipInput from 'material-ui-chip-input'
+import { Chip, Paper, TextField } from "@material-ui/core";
+import { Autocomplete } from "@mui/material";
 
+
+const hotelPolicies=[
+{
+  policies:"Check in time: 14::0",
+},
+{
+  policies:"Check out time: 12::0",
+},
+{
+  policies:"Visa Card",
+},
+{
+  policies:"Master Card",
+},
+{
+  policies:"E-sewa",
+},
+{policies:"Cash on arrival"},
+{policies:"Union Pay"},
+{policies:"Fone pay"},
+{policies:"Khalti"},
+{policies:"There will also be 5.00 USD Nepal Trip cancellation fee."},
+{policies:"The hotel might not refund for late check-in and early check-out."},
+{policies:"Stay extensions will required a new reservation."},
+{policies:"Individual aged 18 and above are required to present a valid Photo ID ( passport, driver’s license, government-issued photo ID etc) at the time of check-in."},
+{policies:"Note all hotel reserve the rights to admission."},
+{policies:"All international travelers must present a valid passport at the time of check in at the hotel."},
+{policies:"Any increase in the price due to taxes will be borne by you and payable at the hotel."},
+{policies:"Unless specified otherwise, rates are quoted in US dollars."},
+{policies:"Availability of accommodation in the same property for extra guests is not guaranteed."},
+{policies:"Special requests are subject to availability and cannot be guaranteed. "},
+]
 
 const Hotel = () => {
   const dispatch = useDispatch();
@@ -265,14 +297,30 @@ const Hotel = () => {
               </div>
               <div className="hotel_policies">
                 <label className="form-label">Hotel Policies</label>
-                <ChipInput
-                  value={hotel_policies}
-                  fullWidth
-                  placeholder='Type and press enter to add hotel policies'
-                  onChange={(value) => setHotelPolicies(value)}
-                  variant="outlined"
-                  size="small"
-                />
+                <Autocomplete
+                      multiple
+                      id="tags-filled"
+                      options={hotelPolicies.map((policy) => policy.policies)}
+                      freeSolo
+                      onChange={(event, newValue) => {
+                        setHotelPolicies(newValue)
+                        }}
+                        value={hotel_policies}
+                      renderTags={(value, getTagProps) =>
+                        value.map((option, index) => (
+                          <Chip variant="outlined" label={option} {...getTagProps({ index })}
+                          />
+                        ))
+                      }
+
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          variant="standard"
+                          size='small'
+                        />
+                      )}
+                    />
               </div>
               <div className="hotel_facilities">
                 <label className="form-label">Hotel Facilities</label>

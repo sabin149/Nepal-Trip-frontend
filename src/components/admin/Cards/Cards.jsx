@@ -49,7 +49,7 @@ const Cards = () => {
   const userSeries = [
     {
       name: 'Users',
-      data: userDataInArray,
+      data: [10,23,12,9,25,15,26],
     }
   ]
 
@@ -76,7 +76,7 @@ const Cards = () => {
   const hotelSeries = [
     {
       name: 'Hotels',
-      data: hotelDataInArray,
+      data: [5,12,15,20,18,20,35],
     }
   ]
 
@@ -103,7 +103,7 @@ const Cards = () => {
   const bookingSeries = [
     {
       name: 'Bookings',
-      data: bookingDataInArray,
+      data: [6,10,7,15,12,18,24],
     }
   ]
 
@@ -130,7 +130,7 @@ const Cards = () => {
   const reviewSeries = [
     {
       name: 'Reviews',
-      data: reviewDataInArray,
+      data: [8,24,10,15,18,20,5],
     }
   ]
 

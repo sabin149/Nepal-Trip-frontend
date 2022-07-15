@@ -193,3 +193,22 @@ export const UnSaveHotel = ({ hotel, auth }) => async (dispatch) => {
 }
 
 
+export const getFavoriteHotels = ({token}) => async (dispatch) => {
+    try {
+        dispatch({ type: HOTEL_TYPES.LOADING_HOTEL, payload: true })
+        const res = await getDataAPI("getFavouriteHotels", token)
+        dispatch({
+            type: HOTEL_TYPES.GET_HOTEL,
+            payload: res.data.hotel
+        })
+        dispatch({ type: HOTEL_TYPES.LOADING_HOTEL, payload: false })
+
+    } catch (error) {
+        dispatch({
+            type: GLOBALTYPES.ALERT,
+            payload: { error: error.response.data.msg }
+        })
+    }
+}
+
+

@@ -27,7 +27,7 @@ const HotelsByDate = ({ hotel }) => {
     name:"Hotels",
     Hotels: [
       {
-        data: dataInArray.reverse()
+        data: [5,12,15,20,18,20,35],
       },
     ],
     options: {

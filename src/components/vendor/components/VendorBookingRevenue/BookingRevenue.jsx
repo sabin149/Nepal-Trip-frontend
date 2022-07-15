@@ -26,7 +26,7 @@ const Bookingrevenue = ({booking}) => {
   const bookingSeries = [
     {
       name: 'Bookings',
-      data: bookingDataInArray,
+      data:[10,15,7,9,12,15,18],
     }
   ]
   const data = {

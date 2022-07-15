@@ -26,7 +26,7 @@ export const createHotelRoom = ({ hotel, newRoom, room_images,navigate, token })
         const newHotel = { ...hotel, rooms: [...rooms, { ...res.data.newRoom }] }
         dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: newHotel })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
-        window.href("/viewHotel")
+       navigate("/")
     } catch (err) {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
     }
