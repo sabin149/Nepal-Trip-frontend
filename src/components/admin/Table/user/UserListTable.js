@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { deleteUser, getUsers } from "../../../../redux/actions/userAction"
 import "../Table.css"
 import { Link, useNavigate } from 'react-router-dom'
-import {CustomToolbar,CustomPagination} from "../../../CustomFunction";
+import { CustomToolbar, CustomPagination } from "../../../CustomFunction";
 
 const UserListTable = () => {
     const dispatch = useDispatch()
@@ -34,7 +34,6 @@ const UserListTable = () => {
                 return <img src={value ? value : ""} alt="avatar" style={{ width: '80px', height: "80px", backgroundColor: "white", borderRadius: "50%" }} />
             }
         },
-
         {
             field: 'email', headerName: 'Email', type: 'string', width: 300,
         },
@@ -50,23 +49,18 @@ const UserListTable = () => {
             field: 'role', headerName: 'Role', width: 80
         },
         {
-            field: "action", headerName: "Action", width: 220, sortable: false, align: "center",
+            field: "action", headerName: "Action", width: 150, sortable: false, align: "center",
             renderCell: (userData) =>
 
                 <span>
-                    <span className='me-2 btn btn-warning btn-sm text-light' onClick={() => {
-                        // console.log(userData.value, "edit")
-                        handleChangeRole(userData.value)
-                    }}>Change</span>
-
                     <span className='me-2 btn btn-success btn-sm' onClick={() => {
                         // console.log(userData.value, "edit")
                         navigate(`/admin/edituser/${userData.value._id}`, { state: { userData: userData.value } })
 
-                    }}>Edit</span>
+                    }}><i className='fas fa-edit me-1'/>Edit</span>
                     <span className='btn btn-danger btn-sm' onClick={() => {
                         handleDeleteUser({ user: userData.value })
-                    }}>Delete</span>
+                    }}> <i className='fas fa-trash me-1'/> Delete</span>
                 </span>
         }
 
@@ -93,14 +87,10 @@ const UserListTable = () => {
             dispatch(deleteUser({ user, token }))
         }
     }
-    const handleChangeRole = ({ user }) => {
-        if (window.confirm("Are you sure you want to change this user role?")) {
 
-        }
-    }
     return (
         <>
-            <span> <Link to="/" className="btn btn-primary btn-sm">Back</Link>  <h3 className='text-center mt-1 '>List of Users</h3></span>
+            <span> <Link to="/" className="btn btn-outline-primary btn-sm">Back</Link>  <h3 className='text-center mt-1 '>List of Users</h3></span>
             <div className="container-fluid" style={{
             }} >
                 <DataGrid style={{ height: "90vh", width: "100%" }}

@@ -19,20 +19,14 @@ export const createHotelRoom = ({ hotel, newRoom, room_images,navigate, token })
             ...rooms,
             { room_images: media, newRoom }]
     }
-
-  
     dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: newHotel })
-
-
     try {
         const data = { ...newRoom, room_images: media, hotelUserId, hotelId }
         const res = await postDataAPI('room', data, token)
         const newHotel = { ...hotel, rooms: [...rooms, { ...res.data.newRoom }] }
         dispatch({ type: HOTEL_TYPES.UPDATE_HOTEL, payload: newHotel })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
-        navigate("/viewHotel")
-
-
+        window.href("/viewHotel")
     } catch (err) {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { error: err.response.data.msg } })
     }
