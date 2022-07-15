@@ -40,7 +40,7 @@ const ChangePassword = ({ token }) => {
             <input
               type={typeOldPass ? "text" : "password"}
               className="form-control"
-              id="exampleInputPassword5"
+              id="oldPassword"
               onChange={handleChangeInput}
               value={opassword}
               name="opassword"
@@ -62,10 +62,10 @@ const ChangePassword = ({ token }) => {
             <input
               type={typePass ? "text" : "password"}
               className="form-control"
-              id="exampleInputPassword7"
               onChange={handleChangeInput}
               value={npassword}
               name="npassword"
+              id="newPassword"
 
             />
             <small onClick={() => setTypePass(!typePass)}>
@@ -84,12 +84,12 @@ const ChangePassword = ({ token }) => {
             <input
               type={typeCPass ? "text" : "password"}
               className="form-control"
-              id="cpassword"
+              id="cPassword"
               onChange={handleChangeInput}
               value={cpassword}
               name="cpassword"
             />
-            <small onClick={() => setTypeCfPass(!typeCPass)}>
+            <small onClick={() => setTypeCfPass(!typeCPass)} id="viewBtn">
               {typeCPass ? (
                 <i className="fas fa-eye mt-1"></i>
               ) : (
@@ -98,7 +98,7 @@ const ChangePassword = ({ token }) => {
             </small>
           </div>
         </div>
-        <button type="submit" className="btn btn-warning w-100 mt-2 text-light">
+        <button type="submit" id="updatePasswordBtn" className="btn btn-warning w-100 mt-2 text-light">
           Change
         </button>
       </form>

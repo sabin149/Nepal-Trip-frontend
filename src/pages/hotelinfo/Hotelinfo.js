@@ -98,7 +98,7 @@ const Hotelinfo = () => {
       })
       return
     }
-    if (checkUserReview) {
+    if (!isEdit && checkUserReview) {
       dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "You have already wrote the review!!!" } })
       setReview("");
       setValue(0);
@@ -164,7 +164,7 @@ const Hotelinfo = () => {
         <div className="Item">
           <button onClick={() => setIsShare(!isShare)} className="btn btn-outline-primary btn-sm " style={{
             marginBlock: "initial"
-          }}>
+          }} id="shareBtn">
             Share
           </button>
           {
@@ -598,6 +598,7 @@ const Hotelinfo = () => {
                   onChange={(event, newValue) => {
                     setValue(newValue);
                   }}
+                  id="rating"
                 />
               </div>
             </div>
@@ -605,11 +606,11 @@ const Hotelinfo = () => {
                 <div className="row reviewtype">
                   <div className="col-xs-12">
                     <div className="form-group">
-                      <textarea className="form-input" value={review} onChange={(e) => setReview(e.target.value)} placeholder="Type Your Review Here"></textarea>
+                      <textarea className="form-input" value={review} onChange={(e) => setReview(e.target.value)} placeholder="Type Your Review Here" id="review"></textarea>
                     </div>
                   </div>
                   <div className="float-end mt-2 pt-1">
-                    <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm"> {isEdit ? "Update Review" : "Post Review"}</button>
+                    <button type="button" onClick={handlePostReview} className="btn btn-primary btn-sm" id="postReviewBtn"> {isEdit ? "Update Review" : "Post Review"}</button>
                   </div>
                 </div>
               </form></> :
@@ -657,13 +658,13 @@ const Hotelinfo = () => {
                     </div>
                     <div className="replysec">
                       {token && userID === review?.user?._id ? <>
-                        <span className="be-comment-name editsec" style={{ cursor: "pointer" }} >
-                          <i className="fa-solid fa-pen-to-square me-1" onClick={() => handleEditReview({ hotelReview: review })} /> Edit
+                        <span className="be-comment-name editsec" style={{ cursor: "pointer" }} onClick={() => handleEditReview({ hotelReview: review })} >
+                          <i className="fa-solid fa-pen-to-square me-1"  /> Edit
                         </span>
                         <span className="be-comment-name" onClick={() => {
                           handleDeleteReview({ hotelReview: review })
                         }} style={{ cursor: "pointer" }} >
-                          <i className="fa-solid fa-trash me-1 " />  Remove
+                          <i className="fa-solid fa-trash me-1 " id="deleteReviewBtn"/>  Remove
                         </span></> :
                         ""
                       }

@@ -85,6 +85,7 @@ const FavoriteHotels = () => {
                                         variant="contained"
                                         color="primary"
                                         className="mt-2"
+                                        id="viewBtn"
                                         onClick={() => {
                                             navigate(`/hotellist?address=${hotel.address}&startDate=${moment(new Date(),).format()}&endDate=${moment(new Date(new Date().setDate(new Date().getDate() + 1))).format()}&adult=${1}&children=${0}&room=${0}`)
                                         }}

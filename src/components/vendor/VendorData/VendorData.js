@@ -19,11 +19,13 @@ export const SidebarData = [
     icon: UilEstate,
     heading: "Home",
     path: "/",
+    
   },
   {
     icon: UilClipboardAlt,
     heading: "Bookings",
     path: "vendor/bookings",
+    id:"bookings"
   },
   {
     icon: UilUsersAlt,

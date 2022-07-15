@@ -93,6 +93,7 @@ const Home = ({ searchData }) => {
                   type="text"
                   placeholder="Where are you going?"
                   className="headerSearchInput"
+                  id="search"
                 />
               </div>
               <div className={classNamees.headerSearchItem}>
@@ -157,7 +158,7 @@ const Home = ({ searchData }) => {
               <form onSubmit={handleSearch}>
                 <div className="headerSearchItem">
 
-                  <button className="headerBtn">Let's Go</button>
+                  <button className="headerBtn" id="LetSGo">Let's Go</button>
 
                 </div></form>
             </div>

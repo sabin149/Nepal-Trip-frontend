@@ -198,16 +198,19 @@ const HotelList = () => {
                   name="price-order"
                   value={sortData}
                   onChange={handleSort}
+                 
                 >
                   <FormControlLabel
                     value="-price"
                     control={<Radio />}
+                     id="highToLowBtn"
                     label="Price: High - Low"
                   />
                   <FormControlLabel
                     value="price"
                     control={<Radio />}
                     label="Price: Low - High"
+                    id="lowToHighBtn"
                   />
                 </RadioGroup>
               </Grid></Paper>
