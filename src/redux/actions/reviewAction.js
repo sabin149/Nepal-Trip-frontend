@@ -1,5 +1,5 @@
 import { deleteDataAPI, getDataAPI, patchDataAPI, postDataAPI } from '../../utils/fetchData'
-import { DeleteData, EditData, GLOBALTYPES } from './globalTypes'
+import { GLOBALTYPES } from './globalTypes'
 import { HOTEL_TYPES } from './hotelAction'
 
 export const REVIEW_TYPES = {

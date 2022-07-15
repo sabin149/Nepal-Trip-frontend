@@ -23,7 +23,7 @@ function VendorDashboard() {
       <div className="AppGlass">
         <Sidebar hotel={hotel} token={token} booking={booking} />
         <MainDash hotel={hotel} token={token} booking={booking}/>
-        <RightSide/>
+        <RightSide booking={booking}/>
       </div>
     </div>
   );

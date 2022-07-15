@@ -10,12 +10,12 @@
     overflow: auto;
 }
 .edit_profile form{
-    max-width: 450px;
+    max-width: 500px;
     width: 100%;
     background: white;
     padding: 20px;
     border-radius: 5px;
-    margin: 20px auto;
+    margin: 0 auto;
 }
 .edit_profile .info_avatar{
     width: 150px;
@@ -23,7 +23,7 @@
     overflow: hidden;
     border-radius: 50%;
     position: relative;
-    margin: 15px auto;
+    margin: 0 auto;
     border: 1px solid #ddd;
     cursor: pointer;
 }

@@ -1,52 +1,12 @@
-.user-profile{
-    background-color: #fff;
-    width: 30%;
-    box-shadow: 0 2px 4px 0 rgba(196, 20, 20, 0.727);
-    
-}
-.bbutton{
-    text-decoration: none;
-    margin-left: 1rem;
-    /* margin-top: 1rem; */
+.edit_user_profile form{
+    max-width: 500px;
+    width: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 0 auto;
 }
 
-.cpass{
-    text-align: right;
-    text-decoration: none;
-    margin-left: 80rem;
-    margin-top: 1rem;
-   
-}
-
-/* .profile-input .name{
-    margin: 0;
-    width: 50%;
-    -webkit-box-flex: 1;
-    -ms-flex: 1 0 auto;
-    flex: 1 0 auto;
-    outline: none;
-    -webkit-tap-highlight-color: rgba(255,255,255,0);
-    text-align: left;
-    line-height: 1.21428571em;
-    padding: 10px;
-    background: #fff;
-    border: 1px solid rgsba(34,36,38,.25);
-    border-radius: 0.28571429rem;
-    -webkit-transition: box-shadow .1s ease,border-color .1s ease;
-    transition: box-shadow .1s ease,border-color .1s ease;
-    box-shadow:0 2px 4px 0 rgb(0 0 0 / 50%);;
-} */
-/* 
-.radio{
-    margin-right: 15px;
-    height: 40%;
-    width: 40%;
-    
-}
-
-.radio-label{
-    font-size: 18px;
-} */
 .edit_user_profile .info_avatar{
     width: 150px;
     height: 150px;
@@ -89,4 +49,3 @@
 ::-webkit-file-upload-button{
     cursor: pointer;
 }
- 

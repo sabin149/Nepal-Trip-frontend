@@ -45,21 +45,16 @@ const Home = ({ searchData }) => {
     });
   };
 
-
   const searchInfo = {
     search,
     date,
     options
   }
 
-
-  // const startDate= moment(date[0].startDate).format()
-  // console.log(startDate);
-
-
   const handleSearch = async (e) => {
     e.preventDefault()
     if (search.length === 0) {
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
       dispatch({ type: GLOBALTYPES.ALERT, payload: { error: "Field cannnot be empty..." } })
       return
     }
@@ -74,6 +69,7 @@ const Home = ({ searchData }) => {
     }
 
     if (res.status === 200) {
+      dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
       navigate(`/hotellist?address=${search}&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`
       )
       searchData(searchInfo)
@@ -213,7 +209,7 @@ const Home = ({ searchData }) => {
                 <figcaption>
                   <h2>Book Now</h2>
                 </figcaption>
-                <Link to="/"></Link>
+                <Link to={`/hotellist?address=Kathmandu&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
               </figure>
               <figure className="destination">
                 <img
@@ -223,7 +219,7 @@ const Home = ({ searchData }) => {
                 <figcaption>
                   <h2>Book Now</h2>
                 </figcaption>
-                <Link to="/"></Link>
+                <Link to={`/hotellist?address=Pokhara&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
               </figure>
               <figure className="destination">
                 <img
@@ -234,7 +230,7 @@ const Home = ({ searchData }) => {
 
                   <h2>Book Now</h2>
                 </figcaption>
-                <Link to="/"></Link>
+                <Link to={`/hotellist?address=Lumbini&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
               </figure>
             </Grid>
           </div>
@@ -248,7 +244,7 @@ const Home = ({ searchData }) => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <Link to="/"></Link>
+              <Link to={`/hotellist?address=Bhaktapur&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
             </figure>
             <figure className="destination">
               <img
@@ -258,7 +254,7 @@ const Home = ({ searchData }) => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <Link to="/"></Link>
+              <Link to={`/hotellist?address=Kathmandu&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
             </figure>
             <figure className="destination">
               <img
@@ -268,7 +264,7 @@ const Home = ({ searchData }) => {
               <figcaption>
                 <h2>Book Now</h2>
               </figcaption>
-              <Link to="/"></Link>
+              <Link to={`/hotellist?address=Chitwan&startDate=${moment(date[0].startDate).format()}&endDate=${moment(date[0].endDate).format()}&adult=${options.adult}&children=${options.children}&room=${options.room}`}></Link>
             </figure>
           </div>
         </div>

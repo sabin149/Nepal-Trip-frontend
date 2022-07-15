@@ -31,7 +31,7 @@ import ResetPassword from "./components/auth/ResetPassword";
 import { createSearchInfo } from "./redux/actions/searchInfoAction";
 import AllHotelBookingsTable from "./components/vendor/components/VendorTable/AllHotelBookingsTable";
 import AllHotelUsers from "./components/vendor/components/VendorTable/AllHotelUsers";
-// import axios from "axios";
+import FavoriteHotels from "./components/Home/FavoriteHotels";
 
 const App = () => {
   const token = localStorage.getItem('token')
@@ -40,18 +40,6 @@ const App = () => {
   const isVendor = token && role === "vendor"
   const isUser = token && role === "user"
 
-  // const refreshJwtToken = async () => {
-  //   const res = await axios.get(
-  //     "/api/refresh_token"
-  //   );
-  //   // setToken(res.data.accessToken);
-  //   // console.log(res.data)
-  // };
-
-  // useEffect(() => {
-  //   refreshJwtToken();
-  // }, []);
-
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -59,11 +47,9 @@ const App = () => {
   }, [dispatch])
 
   const getSearchData = (searchData) => {
-    // console.log(searchData,"from app.js")
     dispatch(createSearchInfo({ searchInfo:searchData }))
   }
 
-  // 
   return (
     <>
      
@@ -94,7 +80,8 @@ const App = () => {
           <Route path="/changepassword" element={ isUser || isVendor || isAdmin ? <ChangePassword token={token} /> :<Navigate to="/"/> } />
           <Route path="/send-reset-password-email" element={<SendPasswordResetEmail />} />
           <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
-          <Route path="/vendor/users" element={<AllHotelUsers/>} />
+          <Route path="/vendor/users" element={isVendor || isAdmin?<AllHotelUsers/>:<Navigate to="/"/> } />
+          <Route path="/myfavoritehotels" element={isUser ?<FavoriteHotels/> :<Navigate to="/"/> } />
           <Route path="*" element={<NotFound />} />
         </Routes>
         {isAdmin ? <></> : isVendor ? <></> : <Footer />}

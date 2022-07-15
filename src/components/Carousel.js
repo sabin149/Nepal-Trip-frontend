@@ -8,7 +8,7 @@ import "swiper/css/navigation";
 import "../Global.css";
 
 // import required modules
-import { Pagination, Navigation,Autoplay, EffectFade } from "swiper";
+import { Pagination, Navigation,Autoplay, EffectFlip } from "swiper";
 
 
 export default function Carousel({images}) {
@@ -20,12 +20,12 @@ export default function Carousel({images}) {
           "--swiper-pagination-color": "black",
         }}
         slidesPerView={1}
-        // spaceBetween={30}
+        spaceBetween={30}
         centeredSlides={true}
         effect={"fade"}
         loop={true}
         autoplay={{
-          delay: 3000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         pagination={{
@@ -33,7 +33,7 @@ export default function Carousel({images}) {
           type:"fraction"
         }}
         navigation={true}
-        modules={[EffectFade,Pagination,Autoplay, Navigation]}
+        modules={[EffectFlip,Pagination,Autoplay, Navigation]}
         className="mySwiper"
       >
         {

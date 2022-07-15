@@ -169,11 +169,13 @@ export const sendResetPasswordEmail = ({ email }) => async (dispatch) => {
     }
 }
 
-export  const resetPassword = ({password, password_confirmation,id,token }) => async (dispatch) => {
+export  const resetPassword = ({password, password_confirmation,id,navigate,token }) => async (dispatch) => {
     try {
         dispatch({ type: GLOBALTYPES.ALERT, payload: { loading: true } })
         const res = await postDataAPI(`reset-password/${id}/${token}`, { password, password_confirmation })
         dispatch({ type: GLOBALTYPES.ALERT, payload: { success: res.data.msg } })
+        navigate('/')
+
     } catch (error) {
         dispatch({
             type: GLOBALTYPES.ALERT,

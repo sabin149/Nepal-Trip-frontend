@@ -1,13 +1,33 @@
+import moment from "moment";
 import React from "react";
 import Chart from "react-apexcharts";
 
+const Bookingrevenue = ({ booking }) => {
+  const bookingCreatedDateCount = booking && booking?.map(item => {
+    //  to week days
+    return moment(item.createdAt).format("dddd")
+  }
+  ).reduce((acc, curr) => {
+    if (!acc[curr]) {
+      acc[curr] = 1
+    }
+    else {
+      acc[curr] += 1
+    }
+    return acc
+  }
+    , {})
 
-const Bookingrevenue = () => {
+  const dataInArray = Object.keys(bookingCreatedDateCount).map(item => {
+    return bookingCreatedDateCount[item]
+  }
+  )
+
   const data = {
     series: [
       {
-        name: "Review",
-        data: [10, 50, 30, 90, 40, 120, 100],
+        name: "Bookings",
+        data: [6,10,7,15,12,18,24]
       },
     ],
     options: {
@@ -36,27 +56,27 @@ const Bookingrevenue = () => {
         show: false,
       },
       xaxis: {
-        type: "datetime",
+        type: "string",
         categories: [
-          "2018-09-19T00:00:00.000Z",
-          "2018-09-19T01:30:00.000Z",
-          "2018-09-19T02:30:00.000Z",
-          "2018-09-19T03:30:00.000Z",
-          "2018-09-19T04:30:00.000Z",
-          "2018-09-19T05:30:00.000Z",
-          "2018-09-19T06:30:00.000Z",
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat"
         ],
       },
       yaxis: {
         show: false
       },
-      toolbar:{
+      toolbar: {
         show: false
       }
     },
   };
   return <div className="BookingRevenue">
-        <Chart options={data.options} series={data.series} type="area" />
+    <Chart options={data.options} series={data.series} type="area" />
   </div>;
 };
 

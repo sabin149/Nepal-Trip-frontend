@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./AdminCard.css";
 import { motion, AnimateSharedLayout } from "framer-motion";
 import { UilTimes } from "@iconscout/react-unicons";
 import Chart from "react-apexcharts";
-import { useDispatch, useSelector } from "react-redux";
-import { getUsers } from "../../../redux/actions/userAction";
-import { getBookings } from "../../../redux/actions/bookingAction";
-import { getReviews } from "../../../redux/actions/reviewAction";
-
 
 const Card = (props) => {
   const [expanded, setExpanded] = useState(false);
@@ -24,19 +19,6 @@ const Card = (props) => {
 
 // Compact Card
 function CompactCard({ param, setExpanded }) {
-  const dispatch = useDispatch();
-  const { user, hotel,review,booking } = useSelector(state => state)
-  const token = localStorage.getItem('token')
-
-  // const bookings = useSelector(state => state.booking)
-  // console.log(bookings);
-
-  useEffect(() => {
-    dispatch(getUsers(token));
-    dispatch(getBookings({ token }))
-    dispatch(getReviews({ token }))
-  }, [token, dispatch])
-
   const Png = param.png;
   return (
     <motion.div
@@ -55,13 +37,13 @@ function CompactCard({ param, setExpanded }) {
         <Png />
         <span>{
           param.title === 'USERS' ?
-            user.count :
+            param.value :
             param.title === 'HOTELS' ?
-              hotel.count :
+            param.value:
               param.title === 'BOOKINGS' ?
-                booking.count :
+              param.value :
                 param.title === 'REVIEWS' ?
-                  review.count :
+                param.value :
                   "0"
         }</span>
         <span>Total</span>
@@ -109,15 +91,15 @@ function ExpandedCard({ param, setExpanded }) {
         show: true,
       },
       xaxis: {
-        type: "datetime",
+        type: "string",
         categories: [
-          "2022-05-19",
-          "2022-06-19",
-          "2022-07-19",
-          "2022-08-19",
-          "2022-09-19",
-          "2022-10-19",
-          "2022-11-19",
+          "Sun",
+          "Mon",
+          "Tue",
+          "Wed",
+          "Thu",
+          "Fri",
+          "Sat"
         ],
       },
     },
@@ -139,7 +121,7 @@ function ExpandedCard({ param, setExpanded }) {
       <div className="chartContainer">
         <Chart options={data.options} series={param.series} type="area" />
       </div>
-      <span>Last 30 Days</span>
+      <span>Last 7 Days</span>
     </motion.div>
   );
 }

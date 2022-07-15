@@ -101,57 +101,181 @@ const RoomTable = ({ hotel, role }) => {
                                                     <hr></hr>
 
                                                     <div className="row row-cols-2">
-                                                        <div className="col">
-                                                            <li>
-                                                                <i className="fa-solid fa-wifi"></i>
+                                                        {
+                                                            room?.room_facilities?.map((facility, index) => {
+                                                        
+                                                                return <div className="col" key={index}>
+                                                                    <li>
+                                                                        {(facility === "freewifi") && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-wifi" />
+                                                                                <span className="amen">Free Wifi</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "tours" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-camera" />
+                                                                                <span className="amen">Tour</span>
+                                                                            </>
+                                                                        )}
 
-                                                                <span className="amen">
-                                                                    24hrs Free Wi-Fi
-                                                                </span>
-                                                            </li>
-                                                        </div>
-                                                        <div className="col">
-                                                            <li>
-                                                                <i className="fa-solid fa-shirt"></i>
+                                                                        {facility === "bar" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-cocktail" />
+                                                                                <span className="amen">Bar</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "restaurant" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-utensils" />
+                                                                                <span className="amen">Restaurant</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "pool" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-swimmer" />
+                                                                                <span className="amen">Pool</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "gym" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-dumbbell" />
+                                                                                <span className="amen">Gym</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "parking" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-car-park" />
+                                                                                <span className="amen">Parking</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "airporttransfer" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-plane-departure" />
+                                                                                <span className="amen">Airport Transfer</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "breakfast" && (
+                                                                            <>
+                                                                                <i className="fa-solid fa-burger" />
+                                                                                <span className="amen">Breakfast</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "lunch" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-plate-wheat" />
+                                                                                <span className="amen">Lunch</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "dinner" && (
+                                                                            <>
+                                                                                <i className="fa-solid fa-utensils" />
+                                                                                <span className="amen">Dinner</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "capservice" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-headset" />
+                                                                                <span className="amen">Cap Service</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "24hrroomservice" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-clock" />
+                                                                                <span className="amen">24hr Room Service</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "childbed" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-child" />
+                                                                                <span className="amen">Child Bed</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "laundary" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-laundry" />
+                                                                                <span className="amen">Laundary</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "medical" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-medkit" />
+                                                                                <span className="amen">Medical Services</span>
+                                                                            </>
+                                                                        )}
 
-                                                                <span className="amen">Restaurant</span>
-                                                            </li>
-                                                        </div>
-                                                        <div className="col">
-                                                            <li>
-                                                                <i className="fa-solid fa-smoking"></i>
-                                                                <span className="amen">
-                                                                    Smoking Area Available
-                                                                </span>
-                                                            </li>
-                                                        </div>
-                                                        <div className="col">
-                                                            <li>
-                                                                <i className="fa-solid fa-car"></i>
+                                                                        {facility === "ticketservice" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-ticket-alt" />
+                                                                                <span className="amen">Ticket Service</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "coffee" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-coffee" />
+                                                                                <span className="amen">Coffee</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "parking" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-car-park" />
+                                                                                <span className="amen">Parking</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "security" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-shield-alt" />
+                                                                                <span className="amen">Security</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "elevator" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-building" />
+                                                                                <span className="amen">Elevator</span>
+                                                                            </>
+                                                                        )}
+                                                                        {facility === "wheelchair" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-wheelchair" />
+                                                                                <span className="amen">Wheelchair
+                                                                                    Access</span>
+                                                                            </>
+                                                                        )}
 
-                                                                <span className="amen">
-                                                                    Transportation Facility
-                                                                </span>
-                                                            </li>
-                                                        </div>
-                                                        <div className="col">
-                                                            <li>
-                                                                <i className="fa-solid fa-bed"></i>
 
-                                                                <span className="amen">
-                                                                    Twin Bed
-                                                                </span>
-                                                            </li>
-                                                        </div>
-                                                        <div className="col">
-                                                            <li>
-                                                                <i className="fa-solid fa-bath"></i>
+                                                                        {facility === "airconditioning" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-snowflake" />
+                                                                                <span className="amen">Air Conditioning</span>
+                                                                            </>
+                                                                        )}
+                                                                        {/* atm */}
+                                                                        {facility === "atm" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-atm" />
+                                                                                <span className="amen">ATM</span>
+                                                                            </>
+                                                                        )}
+                                                                        {/* bank */}
+                                                                        {facility === "bank" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-bank" />
+                                                                                <span className="amen">Bank</span>
+                                                                            </>
+                                                                        )}
 
-                                                                <span className="amen">
-                                                                    Bath
-                                                                </span>
-                                                            </li>
-                                                        </div>
+                                                                        {/* house keeping */}
+                                                                        {facility === "housekeeping" && (
+                                                                            <>
+                                                                                <i className=" fa-solid fa-broom" />
+                                                                                <span className="amen">Housekeeping</span>
+                                                                            </>
+                                                                        )}
+                                                                    </li>
+                                                                </div>
+
+                                                            })
+                                                        }
 
                                                     </div>
                                                 </div>
@@ -164,28 +288,182 @@ const RoomTable = ({ hotel, role }) => {
                                             <div>
 
                                                 <ul className="mg-top-sm ">
-                                                    <li>
-                                                        <i className="fa-solid fa-hot-tub-person"></i>
+                                                    {
+                                                        room?.room_facilities?.map((facility, index) => {
+                                                            return <span key={index}>
+                                                                <li>
+                                                                    {(facility === "freewifi") && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-wifi" />
+                                                                            <span className="amen">Free Wifi</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "tours" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-camera" />
+                                                                            <span className="amen">Tour</span>
+                                                                        </>
+                                                                    )}
 
-                                                        <span className="amen">Hot Tub</span></li>
-                                                    <li>
-                                                        <i className="fa-solid fa-wifi"></i>
+                                                                    {facility === "bar" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-cocktail" />
+                                                                            <span className="amen">Bar</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "restaurant" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-utensils" />
+                                                                            <span className="amen">Restaurant</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "pool" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-swimmer" />
+                                                                            <span className="amen">Pool</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "gym" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-dumbbell" />
+                                                                            <span className="amen">Gym</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "parking" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-car-park" />
+                                                                            <span className="amen">Parking</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "airporttransfer" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-plane-departure" />
+                                                                            <span className="amen">Airport Transfer</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "breakfast" && (
+                                                                        <>
+                                                                            <i className="fa-solid fa-burger" />
+                                                                            <span className="amen">Breakfast</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "lunch" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-plate-wheat" />
+                                                                            <span className="amen">Lunch</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "dinner" && (
+                                                                        <>
+                                                                            <i className="fa-solid fa-utensils" />
+                                                                            <span className="amen">Dinner</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "capservice" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-headset" />
+                                                                            <span className="amen">Cap Service</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "24hrroomservice" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-clock" />
+                                                                            <span className="amen">24hr Room Service</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "childbed" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-child" />
+                                                                            <span className="amen">Child Bed</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "laundary" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-laundry" />
+                                                                            <span className="amen">Laundary</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "medical" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-medkit" />
+                                                                            <span className="amen">Medical Services</span>
+                                                                        </>
+                                                                    )}
+
+                                                                    {facility === "ticketservice" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-ticket-alt" />
+                                                                            <span className="amen">Ticket Service</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "coffee" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-coffee" />
+                                                                            <span className="amen">Coffee</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "parking" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-car-park" />
+                                                                            <span className="amen">Parking</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "security" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-shield-alt" />
+                                                                            <span className="amen">Security</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "elevator" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-building" />
+                                                                            <span className="amen">Elevator</span>
+                                                                        </>
+                                                                    )}
+                                                                    {facility === "wheelchair" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-wheelchair" />
+                                                                            <span className="amen">Wheelchair
+                                                                                Access</span>
+                                                                        </>
+                                                                    )}
 
 
-                                                        <span className="amen">Free Wi-Fi</span></li>
-                                                    <li>
-                                                        <i className="fa-solid fa-smoking"></i>
+                                                                    {facility === "airconditioning" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-snowflake" />
+                                                                            <span className="amen">Air Conditioning</span>
+                                                                        </>
+                                                                    )}
+                                                                    {/* atm */}
+                                                                    {facility === "atm" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-atm" />
+                                                                            <span className="amen">ATM</span>
+                                                                        </>
+                                                                    )}
+                                                                    {/* bank */}
+                                                                    {facility === "bank" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-bank" />
+                                                                            <span className="amen">Bank</span>
+                                                                        </>
+                                                                    )}
 
-                                                        <span className="amen">Smoking Area</span></li>
-                                                    <li>
-                                                        <i className="fa-solid fa-bowl-rice"></i>
+                                                                    {/* house keeping */}
+                                                                    {facility === "housekeeping" && (
+                                                                        <>
+                                                                            <i className=" fa-solid fa-broom" />
+                                                                            <span className="amen">Housekeeping</span>
+                                                                        </>
+                                                                    )}
+                                                                </li>
+                                                            </span>
 
-                                                        <span className="amen">Free Breakfast</span></li>
-                                                    <li>
-                                                        <i className="fa-solid fa-car"></i>
+                                                        })
+                                                    }
 
 
-                                                        <span className="amen">Transport</span></li>
                                                 </ul>
                                             </div>
                                         </td>
