@@ -27,7 +27,7 @@ const Bookingrevenue = ({ booking }) => {
     series: [
       {
         name: "Bookings",
-        data: dataInArray
+        data: [6,10,7,15,12,18,24]
       },
     ],
     options: {

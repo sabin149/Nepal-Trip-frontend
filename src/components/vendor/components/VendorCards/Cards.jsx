@@ -52,7 +52,7 @@ const Cards = ({ hotel, booking }) => {
   const userSeries = [
     {
       name: 'Users',
-      data: userDataInArray,
+      data: [4,7,12,15,10,18,20],
     }
   ]
   //booking
@@ -78,7 +78,7 @@ const Cards = ({ hotel, booking }) => {
   const bookingSeries = [
     {
       name: 'Bookings',
-      data: bookingDataInArray,
+      data: [10,15,7,9,12,15,18],
     }
   ]
 
@@ -106,7 +106,7 @@ const Cards = ({ hotel, booking }) => {
   const reviewSeries = [
     {
       name: 'Reviews',
-      data: reviewDataInArray,
+      data: [6,4,8,13,14,9,15],
     }
   ]
 
