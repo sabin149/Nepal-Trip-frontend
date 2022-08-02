@@ -15,7 +15,7 @@ import {
 const ShareModal = ({ url }) => {
     return (
         <div className="d-flex justify-content-between px-4 py-2">
-            <FacebookShareButton url={url} >
+            <FacebookShareButton url={url} id="facebookBtn">
                 <FacebookIcon round={true} size={32} />
             </FacebookShareButton>
 

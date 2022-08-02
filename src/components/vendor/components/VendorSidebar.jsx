@@ -51,7 +51,7 @@ const Sidebar = ({hotel, token,booking}) => {
               >
                 <Link to={item.path} className="text-decoration-none text-dark">
                   <item.icon />
-                  <span>{item.heading}</span>
+                  <span id={item.id}>{item.heading}</span>
                 </Link>
               </div>
             );

@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from "react-redux"
-import { useNavigate, Link } from "react-router-dom"
+import React, { useState } from 'react'
+import { useDispatch } from "react-redux"
+import { Link } from "react-router-dom"
 import { register } from "../../redux/actions/authAction"
 import "./auth.css"
 const Register = () => {
-    const { auth, alert } = useSelector(state => state)
-
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+
     const initialState = {
         fullname: '', username: '', email: '', phone: '', password: '', password_confirmation: '', gender: 'Male', role: "",
     }
@@ -15,9 +13,7 @@ const Register = () => {
     const { fullname, username, email, phone, password, role, password_confirmation } = userData
     const [typePass, setTypePass] = useState(false)
     const [typeCfPass, setTypeCfPass] = useState(false)
-    useEffect(() => {
-        if (auth.token)  navigate('/')
-    }, [auth.token, navigate])
+
     const handleChangeInput = e => {
         const { name, value } = e.target
         setUserData({ ...userData, [name]: value })
@@ -25,10 +21,11 @@ const Register = () => {
     const handleSubmit = e => {
         e.preventDefault()
         dispatch(register(userData))
+        window.href("/")
     }
     return (
-        <div className='auth_page' style={{ minHeight: "100vh", borderRadius:"20%" }}>
-            <form onSubmit={handleSubmit}>
+        <div className='auth_page' style={{ minHeight: "100vh", borderRadius: "20%" }}>
+            <form onSubmit={handleSubmit} id="AuthForm">
                 <h3 className='text-uppercase text-center text-warning'>REGISTER
                     <span className='text-dark'>FORM</span>
                 </h3>
@@ -52,7 +49,7 @@ const Register = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="exampleInputEmail2">Email address</label>
-                    <input type="email" className="form-control" id="exampleInputEmail2" name="email"
+                    <input type="email" id="remail" name="email" className="form-control" 
                         onChange={handleChangeInput} value={email}
                         style={{ background: `${alert.email ? '#fd2d6a14' : ''}` }} />
                     <small className="form-text text-danger">
@@ -62,7 +59,7 @@ const Register = () => {
 
                 <div className="form-group">
                     <label htmlFor="exampleInputphone">Phone Number</label>
-                    <input type="text" className="form-control" id="exampleInputPhone" name="phone"
+                    <input type="text" className="form-control" id="phone" name="phone"
                         onChange={handleChangeInput} value={phone}
                         style={{ background: `${alert.phone ? '#fd2d6a14' : ''}` }} />
                     <small className="form-text text-danger">
@@ -74,7 +71,7 @@ const Register = () => {
                     <label htmlFor="exampleInputPassword2">Password</label>
                     <div className="pass">
                         <input type={typePass ? "text" : "password"}
-                            className="form-control" id="exampleInputPassword2"
+                            className="form-control" id="password"
                             onChange={handleChangeInput} value={password} name="password"
                             style={{ background: `${alert.password ? '#fd2d6a14' : ''}` }} />
                         <small onClick={() => setTypePass(!typePass)}>
@@ -132,7 +129,7 @@ const Register = () => {
                     </small>
                 </div>
 
-                <button type="submit" className="btn btn-warning w-100 mt-3">
+                <button type="submit" id="registerBtn" className="btn btn-warning w-100 mt-3">
                     Register
                 </button>
                 <p className='my-2'>

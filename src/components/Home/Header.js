@@ -24,22 +24,22 @@ const Header = ({ isUser }) => {
             isUser&&
             <div className="hotel">
             <i className="fa-solid fa-suitcase"> </i>
-            <span> <Link to="/user/bookings" className="text-decoration-none text-dark">My Hotel Booking</Link> </span>
+            <span > <Link id="myBookingsBtn" to="/user/bookings" className="text-decoration-none text-dark">My Hotel Booking</Link> </span>
           </div>
           }
          
           {isUser &&
             <div className="hotel">
               <i className="fa-solid fa-user"> </i>
-              <span> <Link to={`/user/profile/${userID}`} className="text-decoration-none text-dark">Profile</Link> </span>
+              <span id="profileBtn"> <Link to={`/user/profile/${userID}`} className="text-decoration-none text-dark">Profile</Link> </span>
             </div>}
 
           {isUser && <div className="favourite">
             <i className="fa-solid fa-heart"></i>
-            <span> <Link to="/myfavoritehotels" className="text-decoration-none text-dark">My Favourite</Link> </span>
+            <span > <Link to="/myfavoritehotels" id="favoriteBtn" className="text-decoration-none text-dark">My Favourite</Link> </span>
           </div>}
 
-          {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal"> Sign In </button> :
+          {!isUser ? <button className="navButton" data-bs-toggle="modal" data-bs-target="#exampleModal" id="SignInBtn"> Sign In </button> :
             <button className="navButton" onClick={() => {
               if (window.confirm('Are you sure you want to logout?')) {
                 dispatch(logout())

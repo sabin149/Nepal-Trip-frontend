@@ -47,7 +47,7 @@ const Profile = ({ token }) => {
         <>
            <div className="container mt-2">
            <Link to="/" className="btn btn-outline-primary btn-sm">Back</Link>
-            <Link to="/changepassword" className="btn btn-warning btn-sm text-white float-end">Change Password</Link>
+            <Link to="/changepassword" className="btn btn-warning btn-sm text-white float-end" id="changePsdBtn">Change Password</Link>
            </div>
             <div className="edit_user_profile">
                 <form onSubmit={handleSubmit}> <Paper elevation={3} >

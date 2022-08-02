@@ -523,7 +523,7 @@ const RoomTable = ({ hotel, searchInfoData }) => {
                       {
                         !selectedRoom ? <button className="ui fluid primary button width150 mt-2" onClick={() => {
                           setSelectedRoom(room)
-                        }}>
+                        }} id="selectRoomBtn">
                           Select Room
                         </button> :
                           <button className={`ui fluid button width150 mt-2 ${selectedRoom._id === room._id ? "success " : "primary"} }`} onClick={() => {
@@ -560,7 +560,7 @@ const RoomTable = ({ hotel, searchInfoData }) => {
                   margin: "auto"
                 }} onClick={
                   handleCheckout
-                }>
+                } id="reserveBtn">
                   Reserve Now
                 </button>
               </div>

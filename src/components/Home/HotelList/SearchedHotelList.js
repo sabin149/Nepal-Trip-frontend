@@ -277,7 +277,7 @@ const SearchedHotelList = ({ hotelData, searchInfoData }) => {
                                                                 handleSaveHotel({ hotel })
                                                             }} style={{
                                                                 cursor: "pointer",
-                                                            }} /> :
+                                                            }}  /> :
                                                         <i className="fa-solid fa-heart  h2"
                                                             onClick={(e) => {
                                                                 e.preventDefault()
@@ -285,7 +285,7 @@ const SearchedHotelList = ({ hotelData, searchInfoData }) => {
                                                             }
                                                             } style={{
                                                                 cursor: "pointer",
-                                                            }} />
+                                                            }} id="favouriteBtn" />
 
                                                 }
                                             </div>}
@@ -305,6 +305,7 @@ const SearchedHotelList = ({ hotelData, searchInfoData }) => {
                                             onClick={() => {
                                                 navigate(`/hotelinfo/${hotel._id}`, { state: { searchInfoData } });
                                             }}
+                                        id="chooseBtn"
                                         >
                                             CHOOSE
                                         </Button>

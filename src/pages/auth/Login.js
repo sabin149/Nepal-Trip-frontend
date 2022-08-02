@@ -1,19 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from "react-router-dom"
+import React, { useState } from 'react'
+import { Link } from "react-router-dom"
 import { login } from '../../redux/actions/authAction'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import "./auth.css"
 const Login = () => {
   const initialState = { email: "", password: "" }
   const [userData, setUserData] = useState(initialState)
   const { email, password } = userData
   const [typePass, setTypePass] = useState(false)
-  const { auth } = useSelector(state => state)
+
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  useEffect(() => {
-    if (auth.token) navigate("/")
-  }, [auth.token, navigate])
+
   const handleChangeInput = e => {
     const { name, value } = e.target
     setUserData({ ...userData, [name]: value })
@@ -24,22 +21,22 @@ const Login = () => {
     dispatch(login(userData))
   }
   return (
-    <div className='auth_page'>
-      <form onSubmit={handleSubmit}>
+    <div className='auth_page' data-testid="todo-1">
+      <form onSubmit={handleSubmit} id="AuthForm">
         <h3 className='text-uppercase text-center mb-4 text-warning'>LOGIN
           <span className='text-dark'>FORM</span>
         </h3>
         <hr />
         <div className="form-group">
           <label htmlFor="exampleInputEmail1">Email address</label>
-          <input type="email" className="form-control auth_input" id="exampleInputEmail1"
+          <input type="email" className="form-control auth_input" id="email"
             name="email" onChange={handleChangeInput} value={email} />
 
         </div>
         <div className="form-group">
           <label htmlFor="exampleInputPassword1">Password</label>
           <div className="pass">
-            <input type={typePass ? "text" : "password"} className="form-control auth_input" id="exampleInputPassword1" name='password'
+            <input type={typePass ? "text" : "password"} className="form-control auth_input" id="password" name='password'
               onChange={handleChangeInput} value={password}
             />
             <small onClick={() => setTypePass(!typePass)}>
@@ -55,9 +52,9 @@ const Login = () => {
         </p>
         <button type="submit" className="btn btn-warning w-100 mt-2"
           disabled={email && password ? false : true}
-        >Login</button>
+        id="loginBtn">Login</button>
         <p className='my-2'>
-          You don't have an account? <Link to="#" style={{ color: "crimson" }} data-bs-target="#exampleModal2" data-bs-toggle="modal">Register Now</Link>
+          You don't have an account? <Link to="#" style={{ color: "crimson" }} data-bs-target="#exampleModal2" data-bs-toggle="modal" id="NewregisterBtn">Register Now</Link>
         </p>
       </form>
     </div>

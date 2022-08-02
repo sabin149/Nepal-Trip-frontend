@@ -60,7 +60,7 @@ const Sidebar = () => {
                 }
               }}
             >
-              <i className="fa-solid fa-right-from-bracket" style={{ fontSize: "1.5rem" }}></i>
+              <i className="fa-solid fa-right-from-bracket" style={{ fontSize: "1.5rem" }} id="logOutBtn"></i>
    
             </Link>
           </div>

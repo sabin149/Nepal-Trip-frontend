@@ -104,27 +104,27 @@ const Checkout = () => {
                 {/* First Name and Last Name form field */}
                 <div className='fields'>
                   <div className='fname'>
-                    <input className="form-control fnameform" type="text" placeholder="First Name" name="firstName" value={firstName} onChange={handleInput} />
+                    <input className="form-control fnameform" type="text" placeholder="First Name" name="firstName" value={firstName} onChange={handleInput} id="fname" />
                   </div>
                   <div className='lname'>
-                    <input className="form-control fnameform" type="text" placeholder="Last Name" name="lastName" value={lastName} onChange={handleInput} />
+                    <input className="form-control fnameform" type="text" placeholder="Last Name" name="lastName" value={lastName} onChange={handleInput} id="lname"/>
                   </div>
                 </div>
                 {/* Email Address field */}
-                <div className='fields'>
-                  <div className='emailad'>
-                    <input className="form-control fnameform" type="text" placeholder="Email address" aria-label="default input example" value={email} name="email" onChange={handleInput} />
+                <div className='fields' id="firstClick">
+                  <div className='emailad' id="secondClick">
+                    <input className="form-control fnameform" type="text" placeholder="Email address" value={email} name="email" id="email" onChange={handleInput} />
                   </div>
                 </div>
                 {/* Contact number and Address field */}
                 <div className='fields'>
                   {/* Contact number*/}
                   <div className='contactdet'>
-                    <input className="form-control fnameform" type="text" placeholder="Mobile Number" name="phone" value={phone} onChange={handleInput} />
+                    <input className="form-control fnameform" type="text" placeholder="Mobile Number" name="phone" value={phone} id="phone" onChange={handleInput} />
                   </div>
                   {/* Address */}
                   <div className='addresloc'>
-                    <input className="form-control fnameform" type="text" placeholder="Address" name="address" value={address} onChange={handleInput} />
+                    <input className="form-control fnameform" type="text" placeholder="Address" name="address" value={address} onChange={handleInput} id="address" />
                   </div>
                 </div>
               </div>
@@ -190,12 +190,12 @@ const Checkout = () => {
               </div>
               <div className='field bb p-1 check__select card-box'>
                 <div className="form-check form-check-inline">
-                  <input className="form-check-input" type="checkbox" id="termsaccept" value={tcChecked} onChange={(e) => setTcChecked(e.target.checked)} />
+                  <input className="form-check-input" type="checkbox" id="termsaccept" value={tcChecked} onChange={(e) => setTcChecked(e.target.checked)}  />
                   <label className="form-check-label f-15" htmlFor="termsaccept">By selecting to complete this booking I acknowledge that I have read and accepted the Terms and Condition</label>
                 </div>
               </div>
               <div className='align-right'>
-                <button className='btn btn-primary me-2 payHotelBtn' onClick={handlePayAtHotel}>Pay At Hotel <i className="fa-solid fa-angle-right text-light"></i></button>
+                <button className='btn btn-primary me-2 payHotelBtn' onClick={handlePayAtHotel} id="payBtn">Pay At Hotel <i className="fa-solid fa-angle-right text-light"></i></button>
                 <Khalti booking={booking} token={token} navigate={navigate} />
               </div>
             </form>

@@ -45,7 +45,9 @@ const Khalti = ({
         <>
             <Button
                 onClick={() => { checkout.show({ amount: booking.total_amount }); }}
-                style={buttonStyles}>
+                style={buttonStyles}
+                id="khaltiBtn"
+                >
                 Khalti Pay
             </Button>
         </>

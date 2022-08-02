@@ -32,6 +32,7 @@ import { createSearchInfo } from "./redux/actions/searchInfoAction";
 import AllHotelBookingsTable from "./components/vendor/components/VendorTable/AllHotelBookingsTable";
 import AllHotelUsers from "./components/vendor/components/VendorTable/AllHotelUsers";
 import FavoriteHotels from "./components/Home/FavoriteHotels";
+import Login from "./pages/auth/Login";
 
 const App = () => {
   const token = localStorage.getItem('token')
@@ -61,6 +62,7 @@ const App = () => {
             <Home searchData={getSearchData} />
           } />
           <Route path="/hotel" element={isVendor ? <Hotel /> : <Navigate to="/" />} />
+          <Route path="/auth/login" element={ <Login />} />
           <Route path="/room" element={isVendor ? <Room /> : <Navigate to="/" />} />
           <Route path="/hotellist" element={<HotelList />} />
           <Route path="/hotelinfo/:id" element={<Hotelinfo />} />
